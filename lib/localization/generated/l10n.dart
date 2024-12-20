@@ -90,6 +90,16 @@ class Localize {
     );
   }
 
+  /// `Prüfe auf Updates...`
+  String get updateScreenUpdateCheck {
+    return Intl.message(
+      'Prüfe auf Updates...',
+      name: 'updateScreenUpdateCheck',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `U P D A T E   V E R F Ü G B A R`
   String get updateScreenUpdateFound {
     return Intl.message(
@@ -100,81 +110,11 @@ class Localize {
     );
   }
 
-  /// `Es ist eine neuere Version verfügbar. Möchten Sie jetzt updaten?`
-  String get updateScreenUpdateFoundQuestion {
+  /// `Update wird heruntergeladen und installiert!`
+  String get updateScreenUpdating {
     return Intl.message(
-      'Es ist eine neuere Version verfügbar. Möchten Sie jetzt updaten?',
-      name: 'updateScreenUpdateFoundQuestion',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `L O G I N`
-  String get loginScreenTitle {
-    return Intl.message(
-      'L O G I N',
-      name: 'loginScreenTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Dies ist dein erster Login. Bitte erstelle dir eine 4-Stellige PIN.`
-  String get loginScreenFirstLogin {
-    return Intl.message(
-      'Dies ist dein erster Login. Bitte erstelle dir eine 4-Stellige PIN.',
-      name: 'loginScreenFirstLogin',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `PIN`
-  String get loginScreenHint {
-    return Intl.message(
-      'PIN',
-      name: 'loginScreenHint',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Gib deinen PIN ein`
-  String get loginScreenEnterPin {
-    return Intl.message(
-      'Gib deinen PIN ein',
-      name: 'loginScreenEnterPin',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Dein PIN ist zu kurz`
-  String get loginScreenPinToShort {
-    return Intl.message(
-      'Dein PIN ist zu kurz',
-      name: 'loginScreenPinToShort',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Deine PIN's stimmen nicht überein`
-  String get loginScreenPinsNotTheSame {
-    return Intl.message(
-      'Deine PIN\'s stimmen nicht überein',
-      name: 'loginScreenPinsNotTheSame',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Bitte wiederhole deine PIN!`
-  String get loginScreenRepeatEnterPin {
-    return Intl.message(
-      'Bitte wiederhole deine PIN!',
-      name: 'loginScreenRepeatEnterPin',
+      'Update wird heruntergeladen und installiert!',
+      name: 'updateScreenUpdating',
       desc: '',
       args: [],
     );

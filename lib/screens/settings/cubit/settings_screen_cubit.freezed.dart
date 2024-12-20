@@ -85,6 +85,9 @@ class _$SettingsScreenStateCopyWithImpl<$Res, $Val extends SettingsScreenState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -101,6 +104,9 @@ class __$$initialImplCopyWithImpl<$Res>
   __$$initialImplCopyWithImpl(
       _$initialImpl _value, $Res Function(_$initialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -216,6 +222,9 @@ class __$$initializedImplCopyWithImpl<$Res>
   __$$initializedImplCopyWithImpl(
       _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -331,6 +340,9 @@ class __$$settingsChangedImplCopyWithImpl<$Res>
   __$$settingsChangedImplCopyWithImpl(
       _$settingsChangedImpl _value, $Res Function(_$settingsChangedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -449,6 +461,9 @@ class __$$fileOrDirectoryNotFoundImplCopyWithImpl<$Res>
       _$fileOrDirectoryNotFoundImpl _value,
       $Res Function(_$fileOrDirectoryNotFoundImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc

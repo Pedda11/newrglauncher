@@ -41,28 +41,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "addAccountScreenTitle":
             MessageLookupByLibrary.simpleMessage("Add Account"),
         "appTitle": MessageLookupByLibrary.simpleMessage("WOW Launcher"),
-        "loginScreenEnterPin":
-            MessageLookupByLibrary.simpleMessage("Enter your PIN"),
-        "loginScreenFirstLogin": MessageLookupByLibrary.simpleMessage(
-            "This is your first login. Please create a 4-digit PIN."),
-        "loginScreenHint": MessageLookupByLibrary.simpleMessage("PIN"),
-        "loginScreenPinToShort":
-            MessageLookupByLibrary.simpleMessage("Your PIN is too short"),
-        "loginScreenPinsNotTheSame":
-            MessageLookupByLibrary.simpleMessage("Your PINs do not match"),
-        "loginScreenRepeatEnterPin":
-            MessageLookupByLibrary.simpleMessage("Please repeat your PIN!"),
-        "loginScreenTitle": MessageLookupByLibrary.simpleMessage("LOGIN"),
         "menuItemSettings": MessageLookupByLibrary.simpleMessage("Settings"),
         "menuTitle": MessageLookupByLibrary.simpleMessage("MENU"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "settingsScreenWowPath":
             MessageLookupByLibrary.simpleMessage("WoW Path"),
+        "updateScreenUpdateCheck":
+            MessageLookupByLibrary.simpleMessage("Checking for updates..."),
         "updateScreenUpdateFound":
             MessageLookupByLibrary.simpleMessage("UPDATE AVAILABLE"),
-        "updateScreenUpdateFoundQuestion": MessageLookupByLibrary.simpleMessage(
-            "A newer version is available. Do you want to update now?"),
+        "updateScreenUpdating": MessageLookupByLibrary.simpleMessage(
+            "Downloading and installing update!"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

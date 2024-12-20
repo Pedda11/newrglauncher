@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:twodotnulllauncher/screens/account/pages/account_add/account_add_screen.dart';
-import 'package:twodotnulllauncher/screens/account/pages/account_list/account_list_page.dart';
-import 'package:twodotnulllauncher/screens/settings/settings_screen.dart';
-
 import '../localization/generated/l10n.dart';
+import '../screens/account/account_screen.dart';
+import '../screens/settings/settings_screen.dart';
 
 class NavigationPane extends StatefulWidget {
   const NavigationPane({super.key});
@@ -16,7 +14,7 @@ class _NavigationPaneState extends State<NavigationPane> {
   int _selectedIndex = 0;
 
   final List<Widget> screens = [
-    AccountListPage(),
+    AccountScreen(),
     //AccountAddScreen(),
     SettingsScreen(),
   ];

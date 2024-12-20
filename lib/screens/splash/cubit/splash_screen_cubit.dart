@@ -1,19 +1,26 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../data/shared_preferences_settings.dart';
-import '../../../repository/main_repository.dart';
+import '../../../services/update_service.dart';
 
 part 'splash_screen_state.dart';
 
 part 'splash_screen_cubit.freezed.dart';
 
 class SplashScreenCubit extends Cubit<SplashScreenState> {
-  final MainRepository mainRepository;
+  SplashScreenCubit() : super(const SplashScreenState.initial());
 
-  SplashScreenCubit(this.mainRepository)
-      : super(const SplashScreenState.initial());
-
-  void initialize() async {}
-
-  void _checkForPIN() async {}
+  void initialize() async {
+    try {
+      await UpdateService().deleteUpdateFiles();
+      UpdateService().checkForUpdate().then((value) async {
+        if (value) {
+          emit(const SplashScreenState.updateAvailable());
+        } else {
+          emit(const SplashScreenState.initialized());
+        }
+      });
+    } catch (e) {
+      emit(SplashScreenState.failed(errorMsg: e.toString()));
+    }
+  }
 }

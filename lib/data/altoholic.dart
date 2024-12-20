@@ -1,4 +1,3 @@
-
 import '../utils/lua_to_json.dart';
 import '../utils/utils.dart';
 import 'character.dart';
@@ -124,14 +123,13 @@ class Altoholic {
                 Map<String, dynamic> val2 = n.value;
                 if (c.name == name) {
                   for (var o in val2.entries) {
-                    var splitedKey = o.key.split('|');
-                    title = splitedKey[0];
-                    id = int.parse(splitedKey[1]);
+                    var splitKey = o.key.split('|');
+                    title = splitKey[0];
+                    id = int.parse(splitKey[1]);
 
-                    var splitedValue = o.value.split('|');
+                    var splitValue = o.value.split('|');
                     resetDate = Utils.timeSpanToDateTime(
-                        int.parse(splitedValue[0]) +
-                            int.parse(splitedValue[1]));
+                        int.parse(splitValue[0]) + int.parse(splitValue[1]));
                     SavedInstance savedInstance = SavedInstance(
                         title: title, id: id, resetDay: resetDate);
                     c.savedInstances.add(savedInstance);

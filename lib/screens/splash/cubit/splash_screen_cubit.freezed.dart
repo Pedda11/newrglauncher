@@ -20,21 +20,24 @@ mixin _$SplashScreenState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
-    required TResult Function() isFirstLogin,
+    required TResult Function() updateAvailable,
+    required TResult Function(String errorMsg) failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
-    TResult? Function()? isFirstLogin,
+    TResult? Function()? updateAvailable,
+    TResult? Function(String errorMsg)? failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
-    TResult Function()? isFirstLogin,
+    TResult Function()? updateAvailable,
+    TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -42,21 +45,24 @@ mixin _$SplashScreenState {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_isFirstLogin value) isFirstLogin,
+    required TResult Function(_updateAvailable value) updateAvailable,
+    required TResult Function(_failed value) failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_isFirstLogin value)? isFirstLogin,
+    TResult? Function(_updateAvailable value)? updateAvailable,
+    TResult? Function(_failed value)? failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
-    TResult Function(_isFirstLogin value)? isFirstLogin,
+    TResult Function(_updateAvailable value)? updateAvailable,
+    TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -78,6 +84,9 @@ class _$SplashScreenStateCopyWithImpl<$Res, $Val extends SplashScreenState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -94,6 +103,9 @@ class __$$initialImplCopyWithImpl<$Res>
   __$$initialImplCopyWithImpl(
       _$initialImpl _value, $Res Function(_$initialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -120,7 +132,8 @@ class _$initialImpl implements _initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
-    required TResult Function() isFirstLogin,
+    required TResult Function() updateAvailable,
+    required TResult Function(String errorMsg) failed,
   }) {
     return initial();
   }
@@ -130,7 +143,8 @@ class _$initialImpl implements _initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
-    TResult? Function()? isFirstLogin,
+    TResult? Function()? updateAvailable,
+    TResult? Function(String errorMsg)? failed,
   }) {
     return initial?.call();
   }
@@ -140,7 +154,8 @@ class _$initialImpl implements _initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
-    TResult Function()? isFirstLogin,
+    TResult Function()? updateAvailable,
+    TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -154,7 +169,8 @@ class _$initialImpl implements _initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_isFirstLogin value) isFirstLogin,
+    required TResult Function(_updateAvailable value) updateAvailable,
+    required TResult Function(_failed value) failed,
   }) {
     return initial(this);
   }
@@ -164,7 +180,8 @@ class _$initialImpl implements _initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_isFirstLogin value)? isFirstLogin,
+    TResult? Function(_updateAvailable value)? updateAvailable,
+    TResult? Function(_failed value)? failed,
   }) {
     return initial?.call(this);
   }
@@ -174,7 +191,8 @@ class _$initialImpl implements _initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
-    TResult Function(_isFirstLogin value)? isFirstLogin,
+    TResult Function(_updateAvailable value)? updateAvailable,
+    TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -202,6 +220,9 @@ class __$$initializedImplCopyWithImpl<$Res>
   __$$initializedImplCopyWithImpl(
       _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -228,7 +249,8 @@ class _$initializedImpl implements _initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
-    required TResult Function() isFirstLogin,
+    required TResult Function() updateAvailable,
+    required TResult Function(String errorMsg) failed,
   }) {
     return initialized();
   }
@@ -238,7 +260,8 @@ class _$initializedImpl implements _initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
-    TResult? Function()? isFirstLogin,
+    TResult? Function()? updateAvailable,
+    TResult? Function(String errorMsg)? failed,
   }) {
     return initialized?.call();
   }
@@ -248,7 +271,8 @@ class _$initializedImpl implements _initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
-    TResult Function()? isFirstLogin,
+    TResult Function()? updateAvailable,
+    TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -262,7 +286,8 @@ class _$initializedImpl implements _initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_isFirstLogin value) isFirstLogin,
+    required TResult Function(_updateAvailable value) updateAvailable,
+    required TResult Function(_failed value) failed,
   }) {
     return initialized(this);
   }
@@ -272,7 +297,8 @@ class _$initializedImpl implements _initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_isFirstLogin value)? isFirstLogin,
+    TResult? Function(_updateAvailable value)? updateAvailable,
+    TResult? Function(_failed value)? failed,
   }) {
     return initialized?.call(this);
   }
@@ -282,7 +308,8 @@ class _$initializedImpl implements _initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
-    TResult Function(_isFirstLogin value)? isFirstLogin,
+    TResult Function(_updateAvailable value)? updateAvailable,
+    TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -297,35 +324,38 @@ abstract class _initialized implements SplashScreenState {
 }
 
 /// @nodoc
-abstract class _$$isFirstLoginImplCopyWith<$Res> {
-  factory _$$isFirstLoginImplCopyWith(
-          _$isFirstLoginImpl value, $Res Function(_$isFirstLoginImpl) then) =
-      __$$isFirstLoginImplCopyWithImpl<$Res>;
+abstract class _$$updateAvailableImplCopyWith<$Res> {
+  factory _$$updateAvailableImplCopyWith(_$updateAvailableImpl value,
+          $Res Function(_$updateAvailableImpl) then) =
+      __$$updateAvailableImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$isFirstLoginImplCopyWithImpl<$Res>
-    extends _$SplashScreenStateCopyWithImpl<$Res, _$isFirstLoginImpl>
-    implements _$$isFirstLoginImplCopyWith<$Res> {
-  __$$isFirstLoginImplCopyWithImpl(
-      _$isFirstLoginImpl _value, $Res Function(_$isFirstLoginImpl) _then)
+class __$$updateAvailableImplCopyWithImpl<$Res>
+    extends _$SplashScreenStateCopyWithImpl<$Res, _$updateAvailableImpl>
+    implements _$$updateAvailableImplCopyWith<$Res> {
+  __$$updateAvailableImplCopyWithImpl(
+      _$updateAvailableImpl _value, $Res Function(_$updateAvailableImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$isFirstLoginImpl implements _isFirstLogin {
-  const _$isFirstLoginImpl();
+class _$updateAvailableImpl implements _updateAvailable {
+  const _$updateAvailableImpl();
 
   @override
   String toString() {
-    return 'SplashScreenState.isFirstLogin()';
+    return 'SplashScreenState.updateAvailable()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$isFirstLoginImpl);
+        (other.runtimeType == runtimeType && other is _$updateAvailableImpl);
   }
 
   @override
@@ -336,9 +366,10 @@ class _$isFirstLoginImpl implements _isFirstLogin {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
-    required TResult Function() isFirstLogin,
+    required TResult Function() updateAvailable,
+    required TResult Function(String errorMsg) failed,
   }) {
-    return isFirstLogin();
+    return updateAvailable();
   }
 
   @override
@@ -346,9 +377,10 @@ class _$isFirstLoginImpl implements _isFirstLogin {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
-    TResult? Function()? isFirstLogin,
+    TResult? Function()? updateAvailable,
+    TResult? Function(String errorMsg)? failed,
   }) {
-    return isFirstLogin?.call();
+    return updateAvailable?.call();
   }
 
   @override
@@ -356,11 +388,12 @@ class _$isFirstLoginImpl implements _isFirstLogin {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
-    TResult Function()? isFirstLogin,
+    TResult Function()? updateAvailable,
+    TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
-    if (isFirstLogin != null) {
-      return isFirstLogin();
+    if (updateAvailable != null) {
+      return updateAvailable();
     }
     return orElse();
   }
@@ -370,9 +403,10 @@ class _$isFirstLoginImpl implements _isFirstLogin {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
-    required TResult Function(_isFirstLogin value) isFirstLogin,
+    required TResult Function(_updateAvailable value) updateAvailable,
+    required TResult Function(_failed value) failed,
   }) {
-    return isFirstLogin(this);
+    return updateAvailable(this);
   }
 
   @override
@@ -380,9 +414,10 @@ class _$isFirstLoginImpl implements _isFirstLogin {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
-    TResult? Function(_isFirstLogin value)? isFirstLogin,
+    TResult? Function(_updateAvailable value)? updateAvailable,
+    TResult? Function(_failed value)? failed,
   }) {
-    return isFirstLogin?.call(this);
+    return updateAvailable?.call(this);
   }
 
   @override
@@ -390,16 +425,170 @@ class _$isFirstLoginImpl implements _isFirstLogin {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
-    TResult Function(_isFirstLogin value)? isFirstLogin,
+    TResult Function(_updateAvailable value)? updateAvailable,
+    TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
-    if (isFirstLogin != null) {
-      return isFirstLogin(this);
+    if (updateAvailable != null) {
+      return updateAvailable(this);
     }
     return orElse();
   }
 }
 
-abstract class _isFirstLogin implements SplashScreenState {
-  const factory _isFirstLogin() = _$isFirstLoginImpl;
+abstract class _updateAvailable implements SplashScreenState {
+  const factory _updateAvailable() = _$updateAvailableImpl;
+}
+
+/// @nodoc
+abstract class _$$failedImplCopyWith<$Res> {
+  factory _$$failedImplCopyWith(
+          _$failedImpl value, $Res Function(_$failedImpl) then) =
+      __$$failedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String errorMsg});
+}
+
+/// @nodoc
+class __$$failedImplCopyWithImpl<$Res>
+    extends _$SplashScreenStateCopyWithImpl<$Res, _$failedImpl>
+    implements _$$failedImplCopyWith<$Res> {
+  __$$failedImplCopyWithImpl(
+      _$failedImpl _value, $Res Function(_$failedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? errorMsg = null,
+  }) {
+    return _then(_$failedImpl(
+      errorMsg: null == errorMsg
+          ? _value.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$failedImpl implements _failed {
+  const _$failedImpl({required this.errorMsg});
+
+  @override
+  final String errorMsg;
+
+  @override
+  String toString() {
+    return 'SplashScreenState.failed(errorMsg: $errorMsg)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$failedImpl &&
+            (identical(other.errorMsg, errorMsg) ||
+                other.errorMsg == errorMsg));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, errorMsg);
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$failedImplCopyWith<_$failedImpl> get copyWith =>
+      __$$failedImplCopyWithImpl<_$failedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialized,
+    required TResult Function() updateAvailable,
+    required TResult Function(String errorMsg) failed,
+  }) {
+    return failed(errorMsg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? initialized,
+    TResult? Function()? updateAvailable,
+    TResult? Function(String errorMsg)? failed,
+  }) {
+    return failed?.call(errorMsg);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialized,
+    TResult Function()? updateAvailable,
+    TResult Function(String errorMsg)? failed,
+    required TResult orElse(),
+  }) {
+    if (failed != null) {
+      return failed(errorMsg);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initial value) initial,
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_updateAvailable value) updateAvailable,
+    required TResult Function(_failed value) failed,
+  }) {
+    return failed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initial value)? initial,
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_updateAvailable value)? updateAvailable,
+    TResult? Function(_failed value)? failed,
+  }) {
+    return failed?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initial value)? initial,
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_updateAvailable value)? updateAvailable,
+    TResult Function(_failed value)? failed,
+    required TResult orElse(),
+  }) {
+    if (failed != null) {
+      return failed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _failed implements SplashScreenState {
+  const factory _failed({required final String errorMsg}) = _$failedImpl;
+
+  String get errorMsg;
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$failedImplCopyWith<_$failedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

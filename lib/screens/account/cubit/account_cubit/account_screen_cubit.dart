@@ -4,10 +4,9 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:twodotnulllauncher/repository/account_repository.dart';
 import '../../../../data/account.dart';
-import '../../../../data/altoholic.dart';
 import '../../../../repository/main_repository.dart';
+import '../../../../repository/preferences_repository.dart';
 
 part 'account_screen_state.dart';
 
@@ -21,25 +20,30 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       {required this.mainRepository, required this.preferencesRepository})
       : super(const AccountScreenState.initial());
 
-  saveAccounts(Account? acc, MainRepository accRepo) async {
+  Future<void> initialize() async {
+    await loadAccounts();
+    emit(const AccountScreenState.initial());
+  }
+
+  void saveAccounts(Account? account, MainRepository mainRepository) async {
     List<String> accStringList = [];
     List<int> ids = [];
 
-    accRepo.accountList ??= [];
-    for (Account a in accRepo.accountList!) {
+    mainRepository.accountList ??= [];
+    for (Account a in mainRepository.accountList) {
       ids.add(a.accId);
     }
 
-    if (acc != null) {
+    if (account != null) {
       if (ids.isNotEmpty) {
         ids.sort();
         int i = ids[ids.length - 1];
-        acc.accId = i + 1;
+        account.accId = i + 1;
       }
-      accRepo.accountList!.add(acc);
+      mainRepository.accountList.add(account);
     }
 
-    for (Account a in accRepo.accountList!) {
+    for (Account a in mainRepository.accountList) {
       String accountString = jsonEncode(a.toJson());
       accStringList.add(accountString);
     }
@@ -49,37 +53,29 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
     emit(const AccountScreenState.noAccounts());
   }
 
-  Future<void> loadAccounts(MainRepository mainRepository) async {
+  Future<void> loadAccounts() async {
     List<String>? list = await preferencesRepository.getAccounts();
     mainRepository.accountList = [];
     list ??= [];
     if (list.isNotEmpty) {
       for (String s in list) {
         Account acc = Account.fromJson(jsonDecode(s));
-        mainRepository.accountList!.add(acc);
+        mainRepository.accountList.add(acc);
       }
       emit(AccountScreenState.initialized(
-          accountList: mainRepository.accountList!));
+          accountList: mainRepository.accountList));
     } else {
       emit(const AccountScreenState.noAccounts());
     }
   }
 
-/*
-  realmChanged(String realm) {
-    //currentRealm = realm;
-    emit(AccountSuccess());
-  }*/
-
-  deleteSingleAccount(MainRepository accRepo, Account acc) {
+  void deleteSingleAccount(MainRepository accRepo, Account acc) {
     accRepo.accountList!.remove(acc);
 
     saveAccounts(null, accRepo);
-
-    return accRepo;
   }
 
-  changePwVisibility() {
+  void changePwVisibility() {
     /*if (showPw) {
       showPw = !showPw;
       emit(AccountSuccess());
@@ -93,7 +89,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
   late Process _process;
   late Timer _timer;
 
-  startProcessMonitoring(String path) async {
+  void startProcessMonitoring(String path) async {
     _process = await Process.start(path, []);
 
     Timer(const Duration(seconds: 20), () {

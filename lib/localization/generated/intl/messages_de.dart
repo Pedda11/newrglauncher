@@ -41,18 +41,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "addAccountScreenTitle":
             MessageLookupByLibrary.simpleMessage("Account hinzufügen"),
         "appTitle": MessageLookupByLibrary.simpleMessage("WOW-Launcher"),
-        "loginScreenEnterPin":
-            MessageLookupByLibrary.simpleMessage("Gib deinen PIN ein"),
-        "loginScreenFirstLogin": MessageLookupByLibrary.simpleMessage(
-            "Dies ist dein erster Login. Bitte erstelle dir eine 4-Stellige PIN."),
-        "loginScreenHint": MessageLookupByLibrary.simpleMessage("PIN"),
-        "loginScreenPinToShort":
-            MessageLookupByLibrary.simpleMessage("Dein PIN ist zu kurz"),
-        "loginScreenPinsNotTheSame": MessageLookupByLibrary.simpleMessage(
-            "Deine PIN\'s stimmen nicht überein"),
-        "loginScreenRepeatEnterPin":
-            MessageLookupByLibrary.simpleMessage("Bitte wiederhole deine PIN!"),
-        "loginScreenTitle": MessageLookupByLibrary.simpleMessage("L O G I N"),
         "menuItemSettings":
             MessageLookupByLibrary.simpleMessage("Einstellungen"),
         "menuTitle": MessageLookupByLibrary.simpleMessage("M E N Ü"),
@@ -60,10 +48,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "save": MessageLookupByLibrary.simpleMessage("Speichern"),
         "settingsScreenWowPath":
             MessageLookupByLibrary.simpleMessage("WoW-Speicherort"),
+        "updateScreenUpdateCheck":
+            MessageLookupByLibrary.simpleMessage("Prüfe auf Updates..."),
         "updateScreenUpdateFound": MessageLookupByLibrary.simpleMessage(
             "U P D A T E   V E R F Ü G B A R"),
-        "updateScreenUpdateFoundQuestion": MessageLookupByLibrary.simpleMessage(
-            "Es ist eine neuere Version verfügbar. Möchten Sie jetzt updaten?"),
+        "updateScreenUpdating": MessageLookupByLibrary.simpleMessage(
+            "Update wird heruntergeladen und installiert!"),
         "yes": MessageLookupByLibrary.simpleMessage("Ja")
       };
 }

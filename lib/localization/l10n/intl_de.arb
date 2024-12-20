@@ -1,34 +1,21 @@
 {
   "appTitle": "WOW-Launcher",
-
-  "yes" : "Ja",
-  "no" : "Nein",
-  "save" : "Speichern",
-
+  "yes": "Ja",
+  "no": "Nein",
+  "save": "Speichern",
+  "updateScreenUpdateCheck": "Prüfe auf Updates...",
   "updateScreenUpdateFound": "U P D A T E   V E R F Ü G B A R",
-  "updateScreenUpdateFoundQuestion": "Es ist eine neuere Version verfügbar. Möchten Sie jetzt updaten?",
-
-  "loginScreenTitle" : "L O G I N",
-  "loginScreenFirstLogin" : "Dies ist dein erster Login. Bitte erstelle dir eine 4-Stellige PIN.",
-  "loginScreenHint" : "PIN",
-  "loginScreenEnterPin" : "Gib deinen PIN ein",
-  "loginScreenPinToShort" : "Dein PIN ist zu kurz",
-  "loginScreenPinsNotTheSame" : "Deine PIN's stimmen nicht überein",
-  "loginScreenRepeatEnterPin" : "Bitte wiederhole deine PIN!",
-
-  "menuTitle" : "M E N Ü",
-  "menuItemSettings" : "Einstellungen",
-
-  "accountScreenTitle" : "Meine Accounts",
-  "accountScreenNoAccounts" : "Keine Accounts gespeichert",
-  "accountScreenNoData" : "Keine Daten vorhanden",
-
-  "addAccountScreenTitle" : "Account hinzufügen",
-  "addAccountScreenNewAccount" : "N e u e r   A c c o u n t",
-  "addAccountScreenListNameLabel" : "Listen Name",
-  "addAccountScreenAccountNameLabel" : "Account Name",
-  "addAccountScreenPasswordLabel" : "Account Passwort",
-  "addAccountScreenRealmLabel" : "Realm/Logonserver",
-
-  "settingsScreenWowPath" : "WoW-Speicherort"
+  "updateScreenUpdating": "Update wird heruntergeladen und installiert!",
+  "menuTitle": "M E N Ü",
+  "menuItemSettings": "Einstellungen",
+  "accountScreenTitle": "Meine Accounts",
+  "accountScreenNoAccounts": "Keine Accounts gespeichert",
+  "accountScreenNoData": "Keine Daten vorhanden",
+  "addAccountScreenTitle": "Account hinzufügen",
+  "addAccountScreenNewAccount": "N e u e r   A c c o u n t",
+  "addAccountScreenListNameLabel": "Listen Name",
+  "addAccountScreenAccountNameLabel": "Account Name",
+  "addAccountScreenPasswordLabel": "Account Passwort",
+  "addAccountScreenRealmLabel": "Realm/Logonserver",
+  "settingsScreenWowPath": "WoW-Speicherort"
 }

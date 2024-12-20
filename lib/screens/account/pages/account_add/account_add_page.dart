@@ -1,21 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../data/account.dart';
 import '../../../../repository/main_repository.dart';
 import '../../../../widgets/my_appbar.dart';
 import '../../../../widgets/my_text_field.dart';
 import '../../cubit/account_cubit/account_screen_cubit.dart';
 
-class AccountAddScreen extends StatefulWidget {
-  const AccountAddScreen({super.key});
+class AccountAddPage extends StatefulWidget {
+  const AccountAddPage({super.key});
 
   @override
-  State<AccountAddScreen> createState() => _AccountAddScreenState();
+  State<AccountAddPage> createState() => _AccountAddPageState();
 }
 
-class _AccountAddScreenState extends State<AccountAddScreen> {
+class _AccountAddPageState extends State<AccountAddPage> {
   final _listNameController = TextEditingController();
   final _accNameController = TextEditingController();
   final _accPasswordController = TextEditingController();
@@ -31,11 +29,8 @@ class _AccountAddScreenState extends State<AccountAddScreen> {
     super.initState();
   }
 
-  ///Test change
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: const MyAppbar(title: 'N e u e r   A c c o u n t'),
       body: Padding(
@@ -99,7 +94,6 @@ class _AccountAddScreenState extends State<AccountAddScreen> {
                                       accChars: []),
                                   accRepo,
                                 );
-
                           },
                           tooltip: 'Speichern',
                           child: const Icon(Icons.person_add),

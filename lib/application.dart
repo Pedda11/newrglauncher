@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:twodotnulllauncher/navigation/navigation_pane.dart';
-import 'package:twodotnulllauncher/services/update_service.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-
 import 'localization/generated/l10n.dart';
+import 'screens/splash/splash_screen.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       localizationsDelegates: [
         Localize.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -21,7 +19,7 @@ class Application extends StatelessWidget {
         Locale('en', ''),
         Locale('de', ''),
       ],
-      home: NavigationPane(),
+      home: SplashScreen(),
     );
   }
 }
