@@ -1,0 +1,2 @@
+# newrglauncher
+wow_launcher
