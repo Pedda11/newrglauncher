@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:twodotnulllauncher/navigation/navigation_pane.dart';
 import 'package:twodotnulllauncher/services/update_service.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'localization/generated/l10n.dart';
 
 class Application extends StatelessWidget {
   const Application({super.key});
@@ -7,18 +11,17 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Column(
-            children: [
-              const Text('test 3 result'),
-              ElevatedButton(onPressed: (){
-                UpdateService().updateApp();
-              }, child: const Text('update now'))
-            ],
-          ),
-        ),
-      ),
+      localizationsDelegates: [
+        Localize.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('de', ''),
+      ],
+      home: NavigationPane(),
     );
   }
 }

@@ -1,0 +1,34 @@
+{
+  "appTitle": "WOW Launcher",
+
+  "yes": "Yes",
+  "no": "No",
+  "save": "Save",
+
+  "updateScreenUpdateFound": "UPDATE AVAILABLE",
+  "updateScreenUpdateFoundQuestion": "A newer version is available. Do you want to update now?",
+
+  "loginScreenTitle": "LOGIN",
+  "loginScreenFirstLogin": "This is your first login. Please create a 4-digit PIN.",
+  "loginScreenHint": "PIN",
+  "loginScreenEnterPin": "Enter your PIN",
+  "loginScreenPinToShort": "Your PIN is too short",
+  "loginScreenPinsNotTheSame": "Your PINs do not match",
+  "loginScreenRepeatEnterPin": "Please repeat your PIN!",
+
+  "menuTitle": "MENU",
+  "menuItemSettings": "Settings",
+
+  "accountScreenTitle": "My Accounts",
+  "accountScreenNoAccounts": "No accounts saved",
+  "accountScreenNoData": "No data available",
+
+  "addAccountScreenTitle": "Add Account",
+  "addAccountScreenNewAccount": "New Account",
+  "addAccountScreenListNameLabel": "List Name",
+  "addAccountScreenAccountNameLabel": "Account Name",
+  "addAccountScreenPasswordLabel": "Account Password",
+  "addAccountScreenRealmLabel": "Realm/Logon Server",
+
+  "settingsScreenWowPath": "WoW Path"
+}
