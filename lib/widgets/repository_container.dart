@@ -40,12 +40,13 @@ class RepositoryContainer extends StatelessWidget {
                 preferencesRepository: context.read<PreferencesRepository>()),
           ),
           BlocProvider(
-            create: (context) =>
-                CharacterDataCubit(context.read<MainRepository>()),
+            create: (context) => CharacterDataCubit(
+                mainRepository: context.read<MainRepository>(),
+                settingsRepository: context.read<SettingsRepository>()),
           ),
           BlocProvider(
             create: (context) => SettingsScreenCubit(
-                mainRepository: context.read<MainRepository>(),
+                settingsRepository: context.read<SettingsRepository>(),
                 preferencesRepository: context.read<PreferencesRepository>()),
           ),
         ],

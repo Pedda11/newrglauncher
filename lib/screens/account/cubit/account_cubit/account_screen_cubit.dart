@@ -22,35 +22,6 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
   Future<void> initialize() async {
     await loadAccounts();
-    emit(const AccountScreenState.initial());
-  }
-
-  void saveAccounts(Account? account, MainRepository mainRepository) async {
-    List<String> accStringList = [];
-    List<int> ids = [];
-
-    mainRepository.accountList ??= [];
-    for (Account a in mainRepository.accountList) {
-      ids.add(a.accId);
-    }
-
-    if (account != null) {
-      if (ids.isNotEmpty) {
-        ids.sort();
-        int i = ids[ids.length - 1];
-        account.accId = i + 1;
-      }
-      mainRepository.accountList.add(account);
-    }
-
-    for (Account a in mainRepository.accountList) {
-      String accountString = jsonEncode(a.toJson());
-      accStringList.add(accountString);
-    }
-
-    preferencesRepository.setAccounts(accStringList);
-
-    emit(const AccountScreenState.noAccounts());
   }
 
   Future<void> loadAccounts() async {
@@ -62,61 +33,28 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
         Account acc = Account.fromJson(jsonDecode(s));
         mainRepository.accountList.add(acc);
       }
-      emit(AccountScreenState.initialized(
-          accountList: mainRepository.accountList));
+      emit(AccountScreenState.initialized());
     } else {
-      emit(const AccountScreenState.noAccounts());
+      emit(const AccountScreenState.goToAddAccountPage());
     }
   }
 
-  void deleteSingleAccount(MainRepository accRepo, Account acc) {
-    accRepo.accountList!.remove(acc);
+  void deleteSingleAccount(Account acc) async {
+    emit(AccountScreenState.deletingAccount());
+    mainRepository.accountList.remove(acc);
 
-    saveAccounts(null, accRepo);
+    List<String> accStringList = [];
+
+    for (Account a in mainRepository.accountList) {
+      String accountString = jsonEncode(a.toJson());
+      accStringList.add(accountString);
+    }
+
+    await preferencesRepository.setAccounts(accStringList);
+    await loadAccounts();
   }
 
-  void changePwVisibility() {
-    /*if (showPw) {
-      showPw = !showPw;
-      emit(AccountSuccess());
-    } else {
-      showPw = !showPw;
-      emit(AccountSuccess());
-    }*/
+  void goToAccountAddPage() {
+    emit(AccountScreenState.goToAddAccountPage());
   }
-
-  List<ProcessInfo> processInfoList = [];
-  late Process _process;
-  late Timer _timer;
-
-  void startProcessMonitoring(String path) async {
-    _process = await Process.start(path, []);
-
-    Timer(const Duration(seconds: 20), () {
-      /*var hwnd = GetFocus();
-
-      if (kDebugMode) {
-        print(hwnd);
-      }*/
-    });
-
-    /*
-    // Startet einen Timer, der jede Sekunde Prozessinformationen abruft
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) async {
-      final processInfo = await _getProcessInfo();
-      processInfoList.add(processInfo);
-    });*/
-  }
-
-  Future<void> stopProcessMonitoring() async {
-    _timer.cancel();
-    _process.kill();
-  }
-}
-
-class ProcessInfo {
-  final int pid;
-  final Stream<List<int>> pOut;
-
-  ProcessInfo(this.pid, this.pOut);
 }

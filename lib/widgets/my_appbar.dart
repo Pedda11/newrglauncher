@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 
-class MyAppbar extends StatefulWidget implements PreferredSizeWidget {
-  const MyAppbar({Key? key, required this.title}) : super(key: key);
+class MyAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool? centerTitle;
 
-  @override
-  State<MyAppbar> createState() => _MyAppbarState();
+  const MyAppbar({super.key, required this.title, this.centerTitle = true});
 
-  @override
-  Size get preferredSize => const Size.fromHeight(48);
-}
-
-class _MyAppbarState extends State<MyAppbar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      centerTitle: true,
+      centerTitle: centerTitle,
       title: Text(
-        widget.title,
+        title,
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
@@ -25,4 +19,7 @@ class _MyAppbarState extends State<MyAppbar> {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(48);
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import '../../../../../localization/generated/l10n.dart';
 import '../../../../../repository/main_repository.dart';
 import '../../../cubit/account_cubit/account_screen_cubit.dart';
 import '../../../cubit/character_cubit/character_data_cubit.dart';
@@ -16,74 +15,76 @@ class AccountListPageContent extends StatelessWidget {
     final mainRepository = context.read<MainRepository>();
     final screenCubit = context.read<AccountScreenCubit>();
     final characterDataCubit = context.read<CharacterDataCubit>();
-    final locales = Localize.of(context);
-
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          flex: 1,
-          child: BlocBuilder<AccountScreenCubit, AccountScreenState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                initialized: (accList) => ListView.builder(
-                  itemCount: accList.length,
-                  itemBuilder: (context, index) {
-                    return Slidable(
-                      endActionPane: ActionPane(
-                        motion: const StretchMotion(),
-                        children: [
-                          SlidableAction(
-                            spacing: 20,
-                            foregroundColor: Colors.red,
-                            icon: Icons.delete,
-                            borderRadius: BorderRadius.circular(8),
-                            flex: 1,
-                            onPressed: (context) => {
-                              screenCubit.deleteSingleAccount(
-                                  mainRepository, accList[index]),
-                            },
-                          )
-                        ],
-                      ),
-                      child: GestureDetector(
-                        child: AccountCard(
-                          acc: accList[index],
-                        ),
-                        onTap: () {
-                          characterDataCubit.getAccountDetails(accList[index]);
-                        },
-                        onDoubleTap: () {
-                          /*if (sCubit.wowGamePath != null) {
-                            /// If there is a Wow game path selected
-                            accCubit
-                                .startProcessMonitoring(sCubit.wowGamePath!);
+          child: Column(
+            children: [
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    screenCubit.goToAccountAddPage();
+                  },
+                  child: const Text('Add Account'),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: BlocBuilder<AccountScreenCubit, AccountScreenState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      initialized: () => ListView.builder(
+                        itemCount: mainRepository.accountList.length,
+                        itemBuilder: (context, index) {
+                          return Slidable(
+                            endActionPane: ActionPane(
+                              motion: const StretchMotion(),
+                              children: [
+                                SlidableAction(
+                                  spacing: 20,
+                                  foregroundColor: Colors.red,
+                                  icon: Icons.delete,
+                                  borderRadius: BorderRadius.circular(8),
+                                  flex: 1,
+                                  onPressed: (context) => {
+                                    screenCubit.deleteSingleAccount(
+                                        mainRepository.accountList[index]),
+                                  },
+                                )
+                              ],
+                            ),
+                            child: GestureDetector(
+                              child: AccountCard(
+                                acc: mainRepository.accountList[index],
+                              ),
+                              onTap: () {
+                                characterDataCubit.getAccountDetails(
+                                    mainRepository.accountList[index]);
+                              },
+                              onDoubleTap: () {
+                                /*if (sCubit.wowGamePath != null) {
+                                  /// If there is a Wow game path selected
+                                  accCubit
+                                      .startProcessMonitoring(sCubit.wowGamePath!);
 
-                            /// Start Wow game monitoring
-                          }*/
+                                  /// Start Wow game monitoring
+                                }*/
+                              },
+                            ),
+                          );
                         },
                       ),
+                      orElse: () {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
                     );
                   },
                 ),
-                noAccounts: () {
-                  return const Center(
-                    child: Text(
-                      'No accounts saved yet!!!',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
-                    ),
-                  );
-                },
-                orElse: () {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                },
-              );
-            },
+              ),
+            ],
           ),
         ),
         Expanded(

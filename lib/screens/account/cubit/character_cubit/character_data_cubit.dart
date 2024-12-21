@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:twodotnulllauncher/repository/settings_repository.dart';
 
 import '../../../../data/account.dart';
 import '../../../../data/altoholic.dart';
@@ -9,18 +10,22 @@ import '../../../../data/character.dart';
 import '../../../../repository/main_repository.dart';
 
 part 'character_data_state.dart';
+
 part 'character_data_cubit.freezed.dart';
 
 class CharacterDataCubit extends Cubit<CharacterDataState> {
   final MainRepository mainRepository;
-  CharacterDataCubit(this.mainRepository)
+  final SettingsRepository settingsRepository;
+
+  CharacterDataCubit(
+      {required this.mainRepository, required this.settingsRepository})
       : super(const CharacterDataState.initial());
 
   getAccountDetails(Account acc) async {
     //filePaths.clear();
     //fileNames.clear();
     String charsPath =
-        '${mainRepository.settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\Rising-Gods';
+        '${settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\Rising-Gods';
     final dir = Directory(charsPath);
     late List<FileSystemEntity> entities;
     try {
@@ -38,10 +43,10 @@ class CharacterDataCubit extends Cubit<CharacterDataState> {
       }
 
       String charsPathAltoholic =
-          '${mainRepository.settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\SavedVariables\\DataStore_Characters.lua';
+          '${settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\SavedVariables\\DataStore_Characters.lua';
 
       String savedInstancesPathAltoholic =
-          '${mainRepository.settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\SavedVariables\\Altoholic.lua';
+          '${settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\SavedVariables\\Altoholic.lua';
 
       /*String charsPathAltoholic =
           'C:\\Users\\Pedda\\OneDrive\\Documents\\24-09-2023_WTF_autoBak\\Account\\FIJETA\\SavedVariables\\DataStore_Characters.lua';

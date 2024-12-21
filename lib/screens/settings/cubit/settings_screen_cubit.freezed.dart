@@ -20,6 +20,7 @@ mixin _$SettingsScreenState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(List<String> dataFolder) chooseDataFolder,
     required TResult Function() settingsChanged,
     required TResult Function() fileOrDirectoryNotFound,
   }) =>
@@ -28,6 +29,7 @@ mixin _$SettingsScreenState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(List<String> dataFolder)? chooseDataFolder,
     TResult? Function()? settingsChanged,
     TResult? Function()? fileOrDirectoryNotFound,
   }) =>
@@ -36,6 +38,7 @@ mixin _$SettingsScreenState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(List<String> dataFolder)? chooseDataFolder,
     TResult Function()? settingsChanged,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$SettingsScreenState {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_chooseDataFolder value) chooseDataFolder,
     required TResult Function(_settingsChanged value) settingsChanged,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
@@ -54,6 +58,7 @@ mixin _$SettingsScreenState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_chooseDataFolder value)? chooseDataFolder,
     TResult? Function(_settingsChanged value)? settingsChanged,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) =>
@@ -62,6 +67,7 @@ mixin _$SettingsScreenState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_chooseDataFolder value)? chooseDataFolder,
     TResult Function(_settingsChanged value)? settingsChanged,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -120,19 +126,11 @@ class _$initialImpl implements _initial {
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$initialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(List<String> dataFolder) chooseDataFolder,
     required TResult Function() settingsChanged,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
@@ -144,6 +142,7 @@ class _$initialImpl implements _initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(List<String> dataFolder)? chooseDataFolder,
     TResult? Function()? settingsChanged,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
@@ -155,6 +154,7 @@ class _$initialImpl implements _initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(List<String> dataFolder)? chooseDataFolder,
     TResult Function()? settingsChanged,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -170,6 +170,7 @@ class _$initialImpl implements _initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_chooseDataFolder value) chooseDataFolder,
     required TResult Function(_settingsChanged value) settingsChanged,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
@@ -182,6 +183,7 @@ class _$initialImpl implements _initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_chooseDataFolder value)? chooseDataFolder,
     TResult? Function(_settingsChanged value)? settingsChanged,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
@@ -193,6 +195,7 @@ class _$initialImpl implements _initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_chooseDataFolder value)? chooseDataFolder,
     TResult Function(_settingsChanged value)? settingsChanged,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -238,19 +241,11 @@ class _$initializedImpl implements _initialized {
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$initializedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(List<String> dataFolder) chooseDataFolder,
     required TResult Function() settingsChanged,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
@@ -262,6 +257,7 @@ class _$initializedImpl implements _initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(List<String> dataFolder)? chooseDataFolder,
     TResult? Function()? settingsChanged,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
@@ -273,6 +269,7 @@ class _$initializedImpl implements _initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(List<String> dataFolder)? chooseDataFolder,
     TResult Function()? settingsChanged,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -288,6 +285,7 @@ class _$initializedImpl implements _initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_chooseDataFolder value) chooseDataFolder,
     required TResult Function(_settingsChanged value) settingsChanged,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
@@ -300,6 +298,7 @@ class _$initializedImpl implements _initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_chooseDataFolder value)? chooseDataFolder,
     TResult? Function(_settingsChanged value)? settingsChanged,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
@@ -311,6 +310,7 @@ class _$initializedImpl implements _initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_chooseDataFolder value)? chooseDataFolder,
     TResult Function(_settingsChanged value)? settingsChanged,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -324,6 +324,162 @@ class _$initializedImpl implements _initialized {
 
 abstract class _initialized implements SettingsScreenState {
   const factory _initialized() = _$initializedImpl;
+}
+
+/// @nodoc
+abstract class _$$chooseDataFolderImplCopyWith<$Res> {
+  factory _$$chooseDataFolderImplCopyWith(_$chooseDataFolderImpl value,
+          $Res Function(_$chooseDataFolderImpl) then) =
+      __$$chooseDataFolderImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> dataFolder});
+}
+
+/// @nodoc
+class __$$chooseDataFolderImplCopyWithImpl<$Res>
+    extends _$SettingsScreenStateCopyWithImpl<$Res, _$chooseDataFolderImpl>
+    implements _$$chooseDataFolderImplCopyWith<$Res> {
+  __$$chooseDataFolderImplCopyWithImpl(_$chooseDataFolderImpl _value,
+      $Res Function(_$chooseDataFolderImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dataFolder = null,
+  }) {
+    return _then(_$chooseDataFolderImpl(
+      dataFolder: null == dataFolder
+          ? _value._dataFolder
+          : dataFolder // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$chooseDataFolderImpl implements _chooseDataFolder {
+  const _$chooseDataFolderImpl({required final List<String> dataFolder})
+      : _dataFolder = dataFolder;
+
+  final List<String> _dataFolder;
+  @override
+  List<String> get dataFolder {
+    if (_dataFolder is EqualUnmodifiableListView) return _dataFolder;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_dataFolder);
+  }
+
+  @override
+  String toString() {
+    return 'SettingsScreenState.chooseDataFolder(dataFolder: $dataFolder)';
+  }
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$chooseDataFolderImplCopyWith<_$chooseDataFolderImpl> get copyWith =>
+      __$$chooseDataFolderImplCopyWithImpl<_$chooseDataFolderImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialized,
+    required TResult Function(List<String> dataFolder) chooseDataFolder,
+    required TResult Function() settingsChanged,
+    required TResult Function() fileOrDirectoryNotFound,
+  }) {
+    return chooseDataFolder(dataFolder);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? initialized,
+    TResult? Function(List<String> dataFolder)? chooseDataFolder,
+    TResult? Function()? settingsChanged,
+    TResult? Function()? fileOrDirectoryNotFound,
+  }) {
+    return chooseDataFolder?.call(dataFolder);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialized,
+    TResult Function(List<String> dataFolder)? chooseDataFolder,
+    TResult Function()? settingsChanged,
+    TResult Function()? fileOrDirectoryNotFound,
+    required TResult orElse(),
+  }) {
+    if (chooseDataFolder != null) {
+      return chooseDataFolder(dataFolder);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initial value) initial,
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_chooseDataFolder value) chooseDataFolder,
+    required TResult Function(_settingsChanged value) settingsChanged,
+    required TResult Function(_fileOrDirectoryNotFound value)
+        fileOrDirectoryNotFound,
+  }) {
+    return chooseDataFolder(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initial value)? initial,
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_chooseDataFolder value)? chooseDataFolder,
+    TResult? Function(_settingsChanged value)? settingsChanged,
+    TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
+  }) {
+    return chooseDataFolder?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initial value)? initial,
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_chooseDataFolder value)? chooseDataFolder,
+    TResult Function(_settingsChanged value)? settingsChanged,
+    TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
+    required TResult orElse(),
+  }) {
+    if (chooseDataFolder != null) {
+      return chooseDataFolder(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _chooseDataFolder implements SettingsScreenState {
+  const factory _chooseDataFolder({required final List<String> dataFolder}) =
+      _$chooseDataFolderImpl;
+
+  List<String> get dataFolder;
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$chooseDataFolderImplCopyWith<_$chooseDataFolderImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -356,19 +512,11 @@ class _$settingsChangedImpl implements _settingsChanged {
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$settingsChangedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(List<String> dataFolder) chooseDataFolder,
     required TResult Function() settingsChanged,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
@@ -380,6 +528,7 @@ class _$settingsChangedImpl implements _settingsChanged {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(List<String> dataFolder)? chooseDataFolder,
     TResult? Function()? settingsChanged,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
@@ -391,6 +540,7 @@ class _$settingsChangedImpl implements _settingsChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(List<String> dataFolder)? chooseDataFolder,
     TResult Function()? settingsChanged,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -406,6 +556,7 @@ class _$settingsChangedImpl implements _settingsChanged {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_chooseDataFolder value) chooseDataFolder,
     required TResult Function(_settingsChanged value) settingsChanged,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
@@ -418,6 +569,7 @@ class _$settingsChangedImpl implements _settingsChanged {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_chooseDataFolder value)? chooseDataFolder,
     TResult? Function(_settingsChanged value)? settingsChanged,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
@@ -429,6 +581,7 @@ class _$settingsChangedImpl implements _settingsChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_chooseDataFolder value)? chooseDataFolder,
     TResult Function(_settingsChanged value)? settingsChanged,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -477,20 +630,11 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$fileOrDirectoryNotFoundImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(List<String> dataFolder) chooseDataFolder,
     required TResult Function() settingsChanged,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
@@ -502,6 +646,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(List<String> dataFolder)? chooseDataFolder,
     TResult? Function()? settingsChanged,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
@@ -513,6 +658,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(List<String> dataFolder)? chooseDataFolder,
     TResult Function()? settingsChanged,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
@@ -528,6 +674,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_chooseDataFolder value) chooseDataFolder,
     required TResult Function(_settingsChanged value) settingsChanged,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
@@ -540,6 +687,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_chooseDataFolder value)? chooseDataFolder,
     TResult? Function(_settingsChanged value)? settingsChanged,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
@@ -551,6 +699,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_chooseDataFolder value)? chooseDataFolder,
     TResult Function(_settingsChanged value)? settingsChanged,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),

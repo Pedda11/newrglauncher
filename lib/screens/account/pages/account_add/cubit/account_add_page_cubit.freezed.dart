@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'account_screen_cubit.dart';
+part of 'account_add_page_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,14 +15,13 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$AccountScreenState {
+mixin _$AccountAddPageState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(bool isVisible) changeVisibility,
     required TResult Function() accountAdded,
-    required TResult Function() deletingAccount,
-    required TResult Function() goToAddAccountPage,
     required TResult Function(String errorMsg) failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,9 +29,8 @@ mixin _$AccountScreenState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(bool isVisible)? changeVisibility,
     TResult? Function()? accountAdded,
-    TResult? Function()? deletingAccount,
-    TResult? Function()? goToAddAccountPage,
     TResult? Function(String errorMsg)? failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,9 +38,8 @@ mixin _$AccountScreenState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(bool isVisible)? changeVisibility,
     TResult Function()? accountAdded,
-    TResult Function()? deletingAccount,
-    TResult Function()? goToAddAccountPage,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) =>
@@ -51,9 +48,8 @@ mixin _$AccountScreenState {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_changeVisibility value) changeVisibility,
     required TResult Function(_accountAdded value) accountAdded,
-    required TResult Function(_deletingAccount value) deletingAccount,
-    required TResult Function(_goToAddAccountPage value) goToAddAccountPage,
     required TResult Function(_failed value) failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -61,9 +57,8 @@ mixin _$AccountScreenState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_changeVisibility value)? changeVisibility,
     TResult? Function(_accountAdded value)? accountAdded,
-    TResult? Function(_deletingAccount value)? deletingAccount,
-    TResult? Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult? Function(_failed value)? failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -71,9 +66,8 @@ mixin _$AccountScreenState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_changeVisibility value)? changeVisibility,
     TResult Function(_accountAdded value)? accountAdded,
-    TResult Function(_deletingAccount value)? deletingAccount,
-    TResult Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) =>
@@ -81,23 +75,23 @@ mixin _$AccountScreenState {
 }
 
 /// @nodoc
-abstract class $AccountScreenStateCopyWith<$Res> {
-  factory $AccountScreenStateCopyWith(
-          AccountScreenState value, $Res Function(AccountScreenState) then) =
-      _$AccountScreenStateCopyWithImpl<$Res, AccountScreenState>;
+abstract class $AccountAddPageStateCopyWith<$Res> {
+  factory $AccountAddPageStateCopyWith(
+          AccountAddPageState value, $Res Function(AccountAddPageState) then) =
+      _$AccountAddPageStateCopyWithImpl<$Res, AccountAddPageState>;
 }
 
 /// @nodoc
-class _$AccountScreenStateCopyWithImpl<$Res, $Val extends AccountScreenState>
-    implements $AccountScreenStateCopyWith<$Res> {
-  _$AccountScreenStateCopyWithImpl(this._value, this._then);
+class _$AccountAddPageStateCopyWithImpl<$Res, $Val extends AccountAddPageState>
+    implements $AccountAddPageStateCopyWith<$Res> {
+  _$AccountAddPageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of AccountScreenState
+  /// Create a copy of AccountAddPageState
   /// with the given fields replaced by the non-null parameter values.
 }
 
@@ -110,49 +104,33 @@ abstract class _$$initialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$initialImplCopyWithImpl<$Res>
-    extends _$AccountScreenStateCopyWithImpl<$Res, _$initialImpl>
+    extends _$AccountAddPageStateCopyWithImpl<$Res, _$initialImpl>
     implements _$$initialImplCopyWith<$Res> {
   __$$initialImplCopyWithImpl(
       _$initialImpl _value, $Res Function(_$initialImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AccountScreenState
+  /// Create a copy of AccountAddPageState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$initialImpl with DiagnosticableTreeMixin implements _initial {
+class _$initialImpl implements _initial {
   const _$initialImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AccountScreenState.initial()';
+  String toString() {
+    return 'AccountAddPageState.initial()';
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'AccountScreenState.initial'));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$initialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(bool isVisible) changeVisibility,
     required TResult Function() accountAdded,
-    required TResult Function() deletingAccount,
-    required TResult Function() goToAddAccountPage,
     required TResult Function(String errorMsg) failed,
   }) {
     return initial();
@@ -163,9 +141,8 @@ class _$initialImpl with DiagnosticableTreeMixin implements _initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(bool isVisible)? changeVisibility,
     TResult? Function()? accountAdded,
-    TResult? Function()? deletingAccount,
-    TResult? Function()? goToAddAccountPage,
     TResult? Function(String errorMsg)? failed,
   }) {
     return initial?.call();
@@ -176,9 +153,8 @@ class _$initialImpl with DiagnosticableTreeMixin implements _initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(bool isVisible)? changeVisibility,
     TResult Function()? accountAdded,
-    TResult Function()? deletingAccount,
-    TResult Function()? goToAddAccountPage,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -193,9 +169,8 @@ class _$initialImpl with DiagnosticableTreeMixin implements _initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_changeVisibility value) changeVisibility,
     required TResult Function(_accountAdded value) accountAdded,
-    required TResult Function(_deletingAccount value) deletingAccount,
-    required TResult Function(_goToAddAccountPage value) goToAddAccountPage,
     required TResult Function(_failed value) failed,
   }) {
     return initial(this);
@@ -206,9 +181,8 @@ class _$initialImpl with DiagnosticableTreeMixin implements _initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_changeVisibility value)? changeVisibility,
     TResult? Function(_accountAdded value)? accountAdded,
-    TResult? Function(_deletingAccount value)? deletingAccount,
-    TResult? Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult? Function(_failed value)? failed,
   }) {
     return initial?.call(this);
@@ -219,9 +193,8 @@ class _$initialImpl with DiagnosticableTreeMixin implements _initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_changeVisibility value)? changeVisibility,
     TResult Function(_accountAdded value)? accountAdded,
-    TResult Function(_deletingAccount value)? deletingAccount,
-    TResult Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
@@ -232,7 +205,7 @@ class _$initialImpl with DiagnosticableTreeMixin implements _initial {
   }
 }
 
-abstract class _initial implements AccountScreenState {
+abstract class _initial implements AccountAddPageState {
   const factory _initial() = _$initialImpl;
 }
 
@@ -245,50 +218,33 @@ abstract class _$$initializedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$initializedImplCopyWithImpl<$Res>
-    extends _$AccountScreenStateCopyWithImpl<$Res, _$initializedImpl>
+    extends _$AccountAddPageStateCopyWithImpl<$Res, _$initializedImpl>
     implements _$$initializedImplCopyWith<$Res> {
   __$$initializedImplCopyWithImpl(
       _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AccountScreenState
+  /// Create a copy of AccountAddPageState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
+class _$initializedImpl implements _initialized {
   const _$initializedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AccountScreenState.initialized()';
+  String toString() {
+    return 'AccountAddPageState.initialized()';
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty('type', 'AccountScreenState.initialized'));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$initializedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(bool isVisible) changeVisibility,
     required TResult Function() accountAdded,
-    required TResult Function() deletingAccount,
-    required TResult Function() goToAddAccountPage,
     required TResult Function(String errorMsg) failed,
   }) {
     return initialized();
@@ -299,9 +255,8 @@ class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(bool isVisible)? changeVisibility,
     TResult? Function()? accountAdded,
-    TResult? Function()? deletingAccount,
-    TResult? Function()? goToAddAccountPage,
     TResult? Function(String errorMsg)? failed,
   }) {
     return initialized?.call();
@@ -312,9 +267,8 @@ class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(bool isVisible)? changeVisibility,
     TResult Function()? accountAdded,
-    TResult Function()? deletingAccount,
-    TResult Function()? goToAddAccountPage,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -329,9 +283,8 @@ class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_changeVisibility value) changeVisibility,
     required TResult Function(_accountAdded value) accountAdded,
-    required TResult Function(_deletingAccount value) deletingAccount,
-    required TResult Function(_goToAddAccountPage value) goToAddAccountPage,
     required TResult Function(_failed value) failed,
   }) {
     return initialized(this);
@@ -342,9 +295,8 @@ class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_changeVisibility value)? changeVisibility,
     TResult? Function(_accountAdded value)? accountAdded,
-    TResult? Function(_deletingAccount value)? deletingAccount,
-    TResult? Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult? Function(_failed value)? failed,
   }) {
     return initialized?.call(this);
@@ -355,9 +307,8 @@ class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_changeVisibility value)? changeVisibility,
     TResult Function(_accountAdded value)? accountAdded,
-    TResult Function(_deletingAccount value)? deletingAccount,
-    TResult Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
@@ -368,8 +319,157 @@ class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
   }
 }
 
-abstract class _initialized implements AccountScreenState {
+abstract class _initialized implements AccountAddPageState {
   const factory _initialized() = _$initializedImpl;
+}
+
+/// @nodoc
+abstract class _$$changeVisibilityImplCopyWith<$Res> {
+  factory _$$changeVisibilityImplCopyWith(_$changeVisibilityImpl value,
+          $Res Function(_$changeVisibilityImpl) then) =
+      __$$changeVisibilityImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isVisible});
+}
+
+/// @nodoc
+class __$$changeVisibilityImplCopyWithImpl<$Res>
+    extends _$AccountAddPageStateCopyWithImpl<$Res, _$changeVisibilityImpl>
+    implements _$$changeVisibilityImplCopyWith<$Res> {
+  __$$changeVisibilityImplCopyWithImpl(_$changeVisibilityImpl _value,
+      $Res Function(_$changeVisibilityImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AccountAddPageState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isVisible = null,
+  }) {
+    return _then(_$changeVisibilityImpl(
+      isVisible: null == isVisible
+          ? _value.isVisible
+          : isVisible // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$changeVisibilityImpl implements _changeVisibility {
+  const _$changeVisibilityImpl({required this.isVisible});
+
+  @override
+  final bool isVisible;
+
+  @override
+  String toString() {
+    return 'AccountAddPageState.changeVisibility(isVisible: $isVisible)';
+  }
+
+  /// Create a copy of AccountAddPageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$changeVisibilityImplCopyWith<_$changeVisibilityImpl> get copyWith =>
+      __$$changeVisibilityImplCopyWithImpl<_$changeVisibilityImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialized,
+    required TResult Function(bool isVisible) changeVisibility,
+    required TResult Function() accountAdded,
+    required TResult Function(String errorMsg) failed,
+  }) {
+    return changeVisibility(isVisible);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? initialized,
+    TResult? Function(bool isVisible)? changeVisibility,
+    TResult? Function()? accountAdded,
+    TResult? Function(String errorMsg)? failed,
+  }) {
+    return changeVisibility?.call(isVisible);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialized,
+    TResult Function(bool isVisible)? changeVisibility,
+    TResult Function()? accountAdded,
+    TResult Function(String errorMsg)? failed,
+    required TResult orElse(),
+  }) {
+    if (changeVisibility != null) {
+      return changeVisibility(isVisible);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initial value) initial,
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_changeVisibility value) changeVisibility,
+    required TResult Function(_accountAdded value) accountAdded,
+    required TResult Function(_failed value) failed,
+  }) {
+    return changeVisibility(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initial value)? initial,
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_changeVisibility value)? changeVisibility,
+    TResult? Function(_accountAdded value)? accountAdded,
+    TResult? Function(_failed value)? failed,
+  }) {
+    return changeVisibility?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initial value)? initial,
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_changeVisibility value)? changeVisibility,
+    TResult Function(_accountAdded value)? accountAdded,
+    TResult Function(_failed value)? failed,
+    required TResult orElse(),
+  }) {
+    if (changeVisibility != null) {
+      return changeVisibility(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _changeVisibility implements AccountAddPageState {
+  const factory _changeVisibility({required final bool isVisible}) =
+      _$changeVisibilityImpl;
+
+  bool get isVisible;
+
+  /// Create a copy of AccountAddPageState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$changeVisibilityImplCopyWith<_$changeVisibilityImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -381,50 +481,33 @@ abstract class _$$accountAddedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$accountAddedImplCopyWithImpl<$Res>
-    extends _$AccountScreenStateCopyWithImpl<$Res, _$accountAddedImpl>
+    extends _$AccountAddPageStateCopyWithImpl<$Res, _$accountAddedImpl>
     implements _$$accountAddedImplCopyWith<$Res> {
   __$$accountAddedImplCopyWithImpl(
       _$accountAddedImpl _value, $Res Function(_$accountAddedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AccountScreenState
+  /// Create a copy of AccountAddPageState
   /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
 
-class _$accountAddedImpl with DiagnosticableTreeMixin implements _accountAdded {
+class _$accountAddedImpl implements _accountAdded {
   const _$accountAddedImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AccountScreenState.accountAdded()';
+  String toString() {
+    return 'AccountAddPageState.accountAdded()';
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty('type', 'AccountScreenState.accountAdded'));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$accountAddedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(bool isVisible) changeVisibility,
     required TResult Function() accountAdded,
-    required TResult Function() deletingAccount,
-    required TResult Function() goToAddAccountPage,
     required TResult Function(String errorMsg) failed,
   }) {
     return accountAdded();
@@ -435,9 +518,8 @@ class _$accountAddedImpl with DiagnosticableTreeMixin implements _accountAdded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(bool isVisible)? changeVisibility,
     TResult? Function()? accountAdded,
-    TResult? Function()? deletingAccount,
-    TResult? Function()? goToAddAccountPage,
     TResult? Function(String errorMsg)? failed,
   }) {
     return accountAdded?.call();
@@ -448,9 +530,8 @@ class _$accountAddedImpl with DiagnosticableTreeMixin implements _accountAdded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(bool isVisible)? changeVisibility,
     TResult Function()? accountAdded,
-    TResult Function()? deletingAccount,
-    TResult Function()? goToAddAccountPage,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -465,9 +546,8 @@ class _$accountAddedImpl with DiagnosticableTreeMixin implements _accountAdded {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_changeVisibility value) changeVisibility,
     required TResult Function(_accountAdded value) accountAdded,
-    required TResult Function(_deletingAccount value) deletingAccount,
-    required TResult Function(_goToAddAccountPage value) goToAddAccountPage,
     required TResult Function(_failed value) failed,
   }) {
     return accountAdded(this);
@@ -478,9 +558,8 @@ class _$accountAddedImpl with DiagnosticableTreeMixin implements _accountAdded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_changeVisibility value)? changeVisibility,
     TResult? Function(_accountAdded value)? accountAdded,
-    TResult? Function(_deletingAccount value)? deletingAccount,
-    TResult? Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult? Function(_failed value)? failed,
   }) {
     return accountAdded?.call(this);
@@ -491,9 +570,8 @@ class _$accountAddedImpl with DiagnosticableTreeMixin implements _accountAdded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_changeVisibility value)? changeVisibility,
     TResult Function(_accountAdded value)? accountAdded,
-    TResult Function(_deletingAccount value)? deletingAccount,
-    TResult Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
@@ -504,284 +582,8 @@ class _$accountAddedImpl with DiagnosticableTreeMixin implements _accountAdded {
   }
 }
 
-abstract class _accountAdded implements AccountScreenState {
+abstract class _accountAdded implements AccountAddPageState {
   const factory _accountAdded() = _$accountAddedImpl;
-}
-
-/// @nodoc
-abstract class _$$deletingAccountImplCopyWith<$Res> {
-  factory _$$deletingAccountImplCopyWith(_$deletingAccountImpl value,
-          $Res Function(_$deletingAccountImpl) then) =
-      __$$deletingAccountImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$deletingAccountImplCopyWithImpl<$Res>
-    extends _$AccountScreenStateCopyWithImpl<$Res, _$deletingAccountImpl>
-    implements _$$deletingAccountImplCopyWith<$Res> {
-  __$$deletingAccountImplCopyWithImpl(
-      _$deletingAccountImpl _value, $Res Function(_$deletingAccountImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AccountScreenState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$deletingAccountImpl
-    with DiagnosticableTreeMixin
-    implements _deletingAccount {
-  const _$deletingAccountImpl();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AccountScreenState.deletingAccount()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty('type', 'AccountScreenState.deletingAccount'));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$deletingAccountImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function() accountAdded,
-    required TResult Function() deletingAccount,
-    required TResult Function() goToAddAccountPage,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return deletingAccount();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function()? accountAdded,
-    TResult? Function()? deletingAccount,
-    TResult? Function()? goToAddAccountPage,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return deletingAccount?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function()? accountAdded,
-    TResult Function()? deletingAccount,
-    TResult Function()? goToAddAccountPage,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (deletingAccount != null) {
-      return deletingAccount();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_accountAdded value) accountAdded,
-    required TResult Function(_deletingAccount value) deletingAccount,
-    required TResult Function(_goToAddAccountPage value) goToAddAccountPage,
-    required TResult Function(_failed value) failed,
-  }) {
-    return deletingAccount(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_accountAdded value)? accountAdded,
-    TResult? Function(_deletingAccount value)? deletingAccount,
-    TResult? Function(_goToAddAccountPage value)? goToAddAccountPage,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return deletingAccount?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_accountAdded value)? accountAdded,
-    TResult Function(_deletingAccount value)? deletingAccount,
-    TResult Function(_goToAddAccountPage value)? goToAddAccountPage,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (deletingAccount != null) {
-      return deletingAccount(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _deletingAccount implements AccountScreenState {
-  const factory _deletingAccount() = _$deletingAccountImpl;
-}
-
-/// @nodoc
-abstract class _$$goToAddAccountPageImplCopyWith<$Res> {
-  factory _$$goToAddAccountPageImplCopyWith(_$goToAddAccountPageImpl value,
-          $Res Function(_$goToAddAccountPageImpl) then) =
-      __$$goToAddAccountPageImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$goToAddAccountPageImplCopyWithImpl<$Res>
-    extends _$AccountScreenStateCopyWithImpl<$Res, _$goToAddAccountPageImpl>
-    implements _$$goToAddAccountPageImplCopyWith<$Res> {
-  __$$goToAddAccountPageImplCopyWithImpl(_$goToAddAccountPageImpl _value,
-      $Res Function(_$goToAddAccountPageImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of AccountScreenState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$goToAddAccountPageImpl
-    with DiagnosticableTreeMixin
-    implements _goToAddAccountPage {
-  const _$goToAddAccountPageImpl();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AccountScreenState.goToAddAccountPage()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(
-        DiagnosticsProperty('type', 'AccountScreenState.goToAddAccountPage'));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$goToAddAccountPageImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function() accountAdded,
-    required TResult Function() deletingAccount,
-    required TResult Function() goToAddAccountPage,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return goToAddAccountPage();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function()? accountAdded,
-    TResult? Function()? deletingAccount,
-    TResult? Function()? goToAddAccountPage,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return goToAddAccountPage?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function()? accountAdded,
-    TResult Function()? deletingAccount,
-    TResult Function()? goToAddAccountPage,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (goToAddAccountPage != null) {
-      return goToAddAccountPage();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_accountAdded value) accountAdded,
-    required TResult Function(_deletingAccount value) deletingAccount,
-    required TResult Function(_goToAddAccountPage value) goToAddAccountPage,
-    required TResult Function(_failed value) failed,
-  }) {
-    return goToAddAccountPage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_accountAdded value)? accountAdded,
-    TResult? Function(_deletingAccount value)? deletingAccount,
-    TResult? Function(_goToAddAccountPage value)? goToAddAccountPage,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return goToAddAccountPage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_accountAdded value)? accountAdded,
-    TResult Function(_deletingAccount value)? deletingAccount,
-    TResult Function(_goToAddAccountPage value)? goToAddAccountPage,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (goToAddAccountPage != null) {
-      return goToAddAccountPage(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _goToAddAccountPage implements AccountScreenState {
-  const factory _goToAddAccountPage() = _$goToAddAccountPageImpl;
 }
 
 /// @nodoc
@@ -795,13 +597,13 @@ abstract class _$$failedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$failedImplCopyWithImpl<$Res>
-    extends _$AccountScreenStateCopyWithImpl<$Res, _$failedImpl>
+    extends _$AccountAddPageStateCopyWithImpl<$Res, _$failedImpl>
     implements _$$failedImplCopyWith<$Res> {
   __$$failedImplCopyWithImpl(
       _$failedImpl _value, $Res Function(_$failedImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of AccountScreenState
+  /// Create a copy of AccountAddPageState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -819,38 +621,18 @@ class __$$failedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$failedImpl with DiagnosticableTreeMixin implements _failed {
+class _$failedImpl implements _failed {
   const _$failedImpl({required this.errorMsg});
 
   @override
   final String errorMsg;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AccountScreenState.failed(errorMsg: $errorMsg)';
+  String toString() {
+    return 'AccountAddPageState.failed(errorMsg: $errorMsg)';
   }
 
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'AccountScreenState.failed'))
-      ..add(DiagnosticsProperty('errorMsg', errorMsg));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$failedImpl &&
-            (identical(other.errorMsg, errorMsg) ||
-                other.errorMsg == errorMsg));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, errorMsg);
-
-  /// Create a copy of AccountScreenState
+  /// Create a copy of AccountAddPageState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
@@ -863,9 +645,8 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function(bool isVisible) changeVisibility,
     required TResult Function() accountAdded,
-    required TResult Function() deletingAccount,
-    required TResult Function() goToAddAccountPage,
     required TResult Function(String errorMsg) failed,
   }) {
     return failed(errorMsg);
@@ -876,9 +657,8 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function(bool isVisible)? changeVisibility,
     TResult? Function()? accountAdded,
-    TResult? Function()? deletingAccount,
-    TResult? Function()? goToAddAccountPage,
     TResult? Function(String errorMsg)? failed,
   }) {
     return failed?.call(errorMsg);
@@ -889,9 +669,8 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function(bool isVisible)? changeVisibility,
     TResult Function()? accountAdded,
-    TResult Function()? deletingAccount,
-    TResult Function()? goToAddAccountPage,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -906,9 +685,8 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_changeVisibility value) changeVisibility,
     required TResult Function(_accountAdded value) accountAdded,
-    required TResult Function(_deletingAccount value) deletingAccount,
-    required TResult Function(_goToAddAccountPage value) goToAddAccountPage,
     required TResult Function(_failed value) failed,
   }) {
     return failed(this);
@@ -919,9 +697,8 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_changeVisibility value)? changeVisibility,
     TResult? Function(_accountAdded value)? accountAdded,
-    TResult? Function(_deletingAccount value)? deletingAccount,
-    TResult? Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult? Function(_failed value)? failed,
   }) {
     return failed?.call(this);
@@ -932,9 +709,8 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_changeVisibility value)? changeVisibility,
     TResult Function(_accountAdded value)? accountAdded,
-    TResult Function(_deletingAccount value)? deletingAccount,
-    TResult Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
@@ -945,12 +721,12 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   }
 }
 
-abstract class _failed implements AccountScreenState {
+abstract class _failed implements AccountAddPageState {
   const factory _failed({required final String errorMsg}) = _$failedImpl;
 
   String get errorMsg;
 
-  /// Create a copy of AccountScreenState
+  /// Create a copy of AccountAddPageState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$failedImplCopyWith<_$failedImpl> get copyWith =>
