@@ -20,6 +20,8 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
   void initialize() async {
     final wowPath = await preferencesRepository.getWowPath();
     final dataPath = await preferencesRepository.getDataDirectoryPath();
+    settingsRepository.secondsToWaitForGameToStart =
+        await preferencesRepository.getWaitTillGameStarts() ?? 3;
     if (wowPath != null) {
       settingsRepository.fillWithExecutablePath(wowPath);
 
@@ -70,6 +72,13 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
 
     await preferencesRepository.deleteSettings();
     await preferencesRepository.delDataDirectoryPath();
+    emit(SettingsScreenState.settingsChanged());
+    initialize();
+  }
+
+  void changeSecondsToWaitForGameToStart(int int) async {
+    settingsRepository.secondsToWaitForGameToStart = int;
+    await preferencesRepository.setWaitTillGameStarts(int);
     emit(SettingsScreenState.settingsChanged());
     initialize();
   }

@@ -231,10 +231,30 @@ class Localize {
   }
 
   /// `WoW-Speicherort`
-  String get settingsScreenWowPath {
+  String get settingsScreenWowPathLabel {
     return Intl.message(
       'WoW-Speicherort',
-      name: 'settingsScreenWowPath',
+      name: 'settingsScreenWowPathLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spielstartzeit`
+  String get settingsScreenTimeTillGameStartLabel {
+    return Intl.message(
+      'Spielstartzeit',
+      name: 'settingsScreenTimeTillGameStartLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sekunden`
+  String get settingsScreenTimeTillGameStartType {
+    return Intl.message(
+      'Sekunden',
+      name: 'settingsScreenTimeTillGameStartType',
       desc: '',
       args: [],
     );

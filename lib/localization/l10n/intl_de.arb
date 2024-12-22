@@ -17,5 +17,7 @@
   "addAccountScreenAccountNameLabel": "Account Name",
   "addAccountScreenPasswordLabel": "Account Passwort",
   "addAccountScreenRealmLabel": "Realm/Logonserver",
-  "settingsScreenWowPath": "WoW-Speicherort"
+  "settingsScreenWowPathLabel": "WoW-Speicherort",
+  "settingsScreenTimeTillGameStartLabel": "Spielstartzeit",
+  "settingsScreenTimeTillGameStartType": "Sekunden"
 }

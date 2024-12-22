@@ -8,6 +8,7 @@ class SettingsRepository {
   String? wowBackupDirectoryPath;
   String? wowAddonsDirectoryPath;
   String? wowAccountsDirectoryPath;
+  int secondsToWaitForGameToStart = 3;
 }
 
 extension SettingsRepositoryExtension on SettingsRepository {

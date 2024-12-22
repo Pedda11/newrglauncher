@@ -17,5 +17,7 @@
   "addAccountScreenAccountNameLabel": "Account Name",
   "addAccountScreenPasswordLabel": "Account Password",
   "addAccountScreenRealmLabel": "Realm/Logon Server",
-  "settingsScreenWowPath": "WoW Path"
+  "settingsScreenWowPathLabel": "WoW Path",
+  "settingsScreenTimeTillGameStartLabel": "Time until game start",
+  "settingsScreenTimeTillGameStartType": "Seconds"
 }

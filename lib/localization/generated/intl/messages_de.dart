@@ -46,7 +46,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "menuTitle": MessageLookupByLibrary.simpleMessage("M E N Ü"),
         "no": MessageLookupByLibrary.simpleMessage("Nein"),
         "save": MessageLookupByLibrary.simpleMessage("Speichern"),
-        "settingsScreenWowPath":
+        "settingsScreenTimeTillGameStartLabel":
+            MessageLookupByLibrary.simpleMessage("Spielstartzeit"),
+        "settingsScreenTimeTillGameStartType":
+            MessageLookupByLibrary.simpleMessage("Sekunden"),
+        "settingsScreenWowPathLabel":
             MessageLookupByLibrary.simpleMessage("WoW-Speicherort"),
         "updateScreenUpdateCheck":
             MessageLookupByLibrary.simpleMessage("Prüfe auf Updates..."),

@@ -22,7 +22,9 @@ class SettingsScreen extends StatelessWidget {
       child: Scaffold(
         appBar: MyAppbar(title: 'E I N S T E L L U N G E N'),
         body: Padding(
-            padding: EdgeInsets.all(24.0), child: SettingsScreenContent()),
+          padding: EdgeInsets.all(24.0),
+          child: SettingsScreenContent(),
+        ),
       ),
     );
   }
