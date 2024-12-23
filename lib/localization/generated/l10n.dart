@@ -60,6 +60,16 @@ class Localize {
     );
   }
 
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Ja`
   String get yes {
     return Intl.message(
@@ -90,6 +100,26 @@ class Localize {
     );
   }
 
+  /// `Fehler`
+  String get error {
+    return Intl.message(
+      'Fehler',
+      name: 'error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Folgender Fehler ist aufgetreten. Der Fehler wird automatisch reported. Bitte versuchen Sie es später erneut.`
+  String get errorHandlingContent {
+    return Intl.message(
+      'Folgender Fehler ist aufgetreten. Der Fehler wird automatisch reported. Bitte versuchen Sie es später erneut.',
+      name: 'errorHandlingContent',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Prüfe auf Updates...`
   String get updateScreenUpdateCheck {
     return Intl.message(
@@ -105,6 +135,16 @@ class Localize {
     return Intl.message(
       'U P D A T E   V E R F Ü G B A R',
       name: 'updateScreenUpdateFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Möchten Sie das Update jetzt herunterladen und installieren?`
+  String get updateScreenUpdateQuestion {
+    return Intl.message(
+      'Möchten Sie das Update jetzt herunterladen und installieren?',
+      name: 'updateScreenUpdateQuestion',
       desc: '',
       args: [],
     );
@@ -171,60 +211,80 @@ class Localize {
   }
 
   /// `Account hinzufügen`
-  String get addAccountScreenTitle {
+  String get accountAddPageTitle {
     return Intl.message(
       'Account hinzufügen',
-      name: 'addAccountScreenTitle',
+      name: 'accountAddPageTitle',
       desc: '',
       args: [],
     );
   }
 
   /// `N e u e r   A c c o u n t`
-  String get addAccountScreenNewAccount {
+  String get accountAddPageNewAccount {
     return Intl.message(
       'N e u e r   A c c o u n t',
-      name: 'addAccountScreenNewAccount',
+      name: 'accountAddPageNewAccount',
       desc: '',
       args: [],
     );
   }
 
   /// `Listen Name`
-  String get addAccountScreenListNameLabel {
+  String get accountAddPageListNameLabel {
     return Intl.message(
       'Listen Name',
-      name: 'addAccountScreenListNameLabel',
+      name: 'accountAddPageListNameLabel',
       desc: '',
       args: [],
     );
   }
 
   /// `Account Name`
-  String get addAccountScreenAccountNameLabel {
+  String get accountAddPageAccountNameLabel {
     return Intl.message(
       'Account Name',
-      name: 'addAccountScreenAccountNameLabel',
+      name: 'accountAddPageAccountNameLabel',
       desc: '',
       args: [],
     );
   }
 
   /// `Account Passwort`
-  String get addAccountScreenPasswordLabel {
+  String get accountAddPagePasswordLabel {
     return Intl.message(
       'Account Passwort',
-      name: 'addAccountScreenPasswordLabel',
+      name: 'accountAddPagePasswordLabel',
       desc: '',
       args: [],
     );
   }
 
   /// `Realm/Logonserver`
-  String get addAccountScreenRealmLabel {
+  String get accountAddPageRealmLabel {
     return Intl.message(
       'Realm/Logonserver',
-      name: 'addAccountScreenRealmLabel',
+      name: 'accountAddPageRealmLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Liste`
+  String get accountListPageTitle {
+    return Intl.message(
+      'Account Liste',
+      name: 'accountListPageTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account hinzufügen`
+  String get accountListPageAddAccountBtn {
+    return Intl.message(
+      'Account hinzufügen',
+      name: 'accountListPageAddAccountBtn',
       desc: '',
       args: [],
     );
@@ -235,6 +295,16 @@ class Localize {
     return Intl.message(
       'WoW-Speicherort',
       name: 'settingsScreenWowPathLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wähle deinen Data Ordner`
+  String get settingsScreenWowDataPathLabel {
+    return Intl.message(
+      'Wähle deinen Data Ordner',
+      name: 'settingsScreenWowDataPathLabel',
       desc: '',
       args: [],
     );

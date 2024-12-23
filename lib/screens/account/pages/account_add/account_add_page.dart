@@ -82,6 +82,11 @@ class _AccountAddPageState extends State<AccountAddPage> {
                 SizedBox(width: 160),
                 ElevatedButton(
                   onPressed: () {
+                    if (_listNameController.text.isEmpty ||
+                        _accNameController.text.isEmpty ||
+                        _accPasswordController.text.isEmpty) {
+                      return;
+                    }
                     pageCubit.addAccount(
                       Account(
                           accId: 0,

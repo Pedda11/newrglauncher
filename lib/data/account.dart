@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'character.dart';
 
 /// Function to parse JSON data into a List of User objects.
 /// final users = userFromJson(jsonString);
@@ -16,7 +17,7 @@ class Account {
   String accountName;
   String accountPassword;
   String accountRealm;
-  List<dynamic>? accChars;
+  List<Character>? accChars;
 
   Account({
     required this.accId,
@@ -34,7 +35,10 @@ class Account {
         accountName: json["accountName"],
         accountPassword: json["accountPassword"],
         accountRealm: json["accountRealm"],
-        accChars: json["accChars"],
+        accChars: json["accChars"] != null
+            ? List<Character>.from(
+                json["accChars"].map((x) => Character.fromJson(x)))
+            : null,
       );
 
   /// Convert the User object to a JSON map.
@@ -44,6 +48,8 @@ class Account {
         "accountName": accountName,
         "accountPassword": accountPassword,
         "accountRealm": accountRealm,
-        "accChars": accChars,
+        "accChars": accChars != null
+            ? List<dynamic>.from(accChars!.map((x) => x.toJson()))
+            : null,
       };
 }

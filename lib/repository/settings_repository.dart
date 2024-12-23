@@ -9,6 +9,8 @@ class SettingsRepository {
   String? wowAddonsDirectoryPath;
   String? wowAccountsDirectoryPath;
   int secondsToWaitForGameToStart = 3;
+
+  List<String> drives = [];
 }
 
 extension SettingsRepositoryExtension on SettingsRepository {

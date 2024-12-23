@@ -20,6 +20,7 @@ mixin _$SplashScreenState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function() checkingForUpdates,
     required TResult Function() updateAvailable,
     required TResult Function(String errorMsg) failed,
   }) =>
@@ -28,6 +29,7 @@ mixin _$SplashScreenState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function()? checkingForUpdates,
     TResult? Function()? updateAvailable,
     TResult? Function(String errorMsg)? failed,
   }) =>
@@ -36,6 +38,7 @@ mixin _$SplashScreenState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function()? checkingForUpdates,
     TResult Function()? updateAvailable,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
@@ -45,6 +48,7 @@ mixin _$SplashScreenState {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_checkingForUpdates value) checkingForUpdates,
     required TResult Function(_updateAvailable value) updateAvailable,
     required TResult Function(_failed value) failed,
   }) =>
@@ -53,6 +57,7 @@ mixin _$SplashScreenState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
     TResult? Function(_updateAvailable value)? updateAvailable,
     TResult? Function(_failed value)? failed,
   }) =>
@@ -61,6 +66,7 @@ mixin _$SplashScreenState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_checkingForUpdates value)? checkingForUpdates,
     TResult Function(_updateAvailable value)? updateAvailable,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
@@ -110,12 +116,18 @@ class __$$initialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$initialImpl implements _initial {
+class _$initialImpl with DiagnosticableTreeMixin implements _initial {
   const _$initialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'SplashScreenState.initial'));
   }
 
   @override
@@ -132,6 +144,7 @@ class _$initialImpl implements _initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function() checkingForUpdates,
     required TResult Function() updateAvailable,
     required TResult Function(String errorMsg) failed,
   }) {
@@ -143,6 +156,7 @@ class _$initialImpl implements _initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function()? checkingForUpdates,
     TResult? Function()? updateAvailable,
     TResult? Function(String errorMsg)? failed,
   }) {
@@ -154,6 +168,7 @@ class _$initialImpl implements _initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function()? checkingForUpdates,
     TResult Function()? updateAvailable,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
@@ -169,6 +184,7 @@ class _$initialImpl implements _initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_checkingForUpdates value) checkingForUpdates,
     required TResult Function(_updateAvailable value) updateAvailable,
     required TResult Function(_failed value) failed,
   }) {
@@ -180,6 +196,7 @@ class _$initialImpl implements _initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
     TResult? Function(_updateAvailable value)? updateAvailable,
     TResult? Function(_failed value)? failed,
   }) {
@@ -191,6 +208,7 @@ class _$initialImpl implements _initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_checkingForUpdates value)? checkingForUpdates,
     TResult Function(_updateAvailable value)? updateAvailable,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
@@ -227,12 +245,19 @@ class __$$initializedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$initializedImpl implements _initialized {
+class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
   const _$initializedImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.initialized()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'SplashScreenState.initialized'));
   }
 
   @override
@@ -249,6 +274,7 @@ class _$initializedImpl implements _initialized {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function() checkingForUpdates,
     required TResult Function() updateAvailable,
     required TResult Function(String errorMsg) failed,
   }) {
@@ -260,6 +286,7 @@ class _$initializedImpl implements _initialized {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function()? checkingForUpdates,
     TResult? Function()? updateAvailable,
     TResult? Function(String errorMsg)? failed,
   }) {
@@ -271,6 +298,7 @@ class _$initializedImpl implements _initialized {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function()? checkingForUpdates,
     TResult Function()? updateAvailable,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
@@ -286,6 +314,7 @@ class _$initializedImpl implements _initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_checkingForUpdates value) checkingForUpdates,
     required TResult Function(_updateAvailable value) updateAvailable,
     required TResult Function(_failed value) failed,
   }) {
@@ -297,6 +326,7 @@ class _$initializedImpl implements _initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
     TResult? Function(_updateAvailable value)? updateAvailable,
     TResult? Function(_failed value)? failed,
   }) {
@@ -308,6 +338,7 @@ class _$initializedImpl implements _initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_checkingForUpdates value)? checkingForUpdates,
     TResult Function(_updateAvailable value)? updateAvailable,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
@@ -321,6 +352,138 @@ class _$initializedImpl implements _initialized {
 
 abstract class _initialized implements SplashScreenState {
   const factory _initialized() = _$initializedImpl;
+}
+
+/// @nodoc
+abstract class _$$checkingForUpdatesImplCopyWith<$Res> {
+  factory _$$checkingForUpdatesImplCopyWith(_$checkingForUpdatesImpl value,
+          $Res Function(_$checkingForUpdatesImpl) then) =
+      __$$checkingForUpdatesImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$checkingForUpdatesImplCopyWithImpl<$Res>
+    extends _$SplashScreenStateCopyWithImpl<$Res, _$checkingForUpdatesImpl>
+    implements _$$checkingForUpdatesImplCopyWith<$Res> {
+  __$$checkingForUpdatesImplCopyWithImpl(_$checkingForUpdatesImpl _value,
+      $Res Function(_$checkingForUpdatesImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$checkingForUpdatesImpl
+    with DiagnosticableTreeMixin
+    implements _checkingForUpdates {
+  const _$checkingForUpdatesImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState.checkingForUpdates()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'SplashScreenState.checkingForUpdates'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$checkingForUpdatesImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialized,
+    required TResult Function() checkingForUpdates,
+    required TResult Function() updateAvailable,
+    required TResult Function(String errorMsg) failed,
+  }) {
+    return checkingForUpdates();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? initialized,
+    TResult? Function()? checkingForUpdates,
+    TResult? Function()? updateAvailable,
+    TResult? Function(String errorMsg)? failed,
+  }) {
+    return checkingForUpdates?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialized,
+    TResult Function()? checkingForUpdates,
+    TResult Function()? updateAvailable,
+    TResult Function(String errorMsg)? failed,
+    required TResult orElse(),
+  }) {
+    if (checkingForUpdates != null) {
+      return checkingForUpdates();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initial value) initial,
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_checkingForUpdates value) checkingForUpdates,
+    required TResult Function(_updateAvailable value) updateAvailable,
+    required TResult Function(_failed value) failed,
+  }) {
+    return checkingForUpdates(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initial value)? initial,
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
+    TResult? Function(_updateAvailable value)? updateAvailable,
+    TResult? Function(_failed value)? failed,
+  }) {
+    return checkingForUpdates?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initial value)? initial,
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_checkingForUpdates value)? checkingForUpdates,
+    TResult Function(_updateAvailable value)? updateAvailable,
+    TResult Function(_failed value)? failed,
+    required TResult orElse(),
+  }) {
+    if (checkingForUpdates != null) {
+      return checkingForUpdates(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _checkingForUpdates implements SplashScreenState {
+  const factory _checkingForUpdates() = _$checkingForUpdatesImpl;
 }
 
 /// @nodoc
@@ -344,12 +507,21 @@ class __$$updateAvailableImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$updateAvailableImpl implements _updateAvailable {
+class _$updateAvailableImpl
+    with DiagnosticableTreeMixin
+    implements _updateAvailable {
   const _$updateAvailableImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.updateAvailable()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'SplashScreenState.updateAvailable'));
   }
 
   @override
@@ -366,6 +538,7 @@ class _$updateAvailableImpl implements _updateAvailable {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function() checkingForUpdates,
     required TResult Function() updateAvailable,
     required TResult Function(String errorMsg) failed,
   }) {
@@ -377,6 +550,7 @@ class _$updateAvailableImpl implements _updateAvailable {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function()? checkingForUpdates,
     TResult? Function()? updateAvailable,
     TResult? Function(String errorMsg)? failed,
   }) {
@@ -388,6 +562,7 @@ class _$updateAvailableImpl implements _updateAvailable {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function()? checkingForUpdates,
     TResult Function()? updateAvailable,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
@@ -403,6 +578,7 @@ class _$updateAvailableImpl implements _updateAvailable {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_checkingForUpdates value) checkingForUpdates,
     required TResult Function(_updateAvailable value) updateAvailable,
     required TResult Function(_failed value) failed,
   }) {
@@ -414,6 +590,7 @@ class _$updateAvailableImpl implements _updateAvailable {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
     TResult? Function(_updateAvailable value)? updateAvailable,
     TResult? Function(_failed value)? failed,
   }) {
@@ -425,6 +602,7 @@ class _$updateAvailableImpl implements _updateAvailable {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_checkingForUpdates value)? checkingForUpdates,
     TResult Function(_updateAvailable value)? updateAvailable,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
@@ -475,15 +653,23 @@ class __$$failedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$failedImpl implements _failed {
+class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   const _$failedImpl({required this.errorMsg});
 
   @override
   final String errorMsg;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.failed(errorMsg: $errorMsg)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashScreenState.failed'))
+      ..add(DiagnosticsProperty('errorMsg', errorMsg));
   }
 
   @override
@@ -511,6 +697,7 @@ class _$failedImpl implements _failed {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function() checkingForUpdates,
     required TResult Function() updateAvailable,
     required TResult Function(String errorMsg) failed,
   }) {
@@ -522,6 +709,7 @@ class _$failedImpl implements _failed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function()? checkingForUpdates,
     TResult? Function()? updateAvailable,
     TResult? Function(String errorMsg)? failed,
   }) {
@@ -533,6 +721,7 @@ class _$failedImpl implements _failed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function()? checkingForUpdates,
     TResult Function()? updateAvailable,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
@@ -548,6 +737,7 @@ class _$failedImpl implements _failed {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_checkingForUpdates value) checkingForUpdates,
     required TResult Function(_updateAvailable value) updateAvailable,
     required TResult Function(_failed value) failed,
   }) {
@@ -559,6 +749,7 @@ class _$failedImpl implements _failed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
     TResult? Function(_updateAvailable value)? updateAvailable,
     TResult? Function(_failed value)? failed,
   }) {
@@ -570,6 +761,7 @@ class _$failedImpl implements _failed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_checkingForUpdates value)? checkingForUpdates,
     TResult Function(_updateAvailable value)? updateAvailable,
     TResult Function(_failed value)? failed,
     required TResult orElse(),

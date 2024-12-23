@@ -17,7 +17,29 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
     required this.preferencesRepository,
   }) : super(const SettingsScreenState.initial());
 
+  Future<List<String>> getAvailableDrives() async {
+    List<String> drives = [];
+    ProcessResult result =
+        await Process.run('wmic', ['logicaldisk', 'get', 'name']);
+    if (result.exitCode == 0) {
+      drives = result.stdout
+          .toString()
+          .split('\n')
+          .where((line) => line.trim().isNotEmpty && line.contains(':'))
+          .map((line) => line.trim())
+          .toList();
+    }
+    return drives;
+  }
+
   void initialize() async {
+    List<String> drives = await getAvailableDrives();
+    List<String> drivesWithSlash = [];
+    for (String s in drives) {
+      drivesWithSlash.add('$s//');
+    }
+    settingsRepository.drives = drivesWithSlash;
+
     final wowPath = await preferencesRepository.getWowPath();
     final dataPath = await preferencesRepository.getDataDirectoryPath();
     settingsRepository.secondsToWaitForGameToStart =
@@ -52,11 +74,11 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
   }
 
   void changeDataDirectory(String? directoryName) async {
+    emit(SettingsScreenState.changingSettings());
     if (directoryName != null) {
       settingsRepository.wowDataDirectory = directoryName;
       settingsRepository.wowRealmFilePath = '$directoryName/realmlist.wtf';
       await preferencesRepository.setDataDirectory(directoryName);
-      emit(SettingsScreenState.settingsChanged());
       initialize();
     }
   }
@@ -72,14 +94,14 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
 
     await preferencesRepository.deleteSettings();
     await preferencesRepository.delDataDirectoryPath();
-    emit(SettingsScreenState.settingsChanged());
+    emit(SettingsScreenState.changingSettings());
     initialize();
   }
 
-  void changeSecondsToWaitForGameToStart(int int) async {
-    settingsRepository.secondsToWaitForGameToStart = int;
-    await preferencesRepository.setWaitTillGameStarts(int);
-    emit(SettingsScreenState.settingsChanged());
-    initialize();
+  void changeSecondsToWaitForGameToStart(int value) async {
+    emit(SettingsScreenState.changingSettings());
+    settingsRepository.secondsToWaitForGameToStart = value;
+    await preferencesRepository.setWaitTillGameStarts(value);
+    emit(SettingsScreenState.initialized());
   }
 }

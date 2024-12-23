@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:twodotnulllauncher/repository/error_repository.dart';
 import '../repository/main_repository.dart';
 import '../repository/preferences_repository.dart';
 import '../repository/settings_repository.dart';
@@ -23,6 +24,9 @@ class RepositoryContainer extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
+          create: (context) => ErrorRepository(),
+        ),
+        RepositoryProvider(
             create: (context) =>
                 PreferencesRepository(preferences: sharedPreferences)),
         RepositoryProvider(
@@ -37,12 +41,8 @@ class RepositoryContainer extends StatelessWidget {
           BlocProvider(
             create: (context) => AccountScreenCubit(
                 mainRepository: context.read<MainRepository>(),
+                settingsRepository: context.read<SettingsRepository>(),
                 preferencesRepository: context.read<PreferencesRepository>()),
-          ),
-          BlocProvider(
-            create: (context) => CharacterDataCubit(
-                mainRepository: context.read<MainRepository>(),
-                settingsRepository: context.read<SettingsRepository>()),
           ),
           BlocProvider(
             create: (context) => SettingsScreenCubit(

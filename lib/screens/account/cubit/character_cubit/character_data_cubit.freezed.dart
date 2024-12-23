@@ -19,21 +19,24 @@ mixin _$CharacterDataState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<dynamic>? characterList) initialized,
+    required TResult Function() initialized,
+    required TResult Function(List<dynamic>? characterList) accountLoaded,
     required TResult Function(String errorMsg) failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<dynamic>? characterList)? initialized,
+    TResult? Function()? initialized,
+    TResult? Function(List<dynamic>? characterList)? accountLoaded,
     TResult? Function(String errorMsg)? failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<dynamic>? characterList)? initialized,
+    TResult Function()? initialized,
+    TResult Function(List<dynamic>? characterList)? accountLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) =>
@@ -42,6 +45,7 @@ mixin _$CharacterDataState {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_accountLoaded value) accountLoaded,
     required TResult Function(_failed value) failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -49,6 +53,7 @@ mixin _$CharacterDataState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_accountLoaded value)? accountLoaded,
     TResult? Function(_failed value)? failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +61,7 @@ mixin _$CharacterDataState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_accountLoaded value)? accountLoaded,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) =>
@@ -125,7 +131,8 @@ class _$initialImpl implements _initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<dynamic>? characterList) initialized,
+    required TResult Function() initialized,
+    required TResult Function(List<dynamic>? characterList) accountLoaded,
     required TResult Function(String errorMsg) failed,
   }) {
     return initial();
@@ -135,7 +142,8 @@ class _$initialImpl implements _initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<dynamic>? characterList)? initialized,
+    TResult? Function()? initialized,
+    TResult? Function(List<dynamic>? characterList)? accountLoaded,
     TResult? Function(String errorMsg)? failed,
   }) {
     return initial?.call();
@@ -145,7 +153,8 @@ class _$initialImpl implements _initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<dynamic>? characterList)? initialized,
+    TResult Function()? initialized,
+    TResult Function(List<dynamic>? characterList)? accountLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -160,6 +169,7 @@ class _$initialImpl implements _initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_accountLoaded value) accountLoaded,
     required TResult Function(_failed value) failed,
   }) {
     return initial(this);
@@ -170,6 +180,7 @@ class _$initialImpl implements _initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_accountLoaded value)? accountLoaded,
     TResult? Function(_failed value)? failed,
   }) {
     return initial?.call(this);
@@ -180,6 +191,7 @@ class _$initialImpl implements _initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_accountLoaded value)? accountLoaded,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
@@ -199,8 +211,6 @@ abstract class _$$initializedImplCopyWith<$Res> {
   factory _$$initializedImplCopyWith(
           _$initializedImpl value, $Res Function(_$initializedImpl) then) =
       __$$initializedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<dynamic>? characterList});
 }
 
 /// @nodoc
@@ -213,12 +223,131 @@ class __$$initializedImplCopyWithImpl<$Res>
 
   /// Create a copy of CharacterDataState
   /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$initializedImpl implements _initialized {
+  const _$initializedImpl();
+
+  @override
+  String toString() {
+    return 'CharacterDataState.initialized()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$initializedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialized,
+    required TResult Function(List<dynamic>? characterList) accountLoaded,
+    required TResult Function(String errorMsg) failed,
+  }) {
+    return initialized();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? initialized,
+    TResult? Function(List<dynamic>? characterList)? accountLoaded,
+    TResult? Function(String errorMsg)? failed,
+  }) {
+    return initialized?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialized,
+    TResult Function(List<dynamic>? characterList)? accountLoaded,
+    TResult Function(String errorMsg)? failed,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initial value) initial,
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_accountLoaded value) accountLoaded,
+    required TResult Function(_failed value) failed,
+  }) {
+    return initialized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initial value)? initial,
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_accountLoaded value)? accountLoaded,
+    TResult? Function(_failed value)? failed,
+  }) {
+    return initialized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_initial value)? initial,
+    TResult Function(_initialized value)? initialized,
+    TResult Function(_accountLoaded value)? accountLoaded,
+    TResult Function(_failed value)? failed,
+    required TResult orElse(),
+  }) {
+    if (initialized != null) {
+      return initialized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _initialized implements CharacterDataState {
+  const factory _initialized() = _$initializedImpl;
+}
+
+/// @nodoc
+abstract class _$$accountLoadedImplCopyWith<$Res> {
+  factory _$$accountLoadedImplCopyWith(
+          _$accountLoadedImpl value, $Res Function(_$accountLoadedImpl) then) =
+      __$$accountLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<dynamic>? characterList});
+}
+
+/// @nodoc
+class __$$accountLoadedImplCopyWithImpl<$Res>
+    extends _$CharacterDataStateCopyWithImpl<$Res, _$accountLoadedImpl>
+    implements _$$accountLoadedImplCopyWith<$Res> {
+  __$$accountLoadedImplCopyWithImpl(
+      _$accountLoadedImpl _value, $Res Function(_$accountLoadedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CharacterDataState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? characterList = freezed,
   }) {
-    return _then(_$initializedImpl(
+    return _then(_$accountLoadedImpl(
       characterList: freezed == characterList
           ? _value._characterList
           : characterList // ignore: cast_nullable_to_non_nullable
@@ -229,8 +358,8 @@ class __$$initializedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$initializedImpl implements _initialized {
-  const _$initializedImpl({required final List<dynamic>? characterList})
+class _$accountLoadedImpl implements _accountLoaded {
+  const _$accountLoadedImpl({required final List<dynamic>? characterList})
       : _characterList = characterList;
 
   final List<dynamic>? _characterList;
@@ -245,14 +374,14 @@ class _$initializedImpl implements _initialized {
 
   @override
   String toString() {
-    return 'CharacterDataState.initialized(characterList: $characterList)';
+    return 'CharacterDataState.accountLoaded(characterList: $characterList)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$initializedImpl &&
+            other is _$accountLoadedImpl &&
             const DeepCollectionEquality()
                 .equals(other._characterList, _characterList));
   }
@@ -266,39 +395,42 @@ class _$initializedImpl implements _initialized {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
-      __$$initializedImplCopyWithImpl<_$initializedImpl>(this, _$identity);
+  _$$accountLoadedImplCopyWith<_$accountLoadedImpl> get copyWith =>
+      __$$accountLoadedImplCopyWithImpl<_$accountLoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<dynamic>? characterList) initialized,
+    required TResult Function() initialized,
+    required TResult Function(List<dynamic>? characterList) accountLoaded,
     required TResult Function(String errorMsg) failed,
   }) {
-    return initialized(characterList);
+    return accountLoaded(characterList);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<dynamic>? characterList)? initialized,
+    TResult? Function()? initialized,
+    TResult? Function(List<dynamic>? characterList)? accountLoaded,
     TResult? Function(String errorMsg)? failed,
   }) {
-    return initialized?.call(characterList);
+    return accountLoaded?.call(characterList);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<dynamic>? characterList)? initialized,
+    TResult Function()? initialized,
+    TResult Function(List<dynamic>? characterList)? accountLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
-    if (initialized != null) {
-      return initialized(characterList);
+    if (accountLoaded != null) {
+      return accountLoaded(characterList);
     }
     return orElse();
   }
@@ -308,9 +440,10 @@ class _$initializedImpl implements _initialized {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_accountLoaded value) accountLoaded,
     required TResult Function(_failed value) failed,
   }) {
-    return initialized(this);
+    return accountLoaded(this);
   }
 
   @override
@@ -318,9 +451,10 @@ class _$initializedImpl implements _initialized {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_accountLoaded value)? accountLoaded,
     TResult? Function(_failed value)? failed,
   }) {
-    return initialized?.call(this);
+    return accountLoaded?.call(this);
   }
 
   @override
@@ -328,26 +462,27 @@ class _$initializedImpl implements _initialized {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_accountLoaded value)? accountLoaded,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
-    if (initialized != null) {
-      return initialized(this);
+    if (accountLoaded != null) {
+      return accountLoaded(this);
     }
     return orElse();
   }
 }
 
-abstract class _initialized implements CharacterDataState {
-  const factory _initialized({required final List<dynamic>? characterList}) =
-      _$initializedImpl;
+abstract class _accountLoaded implements CharacterDataState {
+  const factory _accountLoaded({required final List<dynamic>? characterList}) =
+      _$accountLoadedImpl;
 
   List<dynamic>? get characterList;
 
   /// Create a copy of CharacterDataState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$initializedImplCopyWith<_$initializedImpl> get copyWith =>
+  _$$accountLoadedImplCopyWith<_$accountLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -421,7 +556,8 @@ class _$failedImpl implements _failed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<dynamic>? characterList) initialized,
+    required TResult Function() initialized,
+    required TResult Function(List<dynamic>? characterList) accountLoaded,
     required TResult Function(String errorMsg) failed,
   }) {
     return failed(errorMsg);
@@ -431,7 +567,8 @@ class _$failedImpl implements _failed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<dynamic>? characterList)? initialized,
+    TResult? Function()? initialized,
+    TResult? Function(List<dynamic>? characterList)? accountLoaded,
     TResult? Function(String errorMsg)? failed,
   }) {
     return failed?.call(errorMsg);
@@ -441,7 +578,8 @@ class _$failedImpl implements _failed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<dynamic>? characterList)? initialized,
+    TResult Function()? initialized,
+    TResult Function(List<dynamic>? characterList)? accountLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -456,6 +594,7 @@ class _$failedImpl implements _failed {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_accountLoaded value) accountLoaded,
     required TResult Function(_failed value) failed,
   }) {
     return failed(this);
@@ -466,6 +605,7 @@ class _$failedImpl implements _failed {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_accountLoaded value)? accountLoaded,
     TResult? Function(_failed value)? failed,
   }) {
     return failed?.call(this);
@@ -476,6 +616,7 @@ class _$failedImpl implements _failed {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_accountLoaded value)? accountLoaded,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:twodotnulllauncher/repository/preferences_repository.dart';
 import 'package:twodotnulllauncher/repository/settings_repository.dart';
 
 import '../../../../data/account.dart';
@@ -16,14 +17,19 @@ part 'character_data_cubit.freezed.dart';
 class CharacterDataCubit extends Cubit<CharacterDataState> {
   final MainRepository mainRepository;
   final SettingsRepository settingsRepository;
+  final PreferencesRepository preferencesRepository;
 
-  CharacterDataCubit(
-      {required this.mainRepository, required this.settingsRepository})
-      : super(const CharacterDataState.initial());
+  CharacterDataCubit({
+    required this.mainRepository,
+    required this.settingsRepository,
+    required this.preferencesRepository,
+  }) : super(const CharacterDataState.initial());
 
-  getAccountDetails(Account acc) async {
-    //filePaths.clear();
-    //fileNames.clear();
+  Future<void> initialize() async {
+    emit(CharacterDataState.initialized());
+  }
+
+  Future<void> getAccountDetails(Account acc) async {
     String charsPath =
         '${settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\Rising-Gods';
     final dir = Directory(charsPath);
@@ -61,10 +67,10 @@ class CharacterDataCubit extends Cubit<CharacterDataState> {
       final charInstances = await altoInstances.readAsString();
 
       mainRepository.accountList
-          ?.firstWhere((element) => element.accountName == acc.accountName)
+          .firstWhere((element) => element.accountName == acc.accountName)
           .accChars = Altoholic.getCharData(charData, charInstances);
-      emit(CharacterDataState.initialized(
-          characterList: mainRepository.accountList!
+      emit(CharacterDataState.accountLoaded(
+          characterList: mainRepository.accountList
               .firstWhere((element) => element.accountName == acc.accountName)
               .accChars));
     } on Exception catch (ex) {

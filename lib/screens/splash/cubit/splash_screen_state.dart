@@ -6,6 +6,8 @@ class SplashScreenState with _$SplashScreenState {
 
   const factory SplashScreenState.initialized() = _initialized;
 
+  const factory SplashScreenState.checkingForUpdates() = _checkingForUpdates;
+
   const factory SplashScreenState.updateAvailable() = _updateAvailable;
 
   const factory SplashScreenState.failed({required String errorMsg}) = _failed;

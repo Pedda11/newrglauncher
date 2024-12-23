@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import '../../../../../localization/generated/l10n.dart';
+import '../../../../../repository/error_repository.dart';
 import '../../../../../repository/main_repository.dart';
 import '../../../cubit/account_cubit/account_screen_cubit.dart';
 import '../../../cubit/character_cubit/character_data_cubit.dart';
@@ -13,8 +15,9 @@ class AccountListPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mainRepository = context.read<MainRepository>();
-    final screenCubit = context.read<AccountScreenCubit>();
+    final screenCubit = context.read<AccountScreenCubit>()..initialize();
     final characterDataCubit = context.read<CharacterDataCubit>();
+    final locales = Localize.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,12 +29,39 @@ class AccountListPageContent extends StatelessWidget {
                   onPressed: () {
                     screenCubit.goToAccountAddPage();
                   },
-                  child: const Text('Add Account'),
+                  child: Text(locales.accountListPageAddAccountBtn),
                 ),
               ),
               Expanded(
                 flex: 1,
-                child: BlocBuilder<AccountScreenCubit, AccountScreenState>(
+                child: BlocConsumer<AccountScreenCubit, AccountScreenState>(
+                  listener: (context, state) {
+                    state.whenOrNull(
+                      failed: (errorMsg) {
+                        context.read<ErrorRepository>().sendErrorToServer(
+                            errorMessage: errorMsg,
+                            errorOnPosition:
+                                'AccountListPageContent-AccountScreenCubit',
+                            errorDateTime: DateTime.now().toString());
+                        return showDialog(
+                          barrierDismissible: false,
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Error'),
+                            content: Text(errorMsg),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text(locales.ok),
+                              )
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
                   builder: (context, state) {
                     return state.maybeWhen(
                       initialized: () => ListView.builder(
@@ -63,18 +93,19 @@ class AccountListPageContent extends StatelessWidget {
                                     mainRepository.accountList[index]);
                               },
                               onDoubleTap: () {
-                                /*if (sCubit.wowGamePath != null) {
-                                  /// If there is a Wow game path selected
-                                  accCubit
-                                      .startProcessMonitoring(sCubit.wowGamePath!);
-
-                                  /// Start Wow game monitoring
-                                }*/
+                                screenCubit.startGame(
+                                    mainRepository.accountList[index]);
                               },
                             ),
                           );
                         },
                       ),
+                      initial: () {
+                        screenCubit.loadAccounts();
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      },
                       orElse: () {
                         return const Center(
                           child: CircularProgressIndicator(),
@@ -89,10 +120,10 @@ class AccountListPageContent extends StatelessWidget {
         ),
         Expanded(
           flex: 1,
-          child: BlocBuilder<CharacterDataCubit, CharacterDataState>(
+          child: BlocConsumer<CharacterDataCubit, CharacterDataState>(
             builder: (context, state) {
               return state.maybeWhen(
-                  initialized: (characterList) => Container(
+                  accountLoaded: (characterList) => Container(
                         height: double.infinity,
                         width: double.infinity,
                         decoration: const BoxDecoration(
@@ -113,6 +144,33 @@ class AccountListPageContent extends StatelessWidget {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ));
+            },
+            listener: (context, state) {
+              state.whenOrNull(
+                failed: (errorMsg) {
+                  context.read<ErrorRepository>().sendErrorToServer(
+                      errorMessage: errorMsg,
+                      errorOnPosition:
+                          'AccountListPageContent-CharacterDataCubit',
+                      errorDateTime: DateTime.now().toString());
+                  return showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text('Error'),
+                      content: Text(errorMsg),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(locales.ok),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
             },
           ),
         )

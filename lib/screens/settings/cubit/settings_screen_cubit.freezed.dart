@@ -21,7 +21,7 @@ mixin _$SettingsScreenState {
     required TResult Function() initial,
     required TResult Function() initialized,
     required TResult Function(List<String> dataFolder) chooseDataFolder,
-    required TResult Function() settingsChanged,
+    required TResult Function() changingSettings,
     required TResult Function() fileOrDirectoryNotFound,
   }) =>
       throw _privateConstructorUsedError;
@@ -30,7 +30,7 @@ mixin _$SettingsScreenState {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function(List<String> dataFolder)? chooseDataFolder,
-    TResult? Function()? settingsChanged,
+    TResult? Function()? changingSettings,
     TResult? Function()? fileOrDirectoryNotFound,
   }) =>
       throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ mixin _$SettingsScreenState {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function(List<String> dataFolder)? chooseDataFolder,
-    TResult Function()? settingsChanged,
+    TResult Function()? changingSettings,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) =>
@@ -49,7 +49,7 @@ mixin _$SettingsScreenState {
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
     required TResult Function(_chooseDataFolder value) chooseDataFolder,
-    required TResult Function(_settingsChanged value) settingsChanged,
+    required TResult Function(_changingSettings value) changingSettings,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
   }) =>
@@ -59,7 +59,7 @@ mixin _$SettingsScreenState {
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult? Function(_settingsChanged value)? settingsChanged,
+    TResult? Function(_changingSettings value)? changingSettings,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,7 +68,7 @@ mixin _$SettingsScreenState {
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult Function(_settingsChanged value)? settingsChanged,
+    TResult Function(_changingSettings value)? changingSettings,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) =>
@@ -131,7 +131,7 @@ class _$initialImpl implements _initial {
     required TResult Function() initial,
     required TResult Function() initialized,
     required TResult Function(List<String> dataFolder) chooseDataFolder,
-    required TResult Function() settingsChanged,
+    required TResult Function() changingSettings,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
     return initial();
@@ -143,7 +143,7 @@ class _$initialImpl implements _initial {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function(List<String> dataFolder)? chooseDataFolder,
-    TResult? Function()? settingsChanged,
+    TResult? Function()? changingSettings,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
     return initial?.call();
@@ -155,7 +155,7 @@ class _$initialImpl implements _initial {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function(List<String> dataFolder)? chooseDataFolder,
-    TResult Function()? settingsChanged,
+    TResult Function()? changingSettings,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
@@ -171,7 +171,7 @@ class _$initialImpl implements _initial {
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
     required TResult Function(_chooseDataFolder value) chooseDataFolder,
-    required TResult Function(_settingsChanged value) settingsChanged,
+    required TResult Function(_changingSettings value) changingSettings,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
   }) {
@@ -184,7 +184,7 @@ class _$initialImpl implements _initial {
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult? Function(_settingsChanged value)? settingsChanged,
+    TResult? Function(_changingSettings value)? changingSettings,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
     return initial?.call(this);
@@ -196,7 +196,7 @@ class _$initialImpl implements _initial {
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult Function(_settingsChanged value)? settingsChanged,
+    TResult Function(_changingSettings value)? changingSettings,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
@@ -246,7 +246,7 @@ class _$initializedImpl implements _initialized {
     required TResult Function() initial,
     required TResult Function() initialized,
     required TResult Function(List<String> dataFolder) chooseDataFolder,
-    required TResult Function() settingsChanged,
+    required TResult Function() changingSettings,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
     return initialized();
@@ -258,7 +258,7 @@ class _$initializedImpl implements _initialized {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function(List<String> dataFolder)? chooseDataFolder,
-    TResult? Function()? settingsChanged,
+    TResult? Function()? changingSettings,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
     return initialized?.call();
@@ -270,7 +270,7 @@ class _$initializedImpl implements _initialized {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function(List<String> dataFolder)? chooseDataFolder,
-    TResult Function()? settingsChanged,
+    TResult Function()? changingSettings,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
@@ -286,7 +286,7 @@ class _$initializedImpl implements _initialized {
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
     required TResult Function(_chooseDataFolder value) chooseDataFolder,
-    required TResult Function(_settingsChanged value) settingsChanged,
+    required TResult Function(_changingSettings value) changingSettings,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
   }) {
@@ -299,7 +299,7 @@ class _$initializedImpl implements _initialized {
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult? Function(_settingsChanged value)? settingsChanged,
+    TResult? Function(_changingSettings value)? changingSettings,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
     return initialized?.call(this);
@@ -311,7 +311,7 @@ class _$initializedImpl implements _initialized {
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult Function(_settingsChanged value)? settingsChanged,
+    TResult Function(_changingSettings value)? changingSettings,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
@@ -393,7 +393,7 @@ class _$chooseDataFolderImpl implements _chooseDataFolder {
     required TResult Function() initial,
     required TResult Function() initialized,
     required TResult Function(List<String> dataFolder) chooseDataFolder,
-    required TResult Function() settingsChanged,
+    required TResult Function() changingSettings,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
     return chooseDataFolder(dataFolder);
@@ -405,7 +405,7 @@ class _$chooseDataFolderImpl implements _chooseDataFolder {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function(List<String> dataFolder)? chooseDataFolder,
-    TResult? Function()? settingsChanged,
+    TResult? Function()? changingSettings,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
     return chooseDataFolder?.call(dataFolder);
@@ -417,7 +417,7 @@ class _$chooseDataFolderImpl implements _chooseDataFolder {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function(List<String> dataFolder)? chooseDataFolder,
-    TResult Function()? settingsChanged,
+    TResult Function()? changingSettings,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
@@ -433,7 +433,7 @@ class _$chooseDataFolderImpl implements _chooseDataFolder {
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
     required TResult Function(_chooseDataFolder value) chooseDataFolder,
-    required TResult Function(_settingsChanged value) settingsChanged,
+    required TResult Function(_changingSettings value) changingSettings,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
   }) {
@@ -446,7 +446,7 @@ class _$chooseDataFolderImpl implements _chooseDataFolder {
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult? Function(_settingsChanged value)? settingsChanged,
+    TResult? Function(_changingSettings value)? changingSettings,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
     return chooseDataFolder?.call(this);
@@ -458,7 +458,7 @@ class _$chooseDataFolderImpl implements _chooseDataFolder {
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult Function(_settingsChanged value)? settingsChanged,
+    TResult Function(_changingSettings value)? changingSettings,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
@@ -483,18 +483,18 @@ abstract class _chooseDataFolder implements SettingsScreenState {
 }
 
 /// @nodoc
-abstract class _$$settingsChangedImplCopyWith<$Res> {
-  factory _$$settingsChangedImplCopyWith(_$settingsChangedImpl value,
-          $Res Function(_$settingsChangedImpl) then) =
-      __$$settingsChangedImplCopyWithImpl<$Res>;
+abstract class _$$changingSettingsImplCopyWith<$Res> {
+  factory _$$changingSettingsImplCopyWith(_$changingSettingsImpl value,
+          $Res Function(_$changingSettingsImpl) then) =
+      __$$changingSettingsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$settingsChangedImplCopyWithImpl<$Res>
-    extends _$SettingsScreenStateCopyWithImpl<$Res, _$settingsChangedImpl>
-    implements _$$settingsChangedImplCopyWith<$Res> {
-  __$$settingsChangedImplCopyWithImpl(
-      _$settingsChangedImpl _value, $Res Function(_$settingsChangedImpl) _then)
+class __$$changingSettingsImplCopyWithImpl<$Res>
+    extends _$SettingsScreenStateCopyWithImpl<$Res, _$changingSettingsImpl>
+    implements _$$changingSettingsImplCopyWith<$Res> {
+  __$$changingSettingsImplCopyWithImpl(_$changingSettingsImpl _value,
+      $Res Function(_$changingSettingsImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of SettingsScreenState
@@ -503,12 +503,12 @@ class __$$settingsChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$settingsChangedImpl implements _settingsChanged {
-  const _$settingsChangedImpl();
+class _$changingSettingsImpl implements _changingSettings {
+  const _$changingSettingsImpl();
 
   @override
   String toString() {
-    return 'SettingsScreenState.settingsChanged()';
+    return 'SettingsScreenState.changingSettings()';
   }
 
   @override
@@ -517,10 +517,10 @@ class _$settingsChangedImpl implements _settingsChanged {
     required TResult Function() initial,
     required TResult Function() initialized,
     required TResult Function(List<String> dataFolder) chooseDataFolder,
-    required TResult Function() settingsChanged,
+    required TResult Function() changingSettings,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
-    return settingsChanged();
+    return changingSettings();
   }
 
   @override
@@ -529,10 +529,10 @@ class _$settingsChangedImpl implements _settingsChanged {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function(List<String> dataFolder)? chooseDataFolder,
-    TResult? Function()? settingsChanged,
+    TResult? Function()? changingSettings,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
-    return settingsChanged?.call();
+    return changingSettings?.call();
   }
 
   @override
@@ -541,12 +541,12 @@ class _$settingsChangedImpl implements _settingsChanged {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function(List<String> dataFolder)? chooseDataFolder,
-    TResult Function()? settingsChanged,
+    TResult Function()? changingSettings,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
-    if (settingsChanged != null) {
-      return settingsChanged();
+    if (changingSettings != null) {
+      return changingSettings();
     }
     return orElse();
   }
@@ -557,11 +557,11 @@ class _$settingsChangedImpl implements _settingsChanged {
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
     required TResult Function(_chooseDataFolder value) chooseDataFolder,
-    required TResult Function(_settingsChanged value) settingsChanged,
+    required TResult Function(_changingSettings value) changingSettings,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
   }) {
-    return settingsChanged(this);
+    return changingSettings(this);
   }
 
   @override
@@ -570,10 +570,10 @@ class _$settingsChangedImpl implements _settingsChanged {
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult? Function(_settingsChanged value)? settingsChanged,
+    TResult? Function(_changingSettings value)? changingSettings,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
-    return settingsChanged?.call(this);
+    return changingSettings?.call(this);
   }
 
   @override
@@ -582,19 +582,19 @@ class _$settingsChangedImpl implements _settingsChanged {
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult Function(_settingsChanged value)? settingsChanged,
+    TResult Function(_changingSettings value)? changingSettings,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
-    if (settingsChanged != null) {
-      return settingsChanged(this);
+    if (changingSettings != null) {
+      return changingSettings(this);
     }
     return orElse();
   }
 }
 
-abstract class _settingsChanged implements SettingsScreenState {
-  const factory _settingsChanged() = _$settingsChangedImpl;
+abstract class _changingSettings implements SettingsScreenState {
+  const factory _changingSettings() = _$changingSettingsImpl;
 }
 
 /// @nodoc
@@ -635,7 +635,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
     required TResult Function() initial,
     required TResult Function() initialized,
     required TResult Function(List<String> dataFolder) chooseDataFolder,
-    required TResult Function() settingsChanged,
+    required TResult Function() changingSettings,
     required TResult Function() fileOrDirectoryNotFound,
   }) {
     return fileOrDirectoryNotFound();
@@ -647,7 +647,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function(List<String> dataFolder)? chooseDataFolder,
-    TResult? Function()? settingsChanged,
+    TResult? Function()? changingSettings,
     TResult? Function()? fileOrDirectoryNotFound,
   }) {
     return fileOrDirectoryNotFound?.call();
@@ -659,7 +659,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function(List<String> dataFolder)? chooseDataFolder,
-    TResult Function()? settingsChanged,
+    TResult Function()? changingSettings,
     TResult Function()? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {
@@ -675,7 +675,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
     required TResult Function(_chooseDataFolder value) chooseDataFolder,
-    required TResult Function(_settingsChanged value) settingsChanged,
+    required TResult Function(_changingSettings value) changingSettings,
     required TResult Function(_fileOrDirectoryNotFound value)
         fileOrDirectoryNotFound,
   }) {
@@ -688,7 +688,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult? Function(_settingsChanged value)? settingsChanged,
+    TResult? Function(_changingSettings value)? changingSettings,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
   }) {
     return fileOrDirectoryNotFound?.call(this);
@@ -700,7 +700,7 @@ class _$fileOrDirectoryNotFoundImpl implements _fileOrDirectoryNotFound {
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_chooseDataFolder value)? chooseDataFolder,
-    TResult Function(_settingsChanged value)? settingsChanged,
+    TResult Function(_changingSettings value)? changingSettings,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
     required TResult orElse(),
   }) {

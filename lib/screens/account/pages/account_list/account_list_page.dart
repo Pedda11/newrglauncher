@@ -11,7 +11,7 @@ class AccountListPage extends StatelessWidget {
     final locales = Localize.of(context);
     return Scaffold(
       backgroundColor: Colors.grey[400],
-      appBar: MyAppbar(title: locales.addAccountScreenTitle),
+      appBar: MyAppbar(title: locales.accountListPageTitle),
       body: const Padding(
         padding: EdgeInsets.all(24.0),
         child: AccountListPageContent(),

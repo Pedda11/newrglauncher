@@ -28,6 +28,10 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
           _wowPathController.text =
               '${settingsRepository.wowRootFolderPath ?? ''}${settingsRepository.wowExecutableName ?? ''}';
           return state.maybeWhen(
+            initial: () {
+              screenCubit.initialize();
+              return CircularProgressIndicator();
+            },
             initialized: () => Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,33 +40,34 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                 Row(
                   children: [
                     Expanded(
-                        child: Text(
-                      _wowPathController.text,
-                      overflow: TextOverflow.fade,
-                    )),
-                    IconButton(
-                      onPressed: () async {
-                        String? path = await FilesystemPicker.openDialog(
-                          folderIconColor: Color(0xFFD2B48C),
-                          showGoUp: true,
-                          title: 'Open file',
-                          context: context,
-                          directory: Directory.current,
-                          rootDirectory: Directory.fromUri(Uri.file('C:/')),
-                          fsType: FilesystemType.file,
-                          allowedExtensions: ['.exe'],
-                          fileTileSelectMode: FileTileSelectMode.wholeTile,
-                        );
-                        if (path != null) {
-                          _wowPathController.text = path;
-                          screenCubit.changeWowFilePath(path);
-                        }
-                      },
-                      icon: Icon(Icons.file_download),
+                      child: Text(
+                        _wowPathController.text,
+                        overflow: TextOverflow.fade,
+                      ),
                     ),
-                    IconButton(
-                        onPressed: () => screenCubit.deleteDataDirectory(),
-                        icon: Icon(Icons.delete))
+                    SizedBox(width: 8),
+                    Row(
+                      children: settingsRepository.drives.map((drive) {
+                        return ElevatedButton(
+                          onPressed: () async {
+                            String? path = await FilesystemPicker.openDialog(
+                              folderIconColor: Color(0xFFE0CDA1),
+                              title: 'Select File',
+                              context: context,
+                              rootDirectory: Directory(drive),
+                              fsType: FilesystemType.file,
+                              allowedExtensions: ['.exe'],
+                              pickText: 'Select',
+                              fileTileSelectMode: FileTileSelectMode.wholeTile,
+                            );
+                            if (path != null) {
+                              screenCubit.changeWowFilePath(path);
+                            }
+                          },
+                          child: Text(drive),
+                        );
+                      }).toList(),
+                    )
                   ],
                 ),
                 SizedBox(height: 24),
@@ -102,7 +107,7 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Choose data folder'),
+                    title: Text(locales.settingsScreenWowDataPathLabel),
                     content: Column(
                       children: dataFolder
                           .map((e) => ListTile(
@@ -122,5 +127,11 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _wowPathController.dispose();
+    super.dispose();
   }
 }

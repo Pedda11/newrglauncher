@@ -10,43 +10,9 @@ class SplashScreenContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locales = Localize.of(context);
-    return BlocConsumer<SplashScreenCubit, SplashScreenState>(
+    return BlocListener<SplashScreenCubit, SplashScreenState>(
       listener: (context, state) {
         state.maybeWhen(
-          updateAvailable: () {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                icon: Icon(
-                  Icons.update,
-                  size: 80,
-                  color: Colors.red,
-                ),
-                title: Text('UPDATE'),
-                content:
-                    Text('An update is available. Do you want to update now?'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => NavigationPane(),
-                      ));
-                    },
-                    child: Text('NO'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      UpdateService().updateApp();
-                    },
-                    child: Text('YES'),
-                  ),
-                ],
-              ),
-            );
-          },
           initialized: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (context) => NavigationPane(),
@@ -55,44 +21,9 @@ class SplashScreenContent extends StatelessWidget {
           orElse: () {},
         );
       },
-      builder: (context, state) {
-        return state.maybeWhen(
-          initial: () => Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(locales.updateScreenUpdateCheck),
-                SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: 120,
-                  width: 120,
-                  child: CircularProgressIndicator(),
-                ),
-              ],
-            ),
-          ),
-          orElse: () {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(locales.updateScreenUpdateFound),
-                  Text(locales.updateScreenUpdating),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                      height: 120,
-                      width: 120,
-                      child: CircularProgressIndicator()),
-                ],
-              ),
-            );
-          },
-        );
-      },
+      child: const Center(
+        child: SizedBox.shrink(),
+      ),
     );
   }
 }

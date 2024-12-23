@@ -9,7 +9,7 @@ class SettingsScreenState with _$SettingsScreenState {
   const factory SettingsScreenState.chooseDataFolder(
       {required List<String> dataFolder}) = _chooseDataFolder;
 
-  const factory SettingsScreenState.settingsChanged() = _settingsChanged;
+  const factory SettingsScreenState.changingSettings() = _changingSettings;
 
   const factory SettingsScreenState.fileOrDirectoryNotFound() =
       _fileOrDirectoryNotFound;

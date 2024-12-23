@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:twodotnulllauncher/screens/account/pages/account_add/cubit/account_add_page_cubit.dart';
-import 'package:twodotnulllauncher/widgets/my_appbar.dart';
-import '../../repository/main_repository.dart';
-import '../../repository/preferences_repository.dart';
+import '../../localization/generated/l10n.dart';
+import '../../widgets/my_appbar.dart';
 import 'cubit/account_cubit/account_screen_cubit.dart';
 import 'pages/account_add/account_add_page.dart';
 import 'pages/account_list/account_list_page.dart';
@@ -22,51 +20,36 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final mainRepository = context.read<MainRepository>();
-    final preferencesRepository = context.read<PreferencesRepository>();
-    return BlocProvider(
-      create: (context) => AccountScreenCubit(
-        mainRepository: mainRepository,
-        preferencesRepository: preferencesRepository,
-      )..initialize(),
-      child: BlocProvider(
-        create: (context) => AccountAddPageCubit(
-          mainRepository: mainRepository,
-          preferencesRepository: preferencesRepository,
-        ),
-        child: Scaffold(
-          appBar: MyAppbar(
-            title: 'Accounts',
-            centerTitle: false,
-          ),
-          body: BlocListener<AccountScreenCubit, AccountScreenState>(
-            listener: (context, state) {
-              state.whenOrNull(
-                initialized: () {
-                  _pageViewController.animateToPage(0,
-                      duration: pageTransitionDuration,
-                      curve: pageTransitionCurve);
-                },
-                goToAddAccountPage: () {
-                  _pageViewController.animateToPage(1,
-                      duration: pageTransitionDuration,
-                      curve: pageTransitionCurve);
-                },
-              );
+    final locales = Localize.of(context);
+    return Scaffold(
+      appBar: MyAppbar(
+        title: locales.accountListPageTitle,
+        centerTitle: false,
+      ),
+      body: BlocListener<AccountScreenCubit, AccountScreenState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            initialized: () {
+              _pageViewController.animateToPage(0,
+                  duration: pageTransitionDuration, curve: pageTransitionCurve);
             },
-            child: PageView(
-              controller: _pageViewController,
-              children: [
-                AccountListPage(),
-                AccountAddPage(),
-              ],
-              onPageChanged: (int index) {
-                setState(() {
-                  _pageViewController.jumpToPage(index);
-                });
-              },
-            ),
-          ),
+            goToAddAccountPage: () {
+              _pageViewController.animateToPage(1,
+                  duration: pageTransitionDuration, curve: pageTransitionCurve);
+            },
+          );
+        },
+        child: PageView(
+          controller: _pageViewController,
+          children: [
+            AccountListPage(),
+            AccountAddPage(),
+          ],
+          onPageChanged: (int index) {
+            setState(() {
+              _pageViewController.jumpToPage(index);
+            });
+          },
         ),
       ),
     );

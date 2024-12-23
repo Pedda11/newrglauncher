@@ -22,39 +22,51 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accountAddPageAccountNameLabel":
+            MessageLookupByLibrary.simpleMessage("Account Name"),
+        "accountAddPageListNameLabel":
+            MessageLookupByLibrary.simpleMessage("List Name"),
+        "accountAddPageNewAccount":
+            MessageLookupByLibrary.simpleMessage("N e w   A c c o u n t"),
+        "accountAddPagePasswordLabel":
+            MessageLookupByLibrary.simpleMessage("Account Password"),
+        "accountAddPageRealmLabel":
+            MessageLookupByLibrary.simpleMessage("Realm/Logon Server"),
+        "accountAddPageTitle":
+            MessageLookupByLibrary.simpleMessage("Add Account"),
+        "accountListPageAddAccountBtn":
+            MessageLookupByLibrary.simpleMessage("Add Account"),
+        "accountListPageTitle":
+            MessageLookupByLibrary.simpleMessage("Account List"),
         "accountScreenNoAccounts":
             MessageLookupByLibrary.simpleMessage("No accounts saved"),
         "accountScreenNoData":
             MessageLookupByLibrary.simpleMessage("No data available"),
         "accountScreenTitle":
             MessageLookupByLibrary.simpleMessage("My Accounts"),
-        "addAccountScreenAccountNameLabel":
-            MessageLookupByLibrary.simpleMessage("Account Name"),
-        "addAccountScreenListNameLabel":
-            MessageLookupByLibrary.simpleMessage("List Name"),
-        "addAccountScreenNewAccount":
-            MessageLookupByLibrary.simpleMessage("New Account"),
-        "addAccountScreenPasswordLabel":
-            MessageLookupByLibrary.simpleMessage("Account Password"),
-        "addAccountScreenRealmLabel":
-            MessageLookupByLibrary.simpleMessage("Realm/Logon Server"),
-        "addAccountScreenTitle":
-            MessageLookupByLibrary.simpleMessage("Add Account"),
-        "appTitle": MessageLookupByLibrary.simpleMessage("WOW Launcher"),
+        "appTitle": MessageLookupByLibrary.simpleMessage("WOW-Launcher"),
+        "error": MessageLookupByLibrary.simpleMessage("Error"),
+        "errorHandlingContent": MessageLookupByLibrary.simpleMessage(
+            "The following error occurred. The error will be reported automatically. Please try again later."),
         "menuItemSettings": MessageLookupByLibrary.simpleMessage("Settings"),
-        "menuTitle": MessageLookupByLibrary.simpleMessage("MENU"),
+        "menuTitle": MessageLookupByLibrary.simpleMessage("M E N U"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "settingsScreenTimeTillGameStartLabel":
-            MessageLookupByLibrary.simpleMessage("Time until game start"),
+            MessageLookupByLibrary.simpleMessage("Game Start Time"),
         "settingsScreenTimeTillGameStartType":
             MessageLookupByLibrary.simpleMessage("Seconds"),
+        "settingsScreenWowDataPathLabel":
+            MessageLookupByLibrary.simpleMessage("Choose your Data Folder"),
         "settingsScreenWowPathLabel":
-            MessageLookupByLibrary.simpleMessage("WoW Path"),
+            MessageLookupByLibrary.simpleMessage("WoW Location"),
         "updateScreenUpdateCheck":
             MessageLookupByLibrary.simpleMessage("Checking for updates..."),
-        "updateScreenUpdateFound":
-            MessageLookupByLibrary.simpleMessage("UPDATE AVAILABLE"),
+        "updateScreenUpdateFound": MessageLookupByLibrary.simpleMessage(
+            "U P D A T E   A V A I L A B L E"),
+        "updateScreenUpdateQuestion": MessageLookupByLibrary.simpleMessage(
+            "Do you want to download and install the update now?"),
         "updateScreenUpdating": MessageLookupByLibrary.simpleMessage(
             "Downloading and installing update!"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")

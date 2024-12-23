@@ -8,4 +8,16 @@ class SavedInstance {
     this.id,
     this.resetDay,
   });
+
+  factory SavedInstance.fromJson(Map<String, dynamic> json) => SavedInstance(
+        title: json["title"],
+        id: json["id"],
+        resetDay: json["resetDay"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "title": title,
+        "id": id,
+        "resetDay": resetDay,
+      };
 }
