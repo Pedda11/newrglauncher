@@ -94,14 +94,14 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
 
     await preferencesRepository.deleteSettings();
     await preferencesRepository.delDataDirectoryPath();
-    emit(SettingsScreenState.changingSettings());
+    emit(const SettingsScreenState.changingSettings());
     initialize();
   }
 
   void changeSecondsToWaitForGameToStart(int value) async {
-    emit(SettingsScreenState.changingSettings());
+    emit(const SettingsScreenState.changingSettings());
     settingsRepository.secondsToWaitForGameToStart = value;
     await preferencesRepository.setWaitTillGameStarts(value);
-    emit(SettingsScreenState.initialized());
+    emit(const SettingsScreenState.initialized());
   }
 }

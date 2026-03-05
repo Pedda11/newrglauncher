@@ -5,9 +5,10 @@ import 'widgets/repository_container.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   final sharedPreferences = SharedPreferencesAsync();
   runApp(RepositoryContainer(
     sharedPreferences: sharedPreferences,
-    child: Application(),
+    child: const Application(),
   ));
 }

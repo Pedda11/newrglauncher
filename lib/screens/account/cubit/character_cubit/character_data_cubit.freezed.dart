@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,54 +9,46 @@ part of 'character_data_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CharacterDataState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function(List<dynamic>? characterList) accountLoaded,
-    required TResult Function(String errorMsg) failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function(List<dynamic>? characterList)? accountLoaded,
-    TResult? Function(String errorMsg)? failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function(List<dynamic>? characterList)? accountLoaded,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_accountLoaded value) accountLoaded,
-    required TResult Function(_failed value) failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_accountLoaded value)? accountLoaded,
-    TResult? Function(_failed value)? failed,
-  }) =>
-      throw _privateConstructorUsedError;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is CharacterDataState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'CharacterDataState()';
+  }
+}
+
+/// @nodoc
+class $CharacterDataStateCopyWith<$Res> {
+  $CharacterDataStateCopyWith(
+      CharacterDataState _, $Res Function(CharacterDataState) __);
+}
+
+/// Adds pattern-matching-related methods to [CharacterDataState].
+extension CharacterDataStatePatterns on CharacterDataState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
@@ -64,306 +56,243 @@ mixin _$CharacterDataState {
     TResult Function(_accountLoaded value)? accountLoaded,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial() when initial != null:
+        return initial(_that);
+      case _initialized() when initialized != null:
+        return initialized(_that);
+      case _accountLoaded() when accountLoaded != null:
+        return accountLoaded(_that);
+      case _failed() when failed != null:
+        return failed(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initial value) initial,
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_accountLoaded value) accountLoaded,
+    required TResult Function(_failed value) failed,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial():
+        return initial(_that);
+      case _initialized():
+        return initialized(_that);
+      case _accountLoaded():
+        return accountLoaded(_that);
+      case _failed():
+        return failed(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initial value)? initial,
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_accountLoaded value)? accountLoaded,
+    TResult? Function(_failed value)? failed,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial() when initial != null:
+        return initial(_that);
+      case _initialized() when initialized != null:
+        return initialized(_that);
+      case _accountLoaded() when accountLoaded != null:
+        return accountLoaded(_that);
+      case _failed() when failed != null:
+        return failed(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialized,
+    TResult Function(List<dynamic>? characterList)? accountLoaded,
+    TResult Function(String errorMsg)? failed,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial() when initial != null:
+        return initial();
+      case _initialized() when initialized != null:
+        return initialized();
+      case _accountLoaded() when accountLoaded != null:
+        return accountLoaded(_that.characterList);
+      case _failed() when failed != null:
+        return failed(_that.errorMsg);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialized,
+    required TResult Function(List<dynamic>? characterList) accountLoaded,
+    required TResult Function(String errorMsg) failed,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial():
+        return initial();
+      case _initialized():
+        return initialized();
+      case _accountLoaded():
+        return accountLoaded(_that.characterList);
+      case _failed():
+        return failed(_that.errorMsg);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? initialized,
+    TResult? Function(List<dynamic>? characterList)? accountLoaded,
+    TResult? Function(String errorMsg)? failed,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial() when initial != null:
+        return initial();
+      case _initialized() when initialized != null:
+        return initialized();
+      case _accountLoaded() when accountLoaded != null:
+        return accountLoaded(_that.characterList);
+      case _failed() when failed != null:
+        return failed(_that.errorMsg);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $CharacterDataStateCopyWith<$Res> {
-  factory $CharacterDataStateCopyWith(
-          CharacterDataState value, $Res Function(CharacterDataState) then) =
-      _$CharacterDataStateCopyWithImpl<$Res, CharacterDataState>;
-}
 
-/// @nodoc
-class _$CharacterDataStateCopyWithImpl<$Res, $Val extends CharacterDataState>
-    implements $CharacterDataStateCopyWith<$Res> {
-  _$CharacterDataStateCopyWithImpl(this._value, this._then);
+class _initial implements CharacterDataState {
+  const _initial();
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _initial);
+  }
 
-  /// Create a copy of CharacterDataState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-abstract class _$$initialImplCopyWith<$Res> {
-  factory _$$initialImplCopyWith(
-          _$initialImpl value, $Res Function(_$initialImpl) then) =
-      __$$initialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$initialImplCopyWithImpl<$Res>
-    extends _$CharacterDataStateCopyWithImpl<$Res, _$initialImpl>
-    implements _$$initialImplCopyWith<$Res> {
-  __$$initialImplCopyWithImpl(
-      _$initialImpl _value, $Res Function(_$initialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CharacterDataState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$initialImpl implements _initial {
-  const _$initialImpl();
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
     return 'CharacterDataState.initial()';
   }
+}
+
+/// @nodoc
+
+class _initialized implements CharacterDataState {
+  const _initialized();
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$initialImpl);
+        (other.runtimeType == runtimeType && other is _initialized);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function(List<dynamic>? characterList) accountLoaded,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function(List<dynamic>? characterList)? accountLoaded,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function(List<dynamic>? characterList)? accountLoaded,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_accountLoaded value) accountLoaded,
-    required TResult Function(_failed value) failed,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_accountLoaded value)? accountLoaded,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_accountLoaded value)? accountLoaded,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _initial implements CharacterDataState {
-  const factory _initial() = _$initialImpl;
-}
-
-/// @nodoc
-abstract class _$$initializedImplCopyWith<$Res> {
-  factory _$$initializedImplCopyWith(
-          _$initializedImpl value, $Res Function(_$initializedImpl) then) =
-      __$$initializedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$initializedImplCopyWithImpl<$Res>
-    extends _$CharacterDataStateCopyWithImpl<$Res, _$initializedImpl>
-    implements _$$initializedImplCopyWith<$Res> {
-  __$$initializedImplCopyWithImpl(
-      _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CharacterDataState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$initializedImpl implements _initialized {
-  const _$initializedImpl();
 
   @override
   String toString() {
     return 'CharacterDataState.initialized()';
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$initializedImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function(List<dynamic>? characterList) accountLoaded,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function(List<dynamic>? characterList)? accountLoaded,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function(List<dynamic>? characterList)? accountLoaded,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_accountLoaded value) accountLoaded,
-    required TResult Function(_failed value) failed,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_accountLoaded value)? accountLoaded,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_accountLoaded value)? accountLoaded,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _initialized implements CharacterDataState {
-  const factory _initialized() = _$initializedImpl;
-}
-
-/// @nodoc
-abstract class _$$accountLoadedImplCopyWith<$Res> {
-  factory _$$accountLoadedImplCopyWith(
-          _$accountLoadedImpl value, $Res Function(_$accountLoadedImpl) then) =
-      __$$accountLoadedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({List<dynamic>? characterList});
-}
-
-/// @nodoc
-class __$$accountLoadedImplCopyWithImpl<$Res>
-    extends _$CharacterDataStateCopyWithImpl<$Res, _$accountLoadedImpl>
-    implements _$$accountLoadedImplCopyWith<$Res> {
-  __$$accountLoadedImplCopyWithImpl(
-      _$accountLoadedImpl _value, $Res Function(_$accountLoadedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of CharacterDataState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? characterList = freezed,
-  }) {
-    return _then(_$accountLoadedImpl(
-      characterList: freezed == characterList
-          ? _value._characterList
-          : characterList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$accountLoadedImpl implements _accountLoaded {
-  const _$accountLoadedImpl({required final List<dynamic>? characterList})
+class _accountLoaded implements CharacterDataState {
+  const _accountLoaded({required final List<dynamic>? characterList})
       : _characterList = characterList;
 
   final List<dynamic>? _characterList;
-  @override
   List<dynamic>? get characterList {
     final value = _characterList;
     if (value == null) return null;
@@ -372,16 +301,18 @@ class _$accountLoadedImpl implements _accountLoaded {
     return EqualUnmodifiableListView(value);
   }
 
-  @override
-  String toString() {
-    return 'CharacterDataState.accountLoaded(characterList: $characterList)';
-  }
+  /// Create a copy of CharacterDataState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$accountLoadedCopyWith<_accountLoaded> get copyWith =>
+      __$accountLoadedCopyWithImpl<_accountLoaded>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$accountLoadedImpl &&
+            other is _accountLoaded &&
             const DeepCollectionEquality()
                 .equals(other._characterList, _characterList));
   }
@@ -390,153 +321,64 @@ class _$accountLoadedImpl implements _accountLoaded {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_characterList));
 
-  /// Create a copy of CharacterDataState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$accountLoadedImplCopyWith<_$accountLoadedImpl> get copyWith =>
-      __$$accountLoadedImplCopyWithImpl<_$accountLoadedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function(List<dynamic>? characterList) accountLoaded,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return accountLoaded(characterList);
+  String toString() {
+    return 'CharacterDataState.accountLoaded(characterList: $characterList)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function(List<dynamic>? characterList)? accountLoaded,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return accountLoaded?.call(characterList);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function(List<dynamic>? characterList)? accountLoaded,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (accountLoaded != null) {
-      return accountLoaded(characterList);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_accountLoaded value) accountLoaded,
-    required TResult Function(_failed value) failed,
-  }) {
-    return accountLoaded(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_accountLoaded value)? accountLoaded,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return accountLoaded?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_accountLoaded value)? accountLoaded,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (accountLoaded != null) {
-      return accountLoaded(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _accountLoaded implements CharacterDataState {
-  const factory _accountLoaded({required final List<dynamic>? characterList}) =
-      _$accountLoadedImpl;
-
-  List<dynamic>? get characterList;
-
-  /// Create a copy of CharacterDataState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$accountLoadedImplCopyWith<_$accountLoadedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$failedImplCopyWith<$Res> {
-  factory _$$failedImplCopyWith(
-          _$failedImpl value, $Res Function(_$failedImpl) then) =
-      __$$failedImplCopyWithImpl<$Res>;
+abstract mixin class _$accountLoadedCopyWith<$Res>
+    implements $CharacterDataStateCopyWith<$Res> {
+  factory _$accountLoadedCopyWith(
+          _accountLoaded value, $Res Function(_accountLoaded) _then) =
+      __$accountLoadedCopyWithImpl;
   @useResult
-  $Res call({String errorMsg});
+  $Res call({List<dynamic>? characterList});
 }
 
 /// @nodoc
-class __$$failedImplCopyWithImpl<$Res>
-    extends _$CharacterDataStateCopyWithImpl<$Res, _$failedImpl>
-    implements _$$failedImplCopyWith<$Res> {
-  __$$failedImplCopyWithImpl(
-      _$failedImpl _value, $Res Function(_$failedImpl) _then)
-      : super(_value, _then);
+class __$accountLoadedCopyWithImpl<$Res>
+    implements _$accountLoadedCopyWith<$Res> {
+  __$accountLoadedCopyWithImpl(this._self, this._then);
+
+  final _accountLoaded _self;
+  final $Res Function(_accountLoaded) _then;
 
   /// Create a copy of CharacterDataState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? errorMsg = null,
+    Object? characterList = freezed,
   }) {
-    return _then(_$failedImpl(
-      errorMsg: null == errorMsg
-          ? _value.errorMsg
-          : errorMsg // ignore: cast_nullable_to_non_nullable
-              as String,
+    return _then(_accountLoaded(
+      characterList: freezed == characterList
+          ? _self._characterList
+          : characterList // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$failedImpl implements _failed {
-  const _$failedImpl({required this.errorMsg});
+class _failed implements CharacterDataState {
+  const _failed({required this.errorMsg});
 
-  @override
   final String errorMsg;
 
-  @override
-  String toString() {
-    return 'CharacterDataState.failed(errorMsg: $errorMsg)';
-  }
+  /// Create a copy of CharacterDataState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$failedCopyWith<_failed> get copyWith =>
+      __$failedCopyWithImpl<_failed>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$failedImpl &&
+            other is _failed &&
             (identical(other.errorMsg, errorMsg) ||
                 other.errorMsg == errorMsg));
   }
@@ -544,97 +386,41 @@ class _$failedImpl implements _failed {
   @override
   int get hashCode => Object.hash(runtimeType, errorMsg);
 
+  @override
+  String toString() {
+    return 'CharacterDataState.failed(errorMsg: $errorMsg)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$failedCopyWith<$Res>
+    implements $CharacterDataStateCopyWith<$Res> {
+  factory _$failedCopyWith(_failed value, $Res Function(_failed) _then) =
+      __$failedCopyWithImpl;
+  @useResult
+  $Res call({String errorMsg});
+}
+
+/// @nodoc
+class __$failedCopyWithImpl<$Res> implements _$failedCopyWith<$Res> {
+  __$failedCopyWithImpl(this._self, this._then);
+
+  final _failed _self;
+  final $Res Function(_failed) _then;
+
   /// Create a copy of CharacterDataState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
   @pragma('vm:prefer-inline')
-  _$$failedImplCopyWith<_$failedImpl> get copyWith =>
-      __$$failedImplCopyWithImpl<_$failedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function(List<dynamic>? characterList) accountLoaded,
-    required TResult Function(String errorMsg) failed,
+  $Res call({
+    Object? errorMsg = null,
   }) {
-    return failed(errorMsg);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function(List<dynamic>? characterList)? accountLoaded,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return failed?.call(errorMsg);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function(List<dynamic>? characterList)? accountLoaded,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(errorMsg);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_accountLoaded value) accountLoaded,
-    required TResult Function(_failed value) failed,
-  }) {
-    return failed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_accountLoaded value)? accountLoaded,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return failed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_accountLoaded value)? accountLoaded,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(this);
-    }
-    return orElse();
+    return _then(_failed(
+      errorMsg: null == errorMsg
+          ? _self.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
-abstract class _failed implements CharacterDataState {
-  const factory _failed({required final String errorMsg}) = _$failedImpl;
-
-  String get errorMsg;
-
-  /// Create a copy of CharacterDataState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$failedImplCopyWith<_$failedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,643 +9,541 @@ part of 'splash_screen_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+/// @nodoc
+mixin _$SplashScreenState implements DiagnosticableTreeMixin {
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'SplashScreenState'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is SplashScreenState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState()';
+  }
+}
 
 /// @nodoc
-mixin _$SplashScreenState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function() checkingForUpdates,
-    required TResult Function() updateAvailable,
-    required TResult Function(String errorMsg) failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function()? checkingForUpdates,
-    TResult? Function()? updateAvailable,
-    TResult? Function(String errorMsg)? failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function()? checkingForUpdates,
-    TResult Function()? updateAvailable,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_checkingForUpdates value) checkingForUpdates,
-    required TResult Function(_updateAvailable value) updateAvailable,
-    required TResult Function(_failed value) failed,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult? Function(_updateAvailable value)? updateAvailable,
-    TResult? Function(_failed value)? failed,
-  }) =>
-      throw _privateConstructorUsedError;
+class $SplashScreenStateCopyWith<$Res> {
+  $SplashScreenStateCopyWith(
+      SplashScreenState _, $Res Function(SplashScreenState) __);
+}
+
+/// Adds pattern-matching-related methods to [SplashScreenState].
+extension SplashScreenStatePatterns on SplashScreenState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult Function(_updateAvailable value)? updateAvailable,
+    TResult Function(_maintenance value)? maintenance,
+    TResult Function(_blockingError value)? blockingError,
+    TResult Function(_updateRequired value)? updateRequired,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial() when initial != null:
+        return initial(_that);
+      case _initialized() when initialized != null:
+        return initialized(_that);
+      case _checkingForUpdates() when checkingForUpdates != null:
+        return checkingForUpdates(_that);
+      case _maintenance() when maintenance != null:
+        return maintenance(_that);
+      case _blockingError() when blockingError != null:
+        return blockingError(_that);
+      case _updateRequired() when updateRequired != null:
+        return updateRequired(_that);
+      case _failed() when failed != null:
+        return failed(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_initial value) initial,
+    required TResult Function(_initialized value) initialized,
+    required TResult Function(_checkingForUpdates value) checkingForUpdates,
+    required TResult Function(_maintenance value) maintenance,
+    required TResult Function(_blockingError value) blockingError,
+    required TResult Function(_updateRequired value) updateRequired,
+    required TResult Function(_failed value) failed,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial():
+        return initial(_that);
+      case _initialized():
+        return initialized(_that);
+      case _checkingForUpdates():
+        return checkingForUpdates(_that);
+      case _maintenance():
+        return maintenance(_that);
+      case _blockingError():
+        return blockingError(_that);
+      case _updateRequired():
+        return updateRequired(_that);
+      case _failed():
+        return failed(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_initial value)? initial,
+    TResult? Function(_initialized value)? initialized,
+    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
+    TResult? Function(_maintenance value)? maintenance,
+    TResult? Function(_blockingError value)? blockingError,
+    TResult? Function(_updateRequired value)? updateRequired,
+    TResult? Function(_failed value)? failed,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial() when initial != null:
+        return initial(_that);
+      case _initialized() when initialized != null:
+        return initialized(_that);
+      case _checkingForUpdates() when checkingForUpdates != null:
+        return checkingForUpdates(_that);
+      case _maintenance() when maintenance != null:
+        return maintenance(_that);
+      case _blockingError() when blockingError != null:
+        return blockingError(_that);
+      case _updateRequired() when updateRequired != null:
+        return updateRequired(_that);
+      case _failed() when failed != null:
+        return failed(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? initialized,
+    TResult Function()? checkingForUpdates,
+    TResult Function(String? motd, BannerData? banner, LinksData? links)?
+        maintenance,
+    TResult Function(String message)? blockingError,
+    TResult Function(String? message, LauncherStatusData status)?
+        updateRequired,
+    TResult Function(String errorMsg)? failed,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial() when initial != null:
+        return initial();
+      case _initialized() when initialized != null:
+        return initialized();
+      case _checkingForUpdates() when checkingForUpdates != null:
+        return checkingForUpdates();
+      case _maintenance() when maintenance != null:
+        return maintenance(_that.motd, _that.banner, _that.links);
+      case _blockingError() when blockingError != null:
+        return blockingError(_that.message);
+      case _updateRequired() when updateRequired != null:
+        return updateRequired(_that.message, _that.status);
+      case _failed() when failed != null:
+        return failed(_that.errorMsg);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() initialized,
+    required TResult Function() checkingForUpdates,
+    required TResult Function(
+            String? motd, BannerData? banner, LinksData? links)
+        maintenance,
+    required TResult Function(String message) blockingError,
+    required TResult Function(String? message, LauncherStatusData status)
+        updateRequired,
+    required TResult Function(String errorMsg) failed,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial():
+        return initial();
+      case _initialized():
+        return initialized();
+      case _checkingForUpdates():
+        return checkingForUpdates();
+      case _maintenance():
+        return maintenance(_that.motd, _that.banner, _that.links);
+      case _blockingError():
+        return blockingError(_that.message);
+      case _updateRequired():
+        return updateRequired(_that.message, _that.status);
+      case _failed():
+        return failed(_that.errorMsg);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? initialized,
+    TResult? Function()? checkingForUpdates,
+    TResult? Function(String? motd, BannerData? banner, LinksData? links)?
+        maintenance,
+    TResult? Function(String message)? blockingError,
+    TResult? Function(String? message, LauncherStatusData status)?
+        updateRequired,
+    TResult? Function(String errorMsg)? failed,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _initial() when initial != null:
+        return initial();
+      case _initialized() when initialized != null:
+        return initialized();
+      case _checkingForUpdates() when checkingForUpdates != null:
+        return checkingForUpdates();
+      case _maintenance() when maintenance != null:
+        return maintenance(_that.motd, _that.banner, _that.links);
+      case _blockingError() when blockingError != null:
+        return blockingError(_that.message);
+      case _updateRequired() when updateRequired != null:
+        return updateRequired(_that.message, _that.status);
+      case _failed() when failed != null:
+        return failed(_that.errorMsg);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $SplashScreenStateCopyWith<$Res> {
-  factory $SplashScreenStateCopyWith(
-          SplashScreenState value, $Res Function(SplashScreenState) then) =
-      _$SplashScreenStateCopyWithImpl<$Res, SplashScreenState>;
-}
 
-/// @nodoc
-class _$SplashScreenStateCopyWithImpl<$Res, $Val extends SplashScreenState>
-    implements $SplashScreenStateCopyWith<$Res> {
-  _$SplashScreenStateCopyWithImpl(this._value, this._then);
+class _initial with DiagnosticableTreeMixin implements SplashScreenState {
+  const _initial();
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'SplashScreenState.initial'));
+  }
 
-  /// Create a copy of SplashScreenState
-  /// with the given fields replaced by the non-null parameter values.
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _initial);
+  }
 
-/// @nodoc
-abstract class _$$initialImplCopyWith<$Res> {
-  factory _$$initialImplCopyWith(
-          _$initialImpl value, $Res Function(_$initialImpl) then) =
-      __$$initialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$initialImplCopyWithImpl<$Res>
-    extends _$SplashScreenStateCopyWithImpl<$Res, _$initialImpl>
-    implements _$$initialImplCopyWith<$Res> {
-  __$$initialImplCopyWithImpl(
-      _$initialImpl _value, $Res Function(_$initialImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SplashScreenState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$initialImpl with DiagnosticableTreeMixin implements _initial {
-  const _$initialImpl();
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.initial()';
   }
+}
+
+/// @nodoc
+
+class _initialized with DiagnosticableTreeMixin implements SplashScreenState {
+  const _initialized();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'SplashScreenState.initial'));
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashScreenState.initialized'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$initialImpl);
+        (other.runtimeType == runtimeType && other is _initialized);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function() checkingForUpdates,
-    required TResult Function() updateAvailable,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function()? checkingForUpdates,
-    TResult? Function()? updateAvailable,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function()? checkingForUpdates,
-    TResult Function()? updateAvailable,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_checkingForUpdates value) checkingForUpdates,
-    required TResult Function(_updateAvailable value) updateAvailable,
-    required TResult Function(_failed value) failed,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult? Function(_updateAvailable value)? updateAvailable,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult Function(_updateAvailable value)? updateAvailable,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _initial implements SplashScreenState {
-  const factory _initial() = _$initialImpl;
-}
-
-/// @nodoc
-abstract class _$$initializedImplCopyWith<$Res> {
-  factory _$$initializedImplCopyWith(
-          _$initializedImpl value, $Res Function(_$initializedImpl) then) =
-      __$$initializedImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$initializedImplCopyWithImpl<$Res>
-    extends _$SplashScreenStateCopyWithImpl<$Res, _$initializedImpl>
-    implements _$$initializedImplCopyWith<$Res> {
-  __$$initializedImplCopyWithImpl(
-      _$initializedImpl _value, $Res Function(_$initializedImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SplashScreenState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$initializedImpl with DiagnosticableTreeMixin implements _initialized {
-  const _$initializedImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.initialized()';
   }
+}
+
+/// @nodoc
+
+class _checkingForUpdates
+    with DiagnosticableTreeMixin
+    implements SplashScreenState {
+  const _checkingForUpdates();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty('type', 'SplashScreenState.initialized'));
+      ..add(
+          DiagnosticsProperty('type', 'SplashScreenState.checkingForUpdates'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$initializedImpl);
+        (other.runtimeType == runtimeType && other is _checkingForUpdates);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function() checkingForUpdates,
-    required TResult Function() updateAvailable,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return initialized();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function()? checkingForUpdates,
-    TResult? Function()? updateAvailable,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return initialized?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function()? checkingForUpdates,
-    TResult Function()? updateAvailable,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_checkingForUpdates value) checkingForUpdates,
-    required TResult Function(_updateAvailable value) updateAvailable,
-    required TResult Function(_failed value) failed,
-  }) {
-    return initialized(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult? Function(_updateAvailable value)? updateAvailable,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return initialized?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult Function(_updateAvailable value)? updateAvailable,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (initialized != null) {
-      return initialized(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _initialized implements SplashScreenState {
-  const factory _initialized() = _$initializedImpl;
-}
-
-/// @nodoc
-abstract class _$$checkingForUpdatesImplCopyWith<$Res> {
-  factory _$$checkingForUpdatesImplCopyWith(_$checkingForUpdatesImpl value,
-          $Res Function(_$checkingForUpdatesImpl) then) =
-      __$$checkingForUpdatesImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$checkingForUpdatesImplCopyWithImpl<$Res>
-    extends _$SplashScreenStateCopyWithImpl<$Res, _$checkingForUpdatesImpl>
-    implements _$$checkingForUpdatesImplCopyWith<$Res> {
-  __$$checkingForUpdatesImplCopyWithImpl(_$checkingForUpdatesImpl _value,
-      $Res Function(_$checkingForUpdatesImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SplashScreenState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$checkingForUpdatesImpl
-    with DiagnosticableTreeMixin
-    implements _checkingForUpdates {
-  const _$checkingForUpdatesImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.checkingForUpdates()';
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(
-        DiagnosticsProperty('type', 'SplashScreenState.checkingForUpdates'));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$checkingForUpdatesImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function() checkingForUpdates,
-    required TResult Function() updateAvailable,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return checkingForUpdates();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function()? checkingForUpdates,
-    TResult? Function()? updateAvailable,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return checkingForUpdates?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function()? checkingForUpdates,
-    TResult Function()? updateAvailable,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (checkingForUpdates != null) {
-      return checkingForUpdates();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_checkingForUpdates value) checkingForUpdates,
-    required TResult Function(_updateAvailable value) updateAvailable,
-    required TResult Function(_failed value) failed,
-  }) {
-    return checkingForUpdates(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult? Function(_updateAvailable value)? updateAvailable,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return checkingForUpdates?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult Function(_updateAvailable value)? updateAvailable,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (checkingForUpdates != null) {
-      return checkingForUpdates(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _checkingForUpdates implements SplashScreenState {
-  const factory _checkingForUpdates() = _$checkingForUpdatesImpl;
 }
 
 /// @nodoc
-abstract class _$$updateAvailableImplCopyWith<$Res> {
-  factory _$$updateAvailableImplCopyWith(_$updateAvailableImpl value,
-          $Res Function(_$updateAvailableImpl) then) =
-      __$$updateAvailableImplCopyWithImpl<$Res>;
-}
 
-/// @nodoc
-class __$$updateAvailableImplCopyWithImpl<$Res>
-    extends _$SplashScreenStateCopyWithImpl<$Res, _$updateAvailableImpl>
-    implements _$$updateAvailableImplCopyWith<$Res> {
-  __$$updateAvailableImplCopyWithImpl(
-      _$updateAvailableImpl _value, $Res Function(_$updateAvailableImpl) _then)
-      : super(_value, _then);
+class _maintenance with DiagnosticableTreeMixin implements SplashScreenState {
+  const _maintenance({this.motd, this.banner, this.links});
+
+  final String? motd;
+  final BannerData? banner;
+  final LinksData? links;
 
   /// Create a copy of SplashScreenState
   /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$updateAvailableImpl
-    with DiagnosticableTreeMixin
-    implements _updateAvailable {
-  const _$updateAvailableImpl();
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SplashScreenState.updateAvailable()';
-  }
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$maintenanceCopyWith<_maintenance> get copyWith =>
+      __$maintenanceCopyWithImpl<_maintenance>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty('type', 'SplashScreenState.updateAvailable'));
+      ..add(DiagnosticsProperty('type', 'SplashScreenState.maintenance'))
+      ..add(DiagnosticsProperty('motd', motd))
+      ..add(DiagnosticsProperty('banner', banner))
+      ..add(DiagnosticsProperty('links', links));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$updateAvailableImpl);
+        (other.runtimeType == runtimeType &&
+            other is _maintenance &&
+            (identical(other.motd, motd) || other.motd == motd) &&
+            (identical(other.banner, banner) || other.banner == banner) &&
+            (identical(other.links, links) || other.links == links));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, motd, banner, links);
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function() checkingForUpdates,
-    required TResult Function() updateAvailable,
-    required TResult Function(String errorMsg) failed,
-  }) {
-    return updateAvailable();
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState.maintenance(motd: $motd, banner: $banner, links: $links)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function()? checkingForUpdates,
-    TResult? Function()? updateAvailable,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return updateAvailable?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function()? checkingForUpdates,
-    TResult Function()? updateAvailable,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (updateAvailable != null) {
-      return updateAvailable();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_checkingForUpdates value) checkingForUpdates,
-    required TResult Function(_updateAvailable value) updateAvailable,
-    required TResult Function(_failed value) failed,
-  }) {
-    return updateAvailable(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult? Function(_updateAvailable value)? updateAvailable,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return updateAvailable?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult Function(_updateAvailable value)? updateAvailable,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (updateAvailable != null) {
-      return updateAvailable(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _updateAvailable implements SplashScreenState {
-  const factory _updateAvailable() = _$updateAvailableImpl;
 }
 
 /// @nodoc
-abstract class _$$failedImplCopyWith<$Res> {
-  factory _$$failedImplCopyWith(
-          _$failedImpl value, $Res Function(_$failedImpl) then) =
-      __$$failedImplCopyWithImpl<$Res>;
+abstract mixin class _$maintenanceCopyWith<$Res>
+    implements $SplashScreenStateCopyWith<$Res> {
+  factory _$maintenanceCopyWith(
+          _maintenance value, $Res Function(_maintenance) _then) =
+      __$maintenanceCopyWithImpl;
   @useResult
-  $Res call({String errorMsg});
+  $Res call({String? motd, BannerData? banner, LinksData? links});
 }
 
 /// @nodoc
-class __$$failedImplCopyWithImpl<$Res>
-    extends _$SplashScreenStateCopyWithImpl<$Res, _$failedImpl>
-    implements _$$failedImplCopyWith<$Res> {
-  __$$failedImplCopyWithImpl(
-      _$failedImpl _value, $Res Function(_$failedImpl) _then)
-      : super(_value, _then);
+class __$maintenanceCopyWithImpl<$Res> implements _$maintenanceCopyWith<$Res> {
+  __$maintenanceCopyWithImpl(this._self, this._then);
+
+  final _maintenance _self;
+  final $Res Function(_maintenance) _then;
 
   /// Create a copy of SplashScreenState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? errorMsg = null,
+    Object? motd = freezed,
+    Object? banner = freezed,
+    Object? links = freezed,
   }) {
-    return _then(_$failedImpl(
-      errorMsg: null == errorMsg
-          ? _value.errorMsg
-          : errorMsg // ignore: cast_nullable_to_non_nullable
+    return _then(_maintenance(
+      motd: freezed == motd
+          ? _self.motd
+          : motd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      banner: freezed == banner
+          ? _self.banner
+          : banner // ignore: cast_nullable_to_non_nullable
+              as BannerData?,
+      links: freezed == links
+          ? _self.links
+          : links // ignore: cast_nullable_to_non_nullable
+              as LinksData?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _blockingError with DiagnosticableTreeMixin implements SplashScreenState {
+  const _blockingError({required this.message});
+
+  final String message;
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$blockingErrorCopyWith<_blockingError> get copyWith =>
+      __$blockingErrorCopyWithImpl<_blockingError>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashScreenState.blockingError'))
+      ..add(DiagnosticsProperty('message', message));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _blockingError &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState.blockingError(message: $message)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$blockingErrorCopyWith<$Res>
+    implements $SplashScreenStateCopyWith<$Res> {
+  factory _$blockingErrorCopyWith(
+          _blockingError value, $Res Function(_blockingError) _then) =
+      __$blockingErrorCopyWithImpl;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$blockingErrorCopyWithImpl<$Res>
+    implements _$blockingErrorCopyWith<$Res> {
+  __$blockingErrorCopyWithImpl(this._self, this._then);
+
+  final _blockingError _self;
+  final $Res Function(_blockingError) _then;
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_blockingError(
+      message: null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -653,20 +551,101 @@ class __$$failedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$failedImpl with DiagnosticableTreeMixin implements _failed {
-  const _$failedImpl({required this.errorMsg});
+class _updateRequired
+    with DiagnosticableTreeMixin
+    implements SplashScreenState {
+  const _updateRequired({this.message, required this.status});
 
-  @override
-  final String errorMsg;
+  final String? message;
+  final LauncherStatusData status;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SplashScreenState.failed(errorMsg: $errorMsg)';
-  }
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$updateRequiredCopyWith<_updateRequired> get copyWith =>
+      __$updateRequiredCopyWithImpl<_updateRequired>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashScreenState.updateRequired'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('status', status));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _updateRequired &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message, status);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState.updateRequired(message: $message, status: $status)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$updateRequiredCopyWith<$Res>
+    implements $SplashScreenStateCopyWith<$Res> {
+  factory _$updateRequiredCopyWith(
+          _updateRequired value, $Res Function(_updateRequired) _then) =
+      __$updateRequiredCopyWithImpl;
+  @useResult
+  $Res call({String? message, LauncherStatusData status});
+}
+
+/// @nodoc
+class __$updateRequiredCopyWithImpl<$Res>
+    implements _$updateRequiredCopyWith<$Res> {
+  __$updateRequiredCopyWithImpl(this._self, this._then);
+
+  final _updateRequired _self;
+  final $Res Function(_updateRequired) _then;
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? message = freezed,
+    Object? status = null,
+  }) {
+    return _then(_updateRequired(
+      message: freezed == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _self.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as LauncherStatusData,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _failed with DiagnosticableTreeMixin implements SplashScreenState {
+  const _failed({required this.errorMsg});
+
+  final String errorMsg;
+
+  /// Create a copy of SplashScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$failedCopyWith<_failed> get copyWith =>
+      __$failedCopyWithImpl<_failed>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     properties
       ..add(DiagnosticsProperty('type', 'SplashScreenState.failed'))
       ..add(DiagnosticsProperty('errorMsg', errorMsg));
@@ -676,7 +655,7 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$failedImpl &&
+            other is _failed &&
             (identical(other.errorMsg, errorMsg) ||
                 other.errorMsg == errorMsg));
   }
@@ -684,103 +663,41 @@ class _$failedImpl with DiagnosticableTreeMixin implements _failed {
   @override
   int get hashCode => Object.hash(runtimeType, errorMsg);
 
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState.failed(errorMsg: $errorMsg)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$failedCopyWith<$Res>
+    implements $SplashScreenStateCopyWith<$Res> {
+  factory _$failedCopyWith(_failed value, $Res Function(_failed) _then) =
+      __$failedCopyWithImpl;
+  @useResult
+  $Res call({String errorMsg});
+}
+
+/// @nodoc
+class __$failedCopyWithImpl<$Res> implements _$failedCopyWith<$Res> {
+  __$failedCopyWithImpl(this._self, this._then);
+
+  final _failed _self;
+  final $Res Function(_failed) _then;
+
   /// Create a copy of SplashScreenState
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
   @pragma('vm:prefer-inline')
-  _$$failedImplCopyWith<_$failedImpl> get copyWith =>
-      __$$failedImplCopyWithImpl<_$failedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() initialized,
-    required TResult Function() checkingForUpdates,
-    required TResult Function() updateAvailable,
-    required TResult Function(String errorMsg) failed,
+  $Res call({
+    Object? errorMsg = null,
   }) {
-    return failed(errorMsg);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? initialized,
-    TResult? Function()? checkingForUpdates,
-    TResult? Function()? updateAvailable,
-    TResult? Function(String errorMsg)? failed,
-  }) {
-    return failed?.call(errorMsg);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? initialized,
-    TResult Function()? checkingForUpdates,
-    TResult Function()? updateAvailable,
-    TResult Function(String errorMsg)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(errorMsg);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_initial value) initial,
-    required TResult Function(_initialized value) initialized,
-    required TResult Function(_checkingForUpdates value) checkingForUpdates,
-    required TResult Function(_updateAvailable value) updateAvailable,
-    required TResult Function(_failed value) failed,
-  }) {
-    return failed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_initial value)? initial,
-    TResult? Function(_initialized value)? initialized,
-    TResult? Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult? Function(_updateAvailable value)? updateAvailable,
-    TResult? Function(_failed value)? failed,
-  }) {
-    return failed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_initial value)? initial,
-    TResult Function(_initialized value)? initialized,
-    TResult Function(_checkingForUpdates value)? checkingForUpdates,
-    TResult Function(_updateAvailable value)? updateAvailable,
-    TResult Function(_failed value)? failed,
-    required TResult orElse(),
-  }) {
-    if (failed != null) {
-      return failed(this);
-    }
-    return orElse();
+    return _then(_failed(
+      errorMsg: null == errorMsg
+          ? _self.errorMsg
+          : errorMsg // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
-abstract class _failed implements SplashScreenState {
-  const factory _failed({required final String errorMsg}) = _$failedImpl;
-
-  String get errorMsg;
-
-  /// Create a copy of SplashScreenState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$failedImplCopyWith<_$failedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

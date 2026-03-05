@@ -18,8 +18,10 @@ class Localize {
   static Localize? _current;
 
   static Localize get current {
-    assert(_current != null,
-        'No instance of Localize was loaded. Try to initialize the Localize delegate before accessing Localize.current.');
+    assert(
+      _current != null,
+      'No instance of Localize was loaded. Try to initialize the Localize delegate before accessing Localize.current.',
+    );
     return _current!;
   }
 
@@ -41,8 +43,10 @@ class Localize {
 
   static Localize of(BuildContext context) {
     final instance = Localize.maybeOf(context);
-    assert(instance != null,
-        'No instance of Localize present in the widget tree. Did you add Localize.delegate in localizationsDelegates?');
+    assert(
+      instance != null,
+      'No instance of Localize present in the widget tree. Did you add Localize.delegate in localizationsDelegates?',
+    );
     return instance!;
   }
 
@@ -52,62 +56,32 @@ class Localize {
 
   /// `WOW-Launcher`
   String get appTitle {
-    return Intl.message(
-      'WOW-Launcher',
-      name: 'appTitle',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('WOW-Launcher', name: 'appTitle', desc: '', args: []);
   }
 
   /// `OK`
   String get ok {
-    return Intl.message(
-      'OK',
-      name: 'ok',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('OK', name: 'ok', desc: '', args: []);
   }
 
   /// `Ja`
   String get yes {
-    return Intl.message(
-      'Ja',
-      name: 'yes',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Ja', name: 'yes', desc: '', args: []);
   }
 
   /// `Nein`
   String get no {
-    return Intl.message(
-      'Nein',
-      name: 'no',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Nein', name: 'no', desc: '', args: []);
   }
 
   /// `Speichern`
   String get save {
-    return Intl.message(
-      'Speichern',
-      name: 'save',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Speichern', name: 'save', desc: '', args: []);
   }
 
   /// `Fehler`
   String get error {
-    return Intl.message(
-      'Fehler',
-      name: 'error',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Fehler', name: 'error', desc: '', args: []);
   }
 
   /// `Folgender Fehler ist aufgetreten. Der Fehler wird automatisch reported. Bitte versuchen Sie es später erneut.`
@@ -162,12 +136,7 @@ class Localize {
 
   /// `M E N Ü`
   String get menuTitle {
-    return Intl.message(
-      'M E N Ü',
-      name: 'menuTitle',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('M E N Ü', name: 'menuTitle', desc: '', args: []);
   }
 
   /// `Einstellungen`

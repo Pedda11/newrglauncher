@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:twodotnulllauncher/services/update/launcher_status_api.dart';
+import '../../data/launcher_endpoints.dart';
 import '../../localization/generated/l10n.dart';
 import '../../repository/error_repository.dart';
 import '../../repository/main_repository.dart';
@@ -21,18 +23,19 @@ class SplashScreen extends StatelessWidget {
     final locales = Localize.of(context);
     return BlocProvider(
       create: (context) => SplashScreenCubit(
-        mainRepository: mainRepository,
-        preferencesRepository: preferencesRepository,
-        settingsRepository: settingsRepository,
-      )..initialize(),
+          mainRepository: mainRepository,
+          preferencesRepository: preferencesRepository,
+          settingsRepository: settingsRepository,
+          launcherStatusApi: LauncherStatusApi(LauncherEndpoints.statusUri))
+        ..initialize(),
       child: Scaffold(
         body: Stack(
           children: [
-            SplashScreenContent(),
+            const SplashScreenContent(),
             BlocBuilder<SplashScreenCubit, SplashScreenState>(
               builder: (context, state) {
                 return state.maybeWhen(
-                  initial: () => Center(
+                  initial: () => const Center(
                     child: SizedBox(
                       height: 120,
                       width: 120,
@@ -45,29 +48,10 @@ class SplashScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(locales.updateScreenUpdateCheck),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          SizedBox(
-                            height: 120,
-                            width: 120,
-                            child: CircularProgressIndicator(),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  updateAvailable: () {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(locales.updateScreenUpdateFound),
-                          Text(locales.updateScreenUpdateQuestion),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          SizedBox(
+                          const SizedBox(
                             height: 120,
                             width: 120,
                             child: CircularProgressIndicator(),
@@ -87,7 +71,7 @@ class SplashScreen extends StatelessWidget {
                         children: [
                           Text(
                             locales.errorHandlingContent,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           Text(errorMsg),
                         ],
@@ -103,7 +87,7 @@ class SplashScreen extends StatelessWidget {
                     );
                   },
                   orElse: () {
-                    return Center(
+                    return const Center(
                       child: SizedBox(
                           height: 120,
                           width: 120,

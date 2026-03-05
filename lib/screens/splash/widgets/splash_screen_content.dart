@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../localization/generated/l10n.dart';
 import '../../../navigation/navigation_pane.dart';
-import '../../../services/update_service.dart';
 import '../cubit/splash_screen_cubit.dart';
 
 class SplashScreenContent extends StatelessWidget {
@@ -15,7 +13,7 @@ class SplashScreenContent extends StatelessWidget {
         state.maybeWhen(
           initialized: () {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => NavigationPane(),
+              builder: (context) => const NavigationPane(),
             ));
           },
           orElse: () {},
