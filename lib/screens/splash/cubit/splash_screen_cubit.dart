@@ -1,8 +1,16 @@
-import 'package:auto_updater/auto_updater.dart';
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../../data/launcher_endpoints.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import '../../../widgets/log.dart';
+import '../core_functions/updater_promoter.dart';
+import '../core_functions/updater_update_finalizer.dart';
+import '../core_functions/updater_version_checker.dart';
+import '../core_functions/updater_update_validator.dart';
+import '../core_functions/updater_zip_downloader.dart';
+import '../core_functions/updater_zip_extractor.dart';
+import '../core_functions/updater_zip_hash_verifier.dart';
 import '../../../services/update/launcher_status_api.dart';
 import '../../../data/launcher_status_data.dart';
 import '../../../data/semver_data.dart';
@@ -11,9 +19,7 @@ import '../../../enum/e_startup_decision_type.dart';
 import '../../../repository/main_repository.dart';
 import '../../../repository/preferences_repository.dart';
 import '../../../repository/settings_repository.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-
-import '../../../services/update/launcher_updater_listener.dart';
+import '../../../services/update/launcher_updater_service.dart';
 
 part 'splash_screen_state.dart';
 
@@ -32,56 +38,70 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
       required this.launcherStatusApi})
       : super(const SplashScreenState.initial());
 
-  void initialize() async {
-    emit(const SplashScreenState.checkingForUpdates());
+  Future<void> initialize() async {
+    await Log.i('Update check started.');
+    try {
+      emit(const SplashScreenState.checkingForUpdates());
 
-    await initUpdater(launcherUpdaterListener);
+      final currentVersion = await getLauncherVersion();
+      final status = await launcherStatusApi.fetchStatus();
 
-    final currentVersion = await getLauncherVersion();
+      final decision = decideStartup(
+        status: status,
+        currentLauncherVersion: currentVersion,
+      );
 
-    final status = await launcherStatusApi.fetchStatus();
+      await Log.i('Startup decision: ${decision.type}');
 
-    final decision = decideStartup(
-      status: status,
-      currentLauncherVersion: currentVersion,
-    );
+      switch (decision.type) {
+        case EStartupDecisionType.maintenance:
+          emit(const SplashScreenState.maintenance());
+          return;
 
-    switch (decision.type) {
-      case EStartupDecisionType.maintenance:
-        emit(SplashScreenState.maintenance(
-          motd: status.motd,
-          banner: status.banner,
-          links: status.links,
-        ));
-        return;
+        case EStartupDecisionType.blockingError:
+          emit(SplashScreenState.blockingError(
+            message: decision.message ?? 'Fehler',
+          ));
+          return;
 
-      case EStartupDecisionType.blockingError:
-        emit(SplashScreenState.blockingError(
-          message: decision.message ?? 'Fehler',
-        ));
-        return;
+        case EStartupDecisionType.forceUpdate:
+          emit(SplashScreenState.updateRequired(
+            message: decision.message,
+            status: status,
+          ));
 
-      case EStartupDecisionType.forceUpdate:
-        emit(SplashScreenState.updateRequired(
-          message: decision.message,
-          status: status,
-        ));
+          await _prepareUpdaterIfNeeded(status);
 
-        /// Defer updater start to avoid running inside initialization microtask chain.
-        Future.microtask(() => _startForcedUpdate());
-        return;
+          if (status.update == null) {
+            throw StateError(
+              'Launcher update required, but status.update is missing.',
+            );
+          }
 
-      case EStartupDecisionType.proceed:
-      case EStartupDecisionType.nonBlockingError:
+          await LauncherUpdaterService.startUpdate(
+            url: status.update!.url,
+            sha256: status.update!.sha256,
+            launcherVersion: status.launcherVersion,
+          );
 
-        /// nonBlockingError behandeln wir später hübsch (banner/toast)
-        emit(const SplashScreenState.initialized());
-        return;
+          exit(0);
+
+        case EStartupDecisionType.proceed:
+        case EStartupDecisionType.nonBlockingError:
+          emit(const SplashScreenState.initialized());
+          return;
+      }
+    } catch (e, st) {
+      debugPrint('Splash initialize error: $e');
+      debugPrintStack(stackTrace: st);
+
+      emit(SplashScreenState.failed(errorMsg: e.toString()));
     }
   }
 
   Future<String> getLauncherVersion() async {
     final info = await PackageInfo.fromPlatform();
+    await Log.i('Current launcher version: ${info.version}');
     return info.version;
   }
 
@@ -98,16 +118,6 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
       );
     }
 
-    /// Blocking error (optional)
-    final err = status.error;
-    if (err != null && (err.blocking ?? false)) {
-      return StartupDecision(
-        type: EStartupDecisionType.blockingError,
-        status: status,
-        message: err.message ?? 'Unknown error',
-      );
-    }
-
     final current = SemverData.parse(currentLauncherVersion);
     final latest = SemverData.parse(status.launcherVersion);
 
@@ -120,28 +130,52 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
       );
     }
 
-    /// Non-blocking error can still be shown as a banner/toast
-    if (err != null) {
-      return StartupDecision(
-        type: EStartupDecisionType.nonBlockingError,
-        status: status,
-        message: err.message,
-      );
-    }
-
     return StartupDecision(
       type: EStartupDecisionType.proceed,
       status: status,
     );
   }
 
-  Future<void> _startForcedUpdate() async {
-    /// Trigger update check/download using the appcast feed.
-    await autoUpdater.checkForUpdates();
-  }
+  Future<void> _prepareUpdaterIfNeeded(LauncherStatusData status) async {
+    final needsUpdaterUpdate =
+        await UpdaterVersionChecker.needsUpdaterUpdate(status: status);
 
-  Future<void> initUpdater(UpdaterListener updaterListener) async {
-    await autoUpdater.setFeedURL(LauncherEndpoints.appcastUrl);
-    autoUpdater.addListener(updaterListener);
+    await Log.i('Updater update needed: $needsUpdaterUpdate');
+
+    if (!needsUpdaterUpdate) {
+      return;
+    }
+
+    final updaterUpdate = UpdaterUpdateValidator.requireUpdaterUpdate(status);
+
+    await Log.i(
+        'Starting download of updater version ${status.updaterVersion} from ${updaterUpdate.url}');
+
+    final zipFile = await UpdaterZipDownloader.downloadUpdaterZip(
+      url: updaterUpdate.url,
+    );
+
+    await Log.i('Download completed. Verifying hash...');
+
+    await UpdaterZipHashVerifier.verify(
+      filePath: zipFile.path,
+      expectedHex: updaterUpdate.sha256,
+    );
+
+    await Log.i('Hash verification passed. Extracting zip...');
+
+    await UpdaterZipExtractor.extractZip(
+      zipPath: zipFile.path,
+    );
+
+    await Log.i('Extraction completed. Promoting updater...');
+
+    await UpdaterPromoter.promote();
+
+    await Log.i('Updater promotion completed. Finalizing update...');
+
+    await UpdaterUpdateFinalizer.finalize(
+      updaterVersion: status.updaterVersion,
+    );
   }
 }

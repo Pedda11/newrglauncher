@@ -1,16 +1,37 @@
-# twodotnulllauncher
+# RG-Launcher
 
-A new Flutter project.
+## First installation:
 
-## Getting Started
+### Zip-Content:
 
-This project is a starting point for a Flutter application.
+- Folder: bundle
+    - Folder: launcher
+        - Folder: data
+        - flutter_windows.dll
+        - twodotnulllauncher.exe
+    - launcher_version.txt → contains the version of the launcher, e.g. 1.0.0
+- Folder: data
+- flutter_windows.dll
+- setup_rg_launcher.exe
 
-A few resources to get you started if this is your first Flutter project:
+## Preparation for Updates:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### To get the hash of the release.zip:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Get-FileHash setup_Release.zip -Algorithm SHA256
+- Get-FileHash Release.zip -Algorithm SHA256
+
+### Content of the release.zip:
+
+- data(folder)
+- flutter_windows.dll
+- launcher_version.txt
+- twodotnulllauncher.exe
+
+### Content of the setup_release.zip:
+
+- data(folder)
+- flutter_windows.dll
+- setup_twodotnulllauncher.exe
+- setup_rg_launcher.exe
+

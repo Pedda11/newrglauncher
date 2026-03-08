@@ -2,49 +2,56 @@ import 'dart:convert';
 
 class LauncherStatusData {
   final bool maintenance;
-
-  /// The single authoritative launcher version on the server.
   final String launcherVersion;
+  final String updaterVersion;
 
   final String? motd;
-  final BannerData? banner;
-  final LinksData? links;
-  final LauncherError? error;
+  final String? imageUrl;
+  final UpdateData? update;
+  final UpdateData? updaterUpdate;
 
   LauncherStatusData({
     required this.maintenance,
     required this.launcherVersion,
+    required this.updaterVersion,
     this.motd,
-    this.banner,
-    this.links,
-    this.error,
+    this.imageUrl,
+    this.update,
+    this.updaterUpdate,
   });
 
   factory LauncherStatusData.fromJson(Map<String, dynamic> json) {
-    /// Required fields
     final maintenance = json['maintenance'];
-    final launcherV = json['launcherVersion'];
+    final launcherVersion = json['launcherVersion'];
+    final updaterVersion = json['updaterVersion'];
 
     if (maintenance is! bool) {
       throw const FormatException('maintenance missing or not bool');
     }
-    if (launcherV is! String || launcherV.isEmpty) {
+
+    if (launcherVersion is! String || launcherVersion.isEmpty) {
       throw const FormatException('launcherVersion missing or not string');
     }
 
-    /// Optional fields
+    if (updaterVersion is! String || updaterVersion.isEmpty) {
+      throw const FormatException('updaterVersion missing or not string');
+    }
+
     final motd = json['motd'] as String?;
-    final bannerJson = json['banner'] as Map<String, dynamic>?;
-    final linksJson = json['links'] as Map<String, dynamic>?;
-    final errorJson = json['error'] as Map<String, dynamic>?;
+    final imageUrl = json['imageUrl'] as String?;
+    final updateJson = json['update'] as Map<String, dynamic>?;
+    final updaterUpdateJson = json['updaterUpdate'] as Map<String, dynamic>?;
 
     return LauncherStatusData(
       maintenance: maintenance,
-      launcherVersion: launcherV,
+      launcherVersion: launcherVersion,
+      updaterVersion: updaterVersion,
       motd: motd,
-      banner: bannerJson == null ? null : BannerData.fromJson(bannerJson),
-      links: linksJson == null ? null : LinksData.fromJson(linksJson),
-      error: errorJson == null ? null : LauncherError.fromJson(errorJson),
+      imageUrl: imageUrl,
+      update: updateJson == null ? null : UpdateData.fromJson(updateJson),
+      updaterUpdate: updaterUpdateJson == null
+          ? null
+          : UpdateData.fromJson(updaterUpdateJson),
     );
   }
 
@@ -54,48 +61,30 @@ class LauncherStatusData {
   }
 }
 
-class BannerData {
-  final String? url;
-  final String? clickUrl;
+class UpdateData {
+  final String url;
+  final String sha256;
 
-  BannerData({this.url, this.clickUrl});
+  UpdateData({
+    required this.url,
+    required this.sha256,
+  });
 
-  factory BannerData.fromJson(Map<String, dynamic> json) {
-    return BannerData(
-      url: json['url'] as String?,
-      clickUrl: json['clickUrl'] as String?,
-    );
-  }
-}
+  factory UpdateData.fromJson(Map<String, dynamic> json) {
+    final url = json['url'];
+    final sha256 = json['sha256'];
 
-class LinksData {
-  final String? discord;
-  final String? website;
-  final String? patchNotes;
+    if (url is! String || url.isEmpty) {
+      throw const FormatException('update.url missing or not string');
+    }
 
-  LinksData({this.discord, this.website, this.patchNotes});
+    if (sha256 is! String || sha256.isEmpty) {
+      throw const FormatException('update.sha256 missing or not string');
+    }
 
-  factory LinksData.fromJson(Map<String, dynamic> json) {
-    return LinksData(
-      discord: json['discord'] as String?,
-      website: json['website'] as String?,
-      patchNotes: json['patchNotes'] as String?,
-    );
-  }
-}
-
-class LauncherError {
-  final String? code;
-  final String? message;
-  final bool? blocking;
-
-  LauncherError({this.code, this.message, this.blocking});
-
-  factory LauncherError.fromJson(Map<String, dynamic> json) {
-    return LauncherError(
-      code: json['code'] as String?,
-      message: json['message'] as String?,
-      blocking: json['blocking'] as bool?,
+    return UpdateData(
+      url: url,
+      sha256: sha256,
     );
   }
 }

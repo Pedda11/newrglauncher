@@ -190,8 +190,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function()? checkingForUpdates,
-    TResult Function(String? motd, BannerData? banner, LinksData? links)?
-        maintenance,
+    TResult Function()? maintenance,
     TResult Function(String message)? blockingError,
     TResult Function(String? message, LauncherStatusData status)?
         updateRequired,
@@ -207,7 +206,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
       case _checkingForUpdates() when checkingForUpdates != null:
         return checkingForUpdates();
       case _maintenance() when maintenance != null:
-        return maintenance(_that.motd, _that.banner, _that.links);
+        return maintenance();
       case _blockingError() when blockingError != null:
         return blockingError(_that.message);
       case _updateRequired() when updateRequired != null:
@@ -237,9 +236,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     required TResult Function() initial,
     required TResult Function() initialized,
     required TResult Function() checkingForUpdates,
-    required TResult Function(
-            String? motd, BannerData? banner, LinksData? links)
-        maintenance,
+    required TResult Function() maintenance,
     required TResult Function(String message) blockingError,
     required TResult Function(String? message, LauncherStatusData status)
         updateRequired,
@@ -254,7 +251,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
       case _checkingForUpdates():
         return checkingForUpdates();
       case _maintenance():
-        return maintenance(_that.motd, _that.banner, _that.links);
+        return maintenance();
       case _blockingError():
         return blockingError(_that.message);
       case _updateRequired():
@@ -283,8 +280,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function()? checkingForUpdates,
-    TResult? Function(String? motd, BannerData? banner, LinksData? links)?
-        maintenance,
+    TResult? Function()? maintenance,
     TResult? Function(String message)? blockingError,
     TResult? Function(String? message, LauncherStatusData status)?
         updateRequired,
@@ -299,7 +295,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
       case _checkingForUpdates() when checkingForUpdates != null:
         return checkingForUpdates();
       case _maintenance() when maintenance != null:
-        return maintenance(_that.motd, _that.banner, _that.links);
+        return maintenance();
       case _blockingError() when blockingError != null:
         return blockingError(_that.message);
       case _updateRequired() when updateRequired != null:
@@ -395,86 +391,26 @@ class _checkingForUpdates
 /// @nodoc
 
 class _maintenance with DiagnosticableTreeMixin implements SplashScreenState {
-  const _maintenance({this.motd, this.banner, this.links});
-
-  final String? motd;
-  final BannerData? banner;
-  final LinksData? links;
-
-  /// Create a copy of SplashScreenState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  _$maintenanceCopyWith<_maintenance> get copyWith =>
-      __$maintenanceCopyWithImpl<_maintenance>(this, _$identity);
+  const _maintenance();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     properties
-      ..add(DiagnosticsProperty('type', 'SplashScreenState.maintenance'))
-      ..add(DiagnosticsProperty('motd', motd))
-      ..add(DiagnosticsProperty('banner', banner))
-      ..add(DiagnosticsProperty('links', links));
+      ..add(DiagnosticsProperty('type', 'SplashScreenState.maintenance'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _maintenance &&
-            (identical(other.motd, motd) || other.motd == motd) &&
-            (identical(other.banner, banner) || other.banner == banner) &&
-            (identical(other.links, links) || other.links == links));
+        (other.runtimeType == runtimeType && other is _maintenance);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, motd, banner, links);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SplashScreenState.maintenance(motd: $motd, banner: $banner, links: $links)';
-  }
-}
-
-/// @nodoc
-abstract mixin class _$maintenanceCopyWith<$Res>
-    implements $SplashScreenStateCopyWith<$Res> {
-  factory _$maintenanceCopyWith(
-          _maintenance value, $Res Function(_maintenance) _then) =
-      __$maintenanceCopyWithImpl;
-  @useResult
-  $Res call({String? motd, BannerData? banner, LinksData? links});
-}
-
-/// @nodoc
-class __$maintenanceCopyWithImpl<$Res> implements _$maintenanceCopyWith<$Res> {
-  __$maintenanceCopyWithImpl(this._self, this._then);
-
-  final _maintenance _self;
-  final $Res Function(_maintenance) _then;
-
-  /// Create a copy of SplashScreenState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  $Res call({
-    Object? motd = freezed,
-    Object? banner = freezed,
-    Object? links = freezed,
-  }) {
-    return _then(_maintenance(
-      motd: freezed == motd
-          ? _self.motd
-          : motd // ignore: cast_nullable_to_non_nullable
-              as String?,
-      banner: freezed == banner
-          ? _self.banner
-          : banner // ignore: cast_nullable_to_non_nullable
-              as BannerData?,
-      links: freezed == links
-          ? _self.links
-          : links // ignore: cast_nullable_to_non_nullable
-              as LinksData?,
-    ));
+    return 'SplashScreenState.maintenance()';
   }
 }
 

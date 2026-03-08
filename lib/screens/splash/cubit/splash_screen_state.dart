@@ -8,8 +8,7 @@ class SplashScreenState with _$SplashScreenState {
 
   const factory SplashScreenState.checkingForUpdates() = _checkingForUpdates;
 
-  const factory SplashScreenState.maintenance(
-      {String? motd, BannerData? banner, LinksData? links}) = _maintenance;
+  const factory SplashScreenState.maintenance() = _maintenance;
 
   const factory SplashScreenState.blockingError({required String message}) =
       _blockingError;
