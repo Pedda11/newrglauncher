@@ -15,7 +15,7 @@ class AccountScreen extends StatefulWidget {
 
 class _AccountScreenState extends State<AccountScreen> {
   final _pageViewController = PageController();
-  final pageTransitionDuration = Duration(milliseconds: 300);
+  Duration pageTransitionDuration = const Duration(milliseconds: 300);
   final pageTransitionCurve = Curves.easeInOut;
 
   @override
@@ -41,7 +41,7 @@ class _AccountScreenState extends State<AccountScreen> {
         },
         child: PageView(
           controller: _pageViewController,
-          children: [
+          children: const [
             AccountListPage(),
             AccountAddPage(),
           ],

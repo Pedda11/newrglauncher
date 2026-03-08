@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import '../../../data/launcher_endpoints.dart';
 import '../../../widgets/log.dart';
 import '../core_functions/updater_promoter.dart';
 import '../core_functions/updater_update_finalizer.dart';
@@ -26,17 +27,7 @@ part 'splash_screen_state.dart';
 part 'splash_screen_cubit.freezed.dart';
 
 class SplashScreenCubit extends Cubit<SplashScreenState> {
-  final MainRepository mainRepository;
-  final SettingsRepository settingsRepository;
-  final PreferencesRepository preferencesRepository;
-  final LauncherStatusApi launcherStatusApi;
-
-  SplashScreenCubit(
-      {required this.mainRepository,
-      required this.settingsRepository,
-      required this.preferencesRepository,
-      required this.launcherStatusApi})
-      : super(const SplashScreenState.initial());
+  SplashScreenCubit() : super(const SplashScreenState.initial());
 
   Future<void> initialize() async {
     await Log.i('Update check started.');
@@ -44,7 +35,8 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
       emit(const SplashScreenState.checkingForUpdates());
 
       final currentVersion = await getLauncherVersion();
-      final status = await launcherStatusApi.fetchStatus();
+      final status =
+          await LauncherStatusApi(LauncherEndpoints.statusUri).fetchStatus();
 
       final decision = decideStartup(
         status: status,

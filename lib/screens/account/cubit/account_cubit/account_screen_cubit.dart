@@ -16,8 +16,6 @@ part 'account_screen_state.dart';
 
 part 'account_screen_cubit.freezed.dart';
 
-const int MAPVK_VK_TO_VSC = 0;
-
 class AccountScreenCubit extends Cubit<AccountScreenState> {
   final MainRepository mainRepository;
   final SettingsRepository settingsRepository;
@@ -43,7 +41,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
           Account acc = Account.fromJson(jsonDecode(s));
           mainRepository.accountList.add(acc);
         }
-        emit(AccountScreenState.initialized());
+        emit(const AccountScreenState.initialized());
       } else {
         emit(const AccountScreenState.goToAddAccountPage());
       }
@@ -54,7 +52,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
   void deleteSingleAccount(Account acc) async {
     try {
-      emit(AccountScreenState.deletingAccount());
+      emit(const AccountScreenState.deletingAccount());
       mainRepository.accountList.remove(acc);
 
       List<String> accStringList = [];
@@ -72,7 +70,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
   }
 
   void goToAccountAddPage() {
-    emit(AccountScreenState.goToAddAccountPage());
+    emit(const AccountScreenState.goToAddAccountPage());
   }
 
   void _sendKey(int keyCode, {bool shift = false}) {
@@ -113,15 +111,13 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
   int _charToVirtualKeyCode(String char) {
     final vkCode = VkKeyScan(char.codeUnitAt(0));
-    return vkCode & 0xFF; // Extract the virtual key code
+    return vkCode & 0xFF;
   }
 
   bool _isShiftRequired(String char) {
     final vkCode = VkKeyScan(char.codeUnitAt(0));
-    bool shiftRequired =
-        (vkCode & 0x100) != 0; // Check if the shift state is required
+    bool shiftRequired = (vkCode & 0x100) != 0;
 
-    // Adjust shift state if Caps Lock is active
     if (_isCapsLockActive()) {
       if (char.toUpperCase() == char) {
         shiftRequired = !shiftRequired;
@@ -150,17 +146,14 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
   }
 
   Future<void> startGame(Account acc) async {
-    // Starte das Spiel
     try {
       final process = await Process.start(
           '${settingsRepository.wowRootFolderPath}${settingsRepository.wowExecutableName}',
           []);
 
-      // Warte darauf, dass das Spiel gestartet ist
       await Future.delayed(
           Duration(seconds: settingsRepository.secondsToWaitForGameToStart));
 
-      // Sende Tasteneingaben
       await sendKeys(acc.accountName, acc.accountPassword);
     } catch (e) {
       emit(AccountScreenState.failed(errorMsg: e.toString()));
