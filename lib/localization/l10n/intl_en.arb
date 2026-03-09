@@ -24,6 +24,7 @@
   "accountListPageTitle": "Account List",
   "accountListPageAddAccountBtn": "Add Account",
   "settingsScreenWowPathLabel": "WoW Location",
+  "settingsScreenSetWowPath": "Set the Wow Path by scanning your drives or selecting the file manually.",
   "settingsScreenWowDataPathLabel": "Choose your Data Folder",
   "settingsScreenTimeTillGameStartLabel": "Game Start Time",
   "settingsScreenTimeTillGameStartType": "Seconds"

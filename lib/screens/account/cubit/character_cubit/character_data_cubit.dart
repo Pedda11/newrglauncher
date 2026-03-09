@@ -26,7 +26,7 @@ class CharacterDataCubit extends Cubit<CharacterDataState> {
   }) : super(const CharacterDataState.initial());
 
   Future<void> initialize() async {
-    emit(CharacterDataState.initialized());
+    emit(const CharacterDataState.initialized());
   }
 
   Future<void> getAccountDetails(Account acc) async {

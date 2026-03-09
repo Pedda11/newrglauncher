@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:twodotnulllauncher/repository/preferences_repository.dart';
 import '../../localization/generated/l10n.dart';
 import '../../widgets/my_appbar.dart';
 import 'cubit/account_cubit/account_screen_cubit.dart';
@@ -39,17 +40,28 @@ class _AccountScreenState extends State<AccountScreen> {
             },
           );
         },
-        child: PageView(
-          controller: _pageViewController,
-          children: const [
-            AccountListPage(),
-            AccountAddPage(),
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                controller: _pageViewController,
+                children: const [
+                  AccountListPage(),
+                  AccountAddPage(),
+                ],
+                onPageChanged: (int index) {
+                  setState(() {
+                    _pageViewController.jumpToPage(index);
+                  });
+                },
+              ),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  context.read<PreferencesRepository>().deleteAll();
+                },
+                child: const Text('reset'))
           ],
-          onPageChanged: (int index) {
-            setState(() {
-              _pageViewController.jumpToPage(index);
-            });
-          },
         ),
       ),
     );

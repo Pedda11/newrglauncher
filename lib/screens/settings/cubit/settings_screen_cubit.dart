@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../repository/preferences_repository.dart';
 import '../../../repository/settings_repository.dart';
+import '../functions/WowScanProgressData.dart';
 
 part 'settings_screen_state.dart';
 
@@ -40,17 +41,10 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
     }
     settingsRepository.drives = drivesWithSlash;
 
-    final wowPath = await preferencesRepository.getWowPath();
-    final dataPath = await preferencesRepository.getDataDirectoryPath();
     settingsRepository.secondsToWaitForGameToStart =
-        await preferencesRepository.getWaitTillGameStarts() ?? 3;
-    if (wowPath != null) {
-      settingsRepository.fillWithExecutablePath(wowPath);
+        settingsRepository.secondsToWaitForGameToStart;
 
-      settingsRepository.wowDataDirectory = dataPath;
-      settingsRepository.wowRealmFilePath = '$dataPath/realmlist.wtf';
-    }
-    emit(SettingsScreenState.initialized());
+    emit(const SettingsScreenState.initialized());
   }
 
   void changeWowFilePath(String? path) async {
@@ -74,20 +68,17 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
   }
 
   void changeDataDirectory(String? directoryName) async {
-    emit(SettingsScreenState.changingSettings());
+    emit(const SettingsScreenState.changingSettings());
     if (directoryName != null) {
-      settingsRepository.wowDataDirectory = directoryName;
-      settingsRepository.wowRealmFilePath = '$directoryName/realmlist.wtf';
+      settingsRepository.wowRealmListFilePath = '$directoryName/realmlist.wtf';
       await preferencesRepository.setDataDirectory(directoryName);
       initialize();
     }
   }
 
   void deleteDataDirectory() async {
-    settingsRepository.wowDataDirectory = null;
-    settingsRepository.wowRealmFilePath = null;
-    settingsRepository.wowDataDirectory = null;
-    settingsRepository.wowRealmFilePath = null;
+    settingsRepository.wowRealmListFilePath = null;
+    settingsRepository.wowRealmListFilePath = null;
     settingsRepository.wowBackupDirectoryPath = null;
     settingsRepository.wowAddonsDirectoryPath = null;
     settingsRepository.wowAccountsDirectoryPath = null;
@@ -103,5 +94,22 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
     settingsRepository.secondsToWaitForGameToStart = value;
     await preferencesRepository.setWaitTillGameStarts(value);
     emit(const SettingsScreenState.initialized());
+  }
+
+  Future<void> findWowExeAndEmitProgress() async {
+    final files = await findWowExe(
+      onProgress: (progress) {
+        if (isClosed) return;
+
+        emit(SettingsScreenState.searchProgress(
+          searchedFolders: progress.scannedDirectories,
+          searchedFiles: progress.scannedFiles,
+          foundExecutables: progress.foundExecutables,
+        ));
+      },
+      settingsRepository: settingsRepository,
+    );
+
+    emit(SettingsScreenState.foundWowExe(wowFiles: files));
   }
 }

@@ -146,13 +146,18 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
   }
 
   Future<void> startGame(Account acc) async {
+    if (settingsRepository.secondsToWaitForGameToStart == null) {
+      emit(const AccountScreenState.failed(
+          errorMsg: 'Ungültige Wartezeit für den Spielstart.'));
+      return;
+    }
     try {
       final process = await Process.start(
           '${settingsRepository.wowRootFolderPath}${settingsRepository.wowExecutableName}',
           []);
 
       await Future.delayed(
-          Duration(seconds: settingsRepository.secondsToWaitForGameToStart));
+          Duration(seconds: settingsRepository.secondsToWaitForGameToStart!));
 
       await sendKeys(acc.accountName, acc.accountPassword);
     } catch (e) {

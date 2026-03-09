@@ -27,7 +27,12 @@ part 'splash_screen_state.dart';
 part 'splash_screen_cubit.freezed.dart';
 
 class SplashScreenCubit extends Cubit<SplashScreenState> {
-  SplashScreenCubit() : super(const SplashScreenState.initial());
+  final SettingsRepository settingsRepository;
+  final PreferencesRepository preferencesRepository;
+
+  SplashScreenCubit(
+      {required this.settingsRepository, required this.preferencesRepository})
+      : super(const SplashScreenState.initial());
 
   Future<void> initialize() async {
     await Log.i('Update check started.');
@@ -79,6 +84,15 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
           exit(0);
 
         case EStartupDecisionType.proceed:
+          settingsRepository
+              .fillWithExecutablePath(await preferencesRepository.getWowPath());
+          settingsRepository.wowDataDirectoryPath =
+              await preferencesRepository.getDataDirectoryPath();
+          settingsRepository.secondsToWaitForGameToStart =
+              await preferencesRepository.getWaitTillGameStarts();
+          emit(const SplashScreenState.initialized());
+          return;
+
         case EStartupDecisionType.nonBlockingError:
           emit(const SplashScreenState.initialized());
           return;

@@ -7,7 +7,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: MyAppbar(title: 'E I N S T E L L U N G E N'),
       body: Padding(
         padding: EdgeInsets.all(24.0),

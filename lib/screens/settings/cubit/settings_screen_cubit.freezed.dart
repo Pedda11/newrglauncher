@@ -44,6 +44,9 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_searchingWowExe value)? searchingWowExe,
+    TResult Function(_searchProgress value)? searchProgress,
+    TResult Function(_foundWowExe value)? foundWowExe,
     TResult Function(_chooseDataFolder value)? chooseDataFolder,
     TResult Function(_changingSettings value)? changingSettings,
     TResult Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
@@ -55,6 +58,12 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial(_that);
       case _initialized() when initialized != null:
         return initialized(_that);
+      case _searchingWowExe() when searchingWowExe != null:
+        return searchingWowExe(_that);
+      case _searchProgress() when searchProgress != null:
+        return searchProgress(_that);
+      case _foundWowExe() when foundWowExe != null:
+        return foundWowExe(_that);
       case _chooseDataFolder() when chooseDataFolder != null:
         return chooseDataFolder(_that);
       case _changingSettings() when changingSettings != null:
@@ -83,6 +92,9 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_searchingWowExe value) searchingWowExe,
+    required TResult Function(_searchProgress value) searchProgress,
+    required TResult Function(_foundWowExe value) foundWowExe,
     required TResult Function(_chooseDataFolder value) chooseDataFolder,
     required TResult Function(_changingSettings value) changingSettings,
     required TResult Function(_fileOrDirectoryNotFound value)
@@ -94,6 +106,12 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial(_that);
       case _initialized():
         return initialized(_that);
+      case _searchingWowExe():
+        return searchingWowExe(_that);
+      case _searchProgress():
+        return searchProgress(_that);
+      case _foundWowExe():
+        return foundWowExe(_that);
       case _chooseDataFolder():
         return chooseDataFolder(_that);
       case _changingSettings():
@@ -121,6 +139,9 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_searchingWowExe value)? searchingWowExe,
+    TResult? Function(_searchProgress value)? searchProgress,
+    TResult? Function(_foundWowExe value)? foundWowExe,
     TResult? Function(_chooseDataFolder value)? chooseDataFolder,
     TResult? Function(_changingSettings value)? changingSettings,
     TResult? Function(_fileOrDirectoryNotFound value)? fileOrDirectoryNotFound,
@@ -131,6 +152,12 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial(_that);
       case _initialized() when initialized != null:
         return initialized(_that);
+      case _searchingWowExe() when searchingWowExe != null:
+        return searchingWowExe(_that);
+      case _searchProgress() when searchProgress != null:
+        return searchProgress(_that);
+      case _foundWowExe() when foundWowExe != null:
+        return foundWowExe(_that);
       case _chooseDataFolder() when chooseDataFolder != null:
         return chooseDataFolder(_that);
       case _changingSettings() when changingSettings != null:
@@ -158,6 +185,11 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function()? searchingWowExe,
+    TResult Function(
+            int searchedFolders, int searchedFiles, int foundExecutables)?
+        searchProgress,
+    TResult Function(List<File> wowFiles)? foundWowExe,
     TResult Function(List<String> dataFolder)? chooseDataFolder,
     TResult Function()? changingSettings,
     TResult Function()? fileOrDirectoryNotFound,
@@ -169,6 +201,13 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial();
       case _initialized() when initialized != null:
         return initialized();
+      case _searchingWowExe() when searchingWowExe != null:
+        return searchingWowExe();
+      case _searchProgress() when searchProgress != null:
+        return searchProgress(
+            _that.searchedFolders, _that.searchedFiles, _that.foundExecutables);
+      case _foundWowExe() when foundWowExe != null:
+        return foundWowExe(_that.wowFiles);
       case _chooseDataFolder() when chooseDataFolder != null:
         return chooseDataFolder(_that.dataFolder);
       case _changingSettings() when changingSettings != null:
@@ -197,6 +236,11 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function() searchingWowExe,
+    required TResult Function(
+            int searchedFolders, int searchedFiles, int foundExecutables)
+        searchProgress,
+    required TResult Function(List<File> wowFiles) foundWowExe,
     required TResult Function(List<String> dataFolder) chooseDataFolder,
     required TResult Function() changingSettings,
     required TResult Function() fileOrDirectoryNotFound,
@@ -207,6 +251,13 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial();
       case _initialized():
         return initialized();
+      case _searchingWowExe():
+        return searchingWowExe();
+      case _searchProgress():
+        return searchProgress(
+            _that.searchedFolders, _that.searchedFiles, _that.foundExecutables);
+      case _foundWowExe():
+        return foundWowExe(_that.wowFiles);
       case _chooseDataFolder():
         return chooseDataFolder(_that.dataFolder);
       case _changingSettings():
@@ -234,6 +285,11 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function()? searchingWowExe,
+    TResult? Function(
+            int searchedFolders, int searchedFiles, int foundExecutables)?
+        searchProgress,
+    TResult? Function(List<File> wowFiles)? foundWowExe,
     TResult? Function(List<String> dataFolder)? chooseDataFolder,
     TResult? Function()? changingSettings,
     TResult? Function()? fileOrDirectoryNotFound,
@@ -244,6 +300,13 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial();
       case _initialized() when initialized != null:
         return initialized();
+      case _searchingWowExe() when searchingWowExe != null:
+        return searchingWowExe();
+      case _searchProgress() when searchProgress != null:
+        return searchProgress(
+            _that.searchedFolders, _that.searchedFiles, _that.foundExecutables);
+      case _foundWowExe() when foundWowExe != null:
+        return foundWowExe(_that.wowFiles);
       case _chooseDataFolder() when chooseDataFolder != null:
         return chooseDataFolder(_that.dataFolder);
       case _changingSettings() when changingSettings != null:
@@ -275,6 +338,143 @@ class _initialized implements SettingsScreenState {
   @override
   String toString() {
     return 'SettingsScreenState.initialized()';
+  }
+}
+
+/// @nodoc
+
+class _searchingWowExe implements SettingsScreenState {
+  const _searchingWowExe();
+
+  @override
+  String toString() {
+    return 'SettingsScreenState.searchingWowExe()';
+  }
+}
+
+/// @nodoc
+
+class _searchProgress implements SettingsScreenState {
+  const _searchProgress(
+      {required this.searchedFolders,
+      required this.searchedFiles,
+      required this.foundExecutables});
+
+  final int searchedFolders;
+  final int searchedFiles;
+  final int foundExecutables;
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$searchProgressCopyWith<_searchProgress> get copyWith =>
+      __$searchProgressCopyWithImpl<_searchProgress>(this, _$identity);
+
+  @override
+  String toString() {
+    return 'SettingsScreenState.searchProgress(searchedFolders: $searchedFolders, searchedFiles: $searchedFiles, foundExecutables: $foundExecutables)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$searchProgressCopyWith<$Res>
+    implements $SettingsScreenStateCopyWith<$Res> {
+  factory _$searchProgressCopyWith(
+          _searchProgress value, $Res Function(_searchProgress) _then) =
+      __$searchProgressCopyWithImpl;
+  @useResult
+  $Res call({int searchedFolders, int searchedFiles, int foundExecutables});
+}
+
+/// @nodoc
+class __$searchProgressCopyWithImpl<$Res>
+    implements _$searchProgressCopyWith<$Res> {
+  __$searchProgressCopyWithImpl(this._self, this._then);
+
+  final _searchProgress _self;
+  final $Res Function(_searchProgress) _then;
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? searchedFolders = null,
+    Object? searchedFiles = null,
+    Object? foundExecutables = null,
+  }) {
+    return _then(_searchProgress(
+      searchedFolders: null == searchedFolders
+          ? _self.searchedFolders
+          : searchedFolders // ignore: cast_nullable_to_non_nullable
+              as int,
+      searchedFiles: null == searchedFiles
+          ? _self.searchedFiles
+          : searchedFiles // ignore: cast_nullable_to_non_nullable
+              as int,
+      foundExecutables: null == foundExecutables
+          ? _self.foundExecutables
+          : foundExecutables // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _foundWowExe implements SettingsScreenState {
+  const _foundWowExe({required final List<File> wowFiles})
+      : _wowFiles = wowFiles;
+
+  final List<File> _wowFiles;
+  List<File> get wowFiles {
+    if (_wowFiles is EqualUnmodifiableListView) return _wowFiles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_wowFiles);
+  }
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$foundWowExeCopyWith<_foundWowExe> get copyWith =>
+      __$foundWowExeCopyWithImpl<_foundWowExe>(this, _$identity);
+
+  @override
+  String toString() {
+    return 'SettingsScreenState.foundWowExe(wowFiles: $wowFiles)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$foundWowExeCopyWith<$Res>
+    implements $SettingsScreenStateCopyWith<$Res> {
+  factory _$foundWowExeCopyWith(
+          _foundWowExe value, $Res Function(_foundWowExe) _then) =
+      __$foundWowExeCopyWithImpl;
+  @useResult
+  $Res call({List<File> wowFiles});
+}
+
+/// @nodoc
+class __$foundWowExeCopyWithImpl<$Res> implements _$foundWowExeCopyWith<$Res> {
+  __$foundWowExeCopyWithImpl(this._self, this._then);
+
+  final _foundWowExe _self;
+  final $Res Function(_foundWowExe) _then;
+
+  /// Create a copy of SettingsScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? wowFiles = null,
+  }) {
+    return _then(_foundWowExe(
+      wowFiles: null == wowFiles
+          ? _self._wowFiles
+          : wowFiles // ignore: cast_nullable_to_non_nullable
+              as List<File>,
+    ));
   }
 }
 

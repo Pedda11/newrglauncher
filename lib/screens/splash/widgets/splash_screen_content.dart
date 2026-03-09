@@ -69,7 +69,7 @@ class SplashScreenContent extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () {
-                    exit(1);
+                    Navigator.of(context).pop();
                   },
                   child: Text(locales.ok),
                 ),

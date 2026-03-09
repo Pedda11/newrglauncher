@@ -17,7 +17,7 @@ class LauncherStatusApi {
         /// Prevent proxies from caching status responses
         'Cache-Control': 'no-cache',
       },
-    );
+    ).timeout(const Duration(seconds: 5));
 
     if (res.statusCode < 200 || res.statusCode >= 300) {
       throw Exception('Status API failed: ${res.statusCode} ${res.body}');

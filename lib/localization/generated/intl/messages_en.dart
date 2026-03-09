@@ -61,6 +61,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "no": MessageLookupByLibrary.simpleMessage("No"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
+    "settingsScreenSetWowPath": MessageLookupByLibrary.simpleMessage(
+      "Set the Wow Path by scanning your drives or selecting the file manually.",
+    ),
     "settingsScreenTimeTillGameStartLabel":
         MessageLookupByLibrary.simpleMessage("Game Start Time"),
     "settingsScreenTimeTillGameStartType": MessageLookupByLibrary.simpleMessage(

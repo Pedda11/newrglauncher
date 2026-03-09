@@ -24,6 +24,7 @@
   "accountListPageTitle": "Account Liste",
   "accountListPageAddAccountBtn": "Account hinzufügen",
   "settingsScreenWowPathLabel": "WoW-Speicherort",
+  "settingsScreenSetWowPath": "Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.",
   "settingsScreenWowDataPathLabel": "Wähle deinen Data Ordner",
   "settingsScreenTimeTillGameStartLabel": "Spielstartzeit",
   "settingsScreenTimeTillGameStartType": "Sekunden"

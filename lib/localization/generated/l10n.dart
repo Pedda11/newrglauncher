@@ -269,6 +269,16 @@ class Localize {
     );
   }
 
+  /// `Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.`
+  String get settingsScreenSetWowPath {
+    return Intl.message(
+      'Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.',
+      name: 'settingsScreenSetWowPath',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Wähle deinen Data Ordner`
   String get settingsScreenWowDataPathLabel {
     return Intl.message(

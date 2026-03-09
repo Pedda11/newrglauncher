@@ -11,12 +11,12 @@ class PreferencesRepository {
   PreferencesRepository({required SharedPreferencesAsync preferences})
       : _preferences = preferences;
 
+  //setter
   Future setAccounts(List<String> accounts) async =>
       _preferences.setStringList(_accounts, accounts);
 
-  Future<List<String>?> getAccounts() => _preferences.getStringList(_accounts);
-
-  Future deleteAccounts() => _preferences.remove(_accounts);
+  Future setWaitTillGameStarts(int seconds) async =>
+      _preferences.setInt(_waitTillGameStarts, seconds);
 
   Future setWowPath(String wowPath) async =>
       _preferences.setString(_wowPath, wowPath);
@@ -24,18 +24,23 @@ class PreferencesRepository {
   Future setDataDirectory(String dataDirectory) async =>
       _preferences.setString(_dataDirectory, dataDirectory);
 
+  //getter
+  Future<List<String>?> getAccounts() => _preferences.getStringList(_accounts);
+
   Future<String?> getWowPath() => _preferences.getString(_wowPath);
 
   Future<String?> getDataDirectoryPath() =>
       _preferences.getString(_dataDirectory);
 
+  Future<int?> getWaitTillGameStarts() =>
+      _preferences.getInt(_waitTillGameStarts);
+
+  //deleter
+  Future deleteAccounts() => _preferences.remove(_accounts);
+
   Future deleteSettings() => _preferences.remove(_wowPath);
 
   Future delDataDirectoryPath() => _preferences.remove(_dataDirectory);
 
-  Future setWaitTillGameStarts(int seconds) async =>
-      _preferences.setInt(_waitTillGameStarts, seconds);
-
-  Future<int?> getWaitTillGameStarts() =>
-      _preferences.getInt(_waitTillGameStarts);
+  Future deleteAll() => _preferences.clear();
 }
