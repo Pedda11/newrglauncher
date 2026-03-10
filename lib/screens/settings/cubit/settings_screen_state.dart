@@ -11,7 +11,7 @@ class SettingsScreenState with _$SettingsScreenState {
   const factory SettingsScreenState.searchProgress(
       {required int searchedFolders,
       required int searchedFiles,
-      required int foundExecutables}) = _searchProgress;
+      required List<File> foundExecutables}) = _searchProgress;
 
   const factory SettingsScreenState.foundWowExe(
       {required List<File> wowFiles}) = _foundWowExe;

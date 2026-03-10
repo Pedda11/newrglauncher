@@ -61,19 +61,44 @@ class MessageLookup extends MessageLookupByLibrary {
     "no": MessageLookupByLibrary.simpleMessage("No"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
-    "settingsScreenSetWowPath": MessageLookupByLibrary.simpleMessage(
+    "settingsScreenCancelWowScanLabel": MessageLookupByLibrary.simpleMessage(
+      "Cancel scan",
+    ),
+    "settingsScreenFoundWowExesLabel": MessageLookupByLibrary.simpleMessage(
+      "Found the following wow.exe files.",
+    ),
+    "settingsScreenSetWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "Set the Wow Path by scanning your drives or selecting the file manually.",
     ),
+    "settingsScreenSetWowPathManuallyDriveException":
+        MessageLookupByLibrary.simpleMessage("Drive not available"),
     "settingsScreenTimeTillGameStartLabel":
-        MessageLookupByLibrary.simpleMessage("Game Start Time"),
+        MessageLookupByLibrary.simpleMessage(
+          "Estimated time until the launcher can enter the login details.",
+        ),
     "settingsScreenTimeTillGameStartType": MessageLookupByLibrary.simpleMessage(
       "Seconds",
+    ),
+    "settingsScreenWowDataPathHint": MessageLookupByLibrary.simpleMessage(
+      "Do you prefer to play WoW in German or English? Select the data folder corresponding to your language.",
     ),
     "settingsScreenWowDataPathLabel": MessageLookupByLibrary.simpleMessage(
       "Choose your Data Folder",
     ),
+    "settingsScreenWowExeFilePickerLabel": MessageLookupByLibrary.simpleMessage(
+      "Select your WoW executable",
+    ),
+    "settingsScreenWowPathDrivesBtnHint": MessageLookupByLibrary.simpleMessage(
+      "<- Or select from one of the available drives.",
+    ),
     "settingsScreenWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "WoW Location",
+    ),
+    "settingsScreenWowPathScanBtn": MessageLookupByLibrary.simpleMessage(
+      "Scan your system for wow.exe",
+    ),
+    "settingsScreenWowPathScanBtnHint": MessageLookupByLibrary.simpleMessage(
+      "<- Scan your drives for wow.exe and select it from the shown list.",
     ),
     "updateScreenUpdateCheck": MessageLookupByLibrary.simpleMessage(
       "Checking for updates...",

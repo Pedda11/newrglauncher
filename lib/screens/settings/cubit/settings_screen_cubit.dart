@@ -96,10 +96,17 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
     emit(const SettingsScreenState.initialized());
   }
 
+  Future<void> cancelWowExeSearch() async {
+    settingsRepository.scanIsCancelled = true;
+  }
+
   Future<void> findWowExeAndEmitProgress() async {
+    settingsRepository.scanIsCancelled = false;
     final files = await findWowExe(
       onProgress: (progress) {
         if (isClosed) return;
+
+        settingsRepository.foundWowExecutables = progress.foundExecutables;
 
         emit(SettingsScreenState.searchProgress(
           searchedFolders: progress.scannedDirectories,
@@ -109,6 +116,11 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
       },
       settingsRepository: settingsRepository,
     );
+
+    if (files.isEmpty) {
+      emit(const SettingsScreenState.initialized());
+      return;
+    }
 
     emit(SettingsScreenState.foundWowExe(wowFiles: files));
   }

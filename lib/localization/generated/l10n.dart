@@ -269,11 +269,61 @@ class Localize {
     );
   }
 
+  /// `Scanne dein System nach wow.exe`
+  String get settingsScreenWowPathScanBtn {
+    return Intl.message(
+      'Scanne dein System nach wow.exe',
+      name: 'settingsScreenWowPathScanBtn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.`
+  String get settingsScreenWowPathScanBtnHint {
+    return Intl.message(
+      '<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.',
+      name: 'settingsScreenWowPathScanBtnHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `<- Oder wähle von einen der verfügbaren Laufwerke aus.`
+  String get settingsScreenWowPathDrivesBtnHint {
+    return Intl.message(
+      '<- Oder wähle von einen der verfügbaren Laufwerke aus.',
+      name: 'settingsScreenWowPathDrivesBtnHint',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.`
-  String get settingsScreenSetWowPath {
+  String get settingsScreenSetWowPathLabel {
     return Intl.message(
       'Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.',
-      name: 'settingsScreenSetWowPath',
+      name: 'settingsScreenSetWowPathLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Laufwerk nicht verfügbar`
+  String get settingsScreenSetWowPathManuallyDriveException {
+    return Intl.message(
+      'Laufwerk nicht verfügbar',
+      name: 'settingsScreenSetWowPathManuallyDriveException',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Wähle deine WoW Anwendung`
+  String get settingsScreenWowExeFilePickerLabel {
+    return Intl.message(
+      'Wähle deine WoW Anwendung',
+      name: 'settingsScreenWowExeFilePickerLabel',
       desc: '',
       args: [],
     );
@@ -289,11 +339,41 @@ class Localize {
     );
   }
 
-  /// `Spielstartzeit`
+  /// `Found the following wow.exe files.`
+  String get settingsScreenFoundWowExesLabel {
+    return Intl.message(
+      'Found the following wow.exe files.',
+      name: 'settingsScreenFoundWowExesLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Spielst du WoW vorzugsweise auf Deutsch oder Englisch? Wähle den Data Ordner entsprechend deiner Sprache aus.`
+  String get settingsScreenWowDataPathHint {
+    return Intl.message(
+      'Spielst du WoW vorzugsweise auf Deutsch oder Englisch? Wähle den Data Ordner entsprechend deiner Sprache aus.',
+      name: 'settingsScreenWowDataPathHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Geschätzte Zeit, bis der Launcher die Anmeldedaten eingeben kann.`
   String get settingsScreenTimeTillGameStartLabel {
     return Intl.message(
-      'Spielstartzeit',
+      'Geschätzte Zeit, bis der Launcher die Anmeldedaten eingeben kann.',
       name: 'settingsScreenTimeTillGameStartLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan abbrechen`
+  String get settingsScreenCancelWowScanLabel {
+    return Intl.message(
+      'Scan abbrechen',
+      name: 'settingsScreenCancelWowScanLabel',
       desc: '',
       args: [],
     );

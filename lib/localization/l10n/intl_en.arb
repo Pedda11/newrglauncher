@@ -24,8 +24,16 @@
   "accountListPageTitle": "Account List",
   "accountListPageAddAccountBtn": "Add Account",
   "settingsScreenWowPathLabel": "WoW Location",
-  "settingsScreenSetWowPath": "Set the Wow Path by scanning your drives or selecting the file manually.",
+  "settingsScreenWowPathScanBtn": "Scan your system for wow.exe",
+  "settingsScreenWowPathScanBtnHint": "<- Scan your drives for wow.exe and select it from the shown list.",
+  "settingsScreenWowPathDrivesBtnHint": "<- Or select from one of the available drives.",
+  "settingsScreenSetWowPathLabel": "Set the Wow Path by scanning your drives or selecting the file manually.",
+  "settingsScreenSetWowPathManuallyDriveException": "Drive not available",
+  "settingsScreenWowExeFilePickerLabel": "Select your WoW executable",
   "settingsScreenWowDataPathLabel": "Choose your Data Folder",
-  "settingsScreenTimeTillGameStartLabel": "Game Start Time",
+  "settingsScreenFoundWowExesLabel": "Found the following wow.exe files.",
+  "settingsScreenWowDataPathHint": "Do you prefer to play WoW in German or English? Select the data folder corresponding to your language.",
+  "settingsScreenTimeTillGameStartLabel": "Estimated time until the launcher can enter the login details.",
+  "settingsScreenCancelWowScanLabel": "Cancel scan",
   "settingsScreenTimeTillGameStartType": "Seconds"
 }

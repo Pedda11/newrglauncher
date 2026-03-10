@@ -7,7 +7,7 @@ class WowScanProgressData {
   final String currentDrive;
   final int scannedDirectories;
   final int scannedFiles;
-  final int foundExecutables;
+  final List<File> foundExecutables;
 
   const WowScanProgressData({
     required this.currentDrive,
@@ -47,48 +47,48 @@ Future<List<File>> findWowExe({
         currentDrive: drive,
         scannedDirectories: scannedDirectories,
         scannedFiles: scannedFiles,
-        foundExecutables: foundExecutables.length,
+        foundExecutables: foundExecutables,
       ),
     );
 
     await _scanDirectoryForWowExe(
-      directory: root,
-      currentDrive: drive,
-      foundExecutables: foundExecutables,
-      wantedNames: wantedNames,
-      onDirectoryScanned: () {
-        scannedDirectories++;
-        progressTick++;
+        directory: root,
+        currentDrive: drive,
+        foundExecutables: foundExecutables,
+        wantedNames: wantedNames,
+        onDirectoryScanned: () {
+          scannedDirectories++;
+          progressTick++;
 
-        /// Nur gelegentlich Fortschritt senden
-        if (progressTick % 200 == 0) {
-          onProgress?.call(
-            WowScanProgressData(
-              currentDrive: drive,
-              scannedDirectories: scannedDirectories,
-              scannedFiles: scannedFiles,
-              foundExecutables: foundExecutables.length,
-            ),
-          );
-        }
-      },
-      onFileScanned: () {
-        scannedFiles++;
-        progressTick++;
+          /// Nur gelegentlich Fortschritt senden
+          if (progressTick % 200 == 0) {
+            onProgress?.call(
+              WowScanProgressData(
+                currentDrive: drive,
+                scannedDirectories: scannedDirectories,
+                scannedFiles: scannedFiles,
+                foundExecutables: foundExecutables,
+              ),
+            );
+          }
+        },
+        onFileScanned: () {
+          scannedFiles++;
+          progressTick++;
 
-        /// Nur gelegentlich Fortschritt senden
-        if (progressTick % 200 == 0) {
-          onProgress?.call(
-            WowScanProgressData(
-              currentDrive: drive,
-              scannedDirectories: scannedDirectories,
-              scannedFiles: scannedFiles,
-              foundExecutables: foundExecutables.length,
-            ),
-          );
-        }
-      },
-    );
+          /// Nur gelegentlich Fortschritt senden
+          if (progressTick % 200 == 0) {
+            onProgress?.call(
+              WowScanProgressData(
+                currentDrive: drive,
+                scannedDirectories: scannedDirectories,
+                scannedFiles: scannedFiles,
+                foundExecutables: foundExecutables,
+              ),
+            );
+          }
+        },
+        settingsRepository: settingsRepository);
   }
 
   /// Finaler Stand
@@ -97,7 +97,7 @@ Future<List<File>> findWowExe({
       currentDrive: '',
       scannedDirectories: scannedDirectories,
       scannedFiles: scannedFiles,
-      foundExecutables: foundExecutables.length,
+      foundExecutables: foundExecutables,
     ),
   );
 
@@ -111,11 +111,15 @@ Future<void> _scanDirectoryForWowExe({
   required Set<String> wantedNames,
   required void Function() onDirectoryScanned,
   required void Function() onFileScanned,
+  required SettingsRepository settingsRepository,
 }) async {
   final directoryName = p.basename(directory.path);
 
   /// Ordner ausschließen
   if (_shouldSkipDirectory(directory.path, directoryName, currentDrive)) {
+    return;
+  }
+  if (settingsRepository.scanIsCancelled) {
     return;
   }
 
@@ -142,6 +146,7 @@ Future<void> _scanDirectoryForWowExe({
           wantedNames: wantedNames,
           onDirectoryScanned: onDirectoryScanned,
           onFileScanned: onFileScanned,
+          settingsRepository: settingsRepository,
         );
       }
     }

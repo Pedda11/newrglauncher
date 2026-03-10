@@ -65,19 +65,44 @@ class MessageLookup extends MessageLookupByLibrary {
     "no": MessageLookupByLibrary.simpleMessage("Nein"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "save": MessageLookupByLibrary.simpleMessage("Speichern"),
-    "settingsScreenSetWowPath": MessageLookupByLibrary.simpleMessage(
+    "settingsScreenCancelWowScanLabel": MessageLookupByLibrary.simpleMessage(
+      "Scan abbrechen",
+    ),
+    "settingsScreenFoundWowExesLabel": MessageLookupByLibrary.simpleMessage(
+      "Found the following wow.exe files.",
+    ),
+    "settingsScreenSetWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.",
     ),
+    "settingsScreenSetWowPathManuallyDriveException":
+        MessageLookupByLibrary.simpleMessage("Laufwerk nicht verfügbar"),
     "settingsScreenTimeTillGameStartLabel":
-        MessageLookupByLibrary.simpleMessage("Spielstartzeit"),
+        MessageLookupByLibrary.simpleMessage(
+          "Geschätzte Zeit, bis der Launcher die Anmeldedaten eingeben kann.",
+        ),
     "settingsScreenTimeTillGameStartType": MessageLookupByLibrary.simpleMessage(
       "Sekunden",
+    ),
+    "settingsScreenWowDataPathHint": MessageLookupByLibrary.simpleMessage(
+      "Spielst du WoW vorzugsweise auf Deutsch oder Englisch? Wähle den Data Ordner entsprechend deiner Sprache aus.",
     ),
     "settingsScreenWowDataPathLabel": MessageLookupByLibrary.simpleMessage(
       "Wähle deinen Data Ordner",
     ),
+    "settingsScreenWowExeFilePickerLabel": MessageLookupByLibrary.simpleMessage(
+      "Wähle deine WoW Anwendung",
+    ),
+    "settingsScreenWowPathDrivesBtnHint": MessageLookupByLibrary.simpleMessage(
+      "<- Oder wähle von einen der verfügbaren Laufwerke aus.",
+    ),
     "settingsScreenWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "WoW-Speicherort",
+    ),
+    "settingsScreenWowPathScanBtn": MessageLookupByLibrary.simpleMessage(
+      "Scanne dein System nach wow.exe",
+    ),
+    "settingsScreenWowPathScanBtnHint": MessageLookupByLibrary.simpleMessage(
+      "<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.",
     ),
     "updateScreenUpdateCheck": MessageLookupByLibrary.simpleMessage(
       "Prüfe auf Updates...",

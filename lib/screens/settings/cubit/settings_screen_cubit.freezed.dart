@@ -186,8 +186,8 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function()? searchingWowExe,
-    TResult Function(
-            int searchedFolders, int searchedFiles, int foundExecutables)?
+    TResult Function(int searchedFolders, int searchedFiles,
+            List<File> foundExecutables)?
         searchProgress,
     TResult Function(List<File> wowFiles)? foundWowExe,
     TResult Function(List<String> dataFolder)? chooseDataFolder,
@@ -238,7 +238,7 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
     required TResult Function() initialized,
     required TResult Function() searchingWowExe,
     required TResult Function(
-            int searchedFolders, int searchedFiles, int foundExecutables)
+            int searchedFolders, int searchedFiles, List<File> foundExecutables)
         searchProgress,
     required TResult Function(List<File> wowFiles) foundWowExe,
     required TResult Function(List<String> dataFolder) chooseDataFolder,
@@ -286,8 +286,8 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function()? searchingWowExe,
-    TResult? Function(
-            int searchedFolders, int searchedFiles, int foundExecutables)?
+    TResult? Function(int searchedFolders, int searchedFiles,
+            List<File> foundExecutables)?
         searchProgress,
     TResult? Function(List<File> wowFiles)? foundWowExe,
     TResult? Function(List<String> dataFolder)? chooseDataFolder,
@@ -358,11 +358,18 @@ class _searchProgress implements SettingsScreenState {
   const _searchProgress(
       {required this.searchedFolders,
       required this.searchedFiles,
-      required this.foundExecutables});
+      required final List<File> foundExecutables})
+      : _foundExecutables = foundExecutables;
 
   final int searchedFolders;
   final int searchedFiles;
-  final int foundExecutables;
+  final List<File> _foundExecutables;
+  List<File> get foundExecutables {
+    if (_foundExecutables is EqualUnmodifiableListView)
+      return _foundExecutables;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_foundExecutables);
+  }
 
   /// Create a copy of SettingsScreenState
   /// with the given fields replaced by the non-null parameter values.
@@ -384,7 +391,8 @@ abstract mixin class _$searchProgressCopyWith<$Res>
           _searchProgress value, $Res Function(_searchProgress) _then) =
       __$searchProgressCopyWithImpl;
   @useResult
-  $Res call({int searchedFolders, int searchedFiles, int foundExecutables});
+  $Res call(
+      {int searchedFolders, int searchedFiles, List<File> foundExecutables});
 }
 
 /// @nodoc
@@ -413,9 +421,9 @@ class __$searchProgressCopyWithImpl<$Res>
           : searchedFiles // ignore: cast_nullable_to_non_nullable
               as int,
       foundExecutables: null == foundExecutables
-          ? _self.foundExecutables
+          ? _self._foundExecutables
           : foundExecutables // ignore: cast_nullable_to_non_nullable
-              as int,
+              as List<File>,
     ));
   }
 }

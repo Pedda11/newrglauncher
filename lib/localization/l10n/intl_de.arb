@@ -24,8 +24,16 @@
   "accountListPageTitle": "Account Liste",
   "accountListPageAddAccountBtn": "Account hinzufügen",
   "settingsScreenWowPathLabel": "WoW-Speicherort",
-  "settingsScreenSetWowPath": "Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.",
+  "settingsScreenWowPathScanBtn": "Scanne dein System nach wow.exe",
+  "settingsScreenWowPathScanBtnHint": "<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.",
+  "settingsScreenWowPathDrivesBtnHint": "<- Oder wähle von einen der verfügbaren Laufwerke aus.",
+  "settingsScreenSetWowPathLabel": "Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.",
+  "settingsScreenSetWowPathManuallyDriveException": "Laufwerk nicht verfügbar",
+  "settingsScreenWowExeFilePickerLabel": "Wähle deine WoW Anwendung",
   "settingsScreenWowDataPathLabel": "Wähle deinen Data Ordner",
-  "settingsScreenTimeTillGameStartLabel": "Spielstartzeit",
+  "settingsScreenFoundWowExesLabel": "Found the following wow.exe files.",
+  "settingsScreenWowDataPathHint": "Spielst du WoW vorzugsweise auf Deutsch oder Englisch? Wähle den Data Ordner entsprechend deiner Sprache aus.",
+  "settingsScreenTimeTillGameStartLabel": "Geschätzte Zeit, bis der Launcher die Anmeldedaten eingeben kann.",
+  "settingsScreenCancelWowScanLabel": "Scan abbrechen",
   "settingsScreenTimeTillGameStartType": "Sekunden"
 }

@@ -10,7 +10,11 @@ class SettingsRepository {
   String? wowAccountsDirectoryPath;
   int? secondsToWaitForGameToStart;
 
+  List<File> foundWowExecutables = [];
+
   List<String> drives = [];
+
+  bool scanIsCancelled = false;
 }
 
 extension SettingsRepositoryExtension on SettingsRepository {
