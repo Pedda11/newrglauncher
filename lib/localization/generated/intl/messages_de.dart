@@ -71,6 +71,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsScreenFoundWowExesLabel": MessageLookupByLibrary.simpleMessage(
       "Found the following wow.exe files.",
     ),
+    "settingsScreenNotAllSet": MessageLookupByLibrary.simpleMessage(
+      "Noch nicht alle Einstellungen gesetzt!",
+    ),
     "settingsScreenSetWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.",
     ),
@@ -79,6 +82,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsScreenTimeTillGameStartLabel":
         MessageLookupByLibrary.simpleMessage(
           "Geschätzte Zeit, bis der Launcher die Anmeldedaten eingeben kann.",
+        ),
+    "settingsScreenTimeTillGameStartMissingLabel":
+        MessageLookupByLibrary.simpleMessage(
+          "Geschätzte Zeit bis zum Spielstart fehlt",
         ),
     "settingsScreenTimeTillGameStartType": MessageLookupByLibrary.simpleMessage(
       "Sekunden",
@@ -93,10 +100,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Wähle deine WoW Anwendung",
     ),
     "settingsScreenWowPathDrivesBtnHint": MessageLookupByLibrary.simpleMessage(
-      "<- Oder wähle von einen der verfügbaren Laufwerke aus.",
+      "<- Oder wählen Sie die Anwendung manuell aus einem der verfügbaren Laufwerke aus.",
     ),
     "settingsScreenWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "WoW-Speicherort",
+    ),
+    "settingsScreenWowPathMissingLabel": MessageLookupByLibrary.simpleMessage(
+      "WoW Pfad noch nicht gesetzt",
     ),
     "settingsScreenWowPathScanBtn": MessageLookupByLibrary.simpleMessage(
       "Scanne dein System nach wow.exe",

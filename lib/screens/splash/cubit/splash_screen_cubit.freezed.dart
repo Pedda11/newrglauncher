@@ -57,7 +57,9 @@ extension SplashScreenStatePatterns on SplashScreenState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
+    TResult Function(_eulaNotAccepted value)? eulaNotAccepted,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_initializedFirstStart value)? initializedFirstStart,
     TResult Function(_checkingForUpdates value)? checkingForUpdates,
     TResult Function(_maintenance value)? maintenance,
     TResult Function(_blockingError value)? blockingError,
@@ -69,8 +71,12 @@ extension SplashScreenStatePatterns on SplashScreenState {
     switch (_that) {
       case _initial() when initial != null:
         return initial(_that);
+      case _eulaNotAccepted() when eulaNotAccepted != null:
+        return eulaNotAccepted(_that);
       case _initialized() when initialized != null:
         return initialized(_that);
+      case _initializedFirstStart() when initializedFirstStart != null:
+        return initializedFirstStart(_that);
       case _checkingForUpdates() when checkingForUpdates != null:
         return checkingForUpdates(_that);
       case _maintenance() when maintenance != null:
@@ -102,7 +108,10 @@ extension SplashScreenStatePatterns on SplashScreenState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
+    required TResult Function(_eulaNotAccepted value) eulaNotAccepted,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_initializedFirstStart value)
+        initializedFirstStart,
     required TResult Function(_checkingForUpdates value) checkingForUpdates,
     required TResult Function(_maintenance value) maintenance,
     required TResult Function(_blockingError value) blockingError,
@@ -113,8 +122,12 @@ extension SplashScreenStatePatterns on SplashScreenState {
     switch (_that) {
       case _initial():
         return initial(_that);
+      case _eulaNotAccepted():
+        return eulaNotAccepted(_that);
       case _initialized():
         return initialized(_that);
+      case _initializedFirstStart():
+        return initializedFirstStart(_that);
       case _checkingForUpdates():
         return checkingForUpdates(_that);
       case _maintenance():
@@ -145,7 +158,9 @@ extension SplashScreenStatePatterns on SplashScreenState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
+    TResult? Function(_eulaNotAccepted value)? eulaNotAccepted,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_initializedFirstStart value)? initializedFirstStart,
     TResult? Function(_checkingForUpdates value)? checkingForUpdates,
     TResult? Function(_maintenance value)? maintenance,
     TResult? Function(_blockingError value)? blockingError,
@@ -156,8 +171,12 @@ extension SplashScreenStatePatterns on SplashScreenState {
     switch (_that) {
       case _initial() when initial != null:
         return initial(_that);
+      case _eulaNotAccepted() when eulaNotAccepted != null:
+        return eulaNotAccepted(_that);
       case _initialized() when initialized != null:
         return initialized(_that);
+      case _initializedFirstStart() when initializedFirstStart != null:
+        return initializedFirstStart(_that);
       case _checkingForUpdates() when checkingForUpdates != null:
         return checkingForUpdates(_that);
       case _maintenance() when maintenance != null:
@@ -188,7 +207,9 @@ extension SplashScreenStatePatterns on SplashScreenState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? eulaNotAccepted,
     TResult Function()? initialized,
+    TResult Function()? initializedFirstStart,
     TResult Function()? checkingForUpdates,
     TResult Function()? maintenance,
     TResult Function(String message)? blockingError,
@@ -201,8 +222,12 @@ extension SplashScreenStatePatterns on SplashScreenState {
     switch (_that) {
       case _initial() when initial != null:
         return initial();
+      case _eulaNotAccepted() when eulaNotAccepted != null:
+        return eulaNotAccepted();
       case _initialized() when initialized != null:
         return initialized();
+      case _initializedFirstStart() when initializedFirstStart != null:
+        return initializedFirstStart();
       case _checkingForUpdates() when checkingForUpdates != null:
         return checkingForUpdates();
       case _maintenance() when maintenance != null:
@@ -234,7 +259,9 @@ extension SplashScreenStatePatterns on SplashScreenState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() eulaNotAccepted,
     required TResult Function() initialized,
+    required TResult Function() initializedFirstStart,
     required TResult Function() checkingForUpdates,
     required TResult Function() maintenance,
     required TResult Function(String message) blockingError,
@@ -246,8 +273,12 @@ extension SplashScreenStatePatterns on SplashScreenState {
     switch (_that) {
       case _initial():
         return initial();
+      case _eulaNotAccepted():
+        return eulaNotAccepted();
       case _initialized():
         return initialized();
+      case _initializedFirstStart():
+        return initializedFirstStart();
       case _checkingForUpdates():
         return checkingForUpdates();
       case _maintenance():
@@ -278,7 +309,9 @@ extension SplashScreenStatePatterns on SplashScreenState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? eulaNotAccepted,
     TResult? Function()? initialized,
+    TResult? Function()? initializedFirstStart,
     TResult? Function()? checkingForUpdates,
     TResult? Function()? maintenance,
     TResult? Function(String message)? blockingError,
@@ -290,8 +323,12 @@ extension SplashScreenStatePatterns on SplashScreenState {
     switch (_that) {
       case _initial() when initial != null:
         return initial();
+      case _eulaNotAccepted() when eulaNotAccepted != null:
+        return eulaNotAccepted();
       case _initialized() when initialized != null:
         return initialized();
+      case _initializedFirstStart() when initializedFirstStart != null:
+        return initializedFirstStart();
       case _checkingForUpdates() when checkingForUpdates != null:
         return checkingForUpdates();
       case _maintenance() when maintenance != null:
@@ -335,6 +372,34 @@ class _initial with DiagnosticableTreeMixin implements SplashScreenState {
 
 /// @nodoc
 
+class _eulaNotAccepted
+    with DiagnosticableTreeMixin
+    implements SplashScreenState {
+  const _eulaNotAccepted();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashScreenState.eulaNotAccepted'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _eulaNotAccepted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState.eulaNotAccepted()';
+  }
+}
+
+/// @nodoc
+
 class _initialized with DiagnosticableTreeMixin implements SplashScreenState {
   const _initialized();
 
@@ -356,6 +421,35 @@ class _initialized with DiagnosticableTreeMixin implements SplashScreenState {
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.initialized()';
+  }
+}
+
+/// @nodoc
+
+class _initializedFirstStart
+    with DiagnosticableTreeMixin
+    implements SplashScreenState {
+  const _initializedFirstStart();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'SplashScreenState.initializedFirstStart'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _initializedFirstStart);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState.initializedFirstStart()';
   }
 }
 

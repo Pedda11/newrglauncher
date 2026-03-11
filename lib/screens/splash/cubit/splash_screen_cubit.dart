@@ -34,6 +34,12 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
       {required this.settingsRepository, required this.preferencesRepository})
       : super(const SplashScreenState.initial());
 
+  Future<void> acceptEula() async {
+    await preferencesRepository.setEula(true);
+    settingsRepository.eulaAccepted = true;
+    initialize();
+  }
+
   Future<void> initialize() async {
     await Log.i('Update check started.');
     try {
@@ -84,12 +90,26 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
           exit(0);
 
         case EStartupDecisionType.proceed:
+          settingsRepository.eulaAccepted =
+              await preferencesRepository.getEula() ?? false;
+          if (!settingsRepository.eulaAccepted) {
+            emit(const SplashScreenState.eulaNotAccepted());
+            return;
+          }
+
           settingsRepository
               .fillWithExecutablePath(await preferencesRepository.getWowPath());
           settingsRepository.wowDataDirectoryPath =
               await preferencesRepository.getDataDirectoryPath();
           settingsRepository.secondsToWaitForGameToStart =
               await preferencesRepository.getWaitTillGameStarts();
+
+          if (settingsRepository.wowRootFolderPath == null ||
+              settingsRepository.secondsToWaitForGameToStart == null) {
+            emit(const SplashScreenState.initializedFirstStart());
+            return;
+          }
+
           emit(const SplashScreenState.initialized());
           return;
 

@@ -4,7 +4,12 @@ part of 'splash_screen_cubit.dart';
 class SplashScreenState with _$SplashScreenState {
   const factory SplashScreenState.initial() = _initial;
 
+  const factory SplashScreenState.eulaNotAccepted() = _eulaNotAccepted;
+
   const factory SplashScreenState.initialized() = _initialized;
+
+  const factory SplashScreenState.initializedFirstStart() =
+      _initializedFirstStart;
 
   const factory SplashScreenState.checkingForUpdates() = _checkingForUpdates;
 

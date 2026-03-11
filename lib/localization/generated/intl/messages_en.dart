@@ -62,10 +62,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "settingsScreenCancelWowScanLabel": MessageLookupByLibrary.simpleMessage(
-      "Cancel scan",
+      "Stop scan",
     ),
     "settingsScreenFoundWowExesLabel": MessageLookupByLibrary.simpleMessage(
       "Found the following wow.exe files.",
+    ),
+    "settingsScreenNotAllSet": MessageLookupByLibrary.simpleMessage(
+      "Not all settings set yet!",
     ),
     "settingsScreenSetWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "Set the Wow Path by scanning your drives or selecting the file manually.",
@@ -75,6 +78,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsScreenTimeTillGameStartLabel":
         MessageLookupByLibrary.simpleMessage(
           "Estimated time until the launcher can enter the login details.",
+        ),
+    "settingsScreenTimeTillGameStartMissingLabel":
+        MessageLookupByLibrary.simpleMessage(
+          "Estimated time until game start missing",
         ),
     "settingsScreenTimeTillGameStartType": MessageLookupByLibrary.simpleMessage(
       "Seconds",
@@ -89,10 +96,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Select your WoW executable",
     ),
     "settingsScreenWowPathDrivesBtnHint": MessageLookupByLibrary.simpleMessage(
-      "<- Or select from one of the available drives.",
+      "<- Or manually select the application from one of the available drives.",
     ),
     "settingsScreenWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "WoW Location",
+    ),
+    "settingsScreenWowPathMissingLabel": MessageLookupByLibrary.simpleMessage(
+      "WoW Path not set yet",
     ),
     "settingsScreenWowPathScanBtn": MessageLookupByLibrary.simpleMessage(
       "Scan your system for wow.exe",

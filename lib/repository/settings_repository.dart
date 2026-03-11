@@ -10,6 +10,8 @@ class SettingsRepository {
   String? wowAccountsDirectoryPath;
   int? secondsToWaitForGameToStart;
 
+  bool eulaAccepted = false;
+
   List<File> foundWowExecutables = [];
 
   List<String> drives = [];

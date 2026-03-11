@@ -36,6 +36,15 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
+              settingsRepository.wowRootFolderPath == null
+                  ? Text(
+                      locales.settingsScreenWowPathMissingLabel,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    )
+                  : Container(),
               Text(
                 locales.settingsScreenSetWowPathLabel,
               ),
@@ -125,7 +134,18 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                   const SizedBox(width: 8),
                 ],
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
+              settingsRepository.secondsToWaitForGameToStart == null
+                  ? Text(
+                      locales.settingsScreenTimeTillGameStartMissingLabel,
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    )
+                  : const SizedBox(
+                      height: 24,
+                    ),
               Text(locales.settingsScreenTimeTillGameStartLabel),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,

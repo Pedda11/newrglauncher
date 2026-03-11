@@ -11,7 +11,9 @@ import '../screens/account/pages/account_add/cubit/account_add_page_cubit.dart';
 import '../screens/settings/settings_screen.dart';
 
 class NavigationPane extends StatefulWidget {
-  const NavigationPane({super.key});
+  final int initialIndex;
+
+  const NavigationPane({super.key, required this.initialIndex});
 
   @override
   State<NavigationPane> createState() => _NavigationPaneState();
@@ -21,14 +23,20 @@ class _NavigationPaneState extends State<NavigationPane> {
   int _selectedIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final mainRepository = context.read<MainRepository>();
     final preferencesRepository = context.read<PreferencesRepository>();
     final settingsRepository = context.read<SettingsRepository>();
     final locales = Localize.of(context);
     final List<Widget> screens = [
-      AccountScreen(),
-      SettingsScreen(),
+      const AccountScreen(),
+      const SettingsScreen(),
     ];
     return MultiBlocProvider(
       providers: [
@@ -67,6 +75,23 @@ class _NavigationPaneState extends State<NavigationPane> {
             ],
             selectedIndex: 0,
             onDestinationSelected: (int index) {
+              if (index == 0) {
+                if (settingsRepository.secondsToWaitForGameToStart == null ||
+                    settingsRepository.wowRootFolderPath == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        locales.settingsScreenNotAllSet,
+                        style: const TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
+                      ),
+                    ),
+                  );
+                  return;
+                }
+              }
               setState(() {
                 _selectedIndex = index;
               });

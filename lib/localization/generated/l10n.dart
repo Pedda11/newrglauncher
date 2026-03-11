@@ -269,6 +269,26 @@ class Localize {
     );
   }
 
+  /// `WoW Pfad noch nicht gesetzt`
+  String get settingsScreenWowPathMissingLabel {
+    return Intl.message(
+      'WoW Pfad noch nicht gesetzt',
+      name: 'settingsScreenWowPathMissingLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Geschätzte Zeit bis zum Spielstart fehlt`
+  String get settingsScreenTimeTillGameStartMissingLabel {
+    return Intl.message(
+      'Geschätzte Zeit bis zum Spielstart fehlt',
+      name: 'settingsScreenTimeTillGameStartMissingLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Scanne dein System nach wow.exe`
   String get settingsScreenWowPathScanBtn {
     return Intl.message(
@@ -289,10 +309,10 @@ class Localize {
     );
   }
 
-  /// `<- Oder wähle von einen der verfügbaren Laufwerke aus.`
+  /// `<- Oder wählen Sie die Anwendung manuell aus einem der verfügbaren Laufwerke aus.`
   String get settingsScreenWowPathDrivesBtnHint {
     return Intl.message(
-      '<- Oder wähle von einen der verfügbaren Laufwerke aus.',
+      '<- Oder wählen Sie die Anwendung manuell aus einem der verfügbaren Laufwerke aus.',
       name: 'settingsScreenWowPathDrivesBtnHint',
       desc: '',
       args: [],
@@ -384,6 +404,16 @@ class Localize {
     return Intl.message(
       'Sekunden',
       name: 'settingsScreenTimeTillGameStartType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Noch nicht alle Einstellungen gesetzt!`
+  String get settingsScreenNotAllSet {
+    return Intl.message(
+      'Noch nicht alle Einstellungen gesetzt!',
+      name: 'settingsScreenNotAllSet',
       desc: '',
       args: [],
     );
