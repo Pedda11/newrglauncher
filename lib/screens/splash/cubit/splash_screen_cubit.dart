@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../../../data/launcher_endpoints.dart';
+import '../../../helper/error_report_builder.dart';
+import '../../../repository/error_report_repository.dart';
+import '../../../repository/error_repository.dart';
 import '../../../widgets/log.dart';
 import '../core_functions/updater_promoter.dart';
 import '../core_functions/updater_update_finalizer.dart';
@@ -62,12 +65,14 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
           return;
 
         case EStartupDecisionType.blockingError:
+          await Log.i('Blocking error encountered: ${decision.message}');
           emit(SplashScreenState.blockingError(
             message: decision.message ?? 'Fehler',
           ));
           return;
 
         case EStartupDecisionType.forceUpdate:
+          await Log.i('Force update required. Message: ${decision.message}');
           emit(SplashScreenState.updateRequired(
             message: decision.message,
             status: status,
@@ -76,10 +81,15 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
           await _prepareUpdaterIfNeeded(status);
 
           if (status.update == null) {
+            await Log.i(
+                'Launcher update information is missing in the status response.');
             throw StateError(
               'Launcher update required, but status.update is missing.',
             );
           }
+
+          await Log.i(
+              'Starting launcher update from ${status.update!.url} with expected SHA256: ${status.update!.sha256}');
 
           await LauncherUpdaterService.startUpdate(
             url: status.update!.url,
@@ -87,39 +97,66 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
             launcherVersion: status.launcherVersion,
           );
 
+          await Log.i(
+              'Launcher update process initiated. Exiting launcher to allow updater to run.');
+
           exit(0);
 
         case EStartupDecisionType.proceed:
           settingsRepository.eulaAccepted =
               await preferencesRepository.getEula() ?? false;
+          await Log.i('EULA accepted: ${settingsRepository.eulaAccepted}');
           if (!settingsRepository.eulaAccepted) {
+            await Log.i(
+                'EULA has not been accepted. Prompting user to accept EULA.');
             emit(const SplashScreenState.eulaNotAccepted());
             return;
           }
 
-          settingsRepository
-              .fillWithExecutablePath(await preferencesRepository.getWowPath());
+          await Log.i('EULA accepted. Proceeding with initialization.');
+
+          final wowPath = await preferencesRepository.getWowPath();
+
+          if (wowPath == null) {
+            await Log.i(
+                'WoW path is not set. Prompting user to complete setup.');
+            emit(const SplashScreenState.initializedFirstStart());
+            return;
+          }
+
+          await Log.i(
+              'All required settings are present. Initialization complete.');
+
+          settingsRepository.fillWithExecutablePath(wowPath);
           settingsRepository.wowDataDirectoryPath =
               await preferencesRepository.getDataDirectoryPath();
           settingsRepository.secondsToWaitForGameToStart =
               await preferencesRepository.getWaitTillGameStarts();
 
-          if (settingsRepository.wowRootFolderPath == null ||
-              settingsRepository.secondsToWaitForGameToStart == null) {
-            emit(const SplashScreenState.initializedFirstStart());
-            return;
-          }
-
           emit(const SplashScreenState.initialized());
           return;
 
         case EStartupDecisionType.nonBlockingError:
+          await Log.i(
+              'Non-blocking error encountered: ${decision.message}. Proceeding with initialization.');
           emit(const SplashScreenState.initialized());
           return;
       }
     } catch (e, st) {
-      debugPrint('Splash initialize error: $e');
-      debugPrintStack(stackTrace: st);
+      await Log.i('Error during initialization: $e');
+
+      final logTail = await LogReader.readLastLines(10);
+
+      final report = await LauncherErrorReportBuilder.build(
+        errorMessage: e.toString(),
+        stackTrace: st.toString(),
+        logTail: logTail,
+      );
+
+      await ErrorReportRepository().uploadErrorReport(
+        app: 'launcher',
+        report: report,
+      );
 
       emit(SplashScreenState.failed(errorMsg: e.toString()));
     }

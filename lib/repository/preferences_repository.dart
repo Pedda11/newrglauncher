@@ -1,11 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesRepository {
-  static const String _accounts = 'accounts';
-  static const String _eula = 'eula';
-  static const String _wowPath = 'wowPath';
-  static const String _dataDirectory = 'dataDirectory';
-  static const String _waitTillGameStarts = 'waitTillGameStarts';
+  static const String _debugPrefix = kDebugMode ? 'debug_' : '';
+
+  static const String _accounts = '${_debugPrefix}accounts';
+  static const String _eula = '${_debugPrefix}eula';
+  static const String _wowPath = '${_debugPrefix}wowPath';
+  static const String _dataDirectory = '${_debugPrefix}dataDirectory';
+  static const String _waitTillGameStarts = '${_debugPrefix}waitTillGameStarts';
 
   final SharedPreferencesAsync _preferences;
 

@@ -40,7 +40,7 @@ class _AccountAddPageState extends State<AccountAddPage> {
               hint: 'Account Name',
               obscure: false,
             ),
-            BlocBuilder<AccountAddPageCubit, AccountAddPageState>(
+            BlocConsumer<AccountAddPageCubit, AccountAddPageState>(
               builder: (context, state) {
                 return Column(
                   children: [
@@ -68,8 +68,11 @@ class _AccountAddPageState extends State<AccountAddPage> {
                   ],
                 );
               },
+              listener: (context, state) => state.whenOrNull(
+                accountAdded: () => screenCubit.initialize(),
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -88,15 +91,13 @@ class _AccountAddPageState extends State<AccountAddPage> {
                       return;
                     }
                     pageCubit.addAccount(
-                      Account(
-                          accId: 0,
-                          listName: _listNameController.text,
-                          accountName: _accNameController.text,
-                          accountPassword: _accPasswordController.text,
-                          accountRealm: 'logon.rising-gods.de',
-                          accChars: []),
-                    );
-                    screenCubit.initialize();
+                        Account(
+                            accId: 0,
+                            listName: _listNameController.text,
+                            accountName: _accNameController.text,
+                            accountRealm: 'logon.rising-gods.de',
+                            accChars: []),
+                        _accPasswordController.text);
                   },
                   child: const Text('Speichern'),
                 ),

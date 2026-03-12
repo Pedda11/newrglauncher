@@ -38,16 +38,11 @@ class AccountListPageContent extends StatelessWidget {
                   listener: (context, state) {
                     state.whenOrNull(
                       failed: (errorMsg) {
-                        context.read<ErrorRepository>().sendErrorToServer(
-                            errorMessage: errorMsg,
-                            errorOnPosition:
-                                'AccountListPageContent-AccountScreenCubit',
-                            errorDateTime: DateTime.now().toString());
                         return showDialog(
                           barrierDismissible: false,
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: Text('Error'),
+                            title: const Text('Error'),
                             content: Text(errorMsg),
                             actions: [
                               TextButton(
@@ -148,11 +143,6 @@ class AccountListPageContent extends StatelessWidget {
             listener: (context, state) {
               state.whenOrNull(
                 failed: (errorMsg) {
-                  context.read<ErrorRepository>().sendErrorToServer(
-                      errorMessage: errorMsg,
-                      errorOnPosition:
-                          'AccountListPageContent-CharacterDataCubit',
-                      errorDateTime: DateTime.now().toString());
                   return showDialog(
                     barrierDismissible: false,
                     context: context,

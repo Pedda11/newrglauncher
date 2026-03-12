@@ -45,6 +45,7 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_changeVisibility value)? changeVisibility,
+    TResult Function(_addingNewAccount value)? addingNewAccount,
     TResult Function(_accountAdded value)? accountAdded,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
@@ -57,6 +58,8 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
         return initialized(_that);
       case _changeVisibility() when changeVisibility != null:
         return changeVisibility(_that);
+      case _addingNewAccount() when addingNewAccount != null:
+        return addingNewAccount(_that);
       case _accountAdded() when accountAdded != null:
         return accountAdded(_that);
       case _failed() when failed != null:
@@ -84,6 +87,7 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
     required TResult Function(_changeVisibility value) changeVisibility,
+    required TResult Function(_addingNewAccount value) addingNewAccount,
     required TResult Function(_accountAdded value) accountAdded,
     required TResult Function(_failed value) failed,
   }) {
@@ -95,6 +99,8 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
         return initialized(_that);
       case _changeVisibility():
         return changeVisibility(_that);
+      case _addingNewAccount():
+        return addingNewAccount(_that);
       case _accountAdded():
         return accountAdded(_that);
       case _failed():
@@ -121,6 +127,7 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_changeVisibility value)? changeVisibility,
+    TResult? Function(_addingNewAccount value)? addingNewAccount,
     TResult? Function(_accountAdded value)? accountAdded,
     TResult? Function(_failed value)? failed,
   }) {
@@ -132,6 +139,8 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
         return initialized(_that);
       case _changeVisibility() when changeVisibility != null:
         return changeVisibility(_that);
+      case _addingNewAccount() when addingNewAccount != null:
+        return addingNewAccount(_that);
       case _accountAdded() when accountAdded != null:
         return accountAdded(_that);
       case _failed() when failed != null:
@@ -158,6 +167,7 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
     TResult Function()? initial,
     TResult Function()? initialized,
     TResult Function(bool isVisible)? changeVisibility,
+    TResult Function()? addingNewAccount,
     TResult Function()? accountAdded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
@@ -170,6 +180,8 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
         return initialized();
       case _changeVisibility() when changeVisibility != null:
         return changeVisibility(_that.isVisible);
+      case _addingNewAccount() when addingNewAccount != null:
+        return addingNewAccount();
       case _accountAdded() when accountAdded != null:
         return accountAdded();
       case _failed() when failed != null:
@@ -197,6 +209,7 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
     required TResult Function() initial,
     required TResult Function() initialized,
     required TResult Function(bool isVisible) changeVisibility,
+    required TResult Function() addingNewAccount,
     required TResult Function() accountAdded,
     required TResult Function(String errorMsg) failed,
   }) {
@@ -208,6 +221,8 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
         return initialized();
       case _changeVisibility():
         return changeVisibility(_that.isVisible);
+      case _addingNewAccount():
+        return addingNewAccount();
       case _accountAdded():
         return accountAdded();
       case _failed():
@@ -234,6 +249,7 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
     TResult? Function()? initial,
     TResult? Function()? initialized,
     TResult? Function(bool isVisible)? changeVisibility,
+    TResult? Function()? addingNewAccount,
     TResult? Function()? accountAdded,
     TResult? Function(String errorMsg)? failed,
   }) {
@@ -245,6 +261,8 @@ extension AccountAddPageStatePatterns on AccountAddPageState {
         return initialized();
       case _changeVisibility() when changeVisibility != null:
         return changeVisibility(_that.isVisible);
+      case _addingNewAccount() when addingNewAccount != null:
+        return addingNewAccount();
       case _accountAdded() when accountAdded != null:
         return accountAdded();
       case _failed() when failed != null:
@@ -327,6 +345,17 @@ class __$changeVisibilityCopyWithImpl<$Res>
           : isVisible // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
+  }
+}
+
+/// @nodoc
+
+class _addingNewAccount implements AccountAddPageState {
+  const _addingNewAccount();
+
+  @override
+  String toString() {
+    return 'AccountAddPageState.addingNewAccount()';
   }
 }
 

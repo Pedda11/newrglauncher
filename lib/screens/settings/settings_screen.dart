@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../widgets/log.dart';
 import '../../widgets/my_appbar.dart';
 import 'widgets/settings_screen_content.dart';
 

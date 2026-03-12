@@ -24,9 +24,6 @@ class RepositoryContainer extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
-          create: (context) => ErrorRepository(),
-        ),
-        RepositoryProvider(
             create: (context) =>
                 PreferencesRepository(preferences: sharedPreferences)),
         RepositoryProvider(
@@ -39,7 +36,8 @@ class RepositoryContainer extends StatelessWidget {
       child: BlocProvider(
         create: (context) => SettingsScreenCubit(
             settingsRepository: context.read<SettingsRepository>(),
-            preferencesRepository: context.read<PreferencesRepository>()),
+            preferencesRepository: context.read<PreferencesRepository>())
+          ..initialize(),
         child: child,
       ),
     );

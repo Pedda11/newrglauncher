@@ -5,6 +5,7 @@ import 'package:twodotnulllauncher/data/disclaimer.dart';
 import '../../../localization/generated/l10n.dart';
 import '../../../navigation/navigation_pane.dart';
 import '../../../repository/error_repository.dart';
+import '../../../widgets/log.dart';
 import '../cubit/splash_screen_cubit.dart';
 
 class SplashScreenContent extends StatelessWidget {
@@ -17,18 +18,20 @@ class SplashScreenContent extends StatelessWidget {
     return BlocConsumer<SplashScreenCubit, SplashScreenState>(
       listener: (context, state) {
         state.maybeWhen(
-          initialized: () =>
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const NavigationPane(
-              initialIndex: 0,
-            ),
-          )),
-          initializedFirstStart: () =>
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const NavigationPane(
-              initialIndex: 1,
-            ),
-          )),
+          initialized: () {
+            return Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const NavigationPane(
+                initialIndex: 0,
+              ),
+            ));
+          },
+          initializedFirstStart: () {
+            return Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const NavigationPane(
+                initialIndex: 1,
+              ),
+            ));
+          },
           eulaNotAccepted: () async {
             bool isChecked = false;
             final hasAccepted = await showDialog(
@@ -122,10 +125,6 @@ class SplashScreenContent extends StatelessWidget {
             );
           },
           failed: (errorMsg) {
-            context.read<ErrorRepository>().sendErrorToServer(
-                errorMessage: errorMsg,
-                errorOnPosition: 'SplashScreenContent',
-                errorDateTime: DateTime.now().toString());
             return AlertDialog(
               title: Text(locales.error),
               content: Column(
@@ -147,6 +146,13 @@ class SplashScreenContent extends StatelessWidget {
               ],
             );
           },
+          updateRequired: (message, status) =>
+              Text('update required: $message'),
+          maintenance: () => Text('maintenance'),
+          eulaNotAccepted: () => Text('Eula not accepted'),
+          initializedFirstStart: () => Text('initialized first start'),
+          initialized: () => Text('initialized'),
+          blockingError: (message) => Text('blocking error: $message'),
           orElse: () {
             return const Center(
               child: SizedBox(

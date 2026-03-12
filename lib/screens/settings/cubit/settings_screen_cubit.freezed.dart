@@ -44,6 +44,7 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_scanningForDrives value)? scanningForDrives,
     TResult Function(_searchingWowExe value)? searchingWowExe,
     TResult Function(_searchProgress value)? searchProgress,
     TResult Function(_foundWowExe value)? foundWowExe,
@@ -58,6 +59,8 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial(_that);
       case _initialized() when initialized != null:
         return initialized(_that);
+      case _scanningForDrives() when scanningForDrives != null:
+        return scanningForDrives(_that);
       case _searchingWowExe() when searchingWowExe != null:
         return searchingWowExe(_that);
       case _searchProgress() when searchProgress != null:
@@ -92,6 +95,7 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_scanningForDrives value) scanningForDrives,
     required TResult Function(_searchingWowExe value) searchingWowExe,
     required TResult Function(_searchProgress value) searchProgress,
     required TResult Function(_foundWowExe value) foundWowExe,
@@ -106,6 +110,8 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial(_that);
       case _initialized():
         return initialized(_that);
+      case _scanningForDrives():
+        return scanningForDrives(_that);
       case _searchingWowExe():
         return searchingWowExe(_that);
       case _searchProgress():
@@ -139,6 +145,7 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_scanningForDrives value)? scanningForDrives,
     TResult? Function(_searchingWowExe value)? searchingWowExe,
     TResult? Function(_searchProgress value)? searchProgress,
     TResult? Function(_foundWowExe value)? foundWowExe,
@@ -152,6 +159,8 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial(_that);
       case _initialized() when initialized != null:
         return initialized(_that);
+      case _scanningForDrives() when scanningForDrives != null:
+        return scanningForDrives(_that);
       case _searchingWowExe() when searchingWowExe != null:
         return searchingWowExe(_that);
       case _searchProgress() when searchProgress != null:
@@ -185,6 +194,7 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
+    TResult Function()? scanningForDrives,
     TResult Function()? searchingWowExe,
     TResult Function(int searchedFolders, int searchedFiles,
             List<File> foundExecutables)?
@@ -201,6 +211,8 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial();
       case _initialized() when initialized != null:
         return initialized();
+      case _scanningForDrives() when scanningForDrives != null:
+        return scanningForDrives();
       case _searchingWowExe() when searchingWowExe != null:
         return searchingWowExe();
       case _searchProgress() when searchProgress != null:
@@ -236,6 +248,7 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
+    required TResult Function() scanningForDrives,
     required TResult Function() searchingWowExe,
     required TResult Function(
             int searchedFolders, int searchedFiles, List<File> foundExecutables)
@@ -251,6 +264,8 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial();
       case _initialized():
         return initialized();
+      case _scanningForDrives():
+        return scanningForDrives();
       case _searchingWowExe():
         return searchingWowExe();
       case _searchProgress():
@@ -285,6 +300,7 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
+    TResult? Function()? scanningForDrives,
     TResult? Function()? searchingWowExe,
     TResult? Function(int searchedFolders, int searchedFiles,
             List<File> foundExecutables)?
@@ -300,6 +316,8 @@ extension SettingsScreenStatePatterns on SettingsScreenState {
         return initial();
       case _initialized() when initialized != null:
         return initialized();
+      case _scanningForDrives() when scanningForDrives != null:
+        return scanningForDrives();
       case _searchingWowExe() when searchingWowExe != null:
         return searchingWowExe();
       case _searchProgress() when searchProgress != null:
@@ -338,6 +356,17 @@ class _initialized implements SettingsScreenState {
   @override
   String toString() {
     return 'SettingsScreenState.initialized()';
+  }
+}
+
+/// @nodoc
+
+class _scanningForDrives implements SettingsScreenState {
+  const _scanningForDrives();
+
+  @override
+  String toString() {
+    return 'SettingsScreenState.scanningForDrives()';
   }
 }
 

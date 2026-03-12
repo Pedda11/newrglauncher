@@ -35,3 +35,4 @@
 - setup_twodotnulllauncher.exe
 - setup_rg_launcher.exe
 
+https://downloads.pedda.tech/installation_setup.zip

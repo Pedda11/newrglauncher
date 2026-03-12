@@ -15,7 +15,6 @@ class Account {
   int accId;
   String listName;
   String accountName;
-  String accountPassword;
   String accountRealm;
   List<Character>? accChars;
 
@@ -23,7 +22,6 @@ class Account {
     required this.accId,
     required this.listName,
     required this.accountName,
-    required this.accountPassword,
     required this.accountRealm,
     required this.accChars,
   });
@@ -33,7 +31,6 @@ class Account {
         accId: json["accId"],
         listName: json["listName"],
         accountName: json["accountName"],
-        accountPassword: json["accountPassword"],
         accountRealm: json["accountRealm"],
         accChars: json["accChars"] != null
             ? List<Character>.from(
@@ -46,7 +43,6 @@ class Account {
         "accId": accId,
         "listName": listName,
         "accountName": accountName,
-        "accountPassword": accountPassword,
         "accountRealm": accountRealm,
         "accChars": accChars != null
             ? List<dynamic>.from(accChars!.map((x) => x.toJson()))

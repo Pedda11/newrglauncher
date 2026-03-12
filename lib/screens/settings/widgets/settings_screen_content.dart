@@ -28,9 +28,17 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
             '${settingsRepository.wowRootFolderPath ?? ''}${settingsRepository.wowExecutableName ?? ''}';
         return state.maybeWhen(
           initial: () {
-            screenCubit.initialize();
             return const CircularProgressIndicator();
           },
+          scanningForDrives: () => const Center(
+            child: Column(
+              children: [
+                Text('Scanning för Drives...'),
+                SizedBox(height: 16),
+                CircularProgressIndicator(),
+              ],
+            ),
+          ),
           initialized: () => Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,7 +176,7 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                     ),
                   ),
                   Text(
-                    '${settingsRepository.secondsToWaitForGameToStart} ${locales.settingsScreenTimeTillGameStartType}',
+                    '${settingsRepository.secondsToWaitForGameToStart ?? ''} ${locales.settingsScreenTimeTillGameStartType}',
                   ),
                 ],
               ),

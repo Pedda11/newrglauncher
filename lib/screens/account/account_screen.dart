@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twodotnulllauncher/repository/preferences_repository.dart';
@@ -56,11 +57,13 @@ class _AccountScreenState extends State<AccountScreen> {
                 },
               ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  context.read<PreferencesRepository>().deleteAll();
-                },
-                child: const Text('reset'))
+            kDebugMode
+                ? ElevatedButton(
+                    onPressed: () {
+                      context.read<PreferencesRepository>().deleteAll();
+                    },
+                    child: const Text('reset'))
+                : Container()
           ],
         ),
       ),

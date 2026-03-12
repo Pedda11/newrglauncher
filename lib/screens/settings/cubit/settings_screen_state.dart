@@ -6,6 +6,8 @@ class SettingsScreenState with _$SettingsScreenState {
 
   const factory SettingsScreenState.initialized() = _initialized;
 
+  const factory SettingsScreenState.scanningForDrives() = _scanningForDrives;
+
   const factory SettingsScreenState.searchingWowExe() = _searchingWowExe;
 
   const factory SettingsScreenState.searchProgress(

@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../repository/preferences_repository.dart';
 import '../../../repository/settings_repository.dart';
+import '../../../widgets/log.dart';
 import '../functions/WowScanProgressData.dart';
 
 part 'settings_screen_state.dart';
@@ -19,30 +20,55 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
   }) : super(const SettingsScreenState.initial());
 
   Future<List<String>> getAvailableDrives() async {
-    List<String> drives = [];
-    ProcessResult result =
-        await Process.run('wmic', ['logicaldisk', 'get', 'name']);
-    if (result.exitCode == 0) {
-      drives = result.stdout
-          .toString()
-          .split('\n')
-          .where((line) => line.trim().isNotEmpty && line.contains(':'))
-          .map((line) => line.trim())
-          .toList();
+    await Log.i('Getting available drives without wmic');
+
+    final drives = <String>[];
+
+    for (var code = 65; code <= 90; code++) {
+      final letter = String.fromCharCode(code);
+      final drivePath = '$letter:';
+      final dir = Directory('$drivePath\\');
+
+      try {
+        final exists = await dir.exists();
+
+        if (!exists) {
+          continue;
+        }
+
+        /// Force a real access check so empty card readers / broken drives do not slip through.
+        await dir.list(recursive: false, followLinks: false).firstWhere(
+              (_) => true,
+              orElse: () => File(''),
+            );
+
+        drives.add(drivePath);
+        await Log.i('Drive is accessible: $drivePath');
+      } catch (e) {
+        await Log.i('Skipping drive $drivePath: $e');
+      }
     }
+
+    await Log.i('Drive scan complete: $drives');
     return drives;
   }
 
-  void initialize() async {
-    List<String> drives = await getAvailableDrives();
-    List<String> drivesWithSlash = [];
-    for (String s in drives) {
-      drivesWithSlash.add('$s//');
+  Future<void> initialize() async {
+    emit(const SettingsScreenState.scanningForDrives());
+    await Log.i('Initializing SettingsScreenCubit');
+
+    final drives = await getAvailableDrives();
+    final drivesWithSlash = <String>[];
+
+    for (final drive in drives) {
+      await Log.i('Found drive: $drive');
+      drivesWithSlash.add('$drive\\');
     }
+
     settingsRepository.drives = drivesWithSlash;
 
-    settingsRepository.secondsToWaitForGameToStart =
-        settingsRepository.secondsToWaitForGameToStart;
+    await Log.i('Available drives: ${settingsRepository.drives}');
+    await Log.i('Settings initialization complete');
 
     emit(const SettingsScreenState.initialized());
   }
