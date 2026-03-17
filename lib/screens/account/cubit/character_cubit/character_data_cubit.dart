@@ -1,13 +1,10 @@
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:twodotnulllauncher/repository/preferences_repository.dart';
 import 'package:twodotnulllauncher/repository/settings_repository.dart';
-
 import '../../../../data/account.dart';
 import '../../../../data/altoholic.dart';
-import '../../../../data/character.dart';
 import '../../../../helper/error_report_builder.dart';
 import '../../../../repository/error_report_repository.dart';
 import '../../../../repository/error_repository.dart';

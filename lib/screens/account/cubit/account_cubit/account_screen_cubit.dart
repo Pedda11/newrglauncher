@@ -16,6 +16,7 @@ import '../../../../repository/main_repository.dart';
 import '../../../../repository/preferences_repository.dart';
 import '../../../../repository/settings_repository.dart';
 import '../../../../widgets/log.dart';
+import 'package:path/path.dart' as p;
 
 part 'account_screen_state.dart';
 
@@ -197,9 +198,12 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
     }
     await Log.i('Starting game for account: ${acc.accountName}');
     try {
-      final process = await Process.start(
-          '${settingsRepository.wowRootFolderPath}${settingsRepository.wowExecutableName}',
-          []);
+      //await startWowProcess();
+
+      await startWowProcessLikeOldLauncher(
+        wowRootPath: settingsRepository.wowRootFolderPath!,
+        wowExecutableName: settingsRepository.wowExecutableName!,
+      );
 
       await Log.i(
           'Game process started, waiting for ${settingsRepository.secondsToWaitForGameToStart} seconds before sending keys');
@@ -233,6 +237,97 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
         report: report,
       );
       emit(AccountScreenState.failed(errorMsg: e.toString()));
+    }
+  }
+
+  Future<Process> startWowProcess() async {
+    final wowRoot = settingsRepository.wowRootFolderPath;
+    final wowExeName = settingsRepository.wowExecutableName;
+
+    if (wowRoot == null || wowRoot.isEmpty) {
+      throw StateError('WoW root path is missing.');
+    }
+
+    if (wowExeName == null || wowExeName.isEmpty) {
+      throw StateError('WoW executable name is missing.');
+    }
+
+    final exePath = p.join(wowRoot, wowExeName);
+
+    await Log.i('Starting WoW process');
+    await Log.i('WoW root: $wowRoot');
+    await Log.i('WoW exe: $exePath');
+    await Log.i('WoW working directory: $wowRoot');
+
+    final exeFile = File(exePath);
+    if (!await exeFile.exists()) {
+      throw StateError('WoW executable not found: $exePath');
+    }
+
+    final process = await Process.start(
+      exePath,
+      const [],
+      workingDirectory: wowRoot,
+      runInShell: false,
+    );
+
+    /// Drain streams so no buffered output can block the process.
+    process.stdout.drain();
+    process.stderr.drain();
+
+    await Log.i('WoW process started with pid: ${process.pid}');
+
+    return process;
+  }
+
+  Future<void> startWowProcessLikeOldLauncher({
+    required String wowRootPath,
+    required String wowExecutableName,
+  }) async {
+    if (wowRootPath.isEmpty) {
+      throw StateError('WoW root path is missing.');
+    }
+
+    if (wowExecutableName.isEmpty) {
+      throw StateError('WoW executable name is missing.');
+    }
+
+    final exePath = p.join(wowRootPath, wowExecutableName);
+
+    final exeFile = File(exePath);
+    if (!await exeFile.exists()) {
+      throw StateError('WoW executable not found: $exePath');
+    }
+
+    await Log.i('Starting WoW like old launcher');
+    await Log.i('WoW root: $wowRootPath');
+    await Log.i('WoW exe: $exePath');
+    await Log.i('WoW start mode: PowerShell + Start-Process + RunAs');
+
+    final psCommand = '''
+Start-Process -FilePath '${exePath.replaceAll("'", "''")}' -WorkingDirectory '${wowRootPath.replaceAll("'", "''")}' -Verb RunAs
+''';
+
+    final result = await Process.run(
+      'powershell',
+      [
+        '-NoProfile',
+        '-ExecutionPolicy',
+        'Bypass',
+        '-Command',
+        psCommand,
+      ],
+      runInShell: true,
+    );
+
+    await Log.i('PowerShell exit code: ${result.exitCode}');
+    await Log.i('PowerShell stdout: ${result.stdout}');
+    await Log.i('PowerShell stderr: ${result.stderr}');
+
+    if (result.exitCode != 0) {
+      throw StateError(
+        'Failed to start WoW via PowerShell RunAs. Exit code: ${result.exitCode}',
+      );
     }
   }
 }

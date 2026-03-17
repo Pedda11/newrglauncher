@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:ftpconnect/ftpconnect.dart';
 
 import '../widgets/paths.dart';
 

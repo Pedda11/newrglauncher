@@ -74,6 +74,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsScreenNotAllSet": MessageLookupByLibrary.simpleMessage(
       "Noch nicht alle Einstellungen gesetzt!",
     ),
+    "settingsScreenScannedFiles": MessageLookupByLibrary.simpleMessage(
+      "gescannte Dateien: ",
+    ),
+    "settingsScreenScannedFolders": MessageLookupByLibrary.simpleMessage(
+      "gescannte Ordner: ",
+    ),
+    "settingsScreenScanningForDrives": MessageLookupByLibrary.simpleMessage(
+      "Scanne nach Laufwerken...",
+    ),
     "settingsScreenSetWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.",
     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:twodotnulllauncher/theme/app_theme.dart';
 import 'localization/generated/l10n.dart';
 import 'screens/splash/splash_screen.dart';
 
@@ -8,18 +9,21 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      localizationsDelegates: [
+    return MaterialApp(
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.light,
+      localizationsDelegates: const [
         Localize.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      supportedLocales: [
+      supportedLocales: const [
         Locale('en', ''),
         Locale('de', ''),
       ],
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

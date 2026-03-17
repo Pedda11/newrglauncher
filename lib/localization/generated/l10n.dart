@@ -299,6 +299,16 @@ class Localize {
     );
   }
 
+  /// `Scanne nach Laufwerken...`
+  String get settingsScreenScanningForDrives {
+    return Intl.message(
+      'Scanne nach Laufwerken...',
+      name: 'settingsScreenScanningForDrives',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.`
   String get settingsScreenWowPathScanBtnHint {
     return Intl.message(
@@ -414,6 +424,26 @@ class Localize {
     return Intl.message(
       'Noch nicht alle Einstellungen gesetzt!',
       name: 'settingsScreenNotAllSet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `gescannte Ordner: `
+  String get settingsScreenScannedFolders {
+    return Intl.message(
+      'gescannte Ordner: ',
+      name: 'settingsScreenScannedFolders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `gescannte Dateien: `
+  String get settingsScreenScannedFiles {
+    return Intl.message(
+      'gescannte Dateien: ',
+      name: 'settingsScreenScannedFiles',
       desc: '',
       args: [],
     );

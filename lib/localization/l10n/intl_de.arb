@@ -27,6 +27,7 @@
   "settingsScreenWowPathMissingLabel": "WoW Pfad noch nicht gesetzt",
   "settingsScreenTimeTillGameStartMissingLabel": "Geschätzte Zeit bis zum Spielstart fehlt",
   "settingsScreenWowPathScanBtn": "Scanne dein System nach wow.exe",
+  "settingsScreenScanningForDrives": "Scanne nach Laufwerken...",
   "settingsScreenWowPathScanBtnHint": "<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.",
   "settingsScreenWowPathDrivesBtnHint": "<- Oder wählen Sie die Anwendung manuell aus einem der verfügbaren Laufwerke aus.",
   "settingsScreenSetWowPathLabel": "Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.",
@@ -38,5 +39,7 @@
   "settingsScreenTimeTillGameStartLabel": "Geschätzte Zeit, bis der Launcher die Anmeldedaten eingeben kann.",
   "settingsScreenCancelWowScanLabel": "Scan abbrechen",
   "settingsScreenTimeTillGameStartType": "Sekunden",
-  "settingsScreenNotAllSet": "Noch nicht alle Einstellungen gesetzt!"
+  "settingsScreenNotAllSet": "Noch nicht alle Einstellungen gesetzt!",
+  "settingsScreenScannedFolders": "gescannte Ordner: ",
+  "settingsScreenScannedFiles": "gescannte Dateien: "
 }

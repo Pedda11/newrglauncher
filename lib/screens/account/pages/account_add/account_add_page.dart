@@ -82,7 +82,7 @@ class _AccountAddPageState extends State<AccountAddPage> {
                   },
                   child: Text('Zurück'),
                 ),
-                SizedBox(width: 160),
+                const SizedBox(width: 160),
                 ElevatedButton(
                   onPressed: () {
                     if (_listNameController.text.isEmpty ||

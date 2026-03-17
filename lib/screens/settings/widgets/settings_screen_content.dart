@@ -22,6 +22,7 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
     final screenCubit = context.read<SettingsScreenCubit>();
     final settingsRepository = context.read<SettingsRepository>();
     final locales = Localize.of(context);
+    final theme = Theme.of(context);
     return BlocConsumer<SettingsScreenCubit, SettingsScreenState>(
       builder: (context, state) {
         _wowPathController.text =
@@ -30,12 +31,12 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
           initial: () {
             return const CircularProgressIndicator();
           },
-          scanningForDrives: () => const Center(
+          scanningForDrives: () => Center(
             child: Column(
               children: [
-                Text('Scanning för Drives...'),
-                SizedBox(height: 16),
-                CircularProgressIndicator(),
+                Text(locales.settingsScreenScanningForDrives),
+                const SizedBox(height: 16),
+                const CircularProgressIndicator(),
               ],
             ),
           ),
@@ -78,6 +79,7 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                         onPressed: () async {
                           try {
                             final dir = Directory(drive);
+                            Directory dirPath = dir;
 
                             final exists = await dir.exists();
 
@@ -88,12 +90,16 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                                   drive);
                             }
 
+                            if (dir.path == 'C:\\') {
+                              dirPath = Directory('${dir.path}Users\\');
+                            }
+
                             String? path = await FilesystemPicker.openDialog(
                               folderIconColor: const Color(0xFFE0CDA1),
                               title:
                                   locales.settingsScreenWowExeFilePickerLabel,
                               context: context,
-                              rootDirectory: dir,
+                              rootDirectory: dirPath,
                               fsType: FilesystemType.file,
                               allowedExtensions: ['.exe'],
                               pickText: 'Select',
@@ -189,8 +195,9 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                   ElevatedButton(
                       onPressed: () => screenCubit.cancelWowExeSearch(),
                       child: Text(locales.settingsScreenCancelWowScanLabel)),
-                  Text('Scanned Folder: $searchedFolders'),
-                  Text('Scanned Files: $searchedFiles'),
+                  Text(
+                      '${locales.settingsScreenScannedFolders} $searchedFolders'),
+                  Text('${locales.settingsScreenScannedFiles} $searchedFiles'),
                   const SizedBox(
                     height: 32,
                   ),
@@ -243,7 +250,10 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                   title: Column(
                     children: [
                       Text(locales.settingsScreenWowDataPathLabel),
-                      Text(locales.settingsScreenWowDataPathLabel),
+                      Text(
+                        locales.settingsScreenWowDataPathHint,
+                        style: theme.textTheme.bodyMedium,
+                      ),
                     ],
                   ),
                   content: Column(

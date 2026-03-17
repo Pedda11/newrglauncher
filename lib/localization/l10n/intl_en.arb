@@ -27,6 +27,7 @@
   "settingsScreenWowPathMissingLabel": "WoW Path not set yet",
   "settingsScreenTimeTillGameStartMissingLabel": "Estimated time until game start missing",
   "settingsScreenWowPathScanBtn": "Scan your system for wow.exe",
+  "settingsScreenScanningForDrives": "Scanning for Drives...",
   "settingsScreenWowPathScanBtnHint": "<- Scan your drives for wow.exe and select it from the shown list.",
   "settingsScreenWowPathDrivesBtnHint": "<- Or manually select the application from one of the available drives.",
   "settingsScreenSetWowPathLabel": "Set the Wow Path by scanning your drives or selecting the file manually.",
@@ -38,5 +39,7 @@
   "settingsScreenTimeTillGameStartLabel": "Estimated time until the launcher can enter the login details.",
   "settingsScreenCancelWowScanLabel": "Stop scan",
   "settingsScreenTimeTillGameStartType": "Seconds",
-  "settingsScreenNotAllSet": "Not all settings set yet!"
+  "settingsScreenNotAllSet": "Not all settings set yet!",
+  "settingsScreenScannedFolders": "Scanned Folder: ",
+  "settingsScreenScannedFiles": "Scanned Files: "
 }

@@ -20,7 +20,6 @@ import '../../../data/launcher_status_data.dart';
 import '../../../data/semver_data.dart';
 import '../../../data/startup_decision.dart';
 import '../../../enum/e_startup_decision_type.dart';
-import '../../../repository/main_repository.dart';
 import '../../../repository/preferences_repository.dart';
 import '../../../repository/settings_repository.dart';
 import '../../../services/update/launcher_updater_service.dart';
