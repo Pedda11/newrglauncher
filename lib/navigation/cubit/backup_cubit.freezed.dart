@@ -52,6 +52,8 @@ extension BackupStatePatterns on BackupState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_initial value)? initial,
     TResult Function(_backUpStarted value)? backUpStarted,
+    TResult Function(_backUpProgress value)? backUpProgress,
+    TResult Function(_finalizing value)? finalizing,
     TResult Function(_backupFinished value)? backupFinished,
     TResult Function(_backupFailed value)? backupFailed,
     required TResult orElse(),
@@ -62,6 +64,10 @@ extension BackupStatePatterns on BackupState {
         return initial(_that);
       case _backUpStarted() when backUpStarted != null:
         return backUpStarted(_that);
+      case _backUpProgress() when backUpProgress != null:
+        return backUpProgress(_that);
+      case _finalizing() when finalizing != null:
+        return finalizing(_that);
       case _backupFinished() when backupFinished != null:
         return backupFinished(_that);
       case _backupFailed() when backupFailed != null:
@@ -88,6 +94,8 @@ extension BackupStatePatterns on BackupState {
   TResult map<TResult extends Object?>({
     required TResult Function(_initial value) initial,
     required TResult Function(_backUpStarted value) backUpStarted,
+    required TResult Function(_backUpProgress value) backUpProgress,
+    required TResult Function(_finalizing value) finalizing,
     required TResult Function(_backupFinished value) backupFinished,
     required TResult Function(_backupFailed value) backupFailed,
   }) {
@@ -97,6 +105,10 @@ extension BackupStatePatterns on BackupState {
         return initial(_that);
       case _backUpStarted():
         return backUpStarted(_that);
+      case _backUpProgress():
+        return backUpProgress(_that);
+      case _finalizing():
+        return finalizing(_that);
       case _backupFinished():
         return backupFinished(_that);
       case _backupFailed():
@@ -122,6 +134,8 @@ extension BackupStatePatterns on BackupState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_initial value)? initial,
     TResult? Function(_backUpStarted value)? backUpStarted,
+    TResult? Function(_backUpProgress value)? backUpProgress,
+    TResult? Function(_finalizing value)? finalizing,
     TResult? Function(_backupFinished value)? backupFinished,
     TResult? Function(_backupFailed value)? backupFailed,
   }) {
@@ -131,6 +145,10 @@ extension BackupStatePatterns on BackupState {
         return initial(_that);
       case _backUpStarted() when backUpStarted != null:
         return backUpStarted(_that);
+      case _backUpProgress() when backUpProgress != null:
+        return backUpProgress(_that);
+      case _finalizing() when finalizing != null:
+        return finalizing(_that);
       case _backupFinished() when backupFinished != null:
         return backupFinished(_that);
       case _backupFailed() when backupFailed != null:
@@ -156,6 +174,9 @@ extension BackupStatePatterns on BackupState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? backUpStarted,
+    TResult Function(int processedFiles, int totalFiles, double progress)?
+        backUpProgress,
+    TResult Function()? finalizing,
     TResult Function()? backupFinished,
     TResult Function(String errorMsg)? backupFailed,
     required TResult orElse(),
@@ -166,6 +187,11 @@ extension BackupStatePatterns on BackupState {
         return initial();
       case _backUpStarted() when backUpStarted != null:
         return backUpStarted();
+      case _backUpProgress() when backUpProgress != null:
+        return backUpProgress(
+            _that.processedFiles, _that.totalFiles, _that.progress);
+      case _finalizing() when finalizing != null:
+        return finalizing();
       case _backupFinished() when backupFinished != null:
         return backupFinished();
       case _backupFailed() when backupFailed != null:
@@ -192,6 +218,10 @@ extension BackupStatePatterns on BackupState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() backUpStarted,
+    required TResult Function(
+            int processedFiles, int totalFiles, double progress)
+        backUpProgress,
+    required TResult Function() finalizing,
     required TResult Function() backupFinished,
     required TResult Function(String errorMsg) backupFailed,
   }) {
@@ -201,6 +231,11 @@ extension BackupStatePatterns on BackupState {
         return initial();
       case _backUpStarted():
         return backUpStarted();
+      case _backUpProgress():
+        return backUpProgress(
+            _that.processedFiles, _that.totalFiles, _that.progress);
+      case _finalizing():
+        return finalizing();
       case _backupFinished():
         return backupFinished();
       case _backupFailed():
@@ -226,6 +261,9 @@ extension BackupStatePatterns on BackupState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? backUpStarted,
+    TResult? Function(int processedFiles, int totalFiles, double progress)?
+        backUpProgress,
+    TResult? Function()? finalizing,
     TResult? Function()? backupFinished,
     TResult? Function(String errorMsg)? backupFailed,
   }) {
@@ -235,6 +273,11 @@ extension BackupStatePatterns on BackupState {
         return initial();
       case _backUpStarted() when backUpStarted != null:
         return backUpStarted();
+      case _backUpProgress() when backUpProgress != null:
+        return backUpProgress(
+            _that.processedFiles, _that.totalFiles, _that.progress);
+      case _finalizing() when finalizing != null:
+        return finalizing();
       case _backupFinished() when backupFinished != null:
         return backupFinished();
       case _backupFailed() when backupFailed != null:
@@ -282,6 +325,111 @@ class _backUpStarted implements BackupState {
   @override
   String toString() {
     return 'BackupState.backUpStarted()';
+  }
+}
+
+/// @nodoc
+
+class _backUpProgress implements BackupState {
+  const _backUpProgress(
+      {required this.processedFiles,
+      required this.totalFiles,
+      required this.progress});
+
+  final int processedFiles;
+  final int totalFiles;
+  final double progress;
+
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$backUpProgressCopyWith<_backUpProgress> get copyWith =>
+      __$backUpProgressCopyWithImpl<_backUpProgress>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _backUpProgress &&
+            (identical(other.processedFiles, processedFiles) ||
+                other.processedFiles == processedFiles) &&
+            (identical(other.totalFiles, totalFiles) ||
+                other.totalFiles == totalFiles) &&
+            (identical(other.progress, progress) ||
+                other.progress == progress));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, processedFiles, totalFiles, progress);
+
+  @override
+  String toString() {
+    return 'BackupState.backUpProgress(processedFiles: $processedFiles, totalFiles: $totalFiles, progress: $progress)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$backUpProgressCopyWith<$Res>
+    implements $BackupStateCopyWith<$Res> {
+  factory _$backUpProgressCopyWith(
+          _backUpProgress value, $Res Function(_backUpProgress) _then) =
+      __$backUpProgressCopyWithImpl;
+  @useResult
+  $Res call({int processedFiles, int totalFiles, double progress});
+}
+
+/// @nodoc
+class __$backUpProgressCopyWithImpl<$Res>
+    implements _$backUpProgressCopyWith<$Res> {
+  __$backUpProgressCopyWithImpl(this._self, this._then);
+
+  final _backUpProgress _self;
+  final $Res Function(_backUpProgress) _then;
+
+  /// Create a copy of BackupState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? processedFiles = null,
+    Object? totalFiles = null,
+    Object? progress = null,
+  }) {
+    return _then(_backUpProgress(
+      processedFiles: null == processedFiles
+          ? _self.processedFiles
+          : processedFiles // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalFiles: null == totalFiles
+          ? _self.totalFiles
+          : totalFiles // ignore: cast_nullable_to_non_nullable
+              as int,
+      progress: null == progress
+          ? _self.progress
+          : progress // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _finalizing implements BackupState {
+  const _finalizing();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _finalizing);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'BackupState.finalizing()';
   }
 }
 

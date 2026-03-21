@@ -47,7 +47,7 @@ class _NavigationPaneState extends State<NavigationPane> {
     final cubit = context.read<BackupCubit>();
     await cubit.startBackup();
 
-    exit(0);
+    //exit(0);
   }
 
   @override
@@ -56,6 +56,7 @@ class _NavigationPaneState extends State<NavigationPane> {
     final preferencesRepository = context.read<PreferencesRepository>();
     final settingsRepository = context.read<SettingsRepository>();
     final locales = Localize.of(context);
+    final theme = Theme.of(context);
     final List<Widget> screens = [
       const AccountScreen(),
       const SettingsScreen(),
@@ -82,95 +83,106 @@ class _NavigationPaneState extends State<NavigationPane> {
           ),
         ),
       ],
-      child: Row(
-        children: [
-          NavigationRail(
-            destinations: [
-              NavigationRailDestination(
-                icon: const Icon(Icons.group),
-                label: Text(locales.accountScreenTitle),
-              ),
-              NavigationRailDestination(
-                icon: const Icon(Icons.settings),
-                label: Text(locales.menuItemSettings),
-              ),
-            ],
-            selectedIndex: 0,
-            onDestinationSelected: (int index) {
-              if (index == 0) {
-                if (settingsRepository.secondsToWaitForGameToStart == null ||
-                    settingsRepository.wowRootFolderPath == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        locales.settingsScreenNotAllSet,
-                        style: const TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
-                      ),
-                    ),
-                  );
-                  return;
-                }
-              }
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-          ),
-          BlocConsumer<BackupCubit, BackupState>(
-            builder: (context, state) {
-              return state.maybeWhen(
-                orElse: () => Expanded(child: screens[_selectedIndex]),
-                backUpStarted: () {
-                  return Container(
-                    color: Colors.blue,
-                    child: const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircularProgressIndicator(),
-                          SizedBox(height: 20),
-                          Text(
-                            'Backup in progress...',
-                            style: TextStyle(
-                              color: Colors.white,
+      child: Scaffold(
+        body: Row(
+          children: [
+            NavigationRail(
+              destinations: [
+                NavigationRailDestination(
+                  icon: const Icon(Icons.group),
+                  label: Text(locales.accountScreenTitle),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.settings),
+                  label: Text(locales.menuItemSettings),
+                ),
+              ],
+              selectedIndex: 0,
+              onDestinationSelected: (int index) {
+                if (index == 0) {
+                  if (settingsRepository.secondsToWaitForGameToStart == null ||
+                      settingsRepository.wowRootFolderPath == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          locales.settingsScreenNotAllSet,
+                          style: const TextStyle(
+                              color: Colors.red,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                backupFailed: (errorMsg) {
-                  return Container(
-                    color: Colors.red,
-                    child: Center(
-                      child: Text(
-                        'Backup failed: $errorMsg',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                              fontSize: 24),
                         ),
                       ),
-                    ),
-                  );
-                },
-              );
-            },
-            listener: (context, state) {
-              state.maybeMap(
-                  orElse: () {},
-                  backupFinished: (value) {
-                    exit(0);
-                  });
-            },
-          ),
-        ],
+                    );
+                    return;
+                  }
+                }
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+            ),
+            BlocConsumer<BackupCubit, BackupState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => Expanded(child: screens[_selectedIndex]),
+                  backUpProgress: (processedFiles, totalFiles, progress) {
+                    return Expanded(
+                      child: Container(
+                        color: Colors.blue,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              progress <= 0.9
+                                  ? Text(
+                                      '$processedFiles/$totalFiles - ${(progress * 100).toStringAsFixed(2)}%',
+                                      style: theme.textTheme.headlineLarge
+                                          ?.copyWith(
+                                              color:
+                                                  theme.colorScheme.onPrimary),
+                                    )
+                                  : Text(
+                                      'Finalizing. Please be patient',
+                                      style: theme.textTheme.headlineLarge
+                                          ?.copyWith(
+                                              color:
+                                                  theme.colorScheme.onPrimary),
+                                    ),
+                              const SizedBox(height: 20),
+                              const CircularProgressIndicator(),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  backupFailed: (errorMsg) {
+                    return Container(
+                      color: Colors.red,
+                      child: Center(
+                        child: Text(
+                          'Backup failed: $errorMsg',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              listener: (context, state) {
+                state.maybeMap(
+                    orElse: () {},
+                    backupFinished: (value) {
+                      exit(0);
+                    });
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

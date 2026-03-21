@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:twodotnulllauncher/navigation/cubit/backup_cubit.dart';
 import 'package:twodotnulllauncher/repository/error_repository.dart';
+import 'package:twodotnulllauncher/services/backup/backup_service.dart';
 import '../repository/main_repository.dart';
 import '../repository/preferences_repository.dart';
 import '../repository/settings_repository.dart';
@@ -43,7 +44,9 @@ class RepositoryContainer extends StatelessWidget {
             child: child,
           ),
           BlocProvider(
-            create: (context) => BackupCubit(),
+            create: (context) => BackupCubit(
+                settingsRepository: context.read<SettingsRepository>(),
+                backupService: BackupService()),
           )
         ], child: child));
   }
