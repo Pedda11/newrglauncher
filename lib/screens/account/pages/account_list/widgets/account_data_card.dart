@@ -1,14 +1,16 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../../../data/character.dart';
+import '../../../../../localization/generated/l10n.dart';
 
 class AccountDataCard extends StatelessWidget {
   final Character character;
+
   const AccountDataCard({super.key, required this.character});
 
   @override
   Widget build(BuildContext context) {
+    final locales = Localize.of(context);
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Container(
@@ -22,9 +24,10 @@ class AccountDataCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Name: ',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                Text(
+                  locales.accountDataCardNameLabel,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Text(
                   character.name,
@@ -32,31 +35,29 @@ class AccountDataCard extends StatelessWidget {
                 ),
               ],
             ),
-            const Divider(
-
-            ),
+            const Divider(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    const Text(
-                      'Gilde: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      locales.accountDataCardGuildLabel,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(character.guildName == ''
-                        ? 'Keine '
+                        ? locales.accountDataCardNoGuild
                         : character.guildName),
                     Text(character.guildRank == ''
-                        ? 'Gilde'
+                        ? locales.accountDataCardGuild
                         : '/${character.guildRank}'),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text(
-                      'Fraktion: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      locales.accountDataCardFactionLabel,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(character.faction),
                   ],
@@ -68,9 +69,9 @@ class AccountDataCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text(
-                      'Zone: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      locales.accountDataCardZoneLabel,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(character.zone),
                     Text('/${character.subZone}'),
@@ -78,9 +79,9 @@ class AccountDataCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Text(
-                      'Klasse: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      locales.accountDataCardClassLabel,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(character.charClass),
                   ],
@@ -92,18 +93,18 @@ class AccountDataCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Text(
-                      'Gold: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      locales.accountDataCardGoldLabel,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(character.money),
                   ],
                 ),
                 Row(
                   children: [
-                    const Text(
-                      'Zuletzt Online: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Text(
+                      locales.accountDataCardLastLogoutLabel,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(character.lastLogout),
                   ],
@@ -117,14 +118,13 @@ class AccountDataCard extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          const Text(
-                            "ID's",
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                          Text(
+                            locales.accountDataCardInstancesTitle,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16),
-                            child: Divider(
-                            ),
+                            child: Divider(),
                           ),
                           Expanded(
                             child: ListView.builder(
@@ -143,13 +143,12 @@ class AccountDataCard extends StatelessWidget {
                                               .toString()),
                                           Text(character.savedInstances[index]
                                                   .title ??
-                                              'NULL'),
+                                              locales.accountDataCardNullValue),
                                           Text(character
                                               .savedInstances[index].resetDay!)
                                         ],
                                       ),
-                                      const Divider(
-                                      ),
+                                      const Divider(),
                                     ],
                                   );
                                 }

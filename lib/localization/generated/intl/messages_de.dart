@@ -20,10 +20,22 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'de';
 
+  static String m0(message) => "blockierender Fehler: ${message}";
+
+  static String m1(message) => "Update erforderlich: ${message}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accept": MessageLookupByLibrary.simpleMessage("Bestätigen"),
+    "accountAddPageAccountNameHint": MessageLookupByLibrary.simpleMessage(
+      "Account Name",
+    ),
     "accountAddPageAccountNameLabel": MessageLookupByLibrary.simpleMessage(
       "Account Name",
+    ),
+    "accountAddPageBackButton": MessageLookupByLibrary.simpleMessage("Zurück"),
+    "accountAddPageListNameHint": MessageLookupByLibrary.simpleMessage(
+      "Listen Name",
     ),
     "accountAddPageListNameLabel": MessageLookupByLibrary.simpleMessage(
       "Listen Name",
@@ -31,15 +43,45 @@ class MessageLookup extends MessageLookupByLibrary {
     "accountAddPageNewAccount": MessageLookupByLibrary.simpleMessage(
       "N e u e r   A c c o u n t",
     ),
+    "accountAddPagePasswordHint": MessageLookupByLibrary.simpleMessage(
+      "Account Passwort",
+    ),
     "accountAddPagePasswordLabel": MessageLookupByLibrary.simpleMessage(
       "Account Passwort",
     ),
     "accountAddPageRealmLabel": MessageLookupByLibrary.simpleMessage(
       "Realm/Logonserver",
     ),
+    "accountAddPageSaveButton": MessageLookupByLibrary.simpleMessage(
+      "Speichern",
+    ),
     "accountAddPageTitle": MessageLookupByLibrary.simpleMessage(
       "Account hinzufügen",
     ),
+    "accountDataCardClassLabel": MessageLookupByLibrary.simpleMessage(
+      "Klasse: ",
+    ),
+    "accountDataCardFactionLabel": MessageLookupByLibrary.simpleMessage(
+      "Fraktion: ",
+    ),
+    "accountDataCardGoldLabel": MessageLookupByLibrary.simpleMessage("Gold: "),
+    "accountDataCardGuild": MessageLookupByLibrary.simpleMessage("Gilde"),
+    "accountDataCardGuildLabel": MessageLookupByLibrary.simpleMessage(
+      "Gilde: ",
+    ),
+    "accountDataCardInstancesTitle": MessageLookupByLibrary.simpleMessage(
+      "ID\'s",
+    ),
+    "accountDataCardLastLogoutLabel": MessageLookupByLibrary.simpleMessage(
+      "Zuletzt Online: ",
+    ),
+    "accountDataCardNameLabel": MessageLookupByLibrary.simpleMessage("Name: "),
+    "accountDataCardNoData": MessageLookupByLibrary.simpleMessage(
+      "Keine Daten vorhanden!",
+    ),
+    "accountDataCardNoGuild": MessageLookupByLibrary.simpleMessage("Keine "),
+    "accountDataCardNullValue": MessageLookupByLibrary.simpleMessage("NULL"),
+    "accountDataCardZoneLabel": MessageLookupByLibrary.simpleMessage("Zone: "),
     "accountListPageAddAccountBtn": MessageLookupByLibrary.simpleMessage(
       "Account hinzufügen",
     ),
@@ -52,14 +94,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "accountScreenNoData": MessageLookupByLibrary.simpleMessage(
       "Keine Daten vorhanden",
     ),
+    "accountScreenResetButton": MessageLookupByLibrary.simpleMessage("reset"),
     "accountScreenTitle": MessageLookupByLibrary.simpleMessage(
       "Meine Accounts",
     ),
     "appTitle": MessageLookupByLibrary.simpleMessage("WOW-Launcher"),
+    "back": MessageLookupByLibrary.simpleMessage("Zurück"),
+    "decline": MessageLookupByLibrary.simpleMessage("Ablehnen"),
     "error": MessageLookupByLibrary.simpleMessage("Fehler"),
     "errorHandlingContent": MessageLookupByLibrary.simpleMessage(
       "Folgender Fehler ist aufgetreten. Der Fehler wird automatisch reported. Bitte versuchen Sie es später erneut.",
     ),
+    "eulaAcceptText": MessageLookupByLibrary.simpleMessage(
+      "Ich habe die Eula gelesen und akzeptiert",
+    ),
+    "eulaLabel": MessageLookupByLibrary.simpleMessage("Eula"),
     "menuItemSettings": MessageLookupByLibrary.simpleMessage("Einstellungen"),
     "menuTitle": MessageLookupByLibrary.simpleMessage("M E N Ü"),
     "no": MessageLookupByLibrary.simpleMessage("Nein"),
@@ -67,6 +116,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "save": MessageLookupByLibrary.simpleMessage("Speichern"),
     "settingsScreenCancelWowScanLabel": MessageLookupByLibrary.simpleMessage(
       "Scan abbrechen",
+    ),
+    "settingsScreenDriveAccessError": MessageLookupByLibrary.simpleMessage(
+      "Auf Laufwerk konnte nicht zugegriffen werden",
     ),
     "settingsScreenFoundWowExesLabel": MessageLookupByLibrary.simpleMessage(
       "Found the following wow.exe files.",
@@ -99,6 +151,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsScreenTimeTillGameStartType": MessageLookupByLibrary.simpleMessage(
       "Sekunden",
     ),
+    "settingsScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "E I N S T E L L U N G E N",
+    ),
     "settingsScreenWowDataPathHint": MessageLookupByLibrary.simpleMessage(
       "Spielst du WoW vorzugsweise auf Deutsch oder Englisch? Wähle den Data Ordner entsprechend deiner Sprache aus.",
     ),
@@ -123,6 +178,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsScreenWowPathScanBtnHint": MessageLookupByLibrary.simpleMessage(
       "<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.",
     ),
+    "splashScreenBlockingError": m0,
+    "splashScreenEulaNotAccepted": MessageLookupByLibrary.simpleMessage(
+      "Eula nicht akzeptiert",
+    ),
+    "splashScreenInitialized": MessageLookupByLibrary.simpleMessage(
+      "initialisiert",
+    ),
+    "splashScreenInitializedFirstStart": MessageLookupByLibrary.simpleMessage(
+      "Erste Initialisierung",
+    ),
+    "splashScreenMaintenance": MessageLookupByLibrary.simpleMessage("Wartung"),
+    "splashScreenUpdateRequired": m1,
     "updateScreenUpdateCheck": MessageLookupByLibrary.simpleMessage(
       "Prüfe auf Updates...",
     ),

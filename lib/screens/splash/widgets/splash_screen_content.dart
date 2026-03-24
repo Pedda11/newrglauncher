@@ -40,7 +40,7 @@ class SplashScreenContent extends StatelessWidget {
                 return StatefulBuilder(
                   builder: (context, setState) {
                     return AlertDialog(
-                      title: const Text('Eula'),
+                      title: Text(locales.back),
                       content: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -62,7 +62,7 @@ class SplashScreenContent extends StatelessWidget {
                                   });
                                 },
                               ),
-                              const Text('I have read and accept the Eula'),
+                              Text(locales.eulaAcceptText),
                             ],
                           )
                         ],
@@ -73,14 +73,14 @@ class SplashScreenContent extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).pop(true);
                                 },
-                                child: const Text('Accept'),
+                                child: Text(locales.accept),
                               )
                             : Container(),
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop(false);
                           },
-                          child: Text('Decline'),
+                          child: Text(locales.decline),
                         ),
                       ],
                     );
@@ -146,13 +146,11 @@ class SplashScreenContent extends StatelessWidget {
               ],
             );
           },
-          updateRequired: (message, status) =>
-              Text('update required: $message'),
-          maintenance: () => Text('maintenance'),
-          eulaNotAccepted: () => Text('Eula not accepted'),
-          initializedFirstStart: () => Text('initialized first start'),
-          initialized: () => Text('initialized'),
-          blockingError: (message) => Text('blocking error: $message'),
+          maintenance: () => Text(locales.splashScreenMaintenance),
+          eulaNotAccepted: () => Text(locales.splashScreenEulaNotAccepted),
+          initializedFirstStart: () =>
+              Text(locales.splashScreenInitializedFirstStart),
+          initialized: () => Text(locales.splashScreenInitialized),
           orElse: () {
             return const Center(
               child: SizedBox(

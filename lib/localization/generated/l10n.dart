@@ -79,9 +79,39 @@ class Localize {
     return Intl.message('Speichern', name: 'save', desc: '', args: []);
   }
 
+  /// `Zurück`
+  String get back {
+    return Intl.message('Zurück', name: 'back', desc: '', args: []);
+  }
+
   /// `Fehler`
   String get error {
     return Intl.message('Fehler', name: 'error', desc: '', args: []);
+  }
+
+  /// `Bestätigen`
+  String get accept {
+    return Intl.message('Bestätigen', name: 'accept', desc: '', args: []);
+  }
+
+  /// `Ablehnen`
+  String get decline {
+    return Intl.message('Ablehnen', name: 'decline', desc: '', args: []);
+  }
+
+  /// `Eula`
+  String get eulaLabel {
+    return Intl.message('Eula', name: 'eulaLabel', desc: '', args: []);
+  }
+
+  /// `Ich habe die Eula gelesen und akzeptiert`
+  String get eulaAcceptText {
+    return Intl.message(
+      'Ich habe die Eula gelesen und akzeptiert',
+      name: 'eulaAcceptText',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `Folgender Fehler ist aufgetreten. Der Fehler wird automatisch reported. Bitte versuchen Sie es später erneut.`
@@ -259,6 +289,16 @@ class Localize {
     );
   }
 
+  /// `E I N S T E L L U N G E N`
+  String get settingsScreenTitle {
+    return Intl.message(
+      'E I N S T E L L U N G E N',
+      name: 'settingsScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `WoW-Speicherort`
   String get settingsScreenWowPathLabel {
     return Intl.message(
@@ -304,6 +344,16 @@ class Localize {
     return Intl.message(
       'Scanne nach Laufwerken...',
       name: 'settingsScreenScanningForDrives',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Auf Laufwerk konnte nicht zugegriffen werden`
+  String get settingsScreenDriveAccessError {
+    return Intl.message(
+      'Auf Laufwerk konnte nicht zugegriffen werden',
+      name: 'settingsScreenDriveAccessError',
       desc: '',
       args: [],
     );
@@ -446,6 +496,246 @@ class Localize {
       name: 'settingsScreenScannedFiles',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Name: `
+  String get accountDataCardNameLabel {
+    return Intl.message(
+      'Name: ',
+      name: 'accountDataCardNameLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gilde: `
+  String get accountDataCardGuildLabel {
+    return Intl.message(
+      'Gilde: ',
+      name: 'accountDataCardGuildLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keine `
+  String get accountDataCardNoGuild {
+    return Intl.message(
+      'Keine ',
+      name: 'accountDataCardNoGuild',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gilde`
+  String get accountDataCardGuild {
+    return Intl.message(
+      'Gilde',
+      name: 'accountDataCardGuild',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fraktion: `
+  String get accountDataCardFactionLabel {
+    return Intl.message(
+      'Fraktion: ',
+      name: 'accountDataCardFactionLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zone: `
+  String get accountDataCardZoneLabel {
+    return Intl.message(
+      'Zone: ',
+      name: 'accountDataCardZoneLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Klasse: `
+  String get accountDataCardClassLabel {
+    return Intl.message(
+      'Klasse: ',
+      name: 'accountDataCardClassLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gold: `
+  String get accountDataCardGoldLabel {
+    return Intl.message(
+      'Gold: ',
+      name: 'accountDataCardGoldLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zuletzt Online: `
+  String get accountDataCardLastLogoutLabel {
+    return Intl.message(
+      'Zuletzt Online: ',
+      name: 'accountDataCardLastLogoutLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ID's`
+  String get accountDataCardInstancesTitle {
+    return Intl.message(
+      'ID\'s',
+      name: 'accountDataCardInstancesTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `NULL`
+  String get accountDataCardNullValue {
+    return Intl.message(
+      'NULL',
+      name: 'accountDataCardNullValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Keine Daten vorhanden!`
+  String get accountDataCardNoData {
+    return Intl.message(
+      'Keine Daten vorhanden!',
+      name: 'accountDataCardNoData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zurück`
+  String get accountAddPageBackButton {
+    return Intl.message(
+      'Zurück',
+      name: 'accountAddPageBackButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speichern`
+  String get accountAddPageSaveButton {
+    return Intl.message(
+      'Speichern',
+      name: 'accountAddPageSaveButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Listen Name`
+  String get accountAddPageListNameHint {
+    return Intl.message(
+      'Listen Name',
+      name: 'accountAddPageListNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Name`
+  String get accountAddPageAccountNameHint {
+    return Intl.message(
+      'Account Name',
+      name: 'accountAddPageAccountNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account Passwort`
+  String get accountAddPagePasswordHint {
+    return Intl.message(
+      'Account Passwort',
+      name: 'accountAddPagePasswordHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `reset`
+  String get accountScreenResetButton {
+    return Intl.message(
+      'reset',
+      name: 'accountScreenResetButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update erforderlich: {message}`
+  String splashScreenUpdateRequired(Object message) {
+    return Intl.message(
+      'Update erforderlich: $message',
+      name: 'splashScreenUpdateRequired',
+      desc: '',
+      args: [message],
+    );
+  }
+
+  /// `Wartung`
+  String get splashScreenMaintenance {
+    return Intl.message(
+      'Wartung',
+      name: 'splashScreenMaintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Eula nicht akzeptiert`
+  String get splashScreenEulaNotAccepted {
+    return Intl.message(
+      'Eula nicht akzeptiert',
+      name: 'splashScreenEulaNotAccepted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Erste Initialisierung`
+  String get splashScreenInitializedFirstStart {
+    return Intl.message(
+      'Erste Initialisierung',
+      name: 'splashScreenInitializedFirstStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `initialisiert`
+  String get splashScreenInitialized {
+    return Intl.message(
+      'initialisiert',
+      name: 'splashScreenInitialized',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `blockierender Fehler: {message}`
+  String splashScreenBlockingError(Object message) {
+    return Intl.message(
+      'blockierender Fehler: $message',
+      name: 'splashScreenBlockingError',
+      desc: '',
+      args: [message],
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/log.dart';
+import '../../localization/generated/l10n.dart';
 import '../../widgets/my_appbar.dart';
 import 'widgets/settings_screen_content.dart';
 
@@ -8,9 +8,10 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: MyAppbar(title: 'E I N S T E L L U N G E N'),
-      body: Padding(
+    final locales = Localize.of(context);
+    return Scaffold(
+      appBar: MyAppbar(title: locales.settingsScreenTitle),
+      body: const Padding(
         padding: EdgeInsets.all(24.0),
         child: SettingsScreenContent(),
       ),

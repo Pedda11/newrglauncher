@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twodotnulllauncher/navigation/cubit/backup_cubit.dart';
+import 'package:twodotnulllauncher/screens/event/event_screen.dart';
 import '../localization/generated/l10n.dart';
 import '../repository/main_repository.dart';
 import '../repository/preferences_repository.dart';
@@ -60,6 +61,7 @@ class _NavigationPaneState extends State<NavigationPane> {
     final List<Widget> screens = [
       const AccountScreen(),
       const SettingsScreen(),
+      const EventScreen(),
     ];
     return MultiBlocProvider(
       providers: [
@@ -96,8 +98,12 @@ class _NavigationPaneState extends State<NavigationPane> {
                   icon: const Icon(Icons.settings),
                   label: Text(locales.menuItemSettings),
                 ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.event),
+                  label: Text(locales.menuItemSettings),
+                ),
               ],
-              selectedIndex: 0,
+              selectedIndex: _selectedIndex,
               onDestinationSelected: (int index) {
                 if (index == 0) {
                   if (settingsRepository.secondsToWaitForGameToStart == null ||
@@ -133,6 +139,11 @@ class _NavigationPaneState extends State<NavigationPane> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              Text(
+                                'Backup in progress',
+                                style: theme.textTheme.headlineLarge?.copyWith(
+                                    color: theme.colorScheme.onPrimary),
+                              ),
                               progress <= 0.9
                                   ? Text(
                                       '$processedFiles/$totalFiles - ${(progress * 100).toStringAsFixed(2)}%',

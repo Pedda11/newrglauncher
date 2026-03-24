@@ -117,12 +117,12 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                               builder: (context) => AlertDialog(
                                 title: Text(locales
                                     .settingsScreenSetWowPathManuallyDriveException),
-                                content:
-                                    Text('Could not access drive $drive\n\n$e'),
+                                content: Text(
+                                    '${locales.settingsScreenDriveAccessError} $drive\n\n$e'),
                                 actions: [
                                   TextButton(
                                     onPressed: () => Navigator.pop(context),
-                                    child: const Text('OK'),
+                                    child: Text(locales.ok),
                                   )
                                 ],
                               ),

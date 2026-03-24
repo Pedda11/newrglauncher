@@ -42,7 +42,7 @@ class AccountListPageContent extends StatelessWidget {
                           barrierDismissible: false,
                           context: context,
                           builder: (context) => AlertDialog(
-                            title: const Text('Error'),
+                            title: Text(locales.error),
                             content: Text(errorMsg),
                             actions: [
                               TextButton(
@@ -147,7 +147,7 @@ class AccountListPageContent extends StatelessWidget {
                     barrierDismissible: false,
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: Text('Error'),
+                      title: Text(locales.error),
                       content: Text(errorMsg),
                       actions: [
                         TextButton(

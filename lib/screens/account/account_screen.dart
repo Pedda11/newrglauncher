@@ -62,7 +62,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     onPressed: () {
                       context.read<PreferencesRepository>().deleteAll();
                     },
-                    child: const Text('reset'))
+                    child: Text(locales.accountScreenResetButton))
                 : Container()
           ],
         ),
