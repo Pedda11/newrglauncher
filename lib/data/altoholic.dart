@@ -56,10 +56,12 @@ class Altoholic {
         String guildName = '';
         String guildRank = '';
         String money = '';
+        int moneyCopper = 0;
+        String lastLogout = '';
+        int lastLogoutTimestamp = 0;
         String charClass = '';
         String zone = '';
         String subZone = '';
-        String lastLogout = '';
 
         for (var n in val.entries) {
           if (n.key == 'faction') {
@@ -69,7 +71,8 @@ class Altoholic {
           } else if (n.key == 'guildRankName') {
             guildRank = n.value ?? '';
           } else if (n.key == 'money') {
-            money = formatCoins(n.value);
+            moneyCopper = n.value ?? 0;
+            money = formatCoins(moneyCopper);
           } else if (n.key == 'class') {
             charClass = n.value ?? '';
           } else if (n.key == 'zone') {
@@ -77,22 +80,26 @@ class Altoholic {
           } else if (n.key == 'subZone') {
             subZone = n.value ?? '';
           } else if (n.key == 'lastLogoutTimestamp') {
-            lastLogout = Utils.timeSpanToDateTime(n.value);
+            lastLogoutTimestamp = n.value ?? 0;
+            lastLogout = Utils.timeSpanToDateTime(lastLogoutTimestamp);
           }
         }
 
         list.add(
           Character(
-              name: name,
-              faction: faction,
-              guildName: guildName,
-              guildRank: guildRank,
-              charClass: charClass,
-              zone: zone,
-              subZone: subZone,
-              money: money,
-              lastLogout: lastLogout,
-              savedInstances: []),
+            name: name,
+            faction: faction,
+            guildName: guildName,
+            guildRank: guildRank,
+            charClass: charClass,
+            zone: zone,
+            subZone: subZone,
+            money: money,
+            lastLogout: lastLogout,
+            savedInstances: [],
+            moneyCopper: moneyCopper,
+            lastLogoutTimestamp: lastLogoutTimestamp,
+          ),
         );
       }
     }

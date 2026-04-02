@@ -26,6 +26,7 @@
 - data(folder)
 - flutter_windows.dll
 - launcher_version.txt
+    - → contains the version of the launcher, e.g. 1.0.0
 - twodotnulllauncher.exe
 
 ### Content of the setup_release.zip:

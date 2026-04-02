@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twodotnulllauncher/navigation/cubit/backup_cubit.dart';
+import 'package:twodotnulllauncher/screens/backup/backup_screen.dart';
 import 'package:twodotnulllauncher/screens/event/event_screen.dart';
 import '../localization/generated/l10n.dart';
 import '../repository/main_repository.dart';
@@ -12,6 +13,7 @@ import '../screens/account/account_screen.dart';
 import '../screens/account/cubit/account_cubit/account_screen_cubit.dart';
 import '../screens/account/cubit/character_cubit/character_data_cubit.dart';
 import '../screens/account/pages/account_add/cubit/account_add_page_cubit.dart';
+import '../screens/gold_trend/gold_trend_chart_screen.dart';
 import '../screens/settings/settings_screen.dart';
 import '../widgets/log.dart';
 
@@ -43,7 +45,7 @@ class _NavigationPaneState extends State<NavigationPane> {
   }
 
   Future<void> _beforeExit() async {
-    await Log.i('Launcher shutting down');
+    await Log.i('_beforeExit');
 
     final cubit = context.read<BackupCubit>();
     await cubit.startBackup();
@@ -62,6 +64,7 @@ class _NavigationPaneState extends State<NavigationPane> {
       const AccountScreen(),
       const SettingsScreen(),
       const EventScreen(),
+      const GoldTrendChartScreen(),
     ];
     return MultiBlocProvider(
       providers: [
@@ -102,6 +105,10 @@ class _NavigationPaneState extends State<NavigationPane> {
                   icon: const Icon(Icons.event),
                   label: Text(locales.menuItemSettings),
                 ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.area_chart),
+                  label: Text(locales.menuItemSettings),
+                ),
               ],
               selectedIndex: _selectedIndex,
               onDestinationSelected: (int index) {
@@ -133,38 +140,10 @@ class _NavigationPaneState extends State<NavigationPane> {
                   orElse: () => Expanded(child: screens[_selectedIndex]),
                   backUpProgress: (processedFiles, totalFiles, progress) {
                     return Expanded(
-                      child: Container(
-                        color: Colors.blue,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Backup in progress',
-                                style: theme.textTheme.headlineLarge?.copyWith(
-                                    color: theme.colorScheme.onPrimary),
-                              ),
-                              progress <= 0.9
-                                  ? Text(
-                                      '$processedFiles/$totalFiles - ${(progress * 100).toStringAsFixed(2)}%',
-                                      style: theme.textTheme.headlineLarge
-                                          ?.copyWith(
-                                              color:
-                                                  theme.colorScheme.onPrimary),
-                                    )
-                                  : Text(
-                                      'Finalizing. Please be patient',
-                                      style: theme.textTheme.headlineLarge
-                                          ?.copyWith(
-                                              color:
-                                                  theme.colorScheme.onPrimary),
-                                    ),
-                              const SizedBox(height: 20),
-                              const CircularProgressIndicator(),
-                            ],
-                          ),
-                        ),
-                      ),
+                      child: BackupScreen(
+                          processedFiles: processedFiles,
+                          totalFiles: totalFiles,
+                          progress: progress),
                     );
                   },
                   backupFailed: (errorMsg) {

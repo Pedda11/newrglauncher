@@ -85,6 +85,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "accountListPageAddAccountBtn": MessageLookupByLibrary.simpleMessage(
       "Account hinzufügen",
     ),
+    "accountListPageNoAccountsLabel": MessageLookupByLibrary.simpleMessage(
+      "Keine Accounts gespeichert",
+    ),
     "accountListPageTitle": MessageLookupByLibrary.simpleMessage(
       "Account Liste",
     ),

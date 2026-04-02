@@ -28,6 +28,7 @@
   "accountAddPageRealmLabel": "Realm/Logon Server",
   "accountListPageTitle": "Account List",
   "accountListPageAddAccountBtn": "Add Account",
+  "accountListPageNoAccountsLabel": "No accounts saved",
   "settingsScreenTitle": "S E T T I N G S",
   "settingsScreenWowPathLabel": "WoW Location",
   "settingsScreenWowPathMissingLabel": "WoW Path not set yet",

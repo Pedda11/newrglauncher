@@ -9,15 +9,15 @@ class CredentialRepository {
   static const int _credType = CRED_TYPE_GENERIC;
   static const int _persist = CRED_PERSIST_LOCAL_MACHINE;
 
-  String _credentialKey(int accountId) {
-    return 'pedda_launcher_account_$accountId';
+  String _credentialKey(String accountUuid) {
+    return 'pedda_launcher_account_$accountUuid';
   }
 
-  Future<void> savePassword(int accountId, String password) async {
-    final targetNamePtr = _credentialKey(accountId).toNativeUtf16();
-    final userNamePtr = 'account_$accountId'.toNativeUtf16();
+  Future<void> savePassword(String accountUuid, String password) async {
+    final targetNamePtr = _credentialKey(accountUuid).toNativeUtf16();
+    final userNamePtr = 'account_$accountUuid'.toNativeUtf16();
 
-    await Log.i('Saving credential for accountId: $accountId');
+    await Log.i('Saving credential for accountUuId: $accountUuid');
 
     final passwordBytes = utf8.encode(password);
     final blobPtr = calloc<Uint8>(passwordBytes.length);
@@ -29,7 +29,7 @@ class CredentialRepository {
     final credentialPtr = calloc<CREDENTIAL>();
 
     await Log.i(
-        'Prepared credential structure for accountId: $accountId, attempting to write to Windows Credential Manager');
+        'Prepared credential structure for accountId: $accountUuid, attempting to write to Windows Credential Manager');
 
     try {
       credentialPtr.ref.Flags = 0;
@@ -48,7 +48,7 @@ class CredentialRepository {
 
       final result = CredWrite(credentialPtr, 0);
 
-      await Log.i('CredWrite result for accountId: $accountId: $result');
+      await Log.i('CredWrite result for accountId: $accountUuid: $result');
 
       if (result == 0) {
         final error = GetLastError();
@@ -56,7 +56,7 @@ class CredentialRepository {
       }
     } finally {
       await Log.i(
-          'Finished attempting to save credential for accountId: $accountId, freeing allocated memory');
+          'Finished attempting to save credential for accountId: $accountUuid, freeing allocated memory');
       calloc.free(credentialPtr);
       calloc.free(blobPtr);
       calloc.free(targetNamePtr);
@@ -64,11 +64,11 @@ class CredentialRepository {
     }
   }
 
-  Future<String?> readPassword(int accountId) async {
-    final targetNamePtr = _credentialKey(accountId).toNativeUtf16();
+  Future<String?> readPassword(String accountUuid) async {
+    final targetNamePtr = _credentialKey(accountUuid).toNativeUtf16();
     final credentialOutPtr = calloc<Pointer<CREDENTIAL>>();
 
-    await Log.i('Attempting to read credential for accountId: $accountId');
+    await Log.i('Attempting to read credential for accountUuId: $accountUuid');
 
     try {
       final result = CredRead(targetNamePtr, _credType, 0, credentialOutPtr);
@@ -90,14 +90,14 @@ class CredentialRepository {
       if (blobSize == 0 || credentialPtr.ref.CredentialBlob == nullptr) {
         CredFree(credentialPtr);
         await Log.i(
-            'Credential blob is empty or null for accountId: $accountId');
+            'Credential blob is empty or null for accountId: $accountUuid');
         return null;
       }
 
       final blobBytes = credentialPtr.ref.CredentialBlob.asTypedList(blobSize);
       final password = utf8.decode(blobBytes);
 
-      await Log.i('Successfully read credential for accountId: $accountId');
+      await Log.i('Successfully read credential for accountId: $accountUuid');
       CredFree(credentialPtr);
       return password;
     } finally {
@@ -106,10 +106,10 @@ class CredentialRepository {
     }
   }
 
-  Future<void> deletePassword(int accountId) async {
-    final targetNamePtr = _credentialKey(accountId).toNativeUtf16();
+  Future<void> deletePassword(String accountUuid) async {
+    final targetNamePtr = _credentialKey(accountUuid).toNativeUtf16();
 
-    await Log.i('Attempting to delete credential for accountId: $accountId');
+    await Log.i('Attempting to delete credential for accountId: $accountUuid');
 
     try {
       final result = CredDelete(targetNamePtr, _credType, 0);
@@ -126,7 +126,7 @@ class CredentialRepository {
       }
     } finally {
       await Log.i(
-          'Finished attempting to delete credential for accountId: $accountId, freeing allocated memory');
+          'Finished attempting to delete credential for accountUuId: $accountUuid, freeing allocated memory');
       calloc.free(targetNamePtr);
     }
   }

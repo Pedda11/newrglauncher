@@ -27,6 +27,7 @@
   "accountAddPagePasswordLabel": "Account Passwort",
   "accountAddPageRealmLabel": "Realm/Logonserver",
   "accountListPageTitle": "Account Liste",
+  "accountListPageNoAccountsLabel": "Keine Accounts gespeichert",
   "accountListPageAddAccountBtn": "Account hinzufügen",
   "settingsScreenTitle": "E I N S T E L L U N G E N",
   "settingsScreenWowPathLabel": "WoW-Speicherort",

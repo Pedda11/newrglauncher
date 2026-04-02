@@ -13,4 +13,18 @@ class Paths {
   static String launcherDir() => '${installRoot()}\\launcher';
 
   static String updatesDir() => '${installRoot()}\\updates';
+
+  /// New: Data directory
+  static String dataDir() => '${installRoot()}\\data';
+
+  /// New: Gold history file path
+  static String goldHistoryFile() => '${dataDir()}\\gold_history.json';
+
+  /// Optional helper: ensure directory exists
+  static Future<void> ensureDataDirExists() async {
+    final dir = Directory(dataDir());
+    if (!await dir.exists()) {
+      await dir.create(recursive: true);
+    }
+  }
 }

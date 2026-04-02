@@ -4,6 +4,9 @@ import 'dart:isolate';
 import 'dart:typed_data';
 import 'package:archive/archive.dart';
 import 'package:path/path.dart' as p;
+import 'package:twodotnulllauncher/helper/report_sanitizer.dart';
+
+import '../../widgets/log.dart';
 
 class BackupProgressData {
   final int processedFiles;
@@ -56,6 +59,7 @@ class BackupService {
     Isolate? isolate;
 
     try {
+      await Log.i('Starting backup isolate');
       isolate = await Isolate.spawn<_BackupIsolateRequest>(
         _backupIsolateEntry,
         _BackupIsolateRequest(
@@ -190,6 +194,8 @@ Future<void> _backupIsolateEntry(_BackupIsolateRequest request) async {
       'currentFilePath': null,
     });
 
+    await Log.i('Collecting files for backup');
+
     final archive = Archive();
     var processedFiles = 0;
 
@@ -211,17 +217,17 @@ Future<void> _backupIsolateEntry(_BackupIsolateRequest request) async {
       });
     }
 
+    await Log.i('Finalizing backup');
+
     request.sendPort.send({'type': 'finalizing'});
 
     final zipData = ZipEncoder().encode(archive);
 
-    if (zipData == null) {
-      throw FileSystemException('Could not encode backup zip');
-    }
-
     final timestamp = _buildTimestamp(DateTime.now());
     final zipFileName = '${timestamp}_WTF_backup.zip';
     final zipFilePath = p.join(request.backupFolderPath, zipFileName);
+
+    await Log.i('Writing backup to $zipFilePath');
 
     final zipFile = File(zipFilePath);
     await zipFile.writeAsBytes(Uint8List.fromList(zipData), flush: true);

@@ -73,6 +73,11 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
     }
   }
 
+  Future<void> editAccount(Account acc) async {
+    mainRepository.account = acc;
+    emit(const AccountScreenState.editAccount());
+  }
+
   void deleteSingleAccount(Account acc) async {
     try {
       await Log.i('Deleting account with id: ${acc.accId}');
@@ -87,7 +92,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
         accStringList.add(accountString);
       }
 
-      CredentialRepository().deletePassword(acc.accId);
+      CredentialRepository().deletePassword(acc.uniqueId);
 
       await preferencesRepository.setAccounts(accStringList);
 
@@ -114,6 +119,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
   }
 
   void goToAccountAddPage() {
+    emit(const AccountScreenState.initialized());
     emit(const AccountScreenState.goToAddAccountPage());
   }
 
@@ -210,7 +216,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       await Future.delayed(
           Duration(seconds: settingsRepository.secondsToWaitForGameToStart!));
 
-      final accPasswd = await CredentialRepository().readPassword(acc.accId);
+      final accPasswd = await CredentialRepository().readPassword(acc.uniqueId);
 
       if (accPasswd == null) {
         await Log.i('Password not found in Credential Manager.');

@@ -8,7 +8,11 @@ import '../../../../data/altoholic.dart';
 import '../../../../helper/error_report_builder.dart';
 import '../../../../repository/error_report_repository.dart';
 import '../../../../repository/error_repository.dart';
+import '../../../../repository/gold_history_repository.dart';
 import '../../../../repository/main_repository.dart';
+import '../../../../services/gold_trend/gold_aggregation_service.dart';
+import '../../../../services/gold_trend/gold_history_service.dart';
+import '../../../../utils/gold_snapshot_builder.dart';
 import '../../../../widgets/log.dart';
 
 part 'character_data_state.dart';
@@ -91,13 +95,84 @@ class CharacterDataCubit extends Cubit<CharacterDataState> {
       var altoInstances = File(savedInstancesPathAltoholic);
       final charInstances = await altoInstances.readAsString();
 
-      mainRepository.accountList
-          .firstWhere((element) => element.accountName == acc.accountName)
-          .accChars = Altoholic.getCharData(charData, charInstances);
-      emit(CharacterDataState.accountLoaded(
-          characterList: mainRepository.accountList
-              .firstWhere((element) => element.accountName == acc.accountName)
-              .accChars));
+      final characters = Altoholic.getCharData(charData, charInstances);
+
+      final accountInList = mainRepository.accountList.firstWhere(
+        (element) => element.accountName == acc.accountName,
+      );
+
+      accountInList.accChars = characters;
+
+      final goldSnapshots = GoldSnapshotBuilder.buildGoldSnapshots(
+        accountName: acc.accountName.toUpperCase(),
+        characters: characters,
+      );
+
+      if (acc.includeInGoldTrend) {
+        final goldHistoryRepository = GoldHistoryRepository();
+
+        final goldHistoryService = GoldHistoryService();
+
+        final existingSnapshots = await goldHistoryRepository.readSnapshots();
+
+        final mergedSnapshots = goldHistoryService.mergeSnapshots(
+          existingSnapshots: existingSnapshots,
+          incomingSnapshots: goldSnapshots,
+        );
+
+        await goldHistoryRepository.writeSnapshots(mergedSnapshots);
+
+        await Log.i(
+          'Gold history updated for account: ${acc.accId}, existing: ${existingSnapshots.length}, incoming: ${goldSnapshots.length}, merged: ${mergedSnapshots.length}',
+        );
+      }
+
+      final goldHistoryRepository = GoldHistoryRepository();
+      final goldAggregationService = GoldAggregationService();
+
+      final snapshots = await goldHistoryRepository.readSnapshots();
+      final totalCopper =
+          goldAggregationService.calculateCurrentTotalGoldCopper(snapshots);
+
+      await Log.i('Current total gold copper: $totalCopper');
+      await Log.i(
+        'Current total gold formatted: ${Altoholic.formatCoins(totalCopper)}',
+      );
+      final goldTimeline =
+          goldAggregationService.buildTotalGoldTimeline(snapshots);
+
+      final dailyGoldTimeline =
+          goldAggregationService.compressTimelineToDailyLastValue(goldTimeline);
+
+      for (final element in dailyGoldTimeline) {
+        await Log.i(
+          'Daily Snapshot: ${element.lastLogoutTimestamp} -> ${element.goldCopper}',
+        );
+      }
+
+      final chartPoints =
+          goldAggregationService.buildChartPoints(dailyGoldTimeline);
+
+      for (final p in chartPoints) {
+        await Log.i('${p.date} -> ${p.gold}');
+      }
+
+      final forecastPoints =
+          goldAggregationService.buildForecastPoints(chartPoints);
+
+      for (final p in forecastPoints) {
+        await Log.i('Forecast: ${p.date} -> ${p.gold}');
+      }
+
+      await Log.i(
+        'Built ${goldSnapshots.length} gold snapshots for accountId: ${acc.accId}',
+      );
+
+      emit(
+        CharacterDataState.accountLoaded(
+          characterList: accountInList.accChars,
+        ),
+      );
       await Log.i(
           'Finished loading character data for account: ${acc.accId}, total characters loaded: ${mainRepository.accountList.firstWhere((element) => element.accountName == acc.accountName).accChars?.length ?? 0}');
     } catch (e, st) {

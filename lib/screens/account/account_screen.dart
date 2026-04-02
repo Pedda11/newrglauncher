@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twodotnulllauncher/repository/preferences_repository.dart';
+import '../../data/account.dart';
 import '../../localization/generated/l10n.dart';
 import '../../widgets/my_appbar.dart';
 import 'cubit/account_cubit/account_screen_cubit.dart';
@@ -19,6 +20,7 @@ class _AccountScreenState extends State<AccountScreen> {
   final _pageViewController = PageController();
   Duration pageTransitionDuration = const Duration(milliseconds: 300);
   final pageTransitionCurve = Curves.easeInOut;
+  late Account? account;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +38,10 @@ class _AccountScreenState extends State<AccountScreen> {
                   duration: pageTransitionDuration, curve: pageTransitionCurve);
             },
             goToAddAccountPage: () {
+              _pageViewController.animateToPage(1,
+                  duration: pageTransitionDuration, curve: pageTransitionCurve);
+            },
+            editAccount: () {
               _pageViewController.animateToPage(1,
                   duration: pageTransitionDuration, curve: pageTransitionCurve);
             },

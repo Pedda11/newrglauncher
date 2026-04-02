@@ -279,6 +279,16 @@ class Localize {
     );
   }
 
+  /// `Keine Accounts gespeichert`
+  String get accountListPageNoAccountsLabel {
+    return Intl.message(
+      'Keine Accounts gespeichert',
+      name: 'accountListPageNoAccountsLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Account hinzufügen`
   String get accountListPageAddAccountBtn {
     return Intl.message(

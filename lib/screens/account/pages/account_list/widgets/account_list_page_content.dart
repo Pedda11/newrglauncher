@@ -6,6 +6,7 @@ import '../../../../../repository/error_repository.dart';
 import '../../../../../repository/main_repository.dart';
 import '../../../cubit/account_cubit/account_screen_cubit.dart';
 import '../../../cubit/character_cubit/character_data_cubit.dart';
+import '../cubit/acc_list_page_cubit.dart';
 import 'account_card.dart';
 import 'account_data_card.dart';
 
@@ -14,8 +15,8 @@ class AccountListPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mainRepository = context.read<MainRepository>();
     final screenCubit = context.read<AccountScreenCubit>()..initialize();
+    final pageCubit = context.read<AccListPageCubit>();
     final characterDataCubit = context.read<CharacterDataCubit>();
     final locales = Localize.of(context);
     return Row(
@@ -37,6 +38,9 @@ class AccountListPageContent extends StatelessWidget {
                 child: BlocConsumer<AccountScreenCubit, AccountScreenState>(
                   listener: (context, state) {
                     state.whenOrNull(
+                      initialized: () {
+                        pageCubit.loadAccounts();
+                      },
                       failed: (errorMsg) {
                         return showDialog(
                           barrierDismissible: false,
@@ -59,46 +63,103 @@ class AccountListPageContent extends StatelessWidget {
                   },
                   builder: (context, state) {
                     return state.maybeWhen(
-                      initialized: () => ListView.builder(
-                        itemCount: mainRepository.accountList.length,
-                        itemBuilder: (context, index) {
-                          return Slidable(
-                            endActionPane: ActionPane(
-                              motion: const StretchMotion(),
-                              children: [
-                                SlidableAction(
-                                  spacing: 20,
-                                  foregroundColor: Colors.red,
-                                  icon: Icons.delete,
-                                  borderRadius: BorderRadius.circular(8),
-                                  flex: 1,
-                                  onPressed: (context) => {
-                                    screenCubit.deleteSingleAccount(
-                                        mainRepository.accountList[index]),
+                      initialized: () {
+                        return BlocBuilder<AccListPageCubit, AccListPageState>(
+                            builder: (context, state) => state.maybeWhen(
+                                  orElse: () {
+                                    return const Center(
+                                        child: CircularProgressIndicator());
                                   },
-                                )
-                              ],
-                            ),
-                            child: GestureDetector(
-                              child: AccountCard(
-                                acc: mainRepository.accountList[index],
-                              ),
-                              onTap: () {
-                                characterDataCubit.getAccountDetails(
-                                    mainRepository.accountList[index]);
-                              },
-                              onDoubleTap: () {
-                                screenCubit.startGame(
-                                    mainRepository.accountList[index]);
-                              },
-                            ),
-                          );
-                        },
-                      ),
+                                  reordered: (accounts) {
+                                    return ReorderableListView.builder(
+                                        buildDefaultDragHandles: false,
+                                        itemBuilder: (context, index) {
+                                          return Padding(
+                                            key: ValueKey(
+                                                accounts[index].uniqueId),
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 4.0),
+                                            child: Slidable(
+                                              endActionPane: ActionPane(
+                                                motion: const StretchMotion(),
+                                                extentRatio: 0.25,
+                                                children: [
+                                                  SlidableAction(
+                                                    foregroundColor: Colors.red,
+                                                    icon: Icons.delete,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    onPressed: (context) => {
+                                                      screenCubit
+                                                          .deleteSingleAccount(
+                                                              accounts[index]),
+                                                    },
+                                                  ),
+                                                  SlidableAction(
+                                                    foregroundColor:
+                                                        Colors.green,
+                                                    icon: Icons.edit,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    onPressed: (context) => {
+                                                      screenCubit.editAccount(
+                                                          accounts[index]),
+                                                    },
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  ReorderableDragStartListener(
+                                                    index: index,
+                                                    child: const Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 8),
+                                                      child: Icon(
+                                                          Icons.drag_handle),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        characterDataCubit
+                                                            .getAccountDetails(
+                                                                accounts[
+                                                                    index]);
+                                                      },
+                                                      onDoubleTap: () {
+                                                        screenCubit.startGame(
+                                                            accounts[index]);
+                                                      },
+                                                      child: AccountCard(
+                                                          acc: accounts[index]),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        itemCount: accounts.length,
+                                        onReorder: (oldIndex, newIndex) {
+                                          pageCubit.reorderAccounts(
+                                              oldIndex, newIndex);
+                                        });
+                                  },
+                                ));
+                      },
                       initial: () {
                         screenCubit.loadAccounts();
                         return const Center(
                           child: CircularProgressIndicator(),
+                        );
+                      },
+                      goToAddAccountPage: () {
+                        return Center(
+                          child: Text(locales.accountListPageNoAccountsLabel),
                         );
                       },
                       orElse: () {

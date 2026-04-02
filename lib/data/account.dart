@@ -13,22 +13,27 @@ String userToJson(List<Account> data) =>
 
 class Account {
   int accId;
+  String uniqueId;
   String listName;
   String accountName;
   String accountRealm;
   List<Character>? accChars;
+  bool includeInGoldTrend;
 
   Account({
     required this.accId,
+    required this.uniqueId,
     required this.listName,
     required this.accountName,
     required this.accountRealm,
     required this.accChars,
+    required this.includeInGoldTrend,
   });
 
   /// Factory method to create a User object from a JSON map.
   factory Account.fromJson(Map<String, dynamic> json) => Account(
         accId: json["accId"],
+        uniqueId: json["uniqueId"],
         listName: json["listName"],
         accountName: json["accountName"],
         accountRealm: json["accountRealm"],
@@ -36,16 +41,19 @@ class Account {
             ? List<Character>.from(
                 json["accChars"].map((x) => Character.fromJson(x)))
             : null,
+        includeInGoldTrend: json["includeInGoldTrend"] ?? false,
       );
 
   /// Convert the User object to a JSON map.
   Map<String, dynamic> toJson() => {
         "accId": accId,
+        "uniqueId": uniqueId,
         "listName": listName,
         "accountName": accountName,
         "accountRealm": accountRealm,
         "accChars": accChars != null
             ? List<dynamic>.from(accChars!.map((x) => x.toJson()))
             : null,
+        "includeInGoldTrend": includeInGoldTrend,
       };
 }

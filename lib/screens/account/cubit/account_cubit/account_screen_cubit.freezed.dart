@@ -20,15 +20,6 @@ mixin _$AccountScreenState implements DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is AccountScreenState);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AccountScreenState()';
   }
@@ -60,6 +51,7 @@ extension AccountScreenStatePatterns on AccountScreenState {
     TResult Function(_initialized value)? initialized,
     TResult Function(_accountAdded value)? accountAdded,
     TResult Function(_deletingAccount value)? deletingAccount,
+    TResult Function(_editAccount value)? editAccount,
     TResult Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
@@ -74,6 +66,8 @@ extension AccountScreenStatePatterns on AccountScreenState {
         return accountAdded(_that);
       case _deletingAccount() when deletingAccount != null:
         return deletingAccount(_that);
+      case _editAccount() when editAccount != null:
+        return editAccount(_that);
       case _goToAddAccountPage() when goToAddAccountPage != null:
         return goToAddAccountPage(_that);
       case _failed() when failed != null:
@@ -102,6 +96,7 @@ extension AccountScreenStatePatterns on AccountScreenState {
     required TResult Function(_initialized value) initialized,
     required TResult Function(_accountAdded value) accountAdded,
     required TResult Function(_deletingAccount value) deletingAccount,
+    required TResult Function(_editAccount value) editAccount,
     required TResult Function(_goToAddAccountPage value) goToAddAccountPage,
     required TResult Function(_failed value) failed,
   }) {
@@ -115,6 +110,8 @@ extension AccountScreenStatePatterns on AccountScreenState {
         return accountAdded(_that);
       case _deletingAccount():
         return deletingAccount(_that);
+      case _editAccount():
+        return editAccount(_that);
       case _goToAddAccountPage():
         return goToAddAccountPage(_that);
       case _failed():
@@ -142,6 +139,7 @@ extension AccountScreenStatePatterns on AccountScreenState {
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_accountAdded value)? accountAdded,
     TResult? Function(_deletingAccount value)? deletingAccount,
+    TResult? Function(_editAccount value)? editAccount,
     TResult? Function(_goToAddAccountPage value)? goToAddAccountPage,
     TResult? Function(_failed value)? failed,
   }) {
@@ -155,6 +153,8 @@ extension AccountScreenStatePatterns on AccountScreenState {
         return accountAdded(_that);
       case _deletingAccount() when deletingAccount != null:
         return deletingAccount(_that);
+      case _editAccount() when editAccount != null:
+        return editAccount(_that);
       case _goToAddAccountPage() when goToAddAccountPage != null:
         return goToAddAccountPage(_that);
       case _failed() when failed != null:
@@ -182,6 +182,7 @@ extension AccountScreenStatePatterns on AccountScreenState {
     TResult Function()? initialized,
     TResult Function()? accountAdded,
     TResult Function()? deletingAccount,
+    TResult Function()? editAccount,
     TResult Function()? goToAddAccountPage,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
@@ -196,6 +197,8 @@ extension AccountScreenStatePatterns on AccountScreenState {
         return accountAdded();
       case _deletingAccount() when deletingAccount != null:
         return deletingAccount();
+      case _editAccount() when editAccount != null:
+        return editAccount();
       case _goToAddAccountPage() when goToAddAccountPage != null:
         return goToAddAccountPage();
       case _failed() when failed != null:
@@ -224,6 +227,7 @@ extension AccountScreenStatePatterns on AccountScreenState {
     required TResult Function() initialized,
     required TResult Function() accountAdded,
     required TResult Function() deletingAccount,
+    required TResult Function() editAccount,
     required TResult Function() goToAddAccountPage,
     required TResult Function(String errorMsg) failed,
   }) {
@@ -237,6 +241,8 @@ extension AccountScreenStatePatterns on AccountScreenState {
         return accountAdded();
       case _deletingAccount():
         return deletingAccount();
+      case _editAccount():
+        return editAccount();
       case _goToAddAccountPage():
         return goToAddAccountPage();
       case _failed():
@@ -264,6 +270,7 @@ extension AccountScreenStatePatterns on AccountScreenState {
     TResult? Function()? initialized,
     TResult? Function()? accountAdded,
     TResult? Function()? deletingAccount,
+    TResult? Function()? editAccount,
     TResult? Function()? goToAddAccountPage,
     TResult? Function(String errorMsg)? failed,
   }) {
@@ -277,6 +284,8 @@ extension AccountScreenStatePatterns on AccountScreenState {
         return accountAdded();
       case _deletingAccount() when deletingAccount != null:
         return deletingAccount();
+      case _editAccount() when editAccount != null:
+        return editAccount();
       case _goToAddAccountPage() when goToAddAccountPage != null:
         return goToAddAccountPage();
       case _failed() when failed != null:
@@ -298,15 +307,6 @@ class _initial with DiagnosticableTreeMixin implements AccountScreenState {
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _initial);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AccountScreenState.initial()';
   }
@@ -324,15 +324,6 @@ class _initialized with DiagnosticableTreeMixin implements AccountScreenState {
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _initialized);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AccountScreenState.initialized()';
   }
@@ -348,15 +339,6 @@ class _accountAdded with DiagnosticableTreeMixin implements AccountScreenState {
     properties
       ..add(DiagnosticsProperty('type', 'AccountScreenState.accountAdded'));
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _accountAdded);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -378,17 +360,25 @@ class _deletingAccount
   }
 
   @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _deletingAccount);
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'AccountScreenState.deletingAccount()';
+  }
+}
+
+/// @nodoc
+
+class _editAccount with DiagnosticableTreeMixin implements AccountScreenState {
+  const _editAccount();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'AccountScreenState.editAccount'));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AccountScreenState.deletingAccount()';
+    return 'AccountScreenState.editAccount()';
   }
 }
 
@@ -405,15 +395,6 @@ class _goToAddAccountPage
       ..add(
           DiagnosticsProperty('type', 'AccountScreenState.goToAddAccountPage'));
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _goToAddAccountPage);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -441,18 +422,6 @@ class _failed with DiagnosticableTreeMixin implements AccountScreenState {
       ..add(DiagnosticsProperty('type', 'AccountScreenState.failed'))
       ..add(DiagnosticsProperty('errorMsg', errorMsg));
   }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _failed &&
-            (identical(other.errorMsg, errorMsg) ||
-                other.errorMsg == errorMsg));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, errorMsg);
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {

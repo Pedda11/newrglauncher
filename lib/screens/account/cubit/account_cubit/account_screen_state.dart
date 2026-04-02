@@ -1,6 +1,6 @@
 part of 'account_screen_cubit.dart';
 
-@freezed
+@Freezed(equal: false)
 class AccountScreenState with _$AccountScreenState {
   const factory AccountScreenState.initial() = _initial;
 
@@ -9,6 +9,8 @@ class AccountScreenState with _$AccountScreenState {
   const factory AccountScreenState.accountAdded() = _accountAdded;
 
   const factory AccountScreenState.deletingAccount() = _deletingAccount;
+
+  const factory AccountScreenState.editAccount() = _editAccount;
 
   const factory AccountScreenState.goToAddAccountPage() = _goToAddAccountPage;
 
