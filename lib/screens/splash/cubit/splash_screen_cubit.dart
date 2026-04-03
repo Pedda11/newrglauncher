@@ -7,6 +7,7 @@ import '../../../data/launcher_endpoints.dart';
 import '../../../helper/error_report_builder.dart';
 import '../../../repository/error_report_repository.dart';
 import '../../../repository/error_repository.dart';
+import '../../../widgets/gold_fake_history_test.dart';
 import '../../../widgets/log.dart';
 import '../core_functions/updater_promoter.dart';
 import '../core_functions/updater_update_finalizer.dart';
@@ -43,6 +44,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
   }
 
   Future<void> initialize() async {
+    await generateFakeGoldHistory();
     await Log.i('Update check started.');
     try {
       emit(const SplashScreenState.checkingForUpdates());

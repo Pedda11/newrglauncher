@@ -5,9 +5,11 @@ import '../data/gold_snapshot.dart';
 import '../widgets/paths.dart';
 
 class GoldHistoryRepository {
-  GoldHistoryRepository();
+  final String? customPath;
 
-  File get _file => File(Paths.goldHistoryFile());
+  GoldHistoryRepository({this.customPath});
+
+  File get _file => File(customPath ?? Paths.goldHistoryFile());
 
   Future<List<GoldSnapshot>> readSnapshots() async {
     if (!await _file.exists()) {

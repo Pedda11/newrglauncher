@@ -20,19 +20,19 @@ class Altoholic {
 
     String result = '';
     if (gold > 0) {
-      result += '$gold Gold';
+      result += '$gold G';
       if (silver > 0 || copper > 0) {
         result += ', ';
       }
     }
     if (silver > 0) {
-      result += '$silver Silber';
+      result += '$silver S';
       if (copper > 0) {
         result += ', ';
       }
     }
     if (copper > 0 || (gold == 0 && silver == 0 && copper == 0)) {
-      result += '$copper Kupfer';
+      result += '$copper C';
     }
 
     return result;

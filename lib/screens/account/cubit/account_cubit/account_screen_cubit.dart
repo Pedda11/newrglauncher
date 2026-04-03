@@ -15,6 +15,7 @@ import '../../../../repository/error_repository.dart';
 import '../../../../repository/main_repository.dart';
 import '../../../../repository/preferences_repository.dart';
 import '../../../../repository/settings_repository.dart';
+import '../../../../services/account_data_refresh_service.dart';
 import '../../../../widgets/log.dart';
 import 'package:path/path.dart' as p;
 
@@ -204,8 +205,6 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
     }
     await Log.i('Starting game for account: ${acc.accountName}');
     try {
-      //await startWowProcess();
-
       await startWowProcessLikeOldLauncher(
         wowRootPath: settingsRepository.wowRootFolderPath!,
         wowExecutableName: settingsRepository.wowExecutableName!,
@@ -244,46 +243,30 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       );
       emit(AccountScreenState.failed(errorMsg: e.toString()));
     }
-  }
+    try {
+      final refreshService = AccountDataRefreshService(
+        mainRepository: mainRepository,
+        settingsRepository: settingsRepository,
+      );
 
-  Future<Process> startWowProcess() async {
-    final wowRoot = settingsRepository.wowRootFolderPath;
-    final wowExeName = settingsRepository.wowExecutableName;
+      await refreshService.refreshAccount(acc);
+    } catch (e, st) {
+      await Log.i('Error while reading character data: ${e.toString()}');
+      final logTail = await LogReader.readLastLines(10);
 
-    if (wowRoot == null || wowRoot.isEmpty) {
-      throw StateError('WoW root path is missing.');
+      final report = await LauncherErrorReportBuilder.build(
+        errorMessage: e.toString(),
+        stackTrace: st.toString(),
+        logTail: logTail,
+      );
+
+      await ErrorReportRepository().uploadErrorReport(
+        app: 'launcher',
+        report: report,
+      );
+
+      emit(AccountScreenState.failed(errorMsg: e.toString()));
     }
-
-    if (wowExeName == null || wowExeName.isEmpty) {
-      throw StateError('WoW executable name is missing.');
-    }
-
-    final exePath = p.join(wowRoot, wowExeName);
-
-    await Log.i('Starting WoW process');
-    await Log.i('WoW root: $wowRoot');
-    await Log.i('WoW exe: $exePath');
-    await Log.i('WoW working directory: $wowRoot');
-
-    final exeFile = File(exePath);
-    if (!await exeFile.exists()) {
-      throw StateError('WoW executable not found: $exePath');
-    }
-
-    final process = await Process.start(
-      exePath,
-      const [],
-      workingDirectory: wowRoot,
-      runInShell: false,
-    );
-
-    /// Drain streams so no buffered output can block the process.
-    process.stdout.drain();
-    process.stderr.drain();
-
-    await Log.i('WoW process started with pid: ${process.pid}');
-
-    return process;
   }
 
   Future<void> startWowProcessLikeOldLauncher({
