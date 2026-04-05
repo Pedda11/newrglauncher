@@ -50,7 +50,7 @@ class _GoldTrendChartScreenContentState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 64, vertical: 16),
+      padding: const EdgeInsets.all(80),
       child: GoldTrendChartWidget(
         historyPoints: historyPoints,
         forecastPoints: forecastPoints,

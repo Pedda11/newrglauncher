@@ -73,5 +73,14 @@
   "splashScreenEulaNotAccepted": "Eula nicht akzeptiert",
   "splashScreenInitializedFirstStart": "Erste Initialisierung",
   "splashScreenInitialized": "initialisiert",
-  "splashScreenBlockingError": "blockierender Fehler: {message}"
+   "splashScreenBlockingError": "blockierender Fehler: {message}",
+   "goldTrendChartNoHistory": "Keine Gold-Historie vorhanden",
+   "goldTrendChartNoHistoryDescription": "Füge Accounts zum Gold-Trend-Tracking hinzu, um Daten zu sammeln.",
+   "goldTrendChartMinimumDataPoints": "Das Diagramm wird angezeigt, wenn mindestens zwei Datenpunkte erfasst sind.",
+   "goldTrendChartDataImprovement": "Mehr Daten verbessern die Genauigkeit im Laufe der Zeit.",
+   "goldTrendChartForecast": "Prognose",
+   "goldTrendChartHistory": "Historie",
+   "goldTrendChartGoldUnit": "Gold",
+   "eventScreenEmpty": "leer",
+   "accountAddPageIncludeInGoldTrend": "In Gold-Trend einbeziehen"
 }

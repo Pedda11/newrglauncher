@@ -34,6 +34,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Account Name",
     ),
     "accountAddPageBackButton": MessageLookupByLibrary.simpleMessage("Back"),
+    "accountAddPageIncludeInGoldTrend": MessageLookupByLibrary.simpleMessage(
+      "Include in Gold Trend",
+    ),
     "accountAddPageListNameHint": MessageLookupByLibrary.simpleMessage(
       "List Name",
     ),
@@ -106,6 +109,22 @@ class MessageLookup extends MessageLookupByLibrary {
       "I have read and accept the Eula",
     ),
     "eulaLabel": MessageLookupByLibrary.simpleMessage("Eula"),
+    "eventScreenEmpty": MessageLookupByLibrary.simpleMessage("empty"),
+    "goldTrendChartDataImprovement": MessageLookupByLibrary.simpleMessage(
+      "More data will improve accuracy over time.",
+    ),
+    "goldTrendChartForecast": MessageLookupByLibrary.simpleMessage("Forecast"),
+    "goldTrendChartGoldUnit": MessageLookupByLibrary.simpleMessage("Gold"),
+    "goldTrendChartHistory": MessageLookupByLibrary.simpleMessage("History"),
+    "goldTrendChartMinimumDataPoints": MessageLookupByLibrary.simpleMessage(
+      "The chart will appear after at least two data points are recorded.",
+    ),
+    "goldTrendChartNoHistory": MessageLookupByLibrary.simpleMessage(
+      "No gold history available yet",
+    ),
+    "goldTrendChartNoHistoryDescription": MessageLookupByLibrary.simpleMessage(
+      "Add accounts to the gold trend tracking to start collecting data.",
+    ),
     "menuItemSettings": MessageLookupByLibrary.simpleMessage("Settings"),
     "menuTitle": MessageLookupByLibrary.simpleMessage("M E N U"),
     "no": MessageLookupByLibrary.simpleMessage("No"),

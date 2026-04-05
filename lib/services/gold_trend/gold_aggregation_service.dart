@@ -117,69 +117,118 @@ class GoldAggregationService {
       return [];
     }
 
-    // Sort by date just in case
     final sorted = [...points]..sort((a, b) => a.date.compareTo(b.date));
 
-    // Take last 30 days (or all if less)
     final cutoffDate = sorted.last.date.subtract(const Duration(days: 30));
-
-    final recent = sorted.where((p) => p.date.isAfter(cutoffDate)).toList();
+    final recent = sorted.where((p) => !p.date.isBefore(cutoffDate)).toList();
 
     if (recent.length < 2) {
       return [];
     }
 
-    // Convert to numeric (days since first point)
     final startDate = recent.first.date;
+    final lastHistoryDate = sorted.last.date;
+    final maxObservedGold =
+        recent.map((e) => e.gold).reduce((a, b) => a > b ? a : b);
 
     final xs = <double>[];
     final ys = <double>[];
+    final ws = <double>[];
 
     for (final p in recent) {
-      final days = p.date.difference(startDate).inHours / 24.0;
-      xs.add(days);
-      ys.add(p.gold);
+      final x = p.date.difference(startDate).inHours / 24.0;
+      final y = p.gold;
+
+      final ageFromLast = lastHistoryDate.difference(p.date).inHours / 24.0;
+      final weight = 1.0 + ((30.0 - ageFromLast).clamp(0.0, 30.0) / 30.0) * 2.0;
+
+      xs.add(x);
+      ys.add(y);
+      ws.add(weight);
     }
 
-    // Linear regression (simple least squares)
-    final n = xs.length;
+    double sumW = 0;
+    double sumWX = 0;
+    double sumWY = 0;
+    double sumWXY = 0;
+    double sumWX2 = 0;
 
-    final sumX = xs.reduce((a, b) => a + b);
-    final sumY = ys.reduce((a, b) => a + b);
-    final sumXY =
-        List.generate(n, (i) => xs[i] * ys[i]).reduce((a, b) => a + b);
-    final sumX2 = xs.map((x) => x * x).reduce((a, b) => a + b);
+    for (var i = 0; i < xs.length; i++) {
+      sumW += ws[i];
+      sumWX += ws[i] * xs[i];
+      sumWY += ws[i] * ys[i];
+      sumWXY += ws[i] * xs[i] * ys[i];
+      sumWX2 += ws[i] * xs[i] * xs[i];
+    }
 
-    final denominator = (n * sumX2 - sumX * sumX);
-
+    final denominator = (sumW * sumWX2 - sumWX * sumWX);
     if (denominator == 0) {
       return [];
     }
 
-    final slope = (n * sumXY - sumX * sumY) / denominator;
-    final intercept = (sumY - slope * sumX) / n;
+    final slope = (sumW * sumWXY - sumWX * sumWY) / denominator;
+    final intercept = (sumWY - slope * sumWX) / sumW;
 
-    double predict(double daysFromStart) {
-      return slope * daysFromStart + intercept;
+    double predict(double x) {
+      return slope * x + intercept;
     }
 
-    final lastDate = sorted.last.date;
+    /// Build deviation pattern from recent real data
+    final deviations = <double>[];
+    for (var i = 0; i < recent.length; i++) {
+      final trendY = predict(xs[i]);
+      deviations.add(ys[i] - trendY);
+    }
 
-    final futureDays = [7.0, 30.0, 90.0];
+    /// Use only the last few deviations as wave pattern
+    final tail = deviations.length >= 7
+        ? deviations.sublist(deviations.length - 7)
+        : [...deviations];
 
-    final forecast = futureDays.map((daysAhead) {
-      final futureDate = lastDate.add(Duration(days: daysAhead.toInt()));
+    /// Average amplitude cap so it does not become silly
+    final avgAbsDeviation = tail.isEmpty
+        ? 0.0
+        : tail.map((e) => e.abs()).reduce((a, b) => a + b) / tail.length;
 
-      final totalDaysFromStart =
-          futureDate.difference(startDate).inHours / 24.0;
+    final maxWaveAmplitude = avgAbsDeviation.clamp(0.0, 8000.0);
 
-      final predictedGold = predict(totalDaysFromStart);
+    final forecast = <GoldChartPoint>[];
 
-      return GoldChartPoint(
-        date: futureDate,
-        gold: predictedGold,
+    for (int daysAhead = 1; daysAhead <= 90; daysAhead++) {
+      final futureDate = lastHistoryDate.add(Duration(days: daysAhead));
+      final x = futureDate.difference(startDate).inHours / 24.0;
+
+      var predictedGold = predict(x);
+
+      /// Reuse recent deviation pattern with damping
+      if (tail.isNotEmpty && maxWaveAmplitude > 0) {
+        final patternValue = tail[(daysAhead - 1) % tail.length];
+
+        /// Damping: wave becomes weaker further in the future
+        final damping = (1.0 - (daysAhead / 120.0)).clamp(0.25, 1.0);
+
+        final normalizedWave =
+            patternValue.clamp(-maxWaveAmplitude, maxWaveAmplitude);
+
+        predictedGold += normalizedWave * damping;
+      }
+
+      if (predictedGold < 0) {
+        predictedGold = 0;
+      }
+
+      final maxReasonableGold = maxObservedGold * 2.0;
+      if (predictedGold > maxReasonableGold) {
+        predictedGold = maxReasonableGold;
+      }
+
+      forecast.add(
+        GoldChartPoint(
+          date: futureDate,
+          gold: predictedGold,
+        ),
       );
-    }).toList();
+    }
 
     return forecast;
   }

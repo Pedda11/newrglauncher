@@ -16,6 +16,7 @@ import '../../../../repository/main_repository.dart';
 import '../../../../repository/preferences_repository.dart';
 import '../../../../repository/settings_repository.dart';
 import '../../../../services/account_data_refresh_service.dart';
+import '../../../../services/totp/totp_service.dart';
 import '../../../../widgets/log.dart';
 import 'package:path/path.dart' as p;
 
@@ -33,6 +34,8 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       required this.settingsRepository,
       required this.preferencesRepository})
       : super(const AccountScreenState.initial());
+
+  final _totpService = TotpService();
 
   Future<void> initialize() async {
     await Log.i('Initializing AccountScreenCubit');
@@ -83,7 +86,8 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
     try {
       await Log.i('Deleting account with id: ${acc.accId}');
       emit(const AccountScreenState.deletingAccount());
-      mainRepository.accountList.remove(acc);
+
+      mainRepository.accountList.removeWhere((a) => a.uniqueId == acc.uniqueId);
 
       List<String> accStringList = [];
 
@@ -93,7 +97,25 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
         accStringList.add(accountString);
       }
 
-      CredentialRepository().deletePassword(acc.uniqueId);
+      try {
+        await CredentialRepository().deletePassword('#${acc.uniqueId}#');
+      } catch (e, st) {
+        await Log.i(
+            'Error occurred while deleting password for account with id: ${acc.accId}, error: $e');
+        final logTail = await LogReader.readLastLines(10);
+
+        final report = await LauncherErrorReportBuilder.build(
+          errorMessage: e.toString(),
+          stackTrace: st.toString(),
+          logTail: logTail,
+        );
+
+        await ErrorReportRepository().uploadErrorReport(
+          app: 'launcher',
+          report: report,
+        );
+        emit(AccountScreenState.failed(errorMsg: e.toString()));
+      }
 
       await preferencesRepository.setAccounts(accStringList);
 
@@ -226,6 +248,28 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
       await Log.i('Sending keys for account: ${acc.accId}');
       await sendKeys(acc.accountName, accPasswd);
+      if (acc.isTotpEnabled) {
+        await Log.i('2FA enabled for account: ${acc.accountName}');
+
+        /// wait for 2FA popup to appear
+        await Future.delayed(const Duration(seconds: 2));
+
+        final secret =
+            await CredentialRepository().readTotpSecret(acc.uniqueId);
+
+        if (secret == null) {
+          await Log.i('TOTP secret not found for account.');
+          emit(const AccountScreenState.failed(
+              errorMsg: '2FA aktiviert, aber kein Secret gespeichert.'));
+          return;
+        }
+
+        final code = _totpService.generateCode(secret: secret);
+
+        await Log.i('Generated TOTP code, sending input');
+
+        await sendText(code, pressEnter: true);
+      }
     } catch (e, st) {
       await Log.i(
           'Error occurred while starting game for account: ${acc.accId}, error: $e');
@@ -317,6 +361,18 @@ Start-Process -FilePath '${exePath.replaceAll("'", "''")}' -WorkingDirectory '${
       throw StateError(
         'Failed to start WoW via PowerShell RunAs. Exit code: ${result.exitCode}',
       );
+    }
+  }
+
+  Future<void> sendText(String text, {bool pressEnter = false}) async {
+    for (var char in text.split('')) {
+      final vkCode = _charToVirtualKeyCode(char);
+      final shift = _isShiftRequired(char);
+      _sendKey(vkCode, shift: shift);
+    }
+
+    if (pressEnter) {
+      _sendKey(VIRTUAL_KEY.VK_RETURN);
     }
   }
 }

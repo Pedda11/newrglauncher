@@ -1,0 +1,4 @@
+enum ECredentialKind {
+  password,
+  totpSecret,
+}

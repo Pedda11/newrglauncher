@@ -1,9 +1,9 @@
+import '../../../helper/gold_chart_axis_helper.dart';
+import '../../../localization/generated/l10n.dart';
+import '../../../data/gold_chart_point.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import '../../../data/gold_chart_point.dart';
 import 'package:intl/intl.dart';
-
-import '../../../helper/gold_chart_axis_helper.dart';
 
 class GoldTrendChartWidget extends StatelessWidget {
   final List<GoldChartPoint> historyPoints;
@@ -17,9 +17,33 @@ class GoldTrendChartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (historyPoints.isEmpty) {
-      return const Center(
-        child: Text('No gold history available yet'),
+    final locales = Localize.of(context);
+    if (historyPoints.length < 2) {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              locales.goldTrendChartNoHistory,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              locales.goldTrendChartNoHistoryDescription,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              locales.goldTrendChartMinimumDataPoints,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 4),
+            Text(
+              locales.goldTrendChartDataImprovement,
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       );
     }
 
@@ -189,9 +213,9 @@ class GoldTrendChartWidget extends StatelessWidget {
                   );
 
                   return LineTooltipItem(
-                    '${isForecast ? 'Forecast' : 'History'}\n'
+                    '${isForecast ? locales.goldTrendChartForecast : locales.goldTrendChartHistory}\n'
                     '${_formatFullDate(point.date)}\n'
-                    '${_formatGoldTooltip(point.gold)}',
+                    '${_formatGoldTooltip(point.gold, locales)}',
                     const TextStyle(fontSize: 12),
                   );
                 }).toList();
@@ -224,9 +248,9 @@ class GoldTrendChartWidget extends StatelessWidget {
     return '$day.$month.$year';
   }
 
-  String _formatGoldTooltip(double goldValue) {
+  String _formatGoldTooltip(double goldValue, Localize locales) {
     final formatter = NumberFormat('#,##0.00', 'de_DE');
-    return '${formatter.format(goldValue)} Gold';
+    return '${formatter.format(goldValue)} ${locales.goldTrendChartGoldUnit}';
   }
 
   double _toDayX(DateTime date, DateTime baseDate) {

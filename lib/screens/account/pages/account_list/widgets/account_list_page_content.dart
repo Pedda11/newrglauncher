@@ -17,7 +17,6 @@ class AccountListPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenCubit = context.read<AccountScreenCubit>()..initialize();
     final pageCubit = context.read<AccListPageCubit>();
-    final characterDataCubit = context.read<CharacterDataCubit>();
     final locales = Localize.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,20 +122,8 @@ class AccountListPageContent extends StatelessWidget {
                                                     ),
                                                   ),
                                                   Expanded(
-                                                    child: GestureDetector(
-                                                      onTap: () {
-                                                        characterDataCubit
-                                                            .getAccountDetails(
-                                                                accounts[
-                                                                    index]);
-                                                      },
-                                                      onDoubleTap: () {
-                                                        screenCubit.startGame(
-                                                            accounts[index]);
-                                                      },
-                                                      child: AccountCard(
-                                                          acc: accounts[index]),
-                                                    ),
+                                                    child: AccountCard(
+                                                        acc: accounts[index]),
                                                   ),
                                                 ],
                                               ),

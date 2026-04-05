@@ -19,6 +19,7 @@ class Account {
   String accountRealm;
   List<Character>? accChars;
   bool includeInGoldTrend;
+  final bool isTotpEnabled;
 
   Account({
     required this.accId,
@@ -28,6 +29,7 @@ class Account {
     required this.accountRealm,
     required this.accChars,
     required this.includeInGoldTrend,
+    this.isTotpEnabled = false,
   });
 
   /// Factory method to create a User object from a JSON map.
@@ -42,6 +44,7 @@ class Account {
                 json["accChars"].map((x) => Character.fromJson(x)))
             : null,
         includeInGoldTrend: json["includeInGoldTrend"] ?? false,
+        isTotpEnabled: json["isTotpEnabled"] ?? false,
       );
 
   /// Convert the User object to a JSON map.
@@ -55,5 +58,6 @@ class Account {
             ? List<dynamic>.from(accChars!.map((x) => x.toJson()))
             : null,
         "includeInGoldTrend": includeInGoldTrend,
+        "isTotpEnabled": isTotpEnabled,
       };
 }

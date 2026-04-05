@@ -6,6 +6,7 @@ import 'package:twodotnulllauncher/navigation/cubit/backup_cubit.dart';
 import 'package:twodotnulllauncher/screens/backup/backup_screen.dart';
 import 'package:twodotnulllauncher/screens/event/event_screen.dart';
 import '../localization/generated/l10n.dart';
+import '../repository/credential_repository.dart';
 import '../repository/main_repository.dart';
 import '../repository/preferences_repository.dart';
 import '../repository/settings_repository.dart';
@@ -59,119 +60,124 @@ class _NavigationPaneState extends State<NavigationPane> {
     final preferencesRepository = context.read<PreferencesRepository>();
     final settingsRepository = context.read<SettingsRepository>();
     final locales = Localize.of(context);
-    final theme = Theme.of(context);
     final List<Widget> screens = [
       const AccountScreen(),
-      const SettingsScreen(),
       const EventScreen(),
       const GoldTrendChartScreen(),
+      const SettingsScreen(),
     ];
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => AccountScreenCubit(
+    return RepositoryProvider(
+      create: (context) => CredentialRepository(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AccountScreenCubit(
+                mainRepository: context.read<MainRepository>(),
+                settingsRepository: settingsRepository,
+                preferencesRepository: context.read<PreferencesRepository>()),
+          ),
+          BlocProvider(
+            create: (context) => AccountAddPageCubit(
+              mainRepository: mainRepository,
+              preferencesRepository: preferencesRepository,
+              credentialRepository: context.read<CredentialRepository>(),
+            ),
+          ),
+          BlocProvider(
+            create: (context) => CharacterDataCubit(
               mainRepository: context.read<MainRepository>(),
               settingsRepository: settingsRepository,
-              preferencesRepository: context.read<PreferencesRepository>()),
-        ),
-        BlocProvider(
-          create: (context) => AccountAddPageCubit(
-            mainRepository: mainRepository,
-            preferencesRepository: preferencesRepository,
-          ),
-        ),
-        BlocProvider(
-          create: (context) => CharacterDataCubit(
-            mainRepository: context.read<MainRepository>(),
-            settingsRepository: settingsRepository,
-            preferencesRepository: preferencesRepository,
-          ),
-        ),
-      ],
-      child: Scaffold(
-        body: Row(
-          children: [
-            NavigationRail(
-              destinations: [
-                NavigationRailDestination(
-                  icon: const Icon(Icons.group),
-                  label: Text(locales.accountScreenTitle),
-                ),
-                NavigationRailDestination(
-                  icon: const Icon(Icons.settings),
-                  label: Text(locales.menuItemSettings),
-                ),
-                NavigationRailDestination(
-                  icon: const Icon(Icons.event),
-                  label: Text(locales.menuItemSettings),
-                ),
-                NavigationRailDestination(
-                  icon: const Icon(Icons.area_chart),
-                  label: Text(locales.menuItemSettings),
-                ),
-              ],
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: (int index) {
-                if (index == 0) {
-                  if (settingsRepository.secondsToWaitForGameToStart == null ||
-                      settingsRepository.wowRootFolderPath == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          locales.settingsScreenNotAllSet,
-                          style: const TextStyle(
-                              color: Colors.red,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24),
-                        ),
-                      ),
-                    );
-                    return;
-                  }
-                }
-                setState(() {
-                  _selectedIndex = index;
-                });
-              },
+              preferencesRepository: preferencesRepository,
             ),
-            BlocConsumer<BackupCubit, BackupState>(
-              builder: (context, state) {
-                return state.maybeWhen(
-                  orElse: () => Expanded(child: screens[_selectedIndex]),
-                  backUpProgress: (processedFiles, totalFiles, progress) {
-                    return Expanded(
-                      child: BackupScreen(
-                          processedFiles: processedFiles,
-                          totalFiles: totalFiles,
-                          progress: progress),
-                    );
-                  },
-                  backupFailed: (errorMsg) {
-                    return Container(
-                      color: Colors.red,
-                      child: Center(
-                        child: Text(
-                          'Backup failed: $errorMsg',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
+          ),
+        ],
+        child: Scaffold(
+          body: Row(
+            children: [
+              NavigationRail(
+                leadingAtTop: true,
+                destinations: [
+                  NavigationRailDestination(
+                    icon: const Icon(Icons.group),
+                    label: Text(locales.accountScreenTitle),
+                  ),
+                  NavigationRailDestination(
+                    icon: const Icon(Icons.event),
+                    label: Text(locales.menuItemSettings),
+                  ),
+                  NavigationRailDestination(
+                    icon: const Icon(Icons.area_chart),
+                    label: Text(locales.menuItemSettings),
+                  ),
+                  NavigationRailDestination(
+                    icon: const Icon(Icons.settings),
+                    label: Text(locales.menuItemSettings),
+                  ),
+                ],
+                selectedIndex: _selectedIndex,
+                onDestinationSelected: (int index) {
+                  if (index == 0) {
+                    if (settingsRepository.secondsToWaitForGameToStart ==
+                            null ||
+                        settingsRepository.wowRootFolderPath == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            locales.settingsScreenNotAllSet,
+                            style: const TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
-              listener: (context, state) {
-                state.maybeMap(
-                    orElse: () {},
-                    backupFinished: (value) {
-                      exit(0);
-                    });
-              },
-            ),
-          ],
+                      );
+                      return;
+                    }
+                  }
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                },
+              ),
+              BlocConsumer<BackupCubit, BackupState>(
+                builder: (context, state) {
+                  return state.maybeWhen(
+                    orElse: () => Expanded(child: screens[_selectedIndex]),
+                    backUpProgress: (processedFiles, totalFiles, progress) {
+                      return Expanded(
+                        child: BackupScreen(
+                            processedFiles: processedFiles,
+                            totalFiles: totalFiles,
+                            progress: progress),
+                      );
+                    },
+                    backupFailed: (errorMsg) {
+                      return Container(
+                        color: Colors.red,
+                        child: Center(
+                          child: Text(
+                            'Backup failed: $errorMsg',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                listener: (context, state) {
+                  state.maybeMap(
+                      orElse: () {},
+                      backupFinished: (value) {
+                        exit(0);
+                      });
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

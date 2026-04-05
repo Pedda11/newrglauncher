@@ -34,6 +34,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Account Name",
     ),
     "accountAddPageBackButton": MessageLookupByLibrary.simpleMessage("Zurück"),
+    "accountAddPageIncludeInGoldTrend": MessageLookupByLibrary.simpleMessage(
+      "In Gold-Trend einbeziehen",
+    ),
     "accountAddPageListNameHint": MessageLookupByLibrary.simpleMessage(
       "Listen Name",
     ),
@@ -112,6 +115,22 @@ class MessageLookup extends MessageLookupByLibrary {
       "Ich habe die Eula gelesen und akzeptiert",
     ),
     "eulaLabel": MessageLookupByLibrary.simpleMessage("Eula"),
+    "eventScreenEmpty": MessageLookupByLibrary.simpleMessage("leer"),
+    "goldTrendChartDataImprovement": MessageLookupByLibrary.simpleMessage(
+      "Mehr Daten verbessern die Genauigkeit im Laufe der Zeit.",
+    ),
+    "goldTrendChartForecast": MessageLookupByLibrary.simpleMessage("Prognose"),
+    "goldTrendChartGoldUnit": MessageLookupByLibrary.simpleMessage("Gold"),
+    "goldTrendChartHistory": MessageLookupByLibrary.simpleMessage("Historie"),
+    "goldTrendChartMinimumDataPoints": MessageLookupByLibrary.simpleMessage(
+      "Das Diagramm wird angezeigt, wenn mindestens zwei Datenpunkte erfasst sind.",
+    ),
+    "goldTrendChartNoHistory": MessageLookupByLibrary.simpleMessage(
+      "Keine Gold-Historie vorhanden",
+    ),
+    "goldTrendChartNoHistoryDescription": MessageLookupByLibrary.simpleMessage(
+      "Füge Accounts zum Gold-Trend-Tracking hinzu, um Daten zu sammeln.",
+    ),
     "menuItemSettings": MessageLookupByLibrary.simpleMessage("Einstellungen"),
     "menuTitle": MessageLookupByLibrary.simpleMessage("M E N Ü"),
     "no": MessageLookupByLibrary.simpleMessage("Nein"),

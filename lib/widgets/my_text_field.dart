@@ -6,11 +6,13 @@ class MyTextField extends StatelessWidget {
     required this.myController,
     required this.hint,
     required this.obscure,
+    this.fieldKey,
   });
 
   final TextEditingController myController;
   final String hint;
   final bool obscure;
+  final Key? fieldKey;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class MyTextField extends StatelessWidget {
       child: SizedBox(
         width: 333,
         child: TextFormField(
+          key: fieldKey,
           controller: myController,
           obscureText: obscure,
           style: const TextStyle(color: Colors.black),

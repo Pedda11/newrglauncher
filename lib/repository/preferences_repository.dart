@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PreferencesRepository {
+import 'i_preferences_repository.dart';
+
+class PreferencesRepository implements IPreferencesRepository {
   static const String _debugPrefix = kDebugMode ? 'debug_' : '';
 
   static const String _accounts = '${_debugPrefix}accounts';
@@ -18,6 +20,7 @@ class PreferencesRepository {
   //setter
   Future setEula(bool accepted) async => _preferences.setBool(_eula, accepted);
 
+  @override
   Future setAccounts(List<String> accounts) async =>
       _preferences.setStringList(_accounts, accounts);
 

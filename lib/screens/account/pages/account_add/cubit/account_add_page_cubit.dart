@@ -7,6 +7,7 @@ import '../../../../../helper/error_report_builder.dart';
 import '../../../../../repository/credential_repository.dart';
 import '../../../../../repository/error_report_repository.dart';
 import '../../../../../repository/error_repository.dart';
+import '../../../../../repository/i_preferences_repository.dart';
 import '../../../../../repository/main_repository.dart';
 import '../../../../../repository/preferences_repository.dart';
 import '../../../../../widgets/log.dart';
@@ -17,30 +18,27 @@ part 'account_add_page_cubit.freezed.dart';
 
 class AccountAddPageCubit extends Cubit<AccountAddPageState> {
   final MainRepository mainRepository;
-  final PreferencesRepository preferencesRepository;
+  final IPreferencesRepository preferencesRepository;
+  final CredentialRepository credentialRepository;
 
   AccountAddPageCubit({
     required this.mainRepository,
     required this.preferencesRepository,
+    required this.credentialRepository,
   }) : super(const AccountAddPageState.initial());
 
   void initialize() {
     emit(const AccountAddPageState.initialized());
   }
 
-  void changeVisibility(bool isVisible) {
-    emit(AccountAddPageState.changeVisibility(isVisible: isVisible));
-  }
-
-  Future<void> addAccount(Account account, String passwd) async {
+  Future<void> addAccount(Account account, String passwd, String? totP) async {
     emit(const AccountAddPageState.addingNewAccount());
     try {
-      //generate uuid
+      /// generate uuid
       final uniqueId = const Uuid().v4();
       account.uniqueId = uniqueId;
 
       await Log.i('Adding account accId: ${account.accId}');
-      final credentialRepository = CredentialRepository();
 
       final ids = <int>[];
 
@@ -58,10 +56,25 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
       /// Save password securely in Windows Credential Manager first.
       await credentialRepository.savePassword(account.uniqueId, passwd);
 
+      if (account.isTotpEnabled) {
+        final normalizedTotp = totP?.trim() ?? '';
+
+        if (normalizedTotp.isEmpty) {
+          throw Exception('TOTP is enabled but no secret was provided.');
+        }
+
+        await Log.i('TOTP enabled for account: ${account.accountName}');
+        await credentialRepository.saveTotpSecret(
+          account.uniqueId,
+          normalizedTotp,
+        );
+      }
+
       mainRepository.accountList.add(account);
 
       await Log.i(
-          'Account added to MainRepository with accId: ${account.accId}, now saving accounts to PreferencesRepository');
+        'Account added to MainRepository with accId: ${account.accId}, now saving accounts to PreferencesRepository',
+      );
       final accStringList = <String>[];
 
       for (final a in mainRepository.accountList) {
@@ -72,7 +85,8 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
       await preferencesRepository.setAccounts(accStringList);
 
       await Log.i(
-          'Account addition process completed successfully for accId: ${account.accId}');
+        'Account addition process completed successfully for accId: ${account.accId}',
+      );
       emit(const AccountAddPageState.accountAdded());
     } catch (e, st) {
       await Log.i('Error occurred while adding account: $e');
@@ -93,12 +107,38 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
     }
   }
 
-  Future<void> editAccount(Account account, String passwd) async {
+  Future<void> editAccount(Account account, String passwd, String? totP) async {
     emit(const AccountAddPageState.addingNewAccount());
     try {
       await Log.i('Editing account accName: ${account.accountName}');
-      final credentialRepository = CredentialRepository();
-      await credentialRepository.savePassword(account.uniqueId, passwd);
+
+      final oldPassword =
+          await credentialRepository.readPassword(account.uniqueId);
+      final oldTotP =
+          await credentialRepository.readTotpSecret(account.uniqueId);
+
+      if (oldPassword != passwd) {
+        await credentialRepository.savePassword(account.uniqueId, passwd);
+      }
+
+      if (account.isTotpEnabled) {
+        final normalizedTotp = totP?.trim() ?? '';
+
+        if (normalizedTotp.isEmpty) {
+          throw Exception('TOTP is enabled but no secret was provided.');
+        }
+
+        if (oldTotP != normalizedTotp) {
+          await credentialRepository.saveTotpSecret(
+            account.uniqueId,
+            normalizedTotp,
+          );
+        }
+      } else {
+        if (oldTotP != null) {
+          await credentialRepository.deleteTotpSecret(account.uniqueId);
+        }
+      }
 
       final index = mainRepository.accountList.indexWhere(
         (a) => a.uniqueId == account.uniqueId,
@@ -111,7 +151,8 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
       mainRepository.accountList[index] = account;
 
       await Log.i(
-          'Account edited to MainRepository with accName: ${account.accountName}, now saving accounts to PreferencesRepository');
+        'Account edited to MainRepository with accName: ${account.accountName}, now saving accounts to PreferencesRepository',
+      );
       final accStringList = <String>[];
 
       for (final a in mainRepository.accountList) {

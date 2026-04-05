@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twodotnulllauncher/repository/preferences_repository.dart';
 import '../../data/account.dart';
 import '../../localization/generated/l10n.dart';
+import '../../repository/credential_repository.dart';
 import '../../widgets/my_appbar.dart';
 import 'cubit/account_cubit/account_screen_cubit.dart';
 import 'pages/account_add/account_add_page.dart';
@@ -52,9 +53,11 @@ class _AccountScreenState extends State<AccountScreen> {
             Expanded(
               child: PageView(
                 controller: _pageViewController,
-                children: const [
-                  AccountListPage(),
-                  AccountAddPage(),
+                children: [
+                  const AccountListPage(),
+                  AccountAddPage(
+                    credentialRepository: context.read<CredentialRepository>(),
+                  ),
                 ],
                 onPageChanged: (int index) {
                   setState(() {

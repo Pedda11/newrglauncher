@@ -73,5 +73,14 @@
   "splashScreenEulaNotAccepted": "Eula not accepted",
   "splashScreenInitializedFirstStart": "initialized first start",
   "splashScreenInitialized": "initialized",
-  "splashScreenBlockingError": "blocking error: {message}"
+   "splashScreenBlockingError": "blocking error: {message}",
+   "goldTrendChartNoHistory": "No gold history available yet",
+   "goldTrendChartNoHistoryDescription": "Add accounts to the gold trend tracking to start collecting data.",
+   "goldTrendChartMinimumDataPoints": "The chart will appear after at least two data points are recorded.",
+   "goldTrendChartDataImprovement": "More data will improve accuracy over time.",
+   "goldTrendChartForecast": "Forecast",
+   "goldTrendChartHistory": "History",
+   "goldTrendChartGoldUnit": "Gold",
+   "eventScreenEmpty": "empty",
+   "accountAddPageIncludeInGoldTrend": "Include in Gold Trend"
 }

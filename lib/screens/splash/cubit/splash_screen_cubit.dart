@@ -44,7 +44,9 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
   }
 
   Future<void> initialize() async {
-    await generateFakeGoldHistory();
+    //generateFakeGoldHistory is only for testing purposes. This replaces the real gold history with fake data. Make sure u backup your data before running this.!!!
+    //await generateFakeGoldHistory();
+
     await Log.i('Update check started.');
     try {
       emit(const SplashScreenState.checkingForUpdates());

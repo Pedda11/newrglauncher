@@ -748,6 +748,91 @@ class Localize {
       args: [message],
     );
   }
+
+  /// `Keine Gold-Historie vorhanden`
+  String get goldTrendChartNoHistory {
+    return Intl.message(
+      'Keine Gold-Historie vorhanden',
+      name: 'goldTrendChartNoHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Füge Accounts zum Gold-Trend-Tracking hinzu, um Daten zu sammeln.`
+  String get goldTrendChartNoHistoryDescription {
+    return Intl.message(
+      'Füge Accounts zum Gold-Trend-Tracking hinzu, um Daten zu sammeln.',
+      name: 'goldTrendChartNoHistoryDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Das Diagramm wird angezeigt, wenn mindestens zwei Datenpunkte erfasst sind.`
+  String get goldTrendChartMinimumDataPoints {
+    return Intl.message(
+      'Das Diagramm wird angezeigt, wenn mindestens zwei Datenpunkte erfasst sind.',
+      name: 'goldTrendChartMinimumDataPoints',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mehr Daten verbessern die Genauigkeit im Laufe der Zeit.`
+  String get goldTrendChartDataImprovement {
+    return Intl.message(
+      'Mehr Daten verbessern die Genauigkeit im Laufe der Zeit.',
+      name: 'goldTrendChartDataImprovement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prognose`
+  String get goldTrendChartForecast {
+    return Intl.message(
+      'Prognose',
+      name: 'goldTrendChartForecast',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Historie`
+  String get goldTrendChartHistory {
+    return Intl.message(
+      'Historie',
+      name: 'goldTrendChartHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gold`
+  String get goldTrendChartGoldUnit {
+    return Intl.message(
+      'Gold',
+      name: 'goldTrendChartGoldUnit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `leer`
+  String get eventScreenEmpty {
+    return Intl.message('leer', name: 'eventScreenEmpty', desc: '', args: []);
+  }
+
+  /// `In Gold-Trend einbeziehen`
+  String get accountAddPageIncludeInGoldTrend {
+    return Intl.message(
+      'In Gold-Trend einbeziehen',
+      name: 'accountAddPageIncludeInGoldTrend',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Localize> {
