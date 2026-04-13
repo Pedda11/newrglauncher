@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../localization/generated/l10n.dart';
 
 class BackupScreen extends StatelessWidget {
   final int processedFiles;
@@ -14,6 +15,7 @@ class BackupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final locales = Localize.of(context);
     return Container(
       color: Colors.blue,
       child: Center(
@@ -21,7 +23,7 @@ class BackupScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Backup in progress',
+              locales.backupScreenTitle,
               style: theme.textTheme.headlineLarge
                   ?.copyWith(color: theme.colorScheme.onPrimary),
             ),
@@ -32,7 +34,7 @@ class BackupScreen extends StatelessWidget {
                         ?.copyWith(color: theme.colorScheme.onPrimary),
                   )
                 : Text(
-                    'Finalizing. Please be patient',
+                    locales.backupScreenFinalizingMessage,
                     style: theme.textTheme.headlineLarge
                         ?.copyWith(color: theme.colorScheme.onPrimary),
                   ),

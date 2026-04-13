@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:twodotnulllauncher/navigation/cubit/backup_cubit.dart';
+import 'package:twodotnulllauncher/repository/credential_repository.dart';
 import 'package:twodotnulllauncher/repository/error_repository.dart';
 import 'package:twodotnulllauncher/services/backup/backup_service.dart';
 import '../repository/main_repository.dart';
@@ -26,6 +27,9 @@ class RepositoryContainer extends StatelessWidget {
     return MultiRepositoryProvider(
         providers: [
           RepositoryProvider(
+            create: (context) => CredentialRepository(),
+          ),
+          RepositoryProvider(
               create: (context) =>
                   PreferencesRepository(preferences: sharedPreferences)),
           RepositoryProvider(
@@ -39,7 +43,8 @@ class RepositoryContainer extends StatelessWidget {
           BlocProvider(
             create: (context) => SettingsScreenCubit(
                 settingsRepository: context.read<SettingsRepository>(),
-                preferencesRepository: context.read<PreferencesRepository>())
+                preferencesRepository: context.read<PreferencesRepository>(),
+                credentialRepository: CredentialRepository())
               ..initialize(),
             child: child,
           ),

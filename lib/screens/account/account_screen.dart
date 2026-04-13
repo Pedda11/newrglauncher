@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:twodotnulllauncher/repository/preferences_repository.dart';
 import '../../data/account.dart';
 import '../../localization/generated/l10n.dart';
@@ -22,6 +23,23 @@ class _AccountScreenState extends State<AccountScreen> {
   Duration pageTransitionDuration = const Duration(milliseconds: 300);
   final pageTransitionCurve = Curves.easeInOut;
   late Account? account;
+
+  PackageInfo? info;
+  String? version;
+
+  Future<void> getInfo() async {
+    info = await PackageInfo.fromPlatform();
+
+    setState(() {
+      version = info?.version;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +84,28 @@ class _AccountScreenState extends State<AccountScreen> {
                 },
               ),
             ),
-            kDebugMode
-                ? ElevatedButton(
-                    onPressed: () {
-                      context.read<PreferencesRepository>().deleteAll();
-                    },
-                    child: Text(locales.accountScreenResetButton))
-                : Container()
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                kDebugMode
+                    ? ElevatedButton(
+                        onPressed: () {
+                          context.read<PreferencesRepository>().deleteAll();
+                        },
+                        child: Text(locales.accountScreenResetButton))
+                    : const SizedBox.shrink(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Text(
+                    version ?? '',
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        fontSize: 10),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

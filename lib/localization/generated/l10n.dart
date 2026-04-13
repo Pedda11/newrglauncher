@@ -833,6 +833,381 @@ class Localize {
       args: [],
     );
   }
+
+  /// `Launcher mit 4-stelligem PIN schützen`
+  String get launcherPinLabel {
+    return Intl.message(
+      'Launcher mit 4-stelligem PIN schützen',
+      name: 'launcherPinLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN muss genau 4 Ziffern haben.`
+  String get launcherPinValidationDigits {
+    return Intl.message(
+      'PIN muss genau 4 Ziffern haben.',
+      name: 'launcherPinValidationDigits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN und Wiederholung stimmen nicht überein.`
+  String get launcherPinMismatch {
+    return Intl.message(
+      'PIN und Wiederholung stimmen nicht überein.',
+      name: 'launcherPinMismatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN wurde gespeichert.`
+  String get launcherPinSaved {
+    return Intl.message(
+      'PIN wurde gespeichert.',
+      name: 'launcherPinSaved',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN konnte nicht gespeichert werden: {error}`
+  String launcherPinSaveError(Object error) {
+    return Intl.message(
+      'PIN konnte nicht gespeichert werden: $error',
+      name: 'launcherPinSaveError',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Zum Deaktivieren bitte zuerst den aktuellen PIN bestätigen.`
+  String get launcherPinDisabledConfirm {
+    return Intl.message(
+      'Zum Deaktivieren bitte zuerst den aktuellen PIN bestätigen.',
+      name: 'launcherPinDisabledConfirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aktueller PIN muss genau 4 Ziffern haben.`
+  String get launcherPinCurrentValidationDigits {
+    return Intl.message(
+      'Aktueller PIN muss genau 4 Ziffern haben.',
+      name: 'launcherPinCurrentValidationDigits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN wurde erfolgreich geändert.`
+  String get launcherPinChanged {
+    return Intl.message(
+      'PIN wurde erfolgreich geändert.',
+      name: 'launcherPinChanged',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN konnte nicht geändert werden: {error}`
+  String launcherPinChangeError(Object error) {
+    return Intl.message(
+      'PIN konnte nicht geändert werden: $error',
+      name: 'launcherPinChangeError',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Launcher-PIN wurde deaktiviert.`
+  String get launcherPinDisabled {
+    return Intl.message(
+      'Launcher-PIN wurde deaktiviert.',
+      name: 'launcherPinDisabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Launcher-PIN ist aktiv.`
+  String get launcherPinActive {
+    return Intl.message(
+      'Launcher-PIN ist aktiv.',
+      name: 'launcherPinActive',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN speichern`
+  String get launcherPinButtonSave {
+    return Intl.message(
+      'PIN speichern',
+      name: 'launcherPinButtonSave',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN ändern`
+  String get launcherPinButtonChange {
+    return Intl.message(
+      'PIN ändern',
+      name: 'launcherPinButtonChange',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN deaktivieren`
+  String get launcherPinButtonDisable {
+    return Intl.message(
+      'PIN deaktivieren',
+      name: 'launcherPinButtonDisable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN aktualisieren`
+  String get launcherPinButtonUpdate {
+    return Intl.message(
+      'PIN aktualisieren',
+      name: 'launcherPinButtonUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Abbrechen`
+  String get launcherPinButtonCancel {
+    return Intl.message(
+      'Abbrechen',
+      name: 'launcherPinButtonCancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aktuellen PIN eingeben`
+  String get launcherPinHintCurrent {
+    return Intl.message(
+      'Aktuellen PIN eingeben',
+      name: 'launcherPinHintCurrent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Neuen PIN eingeben`
+  String get launcherPinHintNew {
+    return Intl.message(
+      'Neuen PIN eingeben',
+      name: 'launcherPinHintNew',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Neuen PIN wiederholen`
+  String get launcherPinHintNewRepeat {
+    return Intl.message(
+      'Neuen PIN wiederholen',
+      name: 'launcherPinHintNewRepeat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN wiederholen`
+  String get launcherPinHintRepeat {
+    return Intl.message(
+      'PIN wiederholen',
+      name: 'launcherPinHintRepeat',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aktueller PIN ist falsch.`
+  String get launcherPinCurrentWrong {
+    return Intl.message(
+      'Aktueller PIN ist falsch.',
+      name: 'launcherPinCurrentWrong',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Neuer PIN muss genau 4 Ziffern haben.`
+  String get launcherPinNewValidationDigits {
+    return Intl.message(
+      'Neuer PIN muss genau 4 Ziffern haben.',
+      name: 'launcherPinNewValidationDigits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Neuer PIN und Wiederholung stimmen nicht überein.`
+  String get launcherPinNewMismatch {
+    return Intl.message(
+      'Neuer PIN und Wiederholung stimmen nicht überein.',
+      name: 'launcherPinNewMismatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PIN konnte nicht deaktiviert werden: {error}`
+  String launcherPinDisableError(Object error) {
+    return Intl.message(
+      'PIN konnte nicht deaktiviert werden: $error',
+      name: 'launcherPinDisableError',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `PIN konnte nicht geprüft werden: {error}`
+  String launcherPinCheckError(Object error) {
+    return Intl.message(
+      'PIN konnte nicht geprüft werden: $error',
+      name: 'launcherPinCheckError',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Zum Deaktivieren bitte den aktuellen PIN eingeben.`
+  String get launcherPinDisableValidationDigits {
+    return Intl.message(
+      'Zum Deaktivieren bitte den aktuellen PIN eingeben.',
+      name: 'launcherPinDisableValidationDigits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Aktueller PIN bestätigt.`
+  String get launcherPinCurrentConfirmed {
+    return Intl.message(
+      'Aktueller PIN bestätigt.',
+      name: 'launcherPinCurrentConfirmed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gib deinen PIN ein, um fortzufahren`
+  String get splashScreenPinPrompt {
+    return Intl.message(
+      'Gib deinen PIN ein, um fortzufahren',
+      name: 'splashScreenPinPrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gold Trend`
+  String get goldTrendScreenTitle {
+    return Intl.message(
+      'Gold Trend',
+      name: 'goldTrendScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Backup läuft`
+  String get backupScreenTitle {
+    return Intl.message(
+      'Backup läuft',
+      name: 'backupScreenTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Abschluss läuft. Bitte warten`
+  String get backupScreenFinalizingMessage {
+    return Intl.message(
+      'Abschluss läuft. Bitte warten',
+      name: 'backupScreenFinalizingMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Backup fehlgeschlagen: {error}`
+  String backupScreenFailed(Object error) {
+    return Intl.message(
+      'Backup fehlgeschlagen: $error',
+      name: 'backupScreenFailed',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Events`
+  String get navigationPaneEventLabel {
+    return Intl.message(
+      'Events',
+      name: 'navigationPaneEventLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gold Trend`
+  String get navigationPaneGoldTrendLabel {
+    return Intl.message(
+      'Gold Trend',
+      name: 'navigationPaneGoldTrendLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2-Faktor Authentification aktiviert`
+  String get totpEnabled {
+    return Intl.message(
+      '2-Faktor Authentification aktiviert',
+      name: 'totpEnabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TOTP-Geheimnis`
+  String get totpSecret {
+    return Intl.message(
+      'TOTP-Geheimnis',
+      name: 'totpSecret',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `prüfen`
+  String get totpCheckButton {
+    return Intl.message('prüfen', name: 'totpCheckButton', desc: '', args: []);
+  }
+
+  /// `Auth-Code`
+  String get totpAuthCodeHint {
+    return Intl.message(
+      'Auth-Code',
+      name: 'totpAuthCodeHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Localize> {

@@ -2,10 +2,15 @@ import 'dart:io';
 import 'package:filesystem_picker/filesystem_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:twodotnulllauncher/screens/settings/widgets/find_wow_exe_widget.dart';
+import 'package:twodotnulllauncher/screens/settings/widgets/launcher_pin_widget.dart';
+import 'package:twodotnulllauncher/screens/settings/widgets/manuelly_find_wow_exe_widget.dart';
+import 'package:twodotnulllauncher/screens/settings/widgets/search_wow_exe_progress_widget.dart';
 import 'package:win32/win32.dart';
 import '../../../localization/generated/l10n.dart';
 import '../../../repository/settings_repository.dart';
 import '../cubit/settings_screen_cubit.dart';
+import 'game_start_time_widget.dart';
 
 class SettingsScreenContent extends StatefulWidget {
   const SettingsScreenContent({super.key});
@@ -40,182 +45,66 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
               ],
             ),
           ),
-          initialized: () => Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              settingsRepository.wowRootFolderPath == null
-                  ? Text(
-                      locales.settingsScreenWowPathMissingLabel,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red),
-                    )
-                  : Container(),
-              Text(
-                locales.settingsScreenSetWowPathLabel,
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      screenCubit.findWowExeAndEmitProgress();
-                    },
-                    child: Text(locales.settingsScreenWowPathScanBtn),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(locales.settingsScreenWowPathScanBtnHint),
-                ],
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  Row(
-                    children: settingsRepository.drives.map((drive) {
-                      return ElevatedButton(
-                        onPressed: () async {
-                          try {
-                            final dir = Directory(drive);
-                            Directory dirPath = dir;
-
-                            final exists = await dir.exists();
-
-                            if (!exists) {
-                              throw FileSystemException(
-                                  locales
-                                      .settingsScreenSetWowPathManuallyDriveException,
-                                  drive);
-                            }
-
-                            if (dir.path == 'C:\\') {
-                              dirPath = Directory('${dir.path}Users\\');
-                            }
-
-                            String? path = await FilesystemPicker.openDialog(
-                              folderIconColor: const Color(0xFFE0CDA1),
-                              title:
-                                  locales.settingsScreenWowExeFilePickerLabel,
-                              context: context,
-                              rootDirectory: dirPath,
-                              fsType: FilesystemType.file,
-                              allowedExtensions: ['.exe'],
-                              pickText: 'Select',
-                              fileTileSelectMode: FileTileSelectMode.wholeTile,
-                            );
-
-                            if (path != null) {
-                              screenCubit.changeWowFilePath(path);
-                            }
-                          } catch (e) {
-                            if (!context.mounted) return;
-
-                            showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                title: Text(locales
-                                    .settingsScreenSetWowPathManuallyDriveException),
-                                content: Text(
-                                    '${locales.settingsScreenDriveAccessError} $drive\n\n$e'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: Text(locales.ok),
-                                  )
-                                ],
-                              ),
-                            );
-                          }
-                        },
-                        child: Text(drive),
-                      );
-                    }).toList(),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(locales.settingsScreenWowPathDrivesBtnHint),
-                ],
-              ),
-              const SizedBox(height: 24),
-              Text(locales.settingsScreenWowPathLabel),
-              Row(
-                children: [
-                  Text(
-                    _wowPathController.text,
-                    overflow: TextOverflow.fade,
-                  ),
-                  const SizedBox(width: 8),
-                ],
-              ),
-              const SizedBox(height: 32),
-              settingsRepository.secondsToWaitForGameToStart == null
-                  ? Text(
-                      locales.settingsScreenTimeTillGameStartMissingLabel,
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.red),
-                    )
-                  : const SizedBox(
-                      height: 24,
+          initialized: () => SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                settingsRepository.wowRootFolderPath == null
+                    ? Text(
+                        locales.settingsScreenWowPathMissingLabel,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                      )
+                    : Container(),
+                Text(
+                  locales.settingsScreenSetWowPathLabel,
+                ),
+                const SizedBox(height: 8),
+                const FindWowExeWidget(),
+                const SizedBox(height: 12),
+                const ManuallyFindWowExeWidget(),
+                const SizedBox(height: 24),
+                Text(locales.settingsScreenWowPathLabel),
+                Row(
+                  children: [
+                    Text(
+                      _wowPathController.text,
+                      overflow: TextOverflow.fade,
                     ),
-              Text(locales.settingsScreenTimeTillGameStartLabel),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    child: Slider(
-                      value: settingsRepository.secondsToWaitForGameToStart
-                              ?.toDouble() ??
-                          3,
-                      min: 3,
-                      max: 60,
-                      divisions: 57,
-                      label: settingsRepository.secondsToWaitForGameToStart
-                          .toString(),
-                      onChanged: (double value) {
-                        screenCubit
-                            .changeSecondsToWaitForGameToStart(value.toInt());
-                      },
-                    ),
-                  ),
-                  Text(
-                    '${settingsRepository.secondsToWaitForGameToStart ?? ''} ${locales.settingsScreenTimeTillGameStartType}',
-                  ),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 8),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                settingsRepository.secondsToWaitForGameToStart == null
+                    ? Text(
+                        locales.settingsScreenTimeTillGameStartMissingLabel,
+                        style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                      )
+                    : const SizedBox(
+                        height: 24,
+                      ),
+                Text(locales.settingsScreenTimeTillGameStartLabel),
+                const GameStartTimeWidget(),
+                Divider(
+                  thickness: 2,
+                  color: theme.dividerColor,
+                ),
+                const LauncherPinWidget()
+              ],
+            ),
           ),
           searchProgress: (searchedFolders, searchedFiles, foundExecutables) {
-            return Center(
-              child: Column(
-                children: [
-                  ElevatedButton(
-                      onPressed: () => screenCubit.cancelWowExeSearch(),
-                      child: Text(locales.settingsScreenCancelWowScanLabel)),
-                  Text(
-                      '${locales.settingsScreenScannedFolders} $searchedFolders'),
-                  Text('${locales.settingsScreenScannedFiles} $searchedFiles'),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  foundExecutables.isNotEmpty
-                      ? Text(
-                          locales.settingsScreenFoundWowExesLabel,
-                          style: const TextStyle(fontSize: 20),
-                        )
-                      : Container(),
-                  Column(
-                    children: foundExecutables
-                        .map((file) => ListTile(
-                              title: Text(file.path),
-                            ))
-                        .toList(),
-                  )
-                ],
-              ),
+            return SearchWowExeProgressWidget(
+              searchedFolders: searchedFolders,
+              searchedFiles: searchedFiles,
+              foundExecutables: foundExecutables,
             );
           },
           foundWowExe: (wowFiles) => Column(

@@ -4,10 +4,10 @@ import '../../../data/rg_event_list_data.dart';
 import '../cubit/event_screen_cubit.dart';
 import 'event_item.dart';
 
-class EventCategoryItem extends StatelessWidget {
+class EventCategoryList extends StatelessWidget {
   final List<RgEventListData> rgEventListDataList;
 
-  const EventCategoryItem({super.key, required this.rgEventListDataList});
+  const EventCategoryList({super.key, required this.rgEventListDataList});
 
   @override
   Widget build(BuildContext context) {

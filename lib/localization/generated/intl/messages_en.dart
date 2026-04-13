@@ -20,9 +20,19 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(message) => "blocking error: ${message}";
+  static String m0(error) => "Backup failed: ${error}";
 
-  static String m1(message) => "update required: ${message}";
+  static String m1(error) => "PIN could not be changed: ${error}";
+
+  static String m2(error) => "PIN could not be checked: ${error}";
+
+  static String m3(error) => "PIN could not be disabled: ${error}";
+
+  static String m4(error) => "PIN could not be saved: ${error}";
+
+  static String m5(message) => "blocking error: ${message}";
+
+  static String m6(message) => "update required: ${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -100,6 +110,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "accountScreenTitle": MessageLookupByLibrary.simpleMessage("My Accounts"),
     "appTitle": MessageLookupByLibrary.simpleMessage("WOW-Launcher"),
     "back": MessageLookupByLibrary.simpleMessage("back"),
+    "backupScreenFailed": m0,
+    "backupScreenFinalizingMessage": MessageLookupByLibrary.simpleMessage(
+      "Finalizing. Please be patient",
+    ),
+    "backupScreenTitle": MessageLookupByLibrary.simpleMessage(
+      "Backup in progress",
+    ),
     "decline": MessageLookupByLibrary.simpleMessage("decline"),
     "error": MessageLookupByLibrary.simpleMessage("Error"),
     "errorHandlingContent": MessageLookupByLibrary.simpleMessage(
@@ -125,8 +142,78 @@ class MessageLookup extends MessageLookupByLibrary {
     "goldTrendChartNoHistoryDescription": MessageLookupByLibrary.simpleMessage(
       "Add accounts to the gold trend tracking to start collecting data.",
     ),
+    "goldTrendScreenTitle": MessageLookupByLibrary.simpleMessage("Gold Trend"),
+    "launcherPinActive": MessageLookupByLibrary.simpleMessage(
+      "Launcher PIN is active.",
+    ),
+    "launcherPinButtonCancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "launcherPinButtonChange": MessageLookupByLibrary.simpleMessage(
+      "Change PIN",
+    ),
+    "launcherPinButtonDisable": MessageLookupByLibrary.simpleMessage(
+      "Disable PIN",
+    ),
+    "launcherPinButtonSave": MessageLookupByLibrary.simpleMessage("Save PIN"),
+    "launcherPinButtonUpdate": MessageLookupByLibrary.simpleMessage(
+      "Update PIN",
+    ),
+    "launcherPinChangeError": m1,
+    "launcherPinChanged": MessageLookupByLibrary.simpleMessage(
+      "PIN has been successfully changed.",
+    ),
+    "launcherPinCheckError": m2,
+    "launcherPinCurrentConfirmed": MessageLookupByLibrary.simpleMessage(
+      "Current PIN confirmed.",
+    ),
+    "launcherPinCurrentValidationDigits": MessageLookupByLibrary.simpleMessage(
+      "Current PIN must be exactly 4 digits.",
+    ),
+    "launcherPinCurrentWrong": MessageLookupByLibrary.simpleMessage(
+      "Current PIN is incorrect.",
+    ),
+    "launcherPinDisableError": m3,
+    "launcherPinDisableValidationDigits": MessageLookupByLibrary.simpleMessage(
+      "Please enter the current PIN to disable.",
+    ),
+    "launcherPinDisabled": MessageLookupByLibrary.simpleMessage(
+      "Launcher PIN has been disabled.",
+    ),
+    "launcherPinDisabledConfirm": MessageLookupByLibrary.simpleMessage(
+      "To disable, please confirm the current PIN first.",
+    ),
+    "launcherPinHintCurrent": MessageLookupByLibrary.simpleMessage(
+      "Enter current PIN",
+    ),
+    "launcherPinHintNew": MessageLookupByLibrary.simpleMessage("Enter new PIN"),
+    "launcherPinHintNewRepeat": MessageLookupByLibrary.simpleMessage(
+      "Repeat new PIN",
+    ),
+    "launcherPinHintRepeat": MessageLookupByLibrary.simpleMessage("Repeat PIN"),
+    "launcherPinLabel": MessageLookupByLibrary.simpleMessage(
+      "Protect launcher with 4-digit PIN",
+    ),
+    "launcherPinMismatch": MessageLookupByLibrary.simpleMessage(
+      "PIN and repeat do not match.",
+    ),
+    "launcherPinNewMismatch": MessageLookupByLibrary.simpleMessage(
+      "New PIN and repeat do not match.",
+    ),
+    "launcherPinNewValidationDigits": MessageLookupByLibrary.simpleMessage(
+      "New PIN must be exactly 4 digits.",
+    ),
+    "launcherPinSaveError": m4,
+    "launcherPinSaved": MessageLookupByLibrary.simpleMessage(
+      "PIN has been saved.",
+    ),
+    "launcherPinValidationDigits": MessageLookupByLibrary.simpleMessage(
+      "PIN must be exactly 4 digits.",
+    ),
     "menuItemSettings": MessageLookupByLibrary.simpleMessage("Settings"),
     "menuTitle": MessageLookupByLibrary.simpleMessage("M E N U"),
+    "navigationPaneEventLabel": MessageLookupByLibrary.simpleMessage("Events"),
+    "navigationPaneGoldTrendLabel": MessageLookupByLibrary.simpleMessage(
+      "Gold Trend",
+    ),
     "no": MessageLookupByLibrary.simpleMessage("No"),
     "ok": MessageLookupByLibrary.simpleMessage("OK"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
@@ -194,7 +281,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsScreenWowPathScanBtnHint": MessageLookupByLibrary.simpleMessage(
       "<- Scan your drives for wow.exe and select it from the shown list.",
     ),
-    "splashScreenBlockingError": m0,
+    "splashScreenBlockingError": m5,
     "splashScreenEulaNotAccepted": MessageLookupByLibrary.simpleMessage(
       "Eula not accepted",
     ),
@@ -207,7 +294,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "splashScreenMaintenance": MessageLookupByLibrary.simpleMessage(
       "maintenance",
     ),
-    "splashScreenUpdateRequired": m1,
+    "splashScreenPinPrompt": MessageLookupByLibrary.simpleMessage(
+      "Enter your PIN to continue",
+    ),
+    "splashScreenUpdateRequired": m6,
+    "totpAuthCodeHint": MessageLookupByLibrary.simpleMessage("auth code"),
+    "totpCheckButton": MessageLookupByLibrary.simpleMessage("check"),
+    "totpEnabled": MessageLookupByLibrary.simpleMessage(
+      "2-factor authentication enabled",
+    ),
+    "totpSecret": MessageLookupByLibrary.simpleMessage("TOTP secret"),
     "updateScreenUpdateCheck": MessageLookupByLibrary.simpleMessage(
       "Checking for updates...",
     ),

@@ -1,6 +1,13 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
+import 'dart:typed_data';
 import 'package:bloc/bloc.dart';
+import 'package:crypto/crypto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:twodotnulllauncher/utils/launcher_pin_utils.dart';
+import '../../../data/launcher_pin_data.dart';
+import '../../../repository/credential_repository.dart';
 import '../../../repository/preferences_repository.dart';
 import '../../../repository/settings_repository.dart';
 import '../../../widgets/log.dart';
@@ -13,11 +20,15 @@ part 'settings_screen_cubit.freezed.dart';
 class SettingsScreenCubit extends Cubit<SettingsScreenState> {
   final SettingsRepository settingsRepository;
   final PreferencesRepository preferencesRepository;
+  final CredentialRepository credentialRepository;
 
   SettingsScreenCubit({
     required this.settingsRepository,
     required this.preferencesRepository,
+    required this.credentialRepository,
   }) : super(const SettingsScreenState.initial());
+
+  LauncherPinUtils? _launcherPinUtils;
 
   Future<List<String>> getAvailableDrives() async {
     await Log.i('Getting available drives without wmic');
@@ -54,6 +65,9 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
   }
 
   Future<void> initialize() async {
+    _launcherPinUtils =
+        LauncherPinUtils(credentialRepository: credentialRepository);
+
     emit(const SettingsScreenState.scanningForDrives());
     await Log.i('Initializing SettingsScreenCubit');
 
@@ -149,5 +163,48 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
     }
 
     emit(SettingsScreenState.foundWowExe(wowFiles: files));
+  }
+
+  Future<void> saveLauncherPin(String pinString) async {
+    final normalizedPin = pinString.trim();
+
+    if (!RegExp(r'^\d{4}$').hasMatch(normalizedPin)) {
+      throw ArgumentError('PIN must be exactly 4 digits.');
+    }
+
+    final random = Random.secure();
+    final saltBytes = Uint8List.fromList(
+      List<int>.generate(16, (_) => random.nextInt(256)),
+    );
+    final saltBase64 = base64Encode(saltBytes);
+
+    final hashInput = utf8.encode('$normalizedPin:$saltBase64');
+    final hashBytes = sha256.convert(hashInput).bytes;
+    final hashBase64 = base64Encode(hashBytes);
+
+    final pinData = LauncherPinData(
+      salt: saltBase64,
+      hash: hashBase64,
+    );
+
+    await credentialRepository.saveLauncherPin(pinData.toRawJson());
+  }
+
+  Future<bool> hasLauncherPin() async {
+    return _launcherPinUtils!.hasLauncherPin();
+  }
+
+  Future<bool> verifyLauncherPin(String pinString) async {
+    return _launcherPinUtils!.verifyLauncherPin(pinString);
+  }
+
+  Future<void> deleteLauncherPin() async {
+    final hasPin = await _launcherPinUtils!.hasLauncherPin();
+
+    if (!hasPin) {
+      return;
+    }
+
+    await credentialRepository.deleteLauncherPin();
   }
 }

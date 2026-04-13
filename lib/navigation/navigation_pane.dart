@@ -66,118 +66,114 @@ class _NavigationPaneState extends State<NavigationPane> {
       const GoldTrendChartScreen(),
       const SettingsScreen(),
     ];
-    return RepositoryProvider(
-      create: (context) => CredentialRepository(),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => AccountScreenCubit(
-                mainRepository: context.read<MainRepository>(),
-                settingsRepository: settingsRepository,
-                preferencesRepository: context.read<PreferencesRepository>()),
-          ),
-          BlocProvider(
-            create: (context) => AccountAddPageCubit(
-              mainRepository: mainRepository,
-              preferencesRepository: preferencesRepository,
-              credentialRepository: context.read<CredentialRepository>(),
-            ),
-          ),
-          BlocProvider(
-            create: (context) => CharacterDataCubit(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AccountScreenCubit(
               mainRepository: context.read<MainRepository>(),
               settingsRepository: settingsRepository,
-              preferencesRepository: preferencesRepository,
-            ),
+              preferencesRepository: context.read<PreferencesRepository>()),
+        ),
+        BlocProvider(
+          create: (context) => AccountAddPageCubit(
+            mainRepository: mainRepository,
+            preferencesRepository: preferencesRepository,
+            credentialRepository: context.read<CredentialRepository>(),
           ),
-        ],
-        child: Scaffold(
-          body: Row(
-            children: [
-              NavigationRail(
-                leadingAtTop: true,
-                destinations: [
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.group),
-                    label: Text(locales.accountScreenTitle),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.event),
-                    label: Text(locales.menuItemSettings),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.area_chart),
-                    label: Text(locales.menuItemSettings),
-                  ),
-                  NavigationRailDestination(
-                    icon: const Icon(Icons.settings),
-                    label: Text(locales.menuItemSettings),
-                  ),
-                ],
-                selectedIndex: _selectedIndex,
-                onDestinationSelected: (int index) {
-                  if (index == 0) {
-                    if (settingsRepository.secondsToWaitForGameToStart ==
-                            null ||
-                        settingsRepository.wowRootFolderPath == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            locales.settingsScreenNotAllSet,
-                            style: const TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24),
-                          ),
-                        ),
-                      );
-                      return;
-                    }
-                  }
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
-              ),
-              BlocConsumer<BackupCubit, BackupState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    orElse: () => Expanded(child: screens[_selectedIndex]),
-                    backUpProgress: (processedFiles, totalFiles, progress) {
-                      return Expanded(
-                        child: BackupScreen(
-                            processedFiles: processedFiles,
-                            totalFiles: totalFiles,
-                            progress: progress),
-                      );
-                    },
-                    backupFailed: (errorMsg) {
-                      return Container(
-                        color: Colors.red,
-                        child: Center(
-                          child: Text(
-                            'Backup failed: $errorMsg',
-                            style: const TextStyle(
-                              color: Colors.white,
+        ),
+        BlocProvider(
+          create: (context) => CharacterDataCubit(
+            mainRepository: context.read<MainRepository>(),
+            settingsRepository: settingsRepository,
+            preferencesRepository: preferencesRepository,
+          ),
+        ),
+      ],
+      child: Scaffold(
+        body: Row(
+          children: [
+            NavigationRail(
+              leadingAtTop: true,
+              destinations: [
+                NavigationRailDestination(
+                  icon: const Icon(Icons.group),
+                  label: Text(locales.accountScreenTitle),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.event),
+                  label: Text(locales.navigationPaneEventLabel),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.area_chart),
+                  label: Text(locales.navigationPaneGoldTrendLabel),
+                ),
+                NavigationRailDestination(
+                  icon: const Icon(Icons.settings),
+                  label: Text(locales.menuItemSettings),
+                ),
+              ],
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: (int index) {
+                if (index == 0) {
+                  if (settingsRepository.secondsToWaitForGameToStart == null ||
+                      settingsRepository.wowRootFolderPath == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          locales.settingsScreenNotAllSet,
+                          style: const TextStyle(
+                              color: Colors.red,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
+                              fontSize: 24),
+                        ),
+                      ),
+                    );
+                    return;
+                  }
+                }
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+            ),
+            BlocConsumer<BackupCubit, BackupState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => Expanded(child: screens[_selectedIndex]),
+                  backUpProgress: (processedFiles, totalFiles, progress) {
+                    return Expanded(
+                      child: BackupScreen(
+                          processedFiles: processedFiles,
+                          totalFiles: totalFiles,
+                          progress: progress),
+                    );
+                  },
+                  backupFailed: (errorMsg) {
+                    return Container(
+                      color: Colors.red,
+                      child: Center(
+                        child: Text(
+                          locales.backupScreenFailed(errorMsg),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
                         ),
-                      );
-                    },
-                  );
-                },
-                listener: (context, state) {
-                  state.maybeMap(
-                      orElse: () {},
-                      backupFinished: (value) {
-                        exit(0);
-                      });
-                },
-              ),
-            ],
-          ),
+                      ),
+                    );
+                  },
+                );
+              },
+              listener: (context, state) {
+                state.maybeMap(
+                    orElse: () {},
+                    backupFinished: (value) {
+                      exit(0);
+                    });
+              },
+            ),
+          ],
         ),
       ),
     );

@@ -17,6 +17,7 @@ class AccountListPageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenCubit = context.read<AccountScreenCubit>()..initialize();
     final pageCubit = context.read<AccListPageCubit>();
+    final characterDataCubit = context.read<CharacterDataCubit>();
     final locales = Localize.of(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,8 +41,8 @@ class AccountListPageContent extends StatelessWidget {
                       initialized: () {
                         pageCubit.loadAccounts();
                       },
-                      failed: (errorMsg) {
-                        return showDialog(
+                      failed: (errorMsg) async {
+                        final result = await showDialog(
                           barrierDismissible: false,
                           context: context,
                           builder: (context) => AlertDialog(
@@ -57,6 +58,7 @@ class AccountListPageContent extends StatelessWidget {
                             ],
                           ),
                         );
+                        screenCubit.initialize();
                       },
                     );
                   },
@@ -123,7 +125,16 @@ class AccountListPageContent extends StatelessWidget {
                                                   ),
                                                   Expanded(
                                                     child: AccountCard(
-                                                        acc: accounts[index]),
+                                                      acc: accounts[index],
+                                                      onTap: () =>
+                                                          characterDataCubit
+                                                              .getAccountDetails(
+                                                                  accounts[
+                                                                      index]),
+                                                      onDoubleTap: () =>
+                                                          screenCubit.startGame(
+                                                              accounts[index]),
+                                                    ),
                                                   ),
                                                 ],
                                               ),
@@ -190,8 +201,8 @@ class AccountListPageContent extends StatelessWidget {
             },
             listener: (context, state) {
               state.whenOrNull(
-                failed: (errorMsg) {
-                  return showDialog(
+                failed: (errorMsg) async {
+                  final result = await showDialog(
                     barrierDismissible: false,
                     context: context,
                     builder: (context) => AlertDialog(
@@ -207,6 +218,7 @@ class AccountListPageContent extends StatelessWidget {
                       ],
                     ),
                   );
+                  pageCubit.loadAccounts();
                 },
               );
             },

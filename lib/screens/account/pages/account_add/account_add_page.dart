@@ -218,7 +218,7 @@ class _AccountAddPageState extends State<AccountAddPage> {
                             });
                           },
                         ),
-                        const Text('TOTP enabled'),
+                        Text(locales.totpEnabled),
                       ],
                     ),
                     _isTotPEnabled
@@ -227,7 +227,7 @@ class _AccountAddPageState extends State<AccountAddPage> {
                               MyTextField(
                                 fieldKey: const Key('account_add_totp_secret'),
                                 myController: _totPSecretController,
-                                hint: 'TOTP secret',
+                                hint: locales.totpSecret,
                                 obscure: !_showTotP,
                               ),
                               IconButton(

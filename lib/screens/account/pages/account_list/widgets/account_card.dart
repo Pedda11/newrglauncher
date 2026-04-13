@@ -24,10 +24,8 @@ class _AccountCardState extends State<AccountCard> {
   double _progress = 0.0;
   bool _isLaunching = false;
 
-  void _onDoubleTap(AccountScreenCubit screenCubit) async {
+  void _onDoubleTap() async {
     if (_isLaunching) return;
-
-    screenCubit.startGame(widget.acc);
 
     setState(() {
       _isLaunching = true;
@@ -50,12 +48,14 @@ class _AccountCardState extends State<AccountCard> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
-    final screenCubit = context.read<AccountScreenCubit>();
-    final characterDataCubit = context.read<CharacterDataCubit>();
     return GestureDetector(
-      onDoubleTap: () => _onDoubleTap(screenCubit),
-      onTap: () => characterDataCubit.getAccountDetails(widget.acc),
+      onDoubleTap: () {
+        _onDoubleTap();
+        widget.onDoubleTap?.call();
+      },
+      onTap: widget.onTap,
       child: Stack(
         children: [
           /// BASE CARD

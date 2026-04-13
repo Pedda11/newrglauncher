@@ -59,6 +59,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     TResult Function(_initial value)? initial,
     TResult Function(_eulaNotAccepted value)? eulaNotAccepted,
     TResult Function(_initialized value)? initialized,
+    TResult Function(_pinSecured value)? pinSecured,
     TResult Function(_initializedFirstStart value)? initializedFirstStart,
     TResult Function(_checkingForUpdates value)? checkingForUpdates,
     TResult Function(_maintenance value)? maintenance,
@@ -75,6 +76,8 @@ extension SplashScreenStatePatterns on SplashScreenState {
         return eulaNotAccepted(_that);
       case _initialized() when initialized != null:
         return initialized(_that);
+      case _pinSecured() when pinSecured != null:
+        return pinSecured(_that);
       case _initializedFirstStart() when initializedFirstStart != null:
         return initializedFirstStart(_that);
       case _checkingForUpdates() when checkingForUpdates != null:
@@ -110,6 +113,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     required TResult Function(_initial value) initial,
     required TResult Function(_eulaNotAccepted value) eulaNotAccepted,
     required TResult Function(_initialized value) initialized,
+    required TResult Function(_pinSecured value) pinSecured,
     required TResult Function(_initializedFirstStart value)
         initializedFirstStart,
     required TResult Function(_checkingForUpdates value) checkingForUpdates,
@@ -126,6 +130,8 @@ extension SplashScreenStatePatterns on SplashScreenState {
         return eulaNotAccepted(_that);
       case _initialized():
         return initialized(_that);
+      case _pinSecured():
+        return pinSecured(_that);
       case _initializedFirstStart():
         return initializedFirstStart(_that);
       case _checkingForUpdates():
@@ -160,6 +166,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     TResult? Function(_initial value)? initial,
     TResult? Function(_eulaNotAccepted value)? eulaNotAccepted,
     TResult? Function(_initialized value)? initialized,
+    TResult? Function(_pinSecured value)? pinSecured,
     TResult? Function(_initializedFirstStart value)? initializedFirstStart,
     TResult? Function(_checkingForUpdates value)? checkingForUpdates,
     TResult? Function(_maintenance value)? maintenance,
@@ -175,6 +182,8 @@ extension SplashScreenStatePatterns on SplashScreenState {
         return eulaNotAccepted(_that);
       case _initialized() when initialized != null:
         return initialized(_that);
+      case _pinSecured() when pinSecured != null:
+        return pinSecured(_that);
       case _initializedFirstStart() when initializedFirstStart != null:
         return initializedFirstStart(_that);
       case _checkingForUpdates() when checkingForUpdates != null:
@@ -209,6 +218,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     TResult Function()? initial,
     TResult Function()? eulaNotAccepted,
     TResult Function()? initialized,
+    TResult Function()? pinSecured,
     TResult Function()? initializedFirstStart,
     TResult Function()? checkingForUpdates,
     TResult Function()? maintenance,
@@ -226,6 +236,8 @@ extension SplashScreenStatePatterns on SplashScreenState {
         return eulaNotAccepted();
       case _initialized() when initialized != null:
         return initialized();
+      case _pinSecured() when pinSecured != null:
+        return pinSecured();
       case _initializedFirstStart() when initializedFirstStart != null:
         return initializedFirstStart();
       case _checkingForUpdates() when checkingForUpdates != null:
@@ -261,6 +273,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     required TResult Function() initial,
     required TResult Function() eulaNotAccepted,
     required TResult Function() initialized,
+    required TResult Function() pinSecured,
     required TResult Function() initializedFirstStart,
     required TResult Function() checkingForUpdates,
     required TResult Function() maintenance,
@@ -277,6 +290,8 @@ extension SplashScreenStatePatterns on SplashScreenState {
         return eulaNotAccepted();
       case _initialized():
         return initialized();
+      case _pinSecured():
+        return pinSecured();
       case _initializedFirstStart():
         return initializedFirstStart();
       case _checkingForUpdates():
@@ -311,6 +326,7 @@ extension SplashScreenStatePatterns on SplashScreenState {
     TResult? Function()? initial,
     TResult? Function()? eulaNotAccepted,
     TResult? Function()? initialized,
+    TResult? Function()? pinSecured,
     TResult? Function()? initializedFirstStart,
     TResult? Function()? checkingForUpdates,
     TResult? Function()? maintenance,
@@ -327,6 +343,8 @@ extension SplashScreenStatePatterns on SplashScreenState {
         return eulaNotAccepted();
       case _initialized() when initialized != null:
         return initialized();
+      case _pinSecured() when pinSecured != null:
+        return pinSecured();
       case _initializedFirstStart() when initializedFirstStart != null:
         return initializedFirstStart();
       case _checkingForUpdates() when checkingForUpdates != null:
@@ -421,6 +439,32 @@ class _initialized with DiagnosticableTreeMixin implements SplashScreenState {
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashScreenState.initialized()';
+  }
+}
+
+/// @nodoc
+
+class _pinSecured with DiagnosticableTreeMixin implements SplashScreenState {
+  const _pinSecured();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashScreenState.pinSecured'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _pinSecured);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SplashScreenState.pinSecured()';
   }
 }
 

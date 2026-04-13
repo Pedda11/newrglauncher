@@ -2,14 +2,43 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twodotnulllauncher/data/disclaimer.dart';
+import 'package:twodotnulllauncher/repository/credential_repository.dart';
+import 'package:twodotnulllauncher/screens/settings/widgets/pin_text_field.dart';
 import '../../../localization/generated/l10n.dart';
 import '../../../navigation/navigation_pane.dart';
 import '../../../repository/error_repository.dart';
+import '../../../utils/launcher_pin_utils.dart';
 import '../../../widgets/log.dart';
 import '../cubit/splash_screen_cubit.dart';
 
-class SplashScreenContent extends StatelessWidget {
+class SplashScreenContent extends StatefulWidget {
   const SplashScreenContent({super.key});
+
+  @override
+  State<SplashScreenContent> createState() => _SplashScreenContentState();
+}
+
+class _SplashScreenContentState extends State<SplashScreenContent> {
+  final _focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _initialize();
+  }
+
+  Future<void> _initialize() async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _focusNode.requestFocus();
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +57,7 @@ class SplashScreenContent extends StatelessWidget {
           initializedFirstStart: () {
             return Navigator.of(context).pushReplacement(MaterialPageRoute(
               builder: (context) => const NavigationPane(
-                initialIndex: 1,
+                initialIndex: 3,
               ),
             ));
           },
@@ -120,6 +149,33 @@ class SplashScreenContent extends StatelessWidget {
                     width: 120,
                     child: CircularProgressIndicator(),
                   ),
+                ],
+              ),
+            );
+          },
+          pinSecured: () {
+            _initialize();
+            final pinController = TextEditingController();
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(locales.splashScreenPinPrompt),
+                  const SizedBox(height: 16),
+                  PinTextField(
+                      focusNode: _focusNode,
+                      myController: pinController,
+                      hint: 'PIN',
+                      onChanged: (p0) async {
+                        final isValid = await LauncherPinUtils(
+                                credentialRepository:
+                                    context.read<CredentialRepository>())
+                            .verifyLauncherPin(p0);
+                        if (isValid) {
+                          await screenCubit.pinSuccess();
+                        }
+                      }),
+                  Text(pinController.text)
                 ],
               ),
             );

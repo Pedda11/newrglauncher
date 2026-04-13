@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../data/rg_event_data.dart';
 
@@ -49,14 +50,14 @@ class RgEventParser {
 
       events.add(
         RgEventData(
-          id: id,
-          name: name,
-          start: start,
-          end: end,
-          iconUrl: iconUrl,
-          detailsUrl: '$_baseUrl/?event=$id',
-          categoryId: categoryId,
-        ),
+            id: id,
+            name: name,
+            start: start,
+            end: end,
+            iconUrl: iconUrl,
+            detailsUrl: '$_baseUrl/?event=$id',
+            categoryId: categoryId,
+            eventColor: Colors.grey.shade300),
       );
     }
 

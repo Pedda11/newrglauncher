@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../../../../../services/totp/totp_service.dart';
 import '../../../../../widgets/my_text_field.dart';
+import '../../../../../localization/generated/l10n.dart';
 
 class TestTotpWidget extends StatefulWidget {
   final TextEditingController secretController;
@@ -52,13 +53,14 @@ class _TestTotpWidgetState extends State<TestTotpWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final locales = Localize.of(context);
     return Row(
       children: [
         Text('$countdown'),
         MyTextField(
           fieldKey: const Key('account_add_totp_code'),
           myController: _totPCodeController,
-          hint: 'auth code',
+          hint: locales.totpAuthCodeHint,
           obscure: false,
         ),
         ElevatedButton(
@@ -79,7 +81,7 @@ class _TestTotpWidgetState extends State<TestTotpWidget> {
               isSecretValid = isValid ? 'VALID' : 'INVALID';
             });
           },
-          child: const Text('check'),
+          child: Text(locales.totpCheckButton),
         ),
         const SizedBox(width: 16),
         Text(isSecretValid)

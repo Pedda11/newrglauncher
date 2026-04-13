@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../../data/rg_event_data.dart';
 import '../../../data/rg_event_list_data.dart';
@@ -13,7 +14,7 @@ class EventScreenCubit extends Cubit<EventScreenState> {
 
   final RgEventParser _rgEventParser = RgEventParser();
 
-  final List<RgEventListData> _groupedEventList = [];
+  List<RgEventListData> _groupedEventList = [];
 
   Future<void> initialize() async {
     List<RgEventData> events = await _rgEventParser.fetchEvents();
@@ -39,6 +40,9 @@ class EventScreenCubit extends Cubit<EventScreenState> {
           categoryId: category, events: group, isExpanded: isExpanded));
     }
 
+    _groupedEventList =
+        await Future.wait(_groupedEventList.map((e) => setEventColors(e)));
+
     emit(EventScreenState.initialized(events: _groupedEventList));
   }
 
@@ -54,5 +58,71 @@ class EventScreenCubit extends Cubit<EventScreenState> {
             .isExpanded;
 
     emit(EventScreenState.initialized(events: _groupedEventList));
+  }
+
+  Future<RgEventListData> setEventColors(RgEventListData events) async {
+    final now = DateTime.now();
+    RgEventData? nextUpcomingEvent;
+
+    // Find the next upcoming event (earliest start time after now)
+    for (final event in events.events) {
+      if (event.start.isAfter(now)) {
+        if (nextUpcomingEvent == null ||
+            event.start.isBefore(nextUpcomingEvent.start)) {
+          nextUpcomingEvent = event;
+        }
+      }
+    }
+
+    // Update colors for all events
+    final updatedEvents = events.events.map((event) {
+      // Check if event is currently active (between start and end)
+      final isActive = !event.start.isAfter(now) && event.end.isAfter(now);
+
+      if (isActive) {
+        // Active events get green color
+        return RgEventData(
+          id: event.id,
+          name: event.name,
+          start: event.start,
+          end: event.end,
+          iconUrl: event.iconUrl,
+          detailsUrl: event.detailsUrl,
+          categoryId: event.categoryId,
+          eventColor: Colors.green,
+        );
+      } else if (nextUpcomingEvent != null &&
+          event.id == nextUpcomingEvent.id) {
+        // Next upcoming event gets yellow color
+        return RgEventData(
+          id: event.id,
+          name: event.name,
+          start: event.start,
+          end: event.end,
+          iconUrl: event.iconUrl,
+          detailsUrl: event.detailsUrl,
+          categoryId: event.categoryId,
+          eventColor: Colors.yellow,
+        );
+      } else {
+        // All other events get white color
+        return RgEventData(
+          id: event.id,
+          name: event.name,
+          start: event.start,
+          end: event.end,
+          iconUrl: event.iconUrl,
+          detailsUrl: event.detailsUrl,
+          categoryId: event.categoryId,
+          eventColor: Colors.grey.shade100,
+        );
+      }
+    }).toList();
+
+    return RgEventListData(
+      categoryId: events.categoryId,
+      events: updatedEvents,
+      isExpanded: events.isExpanded,
+    );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:twodotnulllauncher/screens/event/widgets/event_category_item.dart';
-import '../../../screens/event/widgets/event_item.dart';
 import '../../../screens/event/cubit/event_screen_cubit.dart';
 import '../../../localization/generated/l10n.dart';
 
@@ -16,13 +15,13 @@ class EventScreenContent extends StatelessWidget {
         return state.maybeWhen(
           initialized: (events) {
             if (events.isNotEmpty) {
-              return EventCategoryItem(rgEventListDataList: events);
+              return EventCategoryList(rgEventListDataList: events);
             } else {
               return Text(locales.eventScreenEmpty);
             }
           },
           orElse: () {
-            return const CircularProgressIndicator();
+            return const Center(child: CircularProgressIndicator());
           },
         );
       },

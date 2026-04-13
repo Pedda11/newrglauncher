@@ -8,6 +8,8 @@ class SplashScreenState with _$SplashScreenState {
 
   const factory SplashScreenState.initialized() = _initialized;
 
+  const factory SplashScreenState.pinSecured() = _pinSecured;
+
   const factory SplashScreenState.initializedFirstStart() =
       _initializedFirstStart;
 

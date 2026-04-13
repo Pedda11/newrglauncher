@@ -3,11 +3,12 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:twodotnulllauncher/utils/launcher_pin_utils.dart';
 import '../../../data/launcher_endpoints.dart';
 import '../../../helper/error_report_builder.dart';
+import '../../../repository/credential_repository.dart';
 import '../../../repository/error_report_repository.dart';
 import '../../../repository/error_repository.dart';
-import '../../../widgets/gold_fake_history_test.dart';
 import '../../../widgets/log.dart';
 import '../core_functions/updater_promoter.dart';
 import '../core_functions/updater_update_finalizer.dart';
@@ -32,15 +33,22 @@ part 'splash_screen_cubit.freezed.dart';
 class SplashScreenCubit extends Cubit<SplashScreenState> {
   final SettingsRepository settingsRepository;
   final PreferencesRepository preferencesRepository;
+  final CredentialRepository credentialRepository;
 
   SplashScreenCubit(
-      {required this.settingsRepository, required this.preferencesRepository})
+      {required this.settingsRepository,
+      required this.preferencesRepository,
+      required this.credentialRepository})
       : super(const SplashScreenState.initial());
 
   Future<void> acceptEula() async {
     await preferencesRepository.setEula(true);
     settingsRepository.eulaAccepted = true;
     initialize();
+  }
+
+  Future<void> pinSuccess() async {
+    emit(const SplashScreenState.initialized());
   }
 
   Future<void> initialize() async {
@@ -135,6 +143,14 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
               await preferencesRepository.getDataDirectoryPath();
           settingsRepository.secondsToWaitForGameToStart =
               await preferencesRepository.getWaitTillGameStarts();
+
+          final hasPin =
+              await LauncherPinUtils(credentialRepository: credentialRepository)
+                  .hasLauncherPin();
+          if (hasPin) {
+            emit(const SplashScreenState.pinSecured());
+            return;
+          }
 
           emit(const SplashScreenState.initialized());
           return;
