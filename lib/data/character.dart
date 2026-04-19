@@ -1,6 +1,8 @@
 import 'saved_instance.dart';
 
 class Character {
+  int sortIndex;
+  bool isShown = true;
   String name;
   String faction;
   String guildName;
@@ -15,6 +17,8 @@ class Character {
   List<SavedInstance> savedInstances = [];
 
   Character({
+    required this.sortIndex,
+    required this.isShown,
     required this.name,
     required this.faction,
     required this.guildName,
@@ -30,6 +34,8 @@ class Character {
   });
 
   factory Character.fromJson(Map<String, dynamic> json) => Character(
+        sortIndex: json["sortIndex"] ?? 0,
+        isShown: json["isShown"] ?? true,
         name: json["name"],
         faction: json["faction"],
         guildName: json["guildName"],
@@ -47,6 +53,8 @@ class Character {
       );
 
   Map<String, dynamic> toJson() => {
+        "sortIndex": sortIndex,
+        "isShown": isShown,
         "name": name,
         "faction": faction,
         "guildName": guildName,

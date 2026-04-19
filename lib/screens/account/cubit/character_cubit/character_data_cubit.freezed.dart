@@ -157,7 +157,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? initialized,
-    TResult Function(List<dynamic>? characterList)? accountLoaded,
+    TResult Function(Account account, List<Character> characterList)?
+        accountLoaded,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -168,7 +169,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
       case _initialized() when initialized != null:
         return initialized();
       case _accountLoaded() when accountLoaded != null:
-        return accountLoaded(_that.characterList);
+        return accountLoaded(_that.account, _that.characterList);
       case _failed() when failed != null:
         return failed(_that.errorMsg);
       case _:
@@ -193,7 +194,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() initialized,
-    required TResult Function(List<dynamic>? characterList) accountLoaded,
+    required TResult Function(Account account, List<Character> characterList)
+        accountLoaded,
     required TResult Function(String errorMsg) failed,
   }) {
     final _that = this;
@@ -203,7 +205,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
       case _initialized():
         return initialized();
       case _accountLoaded():
-        return accountLoaded(_that.characterList);
+        return accountLoaded(_that.account, _that.characterList);
       case _failed():
         return failed(_that.errorMsg);
       case _:
@@ -227,7 +229,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? initialized,
-    TResult? Function(List<dynamic>? characterList)? accountLoaded,
+    TResult? Function(Account account, List<Character> characterList)?
+        accountLoaded,
     TResult? Function(String errorMsg)? failed,
   }) {
     final _that = this;
@@ -237,7 +240,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
       case _initialized() when initialized != null:
         return initialized();
       case _accountLoaded() when accountLoaded != null:
-        return accountLoaded(_that.characterList);
+        return accountLoaded(_that.account, _that.characterList);
       case _failed() when failed != null:
         return failed(_that.errorMsg);
       case _:
@@ -289,16 +292,16 @@ class _initialized implements CharacterDataState {
 /// @nodoc
 
 class _accountLoaded implements CharacterDataState {
-  const _accountLoaded({required final List<dynamic>? characterList})
+  const _accountLoaded(
+      {required this.account, required final List<Character> characterList})
       : _characterList = characterList;
 
-  final List<dynamic>? _characterList;
-  List<dynamic>? get characterList {
-    final value = _characterList;
-    if (value == null) return null;
+  final Account account;
+  final List<Character> _characterList;
+  List<Character> get characterList {
     if (_characterList is EqualUnmodifiableListView) return _characterList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_characterList);
   }
 
   /// Create a copy of CharacterDataState
@@ -313,17 +316,18 @@ class _accountLoaded implements CharacterDataState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _accountLoaded &&
+            (identical(other.account, account) || other.account == account) &&
             const DeepCollectionEquality()
                 .equals(other._characterList, _characterList));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_characterList));
+  int get hashCode => Object.hash(runtimeType, account,
+      const DeepCollectionEquality().hash(_characterList));
 
   @override
   String toString() {
-    return 'CharacterDataState.accountLoaded(characterList: $characterList)';
+    return 'CharacterDataState.accountLoaded(account: $account, characterList: $characterList)';
   }
 }
 
@@ -334,7 +338,7 @@ abstract mixin class _$accountLoadedCopyWith<$Res>
           _accountLoaded value, $Res Function(_accountLoaded) _then) =
       __$accountLoadedCopyWithImpl;
   @useResult
-  $Res call({List<dynamic>? characterList});
+  $Res call({Account account, List<Character> characterList});
 }
 
 /// @nodoc
@@ -349,13 +353,18 @@ class __$accountLoadedCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? characterList = freezed,
+    Object? account = null,
+    Object? characterList = null,
   }) {
     return _then(_accountLoaded(
-      characterList: freezed == characterList
+      account: null == account
+          ? _self.account
+          : account // ignore: cast_nullable_to_non_nullable
+              as Account,
+      characterList: null == characterList
           ? _self._characterList
           : characterList // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<Character>,
     ));
   }
 }

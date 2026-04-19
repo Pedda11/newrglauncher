@@ -1,3 +1,6 @@
+import 'package:twodotnulllauncher/data/account.dart';
+
+import '../repository/main_repository.dart';
 import '../utils/lua_to_json.dart';
 import '../utils/utils.dart';
 import 'character.dart';
@@ -87,6 +90,8 @@ class Altoholic {
 
         list.add(
           Character(
+            sortIndex: 0,
+            isShown: true,
             name: name,
             faction: faction,
             guildName: guildName,

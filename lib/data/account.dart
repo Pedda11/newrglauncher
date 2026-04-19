@@ -1,11 +1,6 @@
 import 'dart:convert';
 import 'character.dart';
 
-/// Function to parse JSON data into a List of User objects.
-/// final users = userFromJson(jsonString);
-List<Account> userFromJson(String str) =>
-    List<Account>.from(json.decode(str).map((x) => Account.fromJson(x)));
-
 /// Function to convert a List of User objects to a JSON string.
 /// String jsonString = userToJson(users);
 String userToJson(List<Account> data) =>

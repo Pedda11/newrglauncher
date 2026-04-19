@@ -172,22 +172,61 @@ class AccountListPageContent extends StatelessWidget {
             ],
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: SizedBox(
+            width: 1,
+            height: double.infinity,
+            child: Container(
+              color: Colors.black,
+            ),
+          ),
+        ),
         Expanded(
           flex: 1,
           child: BlocConsumer<CharacterDataCubit, CharacterDataState>(
             builder: (context, state) {
               return state.maybeWhen(
-                  accountLoaded: (characterList) => Container(
+                  accountLoaded: (account, characterList) => Container(
                         height: double.infinity,
                         width: double.infinity,
                         decoration: const BoxDecoration(
                           color: Colors.black12,
                         ),
-                        child: ListView.builder(
-                          itemCount: characterList!.length,
+                        child: ReorderableListView.builder(
+                          buildDefaultDragHandles: false,
+                          itemCount: characterList.length,
+                          onReorder: (oldIndex, newIndex) {
+                            characterDataCubit.reorderCharacters(
+                              account,
+                              oldIndex,
+                              newIndex,
+                            );
+                          },
                           itemBuilder: (context, index) {
-                            return AccountDataCard(
-                              character: characterList[index],
+                            final character = characterList[index];
+
+                            return Padding(
+                              key: ValueKey(character.name),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Row(
+                                children: [
+                                  ReorderableDragStartListener(
+                                    index: index,
+                                    child: const Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 8),
+                                      child: Icon(Icons.drag_handle),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: AccountDataCard(
+                                      character: character,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
                           },
                         ),

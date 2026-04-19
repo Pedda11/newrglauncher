@@ -7,6 +7,7 @@ import '../repository/main_repository.dart';
 import '../repository/settings_repository.dart';
 import '../utils/gold_snapshot_builder.dart';
 import '../widgets/log.dart';
+import 'character/character_merge_service.dart';
 import 'gold_trend/gold_aggregation_service.dart';
 import 'gold_trend/gold_history_service.dart';
 
@@ -54,11 +55,16 @@ class AccountDataRefreshService {
       (element) => element.accountName == acc.accountName,
     );
 
-    accountInList.accChars = characters;
+    final mergedCharacters = CharacterMergeService.mergeWithLocalMeta(
+      incomingCharacters: characters,
+      existingCharacters: accountInList.accChars,
+    );
+
+    accountInList.accChars = mergedCharacters;
 
     final goldSnapshots = GoldSnapshotBuilder.buildGoldSnapshots(
       accountName: acc.accountName.toUpperCase(),
-      characters: characters,
+      characters: mergedCharacters,
     );
 
     if (acc.includeInGoldTrend) {
@@ -123,7 +129,7 @@ class AccountDataRefreshService {
     );
 
     return AccountRefreshResult(
-      characters: characters,
+      characters: mergedCharacters,
       totalGoldCopper: totalCopper,
       chartPoints: chartPoints,
       forecastPoints: forecastPoints,
