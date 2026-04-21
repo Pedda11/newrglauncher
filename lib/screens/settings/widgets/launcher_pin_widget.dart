@@ -4,6 +4,10 @@ import 'package:twodotnulllauncher/screens/settings/widgets/pin_text_field.dart'
 
 import '../../../enum/e_launcher_pin_mode.dart';
 import '../../../localization/generated/l10n.dart';
+import '../../../theme/helpers/theme_context_extensions.dart';
+import '../../../widgets/launcher_button.dart';
+import '../../../widgets/launcher_checkbox.dart';
+import '../../../widgets/launcher_panel.dart';
 import '../cubit/settings_screen_cubit.dart';
 
 class LauncherPinWidget extends StatefulWidget {
@@ -333,9 +337,11 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
   }
 
   Widget _buildMessage() {
+    final spacing = context.launcherSpacing;
+
     if (_errorText != null) {
       return Padding(
-        padding: const EdgeInsets.only(left: 16, top: 8),
+        padding: EdgeInsets.only(top: spacing.sm),
         child: Text(
           _errorText!,
           style: const TextStyle(color: Colors.red),
@@ -345,7 +351,7 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
 
     if (_successText != null) {
       return Padding(
-        padding: const EdgeInsets.only(left: 16, top: 8),
+        padding: EdgeInsets.only(top: spacing.sm),
         child: Text(
           _successText!,
           style: const TextStyle(color: Colors.green),
@@ -358,25 +364,27 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
 
   Widget _buildCreatePinUi() {
     final locales = Localize.of(context);
+    final spacing = context.launcherSpacing;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: spacing.md),
         PinTextField(
           fieldKey: const Key('launcher_pin_create'),
           myController: _pinController,
-          hint: locales.launcherPinHintRepeat,
+          hint: locales.launcherPinHintNew,
         ),
+        SizedBox(height: spacing.md),
         PinTextField(
           fieldKey: const Key('launcher_pin_repeat'),
           myController: _repeatPinController,
           hint: locales.launcherPinHintRepeat,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16, top: 8),
-          child: ElevatedButton(
-            onPressed: _isLoading ? null : _createPin,
-            child: Text(locales.launcherPinButtonSave),
-          ),
+        SizedBox(height: spacing.md),
+        LauncherButton(
+          label: locales.launcherPinButtonSave,
+          onPressed: _isLoading ? null : _createPin,
         ),
       ],
     );
@@ -384,34 +392,42 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
 
   Widget _buildVerifyCurrentPinUi() {
     final locales = Localize.of(context);
+    final spacing = context.launcherSpacing;
+    final colors = context.launcherColors;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16, top: 8),
-          child: Text(locales.launcherPinActive),
+        SizedBox(height: spacing.md),
+        Text(
+          locales.launcherPinActive,
+          style: TextStyle(
+            color: colors.mutedText,
+            fontSize: 13,
+            fontWeight: FontWeight.w500,
+          ),
         ),
+        SizedBox(height: spacing.sm),
         PinTextField(
           fieldKey: const Key('launcher_pin_current'),
           myController: _currentPinController,
           hint: locales.launcherPinHintCurrent,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16, top: 8),
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              ElevatedButton(
-                onPressed: _isLoading ? null : _verifyCurrentPinForChange,
-                child: Text(locales.launcherPinButtonChange),
-              ),
-              ElevatedButton(
-                onPressed: _isLoading ? null : _deletePin,
-                child: Text(locales.launcherPinButtonDisable),
-              ),
-            ],
-          ),
+        SizedBox(height: spacing.md),
+        Wrap(
+          spacing: spacing.md,
+          runSpacing: spacing.md,
+          children: [
+            LauncherButton(
+              label: locales.launcherPinButtonChange,
+              onPressed: _isLoading ? null : _verifyCurrentPinForChange,
+            ),
+            LauncherButton(
+              label: locales.launcherPinButtonDisable,
+              primary: false,
+              onPressed: _isLoading ? null : _deletePin,
+            ),
+          ],
         ),
       ],
     );
@@ -419,43 +435,46 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
 
   Widget _buildChangePinUi() {
     final locales = Localize.of(context);
+    final spacing = context.launcherSpacing;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(height: spacing.md),
         PinTextField(
           fieldKey: const Key('launcher_pin_new'),
           myController: _pinController,
           hint: locales.launcherPinHintNew,
         ),
+        SizedBox(height: spacing.md),
         PinTextField(
           fieldKey: const Key('launcher_pin_new_repeat'),
           myController: _repeatPinController,
           hint: locales.launcherPinHintNewRepeat,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16, top: 8),
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              ElevatedButton(
-                onPressed: _isLoading ? null : _updatePin,
-                child: Text(locales.launcherPinButtonUpdate),
-              ),
-              ElevatedButton(
-                onPressed: _isLoading
-                    ? null
-                    : () {
-                        _clearMessages();
-                        _clearPinInputs();
-                        setState(() {
-                          _mode = ELauncherPinMode.verifyCurrent;
-                        });
-                      },
-                child: Text(locales.launcherPinButtonCancel),
-              ),
-            ],
-          ),
+        SizedBox(height: spacing.md),
+        Wrap(
+          spacing: spacing.md,
+          runSpacing: spacing.md,
+          children: [
+            LauncherButton(
+              label: locales.launcherPinButtonUpdate,
+              onPressed: _isLoading ? null : _updatePin,
+            ),
+            LauncherButton(
+              label: locales.launcherPinButtonCancel,
+              primary: false,
+              onPressed: _isLoading
+                  ? null
+                  : () {
+                      _clearMessages();
+                      _clearPinInputs();
+                      setState(() {
+                        _mode = ELauncherPinMode.verifyCurrent;
+                      });
+                    },
+            ),
+          ],
         ),
       ],
     );
@@ -464,36 +483,71 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
   @override
   Widget build(BuildContext context) {
     final locales = Localize.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Checkbox(
-              value: _isPinEnabled,
-              onChanged: _isLoading
-                  ? null
-                  : (value) async {
-                      await _onPinCheckboxChanged(value ?? false);
-                    },
+    final spacing = context.launcherSpacing;
+    final colors = context.launcherColors;
+
+    return LauncherPanel(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Launcher-PIN',
+            style: TextStyle(
+              color: colors.titleText,
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              height: 1.2,
             ),
-            Text(locales.launcherPinLabel),
-          ],
-        ),
-        if (_isPinEnabled &&
-            !_hasExistingPin &&
-            _mode == ELauncherPinMode.create)
-          _buildCreatePinUi(),
-        if (_isPinEnabled &&
-            _hasExistingPin &&
-            _mode == ELauncherPinMode.verifyCurrent)
-          _buildVerifyCurrentPinUi(),
-        if (_isPinEnabled &&
-            _hasExistingPin &&
-            _mode == ELauncherPinMode.change)
-          _buildChangePinUi(),
-        _buildMessage(),
-      ],
+          ),
+          SizedBox(height: spacing.xs),
+          Text(
+            locales.launcherPinLabel,
+            style: TextStyle(
+              color: colors.mutedText,
+              fontSize: 13,
+              height: 1.4,
+            ),
+          ),
+          SizedBox(height: spacing.lg),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              LauncherCheckbox(
+                value: _isPinEnabled,
+                onChanged: _isLoading
+                    ? null
+                    : (value) async {
+                        await _onPinCheckboxChanged(value);
+                      },
+              ),
+              SizedBox(width: spacing.md),
+              Expanded(
+                child: Text(
+                  locales.launcherPinLabel,
+                  style: TextStyle(
+                    color: colors.bodyText,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          if (_isPinEnabled &&
+              !_hasExistingPin &&
+              _mode == ELauncherPinMode.create)
+            _buildCreatePinUi(),
+          if (_isPinEnabled &&
+              _hasExistingPin &&
+              _mode == ELauncherPinMode.verifyCurrent)
+            _buildVerifyCurrentPinUi(),
+          if (_isPinEnabled &&
+              _hasExistingPin &&
+              _mode == ELauncherPinMode.change)
+            _buildChangePinUi(),
+          _buildMessage(),
+        ],
+      ),
     );
   }
 }

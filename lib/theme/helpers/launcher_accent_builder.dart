@@ -3,29 +3,33 @@ import '../models/launcher_accent_palette.dart';
 
 class LauncherAccentBuilder {
   static LauncherAccentPalette fromHue(double hue) {
-    /// Base accent
-    final base = HSVColor.fromAHSV(
+    final accentBase = HSVColor.fromAHSV(
       1,
       hue,
-      0.65,
-      0.95,
+      0.88,
+      0.98,
     );
 
-    /// Strong accent (buttons, highlights)
-    final strong = base.withSaturation(0.85).withValue(1.0);
+    final accentStrongBase = HSVColor.fromAHSV(
+      1,
+      hue,
+      0.98,
+      1.0,
+    );
 
-    /// Soft accent (background hints)
-    final soft = base.withSaturation(0.4).withValue(0.85);
+    final accentSoftBase = HSVColor.fromAHSV(
+      1,
+      hue,
+      0.72,
+      0.88,
+    );
 
-    final accent = base.toColor();
-    final accentStrong = strong.toColor();
-    final accentSoft = soft.toColor();
+    final accent = accentBase.toColor();
+    final accentStrong = accentStrongBase.toColor();
+    final accentSoft = accentSoftBase.toColor();
 
-    /// Glow (important: opacity only here)
-    final accentGlow = accent.withOpacity(0.35);
-
-    /// Subtle background (nav active etc.)
-    final accentBackground = accent.withOpacity(0.12);
+    final accentGlow = accentStrong.withValues(alpha: 0.35);
+    final accentBackground = accent.withValues(alpha: 0.14);
 
     return LauncherAccentPalette(
       accent: accent,

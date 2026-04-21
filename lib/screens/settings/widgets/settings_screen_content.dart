@@ -52,6 +52,13 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
             ),
           ),
           initialized: () => SingleChildScrollView(
+            clipBehavior: Clip.none,
+            padding: EdgeInsets.fromLTRB(
+              spacing.screenPadding,
+              spacing.screenPadding,
+              spacing.screenPadding,
+              spacing.screenPadding + 16,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -103,43 +110,95 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                       ),
                       SizedBox(height: spacing.sm),
                       Container(
-                        width: double.infinity,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: spacing.lg,
-                          vertical: spacing.md,
-                        ),
-                        decoration: BoxDecoration(
-                          color: colors.inputBackground,
-                          borderRadius: BorderRadius.circular(radius.input),
-                          border: Border.all(
-                            color: colors.inputBorder,
-                            width: effects.inputBorderWidth,
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: spacing.lg,
+                            vertical: spacing.md,
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.12),
-                              blurRadius: 10,
-                              spreadRadius: -4,
-                              offset: const Offset(0, 4),
+                          decoration: BoxDecoration(
+                            color: colors.inputBackground,
+                            borderRadius: BorderRadius.circular(radius.input),
+                            border: Border.all(
+                              color: colors.accent.withValues(alpha: 0.14),
+                              width: effects.inputBorderWidth,
                             ),
-                          ],
-                        ),
-                        child: Text(
-                          _wowPathController.text.isEmpty
-                              ? '-'
-                              : _wowPathController.text,
-                          style: TextStyle(
-                            color: colors.bodyText,
-                            fontSize: 14,
-                            height: 1.2,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.12),
+                                blurRadius: 10,
+                                spreadRadius: -4,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
                           ),
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                      ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.folder_outlined,
+                                size: 18,
+                                color: colors.mutedText.withValues(alpha: 0.9),
+                              ),
+                              SizedBox(width: spacing.md),
+                              Expanded(
+                                child: Text(
+                                  _wowPathController.text.isEmpty
+                                      ? '-'
+                                      : _wowPathController.text,
+                                  style: TextStyle(
+                                    color: colors.bodyText,
+                                    fontSize: 14,
+                                    height: 1.2,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                ),
+                              ),
+                            ],
+                          )),
                     ],
                   ),
                 ),
+                SizedBox(height: spacing.sectionGap),
+                LauncherPanel(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (settingsRepository.secondsToWaitForGameToStart ==
+                          null) ...[
+                        Text(
+                          locales.settingsScreenTimeTillGameStartMissingLabel,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(height: spacing.md),
+                      ],
+                      Text(
+                        'Eingabeverzögerung',
+                        style: TextStyle(
+                          color: colors.titleText,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          height: 1.2,
+                        ),
+                      ),
+                      SizedBox(height: spacing.xs),
+                      Text(
+                        locales.settingsScreenTimeTillGameStartLabel,
+                        style: TextStyle(
+                          color: colors.mutedText,
+                          fontSize: 13,
+                          height: 1.4,
+                        ),
+                      ),
+                      SizedBox(height: spacing.lg),
+                      const GameStartTimeWidget(),
+                    ],
+                  ),
+                ),
+                SizedBox(height: spacing.sectionGap),
+                const LauncherPinWidget(),
               ],
             ),
           ),

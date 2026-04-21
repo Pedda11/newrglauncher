@@ -10,14 +10,10 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locales = Localize.of(context);
-    final spacing = context.launcherSpacing;
 
     return Scaffold(
       appBar: MyAppbar(title: locales.settingsScreenTitle),
-      body: Padding(
-        padding: EdgeInsets.all(spacing.screenPadding),
-        child: const SettingsScreenContent(),
-      ),
+      body: const SettingsScreenContent(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import '../theme/extensions/launcher_color_tokens.dart';
+import '../theme/extensions/launcher_spacing_tokens.dart';
 import '../theme/helpers/theme_context_extensions.dart';
 
 class LauncherButton extends StatefulWidget {
@@ -102,32 +103,34 @@ class _LauncherButtonState extends State<LauncherButton> {
   }
 
   Widget _buildPrimaryButton({
-    required dynamic colors,
-    required dynamic spacing,
+    required LauncherColorTokens colors,
+    required LauncherSpacingTokens spacing,
     required BorderRadius buttonRadius,
   }) {
+    final List<Color> gradientColors = _hovered
+        ? [
+            colors.accentSoft.withValues(alpha: 0.95),
+            colors.accent.withValues(alpha: 1.0),
+            colors.accentStrong.withValues(alpha: 1.0),
+          ]
+        : [
+            colors.accentSoft.withValues(alpha: 0.92),
+            colors.accent.withValues(alpha: 0.98),
+            colors.accentStrong.withValues(alpha: 1.0),
+          ];
+
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: buttonRadius,
         boxShadow: [
           BoxShadow(
-            color: colors.accent.withValues(
-              alpha: _pressed
-                  ? 0.25
-                  : _hovered
-                      ? 0.55
-                      : 0.40,
-            ),
-            blurRadius: _pressed
-                ? 18
-                : _hovered
-                    ? 32
-                    : 26,
-            spreadRadius: 1,
+            color: colors.accent.withValues(alpha: _hovered ? 0.42 : 0.32),
+            blurRadius: _hovered ? 24 : 18,
+            spreadRadius: 0,
           ),
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.28),
-            blurRadius: 16,
+            color: Colors.black.withValues(alpha: 0.24),
+            blurRadius: 14,
             spreadRadius: -4,
             offset: const Offset(0, 6),
           ),
@@ -139,47 +142,88 @@ class _LauncherButtonState extends State<LauncherButton> {
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: widget.onPressed,
-          onTapDown: (_) => setState(() => _pressed = true),
-          onTapUp: (_) => setState(() => _pressed = false),
-          onTapCancel: () => setState(() => _pressed = false),
           borderRadius: buttonRadius,
           child: Ink(
-            padding: EdgeInsets.symmetric(
-              horizontal: spacing.lg,
-              vertical: spacing.md,
-            ),
             decoration: BoxDecoration(
               borderRadius: buttonRadius,
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.10),
+                width: 1,
+              ),
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: _pressed
-                    ? [
-                        colors.accentSoft,
-                        colors.accent,
-                        colors.accent,
-                      ]
-                    : _hovered
-                        ? [
-                            colors.accent,
-                            colors.accentStrong,
-                            colors.accentStrong,
-                          ]
-                        : [
-                            colors.accentSoft,
-                            colors.accent,
-                            colors.accentStrong,
-                          ],
+                colors: gradientColors,
+                stops: const [0.0, 0.45, 1.0],
               ),
             ),
-            child: Text(
-              widget.label,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: colors.buttonPrimaryForeground,
-                fontWeight: FontWeight.w800,
-                fontSize: 14,
-              ),
+            child: Stack(
+              clipBehavior: Clip.antiAlias,
+              children: [
+                /// top-left light hotspot
+                Positioned.fill(
+                  child: IgnorePointer(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: RadialGradient(
+                          center: const Alignment(-0.85, -0.85),
+                          radius: 1.0,
+                          colors: [
+                            Colors.white.withValues(alpha: 0.24),
+                            Colors.white.withValues(alpha: 0.08),
+                            Colors.transparent,
+                          ],
+                          stops: const [0.0, 0.18, 0.55],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                /// bottom edge light
+                Positioned(
+                  left: 8,
+                  right: 8,
+                  bottom: 0,
+                  child: IgnorePointer(
+                    child: Container(
+                      height: 6,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            Colors.transparent,
+                            Colors.white.withValues(alpha: 0.10),
+                            Colors.white.withValues(alpha: 0.16),
+                            Colors.white.withValues(alpha: 0.10),
+                            Colors.transparent,
+                          ],
+                          stops: const [0.0, 0.2, 0.5, 0.8, 1.0],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                /// label defines button size
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: spacing.lg,
+                    vertical: spacing.md,
+                  ),
+                  child: Text(
+                    widget.label,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: colors.buttonPrimaryForeground,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 14,
+                      letterSpacing: 0.1,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
