@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/extensions/launcher_color_tokens.dart';
+import '../theme/extensions/launcher_component_tokens.dart';
 import '../theme/extensions/launcher_spacing_tokens.dart';
 import '../theme/extensions/launcher_text_tokens.dart';
 import '../theme/helpers/theme_context_extensions.dart';
@@ -29,6 +30,7 @@ class _LauncherButtonState extends State<LauncherButton> {
     final radius = context.launcherRadius;
     final spacing = context.launcherSpacing;
     final text = context.launcherText;
+    final components = context.launcherComponents;
 
     final buttonRadius = BorderRadius.circular(radius.button);
 
@@ -43,12 +45,14 @@ class _LauncherButtonState extends State<LauncherButton> {
               colors: colors,
               spacing: spacing,
               text: text,
+              components: components,
               buttonRadius: buttonRadius,
             )
           : _buildSecondaryButton(
               colors: colors,
               spacing: spacing,
               text: text,
+              components: components,
               buttonRadius: buttonRadius,
             ),
     );
@@ -58,6 +62,7 @@ class _LauncherButtonState extends State<LauncherButton> {
     required LauncherColorTokens colors,
     required LauncherSpacingTokens spacing,
     required LauncherTextTokens text,
+    required LauncherComponentTokens components,
     required BorderRadius buttonRadius,
   }) {
     return Material(
@@ -69,8 +74,8 @@ class _LauncherButtonState extends State<LauncherButton> {
         borderRadius: buttonRadius,
         child: Ink(
           padding: EdgeInsets.symmetric(
-            horizontal: spacing.md,
-            vertical: spacing.sm,
+            horizontal: components.secondaryButtonHorizontalPadding,
+            vertical: components.secondaryButtonVerticalPadding,
           ),
           decoration: BoxDecoration(
             color: _hovered
@@ -104,6 +109,7 @@ class _LauncherButtonState extends State<LauncherButton> {
     required LauncherColorTokens colors,
     required LauncherSpacingTokens spacing,
     required LauncherTextTokens text,
+    required LauncherComponentTokens components,
     required BorderRadius buttonRadius,
   }) {
     final List<Color> gradientColors = _hovered
@@ -208,8 +214,8 @@ class _LauncherButtonState extends State<LauncherButton> {
                 /// label defines button size
                 Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: spacing.lg,
-                    vertical: spacing.md,
+                    horizontal: components.secondaryButtonHorizontalPadding,
+                    vertical: components.secondaryButtonVerticalPadding,
                   ),
                   child: Text(
                     widget.label,

@@ -35,6 +35,8 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
     final radius = context.launcherRadius;
     final effects = context.launcherEffects;
     final text = context.launcherText;
+    final components = context.launcherComponents;
+
     return BlocConsumer<SettingsScreenCubit, SettingsScreenState>(
       builder: (context, state) {
         _wowPathController.text =
@@ -99,8 +101,8 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                       Container(
                         width: double.infinity,
                         padding: EdgeInsets.symmetric(
-                          horizontal: spacing.lg,
-                          vertical: spacing.md,
+                          horizontal: components.inputContentHorizontalPadding,
+                          vertical: components.inputContentVerticalPadding,
                         ),
                         decoration: BoxDecoration(
                           color: colors.inputBackground,

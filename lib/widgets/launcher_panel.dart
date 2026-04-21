@@ -18,11 +18,12 @@ class LauncherPanel extends StatelessWidget {
     final radius = context.launcherRadius;
     final effects = context.launcherEffects;
     final spacing = context.launcherSpacing;
+    final components = context.launcherComponents;
 
     final panelRadius = BorderRadius.circular(radius.panel);
 
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(components.panelOuterPadding),
       child: Stack(
         children: [
           /// Outer glow layer

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'extensions/launcher_color_tokens.dart';
+import 'extensions/launcher_component_tokens.dart';
 import 'extensions/launcher_effect_tokens.dart';
 import 'extensions/launcher_radius_tokens.dart';
 import 'extensions/launcher_spacing_tokens.dart';
@@ -159,6 +160,17 @@ class AppTheme {
       ),
     );
 
+    const components = LauncherComponentTokens(
+      panelOuterPadding: 10,
+      primaryButtonHorizontalPadding: 16,
+      primaryButtonVerticalPadding: 12,
+      secondaryButtonHorizontalPadding: 12,
+      secondaryButtonVerticalPadding: 8,
+      inputContentHorizontalPadding: 16,
+      inputContentVerticalPadding: 12,
+      pinFieldWidth: 333,
+    );
+
     final colorScheme = ColorScheme.dark(
       primary: resolvedColors.accent,
       secondary: resolvedColors.accentSoft,
@@ -181,6 +193,7 @@ class AppTheme {
         radius,
         effects,
         text,
+        components,
       ],
       cardTheme: CardThemeData(
         color: resolvedColors.panelBackground,

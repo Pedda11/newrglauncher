@@ -25,11 +25,12 @@ class PinTextField extends StatelessWidget {
     final spacing = context.launcherSpacing;
     final radius = context.launcherRadius;
     final text = context.launcherText;
+    final components = context.launcherComponents;
 
     return Padding(
       padding: EdgeInsets.only(top: spacing.sm),
       child: SizedBox(
-        width: 333,
+        width: components.pinFieldWidth,
         child: TextFormField(
           focusNode: focusNode,
           key: fieldKey,
@@ -60,8 +61,8 @@ class PinTextField extends StatelessWidget {
             filled: true,
             fillColor: colors.inputBackground.withValues(alpha: 0.92),
             contentPadding: EdgeInsets.symmetric(
-              horizontal: spacing.lg,
-              vertical: spacing.md,
+              horizontal: components.inputContentHorizontalPadding,
+              vertical: components.inputContentVerticalPadding,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(radius.input),

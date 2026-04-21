@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../extensions/launcher_color_tokens.dart';
+import '../extensions/launcher_component_tokens.dart';
 import '../extensions/launcher_effect_tokens.dart';
 import '../extensions/launcher_radius_tokens.dart';
 import '../extensions/launcher_spacing_tokens.dart';
@@ -21,4 +22,7 @@ extension ThemeContextExtensions on BuildContext {
       theme.extension<LauncherEffectTokens>()!;
 
   LauncherTextTokens get launcherText => theme.extension<LauncherTextTokens>()!;
+
+  LauncherComponentTokens get launcherComponents =>
+      theme.extension<LauncherComponentTokens>()!;
 }
