@@ -369,31 +369,41 @@ class Localize {
     );
   }
 
-  /// `<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.`
+  /// `Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.`
   String get settingsScreenWowPathScanBtnHint {
     return Intl.message(
-      '<- Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.',
+      'Scanne deine Laufwerke nach wow.exe und wähle sie aus der angezeigten Liste aus.',
       name: 'settingsScreenWowPathScanBtnHint',
       desc: '',
       args: [],
     );
   }
 
-  /// `<- Oder wählen Sie die Anwendung manuell aus einem der verfügbaren Laufwerke aus.`
+  /// `Oder wählen Sie die Anwendung manuell aus einem der verfügbaren Laufwerke aus.`
   String get settingsScreenWowPathDrivesBtnHint {
     return Intl.message(
-      '<- Oder wählen Sie die Anwendung manuell aus einem der verfügbaren Laufwerke aus.',
+      'Oder wählen Sie die Anwendung manuell aus einem der verfügbaren Laufwerke aus.',
       name: 'settingsScreenWowPathDrivesBtnHint',
       desc: '',
       args: [],
     );
   }
 
-  /// `Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.`
+  /// `WoW-Pfad festlegen`
   String get settingsScreenSetWowPathLabel {
     return Intl.message(
-      'Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.',
+      'WoW-Pfad festlegen',
       name: 'settingsScreenSetWowPathLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.`
+  String get settingsScreenSetWowPathLabelHint {
+    return Intl.message(
+      'Setze den WoW Pfad durch Scannen deiner Laufwerke oder durch manuelles Auswählen der Datei.',
+      name: 'settingsScreenSetWowPathLabelHint',
       desc: '',
       args: [],
     );

@@ -239,6 +239,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Scanning for Drives...",
     ),
     "settingsScreenSetWowPathLabel": MessageLookupByLibrary.simpleMessage(
+      "Set WoW Path",
+    ),
+    "settingsScreenSetWowPathLabelHint": MessageLookupByLibrary.simpleMessage(
       "Set the Wow Path by scanning your drives or selecting the file manually.",
     ),
     "settingsScreenSetWowPathManuallyDriveException":
@@ -267,7 +270,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Select your WoW executable",
     ),
     "settingsScreenWowPathDrivesBtnHint": MessageLookupByLibrary.simpleMessage(
-      "<- Or manually select the application from one of the available drives.",
+      "Or manually select the application from one of the available drives.",
     ),
     "settingsScreenWowPathLabel": MessageLookupByLibrary.simpleMessage(
       "WoW Location",
@@ -279,7 +282,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Scan your system for wow.exe",
     ),
     "settingsScreenWowPathScanBtnHint": MessageLookupByLibrary.simpleMessage(
-      "<- Scan your drives for wow.exe and select it from the shown list.",
+      "Scan your drives for wow.exe and select it from the shown list.",
     ),
     "splashScreenBlockingError": m5,
     "splashScreenEulaNotAccepted": MessageLookupByLibrary.simpleMessage(

@@ -53,9 +53,7 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
           ),
           initialized: () => SingleChildScrollView(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
               children: [
                 LauncherPanel(
                   child: Column(
@@ -77,26 +75,30 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                           color: colors.titleText,
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
+                          height: 1.2,
                         ),
                       ),
                       SizedBox(height: spacing.xs),
                       Text(
-                        locales.settingsScreenWowPathScanBtnHint,
+                        locales.settingsScreenSetWowPathLabelHint,
                         style: TextStyle(
                           color: colors.mutedText,
                           fontSize: 13,
+                          height: 1.4,
                         ),
                       ),
-                      SizedBox(height: spacing.lg),
-                      const FindWowExeWidget(),
                       SizedBox(height: spacing.md),
+                      const FindWowExeWidget(),
+                      SizedBox(height: spacing.xl),
                       const ManuallyFindWowExeWidget(),
                       SizedBox(height: spacing.xl),
                       Text(
                         locales.settingsScreenWowPathLabel,
                         style: TextStyle(
-                          color: colors.bodyText,
+                          color: colors.mutedText,
+                          fontSize: 13,
                           fontWeight: FontWeight.w600,
+                          letterSpacing: 0.2,
                         ),
                       ),
                       SizedBox(height: spacing.sm),
@@ -113,6 +115,14 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                             color: colors.inputBorder,
                             width: effects.inputBorderWidth,
                           ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.12),
+                              blurRadius: 10,
+                              spreadRadius: -4,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
                         ),
                         child: Text(
                           _wowPathController.text.isEmpty
@@ -120,6 +130,8 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                               : _wowPathController.text,
                           style: TextStyle(
                             color: colors.bodyText,
+                            fontSize: 14,
+                            height: 1.2,
                           ),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,

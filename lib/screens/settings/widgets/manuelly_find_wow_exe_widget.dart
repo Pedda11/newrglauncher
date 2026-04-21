@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../localization/generated/l10n.dart';
 import '../../../repository/settings_repository.dart';
+import '../../../theme/helpers/theme_context_extensions.dart';
 import '../../../widgets/launcher_button.dart';
 import '../cubit/settings_screen_cubit.dart';
 
@@ -12,24 +13,29 @@ class ManuallyFindWowExeWidget extends StatefulWidget {
 
   @override
   State<ManuallyFindWowExeWidget> createState() =>
-      _ManuellyFindWowExeWidgetState();
+      _ManuallyFindWowExeWidgetState();
 }
 
-class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
+class _ManuallyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
   @override
   Widget build(BuildContext context) {
     final screenCubit = context.read<SettingsScreenCubit>();
     final settingsRepository = context.read<SettingsRepository>();
     final locales = Localize.of(context);
-    return Row(
+    final colors = context.launcherColors;
+    final spacing = context.launcherSpacing;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        Wrap(
+          spacing: spacing.sm,
+          runSpacing: spacing.sm,
           children: settingsRepository.drives.map((drive) {
             return LauncherButton(
               label: drive,
               primary: false,
               onPressed: () async {
-                final ctx = context;
                 try {
                   final dir = Directory(drive);
                   Directory dirPath = dir;
@@ -38,8 +44,9 @@ class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
 
                   if (!exists) {
                     throw FileSystemException(
-                        locales.settingsScreenSetWowPathManuallyDriveException,
-                        drive);
+                      locales.settingsScreenSetWowPathManuallyDriveException,
+                      drive,
+                    );
                   }
 
                   if (dir.path == 'C:\\') {
@@ -49,7 +56,7 @@ class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
                   String? path = await FilesystemPicker.openDialog(
                     folderIconColor: const Color(0xFFE0CDA1),
                     title: locales.settingsScreenWowExeFilePickerLabel,
-                    context: ctx,
+                    context: context,
                     rootDirectory: dirPath,
                     fsType: FilesystemType.file,
                     allowedExtensions: ['.exe'],
@@ -61,20 +68,22 @@ class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
                     screenCubit.changeWowFilePath(path);
                   }
                 } catch (e) {
-                  if (!ctx.mounted) return;
+                  if (!context.mounted) return;
 
                   showDialog(
-                    context: ctx,
-                    builder: (ctx) => AlertDialog(
-                      title: Text(locales
-                          .settingsScreenSetWowPathManuallyDriveException),
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text(
+                        locales.settingsScreenSetWowPathManuallyDriveException,
+                      ),
                       content: Text(
-                          '${locales.settingsScreenDriveAccessError} $drive\n\n$e'),
+                        '${locales.settingsScreenDriveAccessError} $drive\n\n$e',
+                      ),
                       actions: [
                         TextButton(
-                          onPressed: () => Navigator.pop(ctx),
+                          onPressed: () => Navigator.pop(context),
                           child: Text(locales.ok),
-                        )
+                        ),
                       ],
                     ),
                   );
@@ -83,8 +92,16 @@ class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
             );
           }).toList(),
         ),
-        const SizedBox(width: 8),
-        Text(locales.settingsScreenWowPathDrivesBtnHint),
+        SizedBox(height: spacing.sm),
+        Text(
+          locales.settingsScreenWowPathDrivesBtnHint,
+          style: TextStyle(
+            color: colors.mutedText,
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            height: 1.4,
+          ),
+        ),
       ],
     );
   }
