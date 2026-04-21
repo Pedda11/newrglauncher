@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../localization/generated/l10n.dart';
 import '../../../repository/settings_repository.dart';
+import '../../../widgets/launcher_button.dart';
 import '../cubit/settings_screen_cubit.dart';
 
 class ManuallyFindWowExeWidget extends StatefulWidget {
@@ -24,8 +25,11 @@ class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
       children: [
         Row(
           children: settingsRepository.drives.map((drive) {
-            return ElevatedButton(
+            return LauncherButton(
+              label: drive,
+              primary: false,
               onPressed: () async {
+                final ctx = context;
                 try {
                   final dir = Directory(drive);
                   Directory dirPath = dir;
@@ -45,7 +49,7 @@ class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
                   String? path = await FilesystemPicker.openDialog(
                     folderIconColor: const Color(0xFFE0CDA1),
                     title: locales.settingsScreenWowExeFilePickerLabel,
-                    context: context,
+                    context: ctx,
                     rootDirectory: dirPath,
                     fsType: FilesystemType.file,
                     allowedExtensions: ['.exe'],
@@ -57,18 +61,18 @@ class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
                     screenCubit.changeWowFilePath(path);
                   }
                 } catch (e) {
-                  if (!context.mounted) return;
+                  if (!ctx.mounted) return;
 
                   showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
+                    context: ctx,
+                    builder: (ctx) => AlertDialog(
                       title: Text(locales
                           .settingsScreenSetWowPathManuallyDriveException),
                       content: Text(
                           '${locales.settingsScreenDriveAccessError} $drive\n\n$e'),
                       actions: [
                         TextButton(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () => Navigator.pop(ctx),
                           child: Text(locales.ok),
                         )
                       ],
@@ -76,7 +80,6 @@ class _ManuellyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
                   );
                 }
               },
-              child: Text(drive),
             );
           }).toList(),
         ),

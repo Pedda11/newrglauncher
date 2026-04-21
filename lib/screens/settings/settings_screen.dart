@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../localization/generated/l10n.dart';
+import '../../theme/helpers/theme_context_extensions.dart';
 import '../../widgets/my_appbar.dart';
 import 'widgets/settings_screen_content.dart';
 
@@ -9,11 +10,13 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locales = Localize.of(context);
+    final spacing = context.launcherSpacing;
+
     return Scaffold(
       appBar: MyAppbar(title: locales.settingsScreenTitle),
-      body: const Padding(
-        padding: EdgeInsets.all(24.0),
-        child: SettingsScreenContent(),
+      body: Padding(
+        padding: EdgeInsets.all(spacing.screenPadding),
+        child: const SettingsScreenContent(),
       ),
     );
   }

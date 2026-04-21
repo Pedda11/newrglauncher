@@ -9,6 +9,8 @@ import 'package:twodotnulllauncher/screens/settings/widgets/search_wow_exe_progr
 import 'package:win32/win32.dart';
 import '../../../localization/generated/l10n.dart';
 import '../../../repository/settings_repository.dart';
+import '../../../theme/helpers/theme_context_extensions.dart';
+import '../../../widgets/launcher_panel.dart';
 import '../cubit/settings_screen_cubit.dart';
 import 'game_start_time_widget.dart';
 
@@ -28,6 +30,10 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
     final settingsRepository = context.read<SettingsRepository>();
     final locales = Localize.of(context);
     final theme = Theme.of(context);
+    final colors = context.launcherColors;
+    final spacing = context.launcherSpacing;
+    final radius = context.launcherRadius;
+    final effects = context.launcherEffects;
     return BlocConsumer<SettingsScreenCubit, SettingsScreenState>(
       builder: (context, state) {
         _wowPathController.text =
@@ -51,52 +57,77 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
               children: [
-                settingsRepository.wowRootFolderPath == null
-                    ? Text(
-                        locales.settingsScreenWowPathMissingLabel,
-                        style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red),
-                      )
-                    : Container(),
-                Text(
-                  locales.settingsScreenSetWowPathLabel,
-                ),
-                const SizedBox(height: 8),
-                const FindWowExeWidget(),
-                const SizedBox(height: 12),
-                const ManuallyFindWowExeWidget(),
-                const SizedBox(height: 24),
-                Text(locales.settingsScreenWowPathLabel),
-                Row(
-                  children: [
-                    Text(
-                      _wowPathController.text,
-                      overflow: TextOverflow.fade,
-                    ),
-                    const SizedBox(width: 8),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                settingsRepository.secondsToWaitForGameToStart == null
-                    ? Text(
-                        locales.settingsScreenTimeTillGameStartMissingLabel,
-                        style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red),
-                      )
-                    : const SizedBox(
-                        height: 24,
+                LauncherPanel(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (settingsRepository.wowRootFolderPath == null) ...[
+                        Text(
+                          locales.settingsScreenWowPathMissingLabel,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        SizedBox(height: spacing.md),
+                      ],
+                      Text(
+                        locales.settingsScreenSetWowPathLabel,
+                        style: TextStyle(
+                          color: colors.titleText,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
-                Text(locales.settingsScreenTimeTillGameStartLabel),
-                const GameStartTimeWidget(),
-                Divider(
-                  thickness: 2,
-                  color: theme.dividerColor,
+                      SizedBox(height: spacing.xs),
+                      Text(
+                        locales.settingsScreenWowPathScanBtnHint,
+                        style: TextStyle(
+                          color: colors.mutedText,
+                          fontSize: 13,
+                        ),
+                      ),
+                      SizedBox(height: spacing.lg),
+                      const FindWowExeWidget(),
+                      SizedBox(height: spacing.md),
+                      const ManuallyFindWowExeWidget(),
+                      SizedBox(height: spacing.xl),
+                      Text(
+                        locales.settingsScreenWowPathLabel,
+                        style: TextStyle(
+                          color: colors.bodyText,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: spacing.sm),
+                      Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: spacing.lg,
+                          vertical: spacing.md,
+                        ),
+                        decoration: BoxDecoration(
+                          color: colors.inputBackground,
+                          borderRadius: BorderRadius.circular(radius.input),
+                          border: Border.all(
+                            color: colors.inputBorder,
+                            width: effects.inputBorderWidth,
+                          ),
+                        ),
+                        child: Text(
+                          _wowPathController.text.isEmpty
+                              ? '-'
+                              : _wowPathController.text,
+                          style: TextStyle(
+                            color: colors.bodyText,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                const LauncherPinWidget()
               ],
             ),
           ),
