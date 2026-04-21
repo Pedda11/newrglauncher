@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:twodotnulllauncher/widgets/launcher_button.dart';
 
 import '../../../localization/generated/l10n.dart';
 import '../cubit/settings_screen_cubit.dart';
@@ -26,9 +27,10 @@ class SearchWowExeProgressWidget extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          ElevatedButton(
-              onPressed: () => screenCubit.cancelWowExeSearch(),
-              child: Text(locales.settingsScreenCancelWowScanLabel)),
+          LauncherButton(
+            label: locales.settingsScreenCancelWowScanLabel,
+            onPressed: () => screenCubit.cancelWowExeSearch(),
+          ),
           Text('${locales.settingsScreenScannedFolders} $searchedFolders'),
           Text('${locales.settingsScreenScannedFiles} $searchedFiles'),
           const SizedBox(

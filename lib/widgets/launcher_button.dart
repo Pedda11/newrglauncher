@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/extensions/launcher_color_tokens.dart';
 import '../theme/extensions/launcher_spacing_tokens.dart';
+import '../theme/extensions/launcher_text_tokens.dart';
 import '../theme/helpers/theme_context_extensions.dart';
 
 class LauncherButton extends StatefulWidget {
@@ -21,13 +22,13 @@ class LauncherButton extends StatefulWidget {
 
 class _LauncherButtonState extends State<LauncherButton> {
   bool _hovered = false;
-  bool _pressed = false;
 
   @override
   Widget build(BuildContext context) {
     final colors = context.launcherColors;
     final radius = context.launcherRadius;
     final spacing = context.launcherSpacing;
+    final text = context.launcherText;
 
     final buttonRadius = BorderRadius.circular(radius.button);
 
@@ -41,19 +42,22 @@ class _LauncherButtonState extends State<LauncherButton> {
           ? _buildPrimaryButton(
               colors: colors,
               spacing: spacing,
+              text: text,
               buttonRadius: buttonRadius,
             )
           : _buildSecondaryButton(
               colors: colors,
               spacing: spacing,
+              text: text,
               buttonRadius: buttonRadius,
             ),
     );
   }
 
   Widget _buildSecondaryButton({
-    required dynamic colors,
-    required dynamic spacing,
+    required LauncherColorTokens colors,
+    required LauncherSpacingTokens spacing,
+    required LauncherTextTokens text,
     required BorderRadius buttonRadius,
   }) {
     return Material(
@@ -69,11 +73,9 @@ class _LauncherButtonState extends State<LauncherButton> {
             vertical: spacing.sm,
           ),
           decoration: BoxDecoration(
-            color: _pressed
-                ? colors.buttonSecondaryBackground.withValues(alpha: 0.75)
-                : _hovered
-                    ? colors.buttonSecondaryBackground.withValues(alpha: 0.9)
-                    : colors.buttonSecondaryBackground,
+            color: _hovered
+                ? colors.buttonSecondaryBackground.withValues(alpha: 0.9)
+                : colors.buttonSecondaryBackground,
             borderRadius: buttonRadius,
             border: Border.all(
               color: colors.panelBorder,
@@ -91,11 +93,7 @@ class _LauncherButtonState extends State<LauncherButton> {
           child: Text(
             widget.label,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: colors.buttonSecondaryForeground,
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-            ),
+            style: text.buttonSecondary,
           ),
         ),
       ),
@@ -105,6 +103,7 @@ class _LauncherButtonState extends State<LauncherButton> {
   Widget _buildPrimaryButton({
     required LauncherColorTokens colors,
     required LauncherSpacingTokens spacing,
+    required LauncherTextTokens text,
     required BorderRadius buttonRadius,
   }) {
     final List<Color> gradientColors = _hovered
@@ -215,12 +214,7 @@ class _LauncherButtonState extends State<LauncherButton> {
                   child: Text(
                     widget.label,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: colors.buttonPrimaryForeground,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 14,
-                      letterSpacing: 0.1,
-                    ),
+                    style: text.buttonPrimary,
                   ),
                 ),
               ],

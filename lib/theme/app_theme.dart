@@ -4,6 +4,7 @@ import 'extensions/launcher_color_tokens.dart';
 import 'extensions/launcher_effect_tokens.dart';
 import 'extensions/launcher_radius_tokens.dart';
 import 'extensions/launcher_spacing_tokens.dart';
+import 'extensions/launcher_text_tokens.dart';
 import 'helpers/launcher_accent_builder.dart';
 
 class AppTheme {
@@ -87,6 +88,77 @@ class AppTheme {
       focusBorder: accentPalette.accent,
     );
 
+    final text = LauncherTextTokens(
+      sectionTitle: TextStyle(
+        color: resolvedColors.titleText,
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+        height: 1.2,
+      ),
+      sectionSubtitle: TextStyle(
+        color: resolvedColors.mutedText,
+        fontSize: 13,
+        height: 1.4,
+      ),
+      fieldLabel: TextStyle(
+        color: resolvedColors.mutedText,
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 0.2,
+      ),
+      fieldValue: TextStyle(
+        color: resolvedColors.bodyText,
+        fontSize: 14,
+        height: 1.2,
+      ),
+      hintText: TextStyle(
+        color: resolvedColors.mutedText,
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        height: 1.4,
+      ),
+      buttonPrimary: TextStyle(
+        color: resolvedColors.buttonPrimaryForeground,
+        fontWeight: FontWeight.w800,
+        fontSize: 14,
+        letterSpacing: 0.1,
+      ),
+      buttonSecondary: TextStyle(
+        color: resolvedColors.buttonSecondaryForeground,
+        fontWeight: FontWeight.w400,
+        fontSize: 12,
+      ),
+      largeValue: TextStyle(
+        color: resolvedColors.titleText,
+        fontSize: 34,
+        fontWeight: FontWeight.w700,
+        height: 1.0,
+      ),
+      pinFieldText: TextStyle(
+        color: resolvedColors.bodyText,
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        letterSpacing: 2,
+      ),
+      pinFieldHint: TextStyle(
+        color: resolvedColors.mutedText,
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+      ),
+      statusError: const TextStyle(
+        color: Colors.red,
+        fontSize: 13,
+        fontWeight: FontWeight.w500,
+        height: 1.3,
+      ),
+      statusSuccess: const TextStyle(
+        color: Colors.green,
+        fontSize: 13,
+        fontWeight: FontWeight.w500,
+        height: 1.3,
+      ),
+    );
+
     final colorScheme = ColorScheme.dark(
       primary: resolvedColors.accent,
       secondary: resolvedColors.accentSoft,
@@ -108,6 +180,7 @@ class AppTheme {
         spacing,
         radius,
         effects,
+        text,
       ],
       cardTheme: CardThemeData(
         color: resolvedColors.panelBackground,

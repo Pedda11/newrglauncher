@@ -24,6 +24,7 @@ class PinTextField extends StatelessWidget {
     final colors = context.launcherColors;
     final spacing = context.launcherSpacing;
     final radius = context.launcherRadius;
+    final text = context.launcherText;
 
     return Padding(
       padding: EdgeInsets.only(top: spacing.sm),
@@ -40,12 +41,7 @@ class PinTextField extends StatelessWidget {
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,
           ],
-          style: TextStyle(
-            color: colors.bodyText,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 2,
-          ),
+          style: text.pinFieldText,
           cursorColor: colors.accentStrong,
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
@@ -60,11 +56,7 @@ class PinTextField extends StatelessWidget {
             ),
             errorStyle: const TextStyle(height: 0),
             hintText: hint,
-            hintStyle: TextStyle(
-              color: colors.mutedText,
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
+            hintStyle: text.pinFieldHint,
             filled: true,
             fillColor: colors.inputBackground.withValues(alpha: 0.92),
             contentPadding: EdgeInsets.symmetric(

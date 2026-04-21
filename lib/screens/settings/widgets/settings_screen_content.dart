@@ -34,6 +34,7 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
     final spacing = context.launcherSpacing;
     final radius = context.launcherRadius;
     final effects = context.launcherEffects;
+    final text = context.launcherText;
     return BlocConsumer<SettingsScreenCubit, SettingsScreenState>(
       builder: (context, state) {
         _wowPathController.text =
@@ -78,21 +79,12 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                       ],
                       Text(
                         locales.settingsScreenSetWowPathLabel,
-                        style: TextStyle(
-                          color: colors.titleText,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
-                        ),
+                        style: text.sectionTitle,
                       ),
                       SizedBox(height: spacing.xs),
                       Text(
                         locales.settingsScreenSetWowPathLabelHint,
-                        style: TextStyle(
-                          color: colors.mutedText,
-                          fontSize: 13,
-                          height: 1.4,
-                        ),
+                        style: text.sectionSubtitle,
                       ),
                       SizedBox(height: spacing.md),
                       const FindWowExeWidget(),
@@ -101,60 +93,52 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                       SizedBox(height: spacing.xl),
                       Text(
                         locales.settingsScreenWowPathLabel,
-                        style: TextStyle(
-                          color: colors.mutedText,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.2,
-                        ),
+                        style: text.fieldLabel,
                       ),
                       SizedBox(height: spacing.sm),
                       Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: spacing.lg,
-                            vertical: spacing.md,
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: spacing.lg,
+                          vertical: spacing.md,
+                        ),
+                        decoration: BoxDecoration(
+                          color: colors.inputBackground,
+                          borderRadius: BorderRadius.circular(radius.input),
+                          border: Border.all(
+                            color: colors.accent.withValues(alpha: 0.14),
+                            width: effects.inputBorderWidth,
                           ),
-                          decoration: BoxDecoration(
-                            color: colors.inputBackground,
-                            borderRadius: BorderRadius.circular(radius.input),
-                            border: Border.all(
-                              color: colors.accent.withValues(alpha: 0.14),
-                              width: effects.inputBorderWidth,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.12),
+                              blurRadius: 10,
+                              spreadRadius: -4,
+                              offset: const Offset(0, 4),
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.12),
-                                blurRadius: 10,
-                                spreadRadius: -4,
-                                offset: const Offset(0, 4),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.folder_outlined,
+                              size: 18,
+                              color: colors.mutedText.withValues(alpha: 0.9),
+                            ),
+                            SizedBox(width: spacing.md),
+                            Expanded(
+                              child: Text(
+                                _wowPathController.text.isEmpty
+                                    ? '-'
+                                    : _wowPathController.text,
+                                style: text.fieldValue,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
                               ),
-                            ],
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.folder_outlined,
-                                size: 18,
-                                color: colors.mutedText.withValues(alpha: 0.9),
-                              ),
-                              SizedBox(width: spacing.md),
-                              Expanded(
-                                child: Text(
-                                  _wowPathController.text.isEmpty
-                                      ? '-'
-                                      : _wowPathController.text,
-                                  style: TextStyle(
-                                    color: colors.bodyText,
-                                    fontSize: 14,
-                                    height: 1.2,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                ),
-                              ),
-                            ],
-                          )),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -176,21 +160,12 @@ class _SettingsScreenContentState extends State<SettingsScreenContent> {
                       ],
                       Text(
                         'Eingabeverzögerung',
-                        style: TextStyle(
-                          color: colors.titleText,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2,
-                        ),
+                        style: text.sectionTitle,
                       ),
                       SizedBox(height: spacing.xs),
                       Text(
                         locales.settingsScreenTimeTillGameStartLabel,
-                        style: TextStyle(
-                          color: colors.mutedText,
-                          fontSize: 13,
-                          height: 1.4,
-                        ),
+                        style: text.sectionSubtitle,
                       ),
                       SizedBox(height: spacing.lg),
                       const GameStartTimeWidget(),

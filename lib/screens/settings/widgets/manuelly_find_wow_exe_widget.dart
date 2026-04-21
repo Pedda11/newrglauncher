@@ -24,6 +24,7 @@ class _ManuallyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
     final locales = Localize.of(context);
     final colors = context.launcherColors;
     final spacing = context.launcherSpacing;
+    final text = context.launcherText;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,12 +96,7 @@ class _ManuallyFindWowExeWidgetState extends State<ManuallyFindWowExeWidget> {
         SizedBox(height: spacing.sm),
         Text(
           locales.settingsScreenWowPathDrivesBtnHint,
-          style: TextStyle(
-            color: colors.mutedText,
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
-            height: 1.4,
-          ),
+          style: text.hintText,
         ),
       ],
     );

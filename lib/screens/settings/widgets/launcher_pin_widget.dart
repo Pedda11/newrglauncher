@@ -338,13 +338,14 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
 
   Widget _buildMessage() {
     final spacing = context.launcherSpacing;
+    final text = context.launcherText;
 
     if (_errorText != null) {
       return Padding(
         padding: EdgeInsets.only(top: spacing.sm),
         child: Text(
           _errorText!,
-          style: const TextStyle(color: Colors.red),
+          style: text.statusError,
         ),
       );
     }
@@ -354,7 +355,7 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
         padding: EdgeInsets.only(top: spacing.sm),
         child: Text(
           _successText!,
-          style: const TextStyle(color: Colors.green),
+          style: text.statusSuccess,
         ),
       );
     }
@@ -365,6 +366,7 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
   Widget _buildCreatePinUi() {
     final locales = Localize.of(context);
     final spacing = context.launcherSpacing;
+    final text = context.launcherText;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -394,6 +396,7 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
     final locales = Localize.of(context);
     final spacing = context.launcherSpacing;
     final colors = context.launcherColors;
+    final text = context.launcherText;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -401,9 +404,7 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
         SizedBox(height: spacing.md),
         Text(
           locales.launcherPinActive,
-          style: TextStyle(
-            color: colors.mutedText,
-            fontSize: 13,
+          style: text.hintText.copyWith(
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -485,6 +486,7 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
     final locales = Localize.of(context);
     final spacing = context.launcherSpacing;
     final colors = context.launcherColors;
+    final text = context.launcherText;
 
     return LauncherPanel(
       child: Column(
@@ -492,21 +494,12 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
         children: [
           Text(
             'Launcher-PIN',
-            style: TextStyle(
-              color: colors.titleText,
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-              height: 1.2,
-            ),
+            style: text.sectionTitle,
           ),
           SizedBox(height: spacing.xs),
           Text(
             locales.launcherPinLabel,
-            style: TextStyle(
-              color: colors.mutedText,
-              fontSize: 13,
-              height: 1.4,
-            ),
+            style: text.sectionSubtitle,
           ),
           SizedBox(height: spacing.lg),
           Row(
@@ -524,9 +517,7 @@ class _LauncherPinWidgetState extends State<LauncherPinWidget> {
               Expanded(
                 child: Text(
                   locales.launcherPinLabel,
-                  style: TextStyle(
-                    color: colors.bodyText,
-                    fontSize: 14,
+                  style: text.fieldValue.copyWith(
                     fontWeight: FontWeight.w500,
                   ),
                 ),
