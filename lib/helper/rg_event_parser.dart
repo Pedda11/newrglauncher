@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import '../data/rg_event_data.dart';
+import '../enum/e_event_ui_status.dart';
 
 class RgEventParser {
   static const _baseUrl = 'https://db.rising-gods.de';
@@ -57,7 +58,7 @@ class RgEventParser {
             iconUrl: iconUrl,
             detailsUrl: '$_baseUrl/?event=$id',
             categoryId: categoryId,
-            eventColor: Colors.grey.shade300),
+            uiStatus: EEventUiStatus.none),
       );
     }
 

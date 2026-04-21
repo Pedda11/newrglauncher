@@ -10,6 +10,7 @@ class LauncherRadiusTokens extends ThemeExtension<LauncherRadiusTokens> {
   final double panel;
   final double button;
   final double input;
+  final double card;
 
   const LauncherRadiusTokens({
     required this.small,
@@ -18,6 +19,7 @@ class LauncherRadiusTokens extends ThemeExtension<LauncherRadiusTokens> {
     required this.panel,
     required this.button,
     required this.input,
+    required this.card,
   });
 
   @override
@@ -28,6 +30,7 @@ class LauncherRadiusTokens extends ThemeExtension<LauncherRadiusTokens> {
     double? panel,
     double? button,
     double? input,
+    double? card,
   }) {
     return LauncherRadiusTokens(
       small: small ?? this.small,
@@ -36,6 +39,7 @@ class LauncherRadiusTokens extends ThemeExtension<LauncherRadiusTokens> {
       panel: panel ?? this.panel,
       button: button ?? this.button,
       input: input ?? this.input,
+      card: card ?? this.card,
     );
   }
 
@@ -53,6 +57,7 @@ class LauncherRadiusTokens extends ThemeExtension<LauncherRadiusTokens> {
       panel: lerpDouble(panel, other.panel),
       button: lerpDouble(button, other.button),
       input: lerpDouble(input, other.input),
+      card: lerpDouble(card, other.card),
     );
   }
 }

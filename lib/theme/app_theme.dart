@@ -59,6 +59,7 @@ class AppTheme {
       panel: 24,
       button: 16,
       input: 16,
+      card: 16,
     );
 
     const effects = LauncherEffectTokens(

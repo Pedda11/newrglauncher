@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../enum/e_event_ui_status.dart';
+
 class RgEventData {
   final int id;
   final String name;
@@ -8,7 +10,7 @@ class RgEventData {
   final String iconUrl;
   final String detailsUrl;
   final int categoryId;
-  final Color eventColor;
+  final EEventUiStatus uiStatus;
 
   const RgEventData({
     required this.id,
@@ -18,7 +20,7 @@ class RgEventData {
     required this.iconUrl,
     required this.detailsUrl,
     required this.categoryId,
-    required this.eventColor,
+    required this.uiStatus,
   });
 
   bool get isTodayOrFuture {

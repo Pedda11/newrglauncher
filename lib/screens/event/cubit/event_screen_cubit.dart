@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:twodotnulllauncher/enum/e_event_ui_status.dart';
 import '../../../data/rg_event_data.dart';
 import '../../../data/rg_event_list_data.dart';
 import '../../../helper/rg_event_parser.dart';
@@ -41,7 +42,7 @@ class EventScreenCubit extends Cubit<EventScreenState> {
     }
 
     _groupedEventList =
-        await Future.wait(_groupedEventList.map((e) => setEventColors(e)));
+        await Future.wait(_groupedEventList.map((e) => setEventStatuses(e)));
 
     emit(EventScreenState.initialized(events: _groupedEventList));
   }
@@ -60,7 +61,7 @@ class EventScreenCubit extends Cubit<EventScreenState> {
     emit(EventScreenState.initialized(events: _groupedEventList));
   }
 
-  Future<RgEventListData> setEventColors(RgEventListData events) async {
+  Future<RgEventListData> setEventStatuses(RgEventListData events) async {
     final now = DateTime.now();
     RgEventData? nextUpcomingEvent;
 
@@ -89,7 +90,7 @@ class EventScreenCubit extends Cubit<EventScreenState> {
           iconUrl: event.iconUrl,
           detailsUrl: event.detailsUrl,
           categoryId: event.categoryId,
-          eventColor: Colors.green,
+          uiStatus: EEventUiStatus.active,
         );
       } else if (nextUpcomingEvent != null &&
           event.id == nextUpcomingEvent.id) {
@@ -102,7 +103,7 @@ class EventScreenCubit extends Cubit<EventScreenState> {
           iconUrl: event.iconUrl,
           detailsUrl: event.detailsUrl,
           categoryId: event.categoryId,
-          eventColor: Colors.yellow,
+          uiStatus: EEventUiStatus.upcoming,
         );
       } else {
         // All other events get white color
@@ -114,7 +115,7 @@ class EventScreenCubit extends Cubit<EventScreenState> {
           iconUrl: event.iconUrl,
           detailsUrl: event.detailsUrl,
           categoryId: event.categoryId,
-          eventColor: Colors.grey.shade100,
+          uiStatus: EEventUiStatus.none,
         );
       }
     }).toList();
