@@ -56,6 +56,7 @@ class CharacterDataCubit extends Cubit<CharacterDataState> {
       );
     } on PathNotFoundException catch (e) {
       await Log.i('Error while reading character data: ${e.toString()}');
+      emit(const CharacterDataState.noData());
       return;
     } catch (e, st) {
       await Log.i('Error while reading character data: ${e.toString()}');

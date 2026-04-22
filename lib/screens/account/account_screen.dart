@@ -44,70 +44,64 @@ class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
     final locales = Localize.of(context);
-    return Scaffold(
-      appBar: MyAppbar(
-        title: locales.accountListPageTitle,
-        centerTitle: false,
-      ),
-      body: BlocListener<AccountScreenCubit, AccountScreenState>(
-        listener: (context, state) {
-          state.whenOrNull(
-            initialized: () {
-              _pageViewController.animateToPage(0,
-                  duration: pageTransitionDuration, curve: pageTransitionCurve);
-            },
-            goToAddAccountPage: () {
-              _pageViewController.animateToPage(1,
-                  duration: pageTransitionDuration, curve: pageTransitionCurve);
-            },
-            editAccount: () {
-              _pageViewController.animateToPage(1,
-                  duration: pageTransitionDuration, curve: pageTransitionCurve);
-            },
-          );
-        },
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView(
-                controller: _pageViewController,
-                children: [
-                  const AccountListPage(),
-                  AccountAddPage(
-                    credentialRepository: context.read<CredentialRepository>(),
-                  ),
-                ],
-                onPageChanged: (int index) {
-                  setState(() {
-                    _pageViewController.jumpToPage(index);
-                  });
-                },
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocListener<AccountScreenCubit, AccountScreenState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          initialized: () {
+            _pageViewController.animateToPage(0,
+                duration: pageTransitionDuration, curve: pageTransitionCurve);
+          },
+          goToAddAccountPage: () {
+            _pageViewController.animateToPage(1,
+                duration: pageTransitionDuration, curve: pageTransitionCurve);
+          },
+          editAccount: () {
+            _pageViewController.animateToPage(1,
+                duration: pageTransitionDuration, curve: pageTransitionCurve);
+          },
+        );
+      },
+      child: Column(
+        children: [
+          Expanded(
+            child: PageView(
+              controller: _pageViewController,
               children: [
-                kDebugMode
-                    ? ElevatedButton(
-                        onPressed: () {
-                          context.read<PreferencesRepository>().deleteAll();
-                        },
-                        child: Text(locales.accountScreenResetButton))
-                    : const SizedBox.shrink(),
-                Padding(
-                  padding: const EdgeInsets.only(right: 16.0),
-                  child: Text(
-                    version ?? '',
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        fontSize: 10),
-                  ),
+                const AccountListPage(),
+                AccountAddPage(
+                  credentialRepository: context.read<CredentialRepository>(),
                 ),
               ],
+              onPageChanged: (int index) {
+                setState(() {
+                  _pageViewController.jumpToPage(index);
+                });
+              },
             ),
-          ],
-        ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              kDebugMode
+                  ? ElevatedButton(
+                      onPressed: () {
+                        context.read<PreferencesRepository>().deleteAll();
+                      },
+                      child: Text(locales.accountScreenResetButton))
+                  : const SizedBox.shrink(),
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Text(
+                  version ?? '',
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey,
+                      fontSize: 10),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

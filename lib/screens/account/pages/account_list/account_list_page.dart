@@ -4,6 +4,7 @@ import 'package:twodotnulllauncher/repository/main_repository.dart';
 import 'package:twodotnulllauncher/repository/preferences_repository.dart';
 import 'package:twodotnulllauncher/screens/account/pages/account_list/cubit/acc_list_page_cubit.dart';
 import '../../../../localization/generated/l10n.dart';
+import '../../../../theme/helpers/theme_context_extensions.dart';
 import '../../../../widgets/my_appbar.dart';
 import 'widgets/account_list_page_content.dart';
 
@@ -19,12 +20,9 @@ class AccountListPage extends StatelessWidget {
         preferencesRepository: context.read<PreferencesRepository>(),
       )..loadAccounts(),
       child: Scaffold(
-        backgroundColor: Colors.grey[400],
+        backgroundColor: context.launcherColors.windowBackground,
         appBar: MyAppbar(title: locales.accountListPageTitle),
-        body: const Padding(
-          padding: EdgeInsets.all(24.0),
-          child: AccountListPageContent(),
-        ),
+        body: const AccountListPageContent(),
       ),
     );
   }

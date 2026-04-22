@@ -54,6 +54,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
     TResult Function(_initial value)? initial,
     TResult Function(_initialized value)? initialized,
     TResult Function(_accountLoaded value)? accountLoaded,
+    TResult Function(_noData value)? noData,
     TResult Function(_failed value)? failed,
     required TResult orElse(),
   }) {
@@ -65,6 +66,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
         return initialized(_that);
       case _accountLoaded() when accountLoaded != null:
         return accountLoaded(_that);
+      case _noData() when noData != null:
+        return noData(_that);
       case _failed() when failed != null:
         return failed(_that);
       case _:
@@ -90,6 +93,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
     required TResult Function(_initial value) initial,
     required TResult Function(_initialized value) initialized,
     required TResult Function(_accountLoaded value) accountLoaded,
+    required TResult Function(_noData value) noData,
     required TResult Function(_failed value) failed,
   }) {
     final _that = this;
@@ -100,6 +104,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
         return initialized(_that);
       case _accountLoaded():
         return accountLoaded(_that);
+      case _noData():
+        return noData(_that);
       case _failed():
         return failed(_that);
       case _:
@@ -124,6 +130,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
     TResult? Function(_initial value)? initial,
     TResult? Function(_initialized value)? initialized,
     TResult? Function(_accountLoaded value)? accountLoaded,
+    TResult? Function(_noData value)? noData,
     TResult? Function(_failed value)? failed,
   }) {
     final _that = this;
@@ -134,6 +141,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
         return initialized(_that);
       case _accountLoaded() when accountLoaded != null:
         return accountLoaded(_that);
+      case _noData() when noData != null:
+        return noData(_that);
       case _failed() when failed != null:
         return failed(_that);
       case _:
@@ -159,6 +168,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
     TResult Function()? initialized,
     TResult Function(Account account, List<Character> characterList)?
         accountLoaded,
+    TResult Function()? noData,
     TResult Function(String errorMsg)? failed,
     required TResult orElse(),
   }) {
@@ -170,6 +180,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
         return initialized();
       case _accountLoaded() when accountLoaded != null:
         return accountLoaded(_that.account, _that.characterList);
+      case _noData() when noData != null:
+        return noData();
       case _failed() when failed != null:
         return failed(_that.errorMsg);
       case _:
@@ -196,6 +208,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
     required TResult Function() initialized,
     required TResult Function(Account account, List<Character> characterList)
         accountLoaded,
+    required TResult Function() noData,
     required TResult Function(String errorMsg) failed,
   }) {
     final _that = this;
@@ -206,6 +219,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
         return initialized();
       case _accountLoaded():
         return accountLoaded(_that.account, _that.characterList);
+      case _noData():
+        return noData();
       case _failed():
         return failed(_that.errorMsg);
       case _:
@@ -231,6 +246,7 @@ extension CharacterDataStatePatterns on CharacterDataState {
     TResult? Function()? initialized,
     TResult? Function(Account account, List<Character> characterList)?
         accountLoaded,
+    TResult? Function()? noData,
     TResult? Function(String errorMsg)? failed,
   }) {
     final _that = this;
@@ -241,6 +257,8 @@ extension CharacterDataStatePatterns on CharacterDataState {
         return initialized();
       case _accountLoaded() when accountLoaded != null:
         return accountLoaded(_that.account, _that.characterList);
+      case _noData() when noData != null:
+        return noData();
       case _failed() when failed != null:
         return failed(_that.errorMsg);
       case _:
@@ -366,6 +384,26 @@ class __$accountLoadedCopyWithImpl<$Res>
           : characterList // ignore: cast_nullable_to_non_nullable
               as List<Character>,
     ));
+  }
+}
+
+/// @nodoc
+
+class _noData implements CharacterDataState {
+  const _noData();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _noData);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'CharacterDataState.noData()';
   }
 }
 

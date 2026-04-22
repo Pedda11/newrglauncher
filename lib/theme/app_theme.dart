@@ -22,6 +22,7 @@ class AppTheme {
       titleText: Colors.white,
       bodyText: Color(0xB3FFFFFF),
       mutedText: Color(0x61FFFFFF),
+      errorText: Colors.red,
       inputBackground: Color(0xFF20222A),
       inputBorder: Color(0x1FFFFFFF),
       accent: Color(0x00000000),

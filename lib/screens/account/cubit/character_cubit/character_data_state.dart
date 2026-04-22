@@ -11,5 +11,7 @@ class CharacterDataState with _$CharacterDataState {
     required List<Character> characterList,
   }) = _accountLoaded;
 
+  const factory CharacterDataState.noData() = _noData;
+
   const factory CharacterDataState.failed({required String errorMsg}) = _failed;
 }

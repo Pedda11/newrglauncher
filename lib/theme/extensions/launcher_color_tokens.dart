@@ -12,6 +12,7 @@ class LauncherColorTokens extends ThemeExtension<LauncherColorTokens> {
   final Color titleText;
   final Color bodyText;
   final Color mutedText;
+  final Color errorText;
 
   /// Inputs
   final Color inputBackground;
@@ -48,6 +49,7 @@ class LauncherColorTokens extends ThemeExtension<LauncherColorTokens> {
     required this.titleText,
     required this.bodyText,
     required this.mutedText,
+    required this.errorText,
     required this.inputBackground,
     required this.inputBorder,
     required this.accent,
@@ -76,6 +78,7 @@ class LauncherColorTokens extends ThemeExtension<LauncherColorTokens> {
     Color? titleText,
     Color? bodyText,
     Color? mutedText,
+    Color? errorText,
     Color? inputBackground,
     Color? inputBorder,
     Color? accent,
@@ -102,6 +105,7 @@ class LauncherColorTokens extends ThemeExtension<LauncherColorTokens> {
       titleText: titleText ?? this.titleText,
       bodyText: bodyText ?? this.bodyText,
       mutedText: mutedText ?? this.mutedText,
+      errorText: errorText ?? this.errorText,
       inputBackground: inputBackground ?? this.inputBackground,
       inputBorder: inputBorder ?? this.inputBorder,
       accent: accent ?? this.accent,
@@ -141,6 +145,7 @@ class LauncherColorTokens extends ThemeExtension<LauncherColorTokens> {
       titleText: Color.lerp(titleText, other.titleText, t)!,
       bodyText: Color.lerp(bodyText, other.bodyText, t)!,
       mutedText: Color.lerp(mutedText, other.mutedText, t)!,
+      errorText: Color.lerp(errorText, other.errorText, t)!,
       inputBackground: Color.lerp(inputBackground, other.inputBackground, t)!,
       inputBorder: Color.lerp(inputBorder, other.inputBorder, t)!,
       accent: Color.lerp(accent, other.accent, t)!,
