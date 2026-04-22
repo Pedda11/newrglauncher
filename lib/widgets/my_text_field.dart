@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/helpers/theme_context_extensions.dart';
+
 class MyTextField extends StatelessWidget {
   const MyTextField({
     super.key,
@@ -16,15 +18,23 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.launcherColors;
+    final spacing = context.launcherSpacing;
+    final radius = context.launcherRadius;
+    final text = context.launcherText;
+    final components = context.launcherComponents;
+
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+      padding: EdgeInsets.only(top: spacing.sm),
       child: SizedBox(
-        width: 333,
+        width: components.pinFieldWidth,
         child: TextFormField(
           key: fieldKey,
           controller: myController,
           obscureText: obscure,
-          style: const TextStyle(color: Colors.black),
+          style: text.fieldValue.copyWith(
+            color: colors.bodyText,
+          ),
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
               return '';
@@ -32,25 +42,43 @@ class MyTextField extends StatelessWidget {
             return null;
           },
           decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.grey),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.grey, width: 2),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red, width: 2),
-            ),
             errorStyle: const TextStyle(height: 0),
             hintText: hint,
-            labelText: hint,
+            hintStyle: text.pinFieldHint,
+            filled: true,
+            fillColor: colors.inputBackground.withValues(alpha: 0.92),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: components.inputContentHorizontalPadding,
+              vertical: components.inputContentVerticalPadding,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius.input),
+              borderSide: BorderSide(
+                color: colors.accent.withValues(alpha: 0.14),
+                width: 1,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius.input),
+              borderSide: BorderSide(
+                color: colors.accent.withValues(alpha: 0.55),
+                width: 1.4,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius.input),
+              borderSide: BorderSide(
+                color: colors.errorText,
+                width: 1.2,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(radius.input),
+              borderSide: BorderSide(
+                color: colors.errorText,
+                width: 1.4,
+              ),
+            ),
           ),
         ),
       ),

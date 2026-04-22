@@ -11,7 +11,7 @@ import 'package:twodotnulllauncher/repository/main_repository.dart';
 import 'package:twodotnulllauncher/repository/preferences_repository.dart';
 import 'package:twodotnulllauncher/repository/settings_repository.dart';
 import 'package:twodotnulllauncher/screens/account/cubit/account_cubit/account_screen_cubit.dart';
-import 'package:twodotnulllauncher/screens/account/pages/account_add/account_add_page.dart';
+import 'package:twodotnulllauncher/screens/account/pages/account_add/widgets/account_add_page_content.dart';
 import 'package:twodotnulllauncher/screens/account/pages/account_add/cubit/account_add_page_cubit.dart';
 import 'package:twodotnulllauncher/services/totp/totp_service.dart';
 
@@ -66,7 +66,7 @@ Future<void> pumpAccountAddPage({
             Locale('en', ''),
             Locale('de', ''),
           ],
-          home: AccountAddPage(
+          home: AccountAddPageContent(
             credentialRepository: credentialRepository,
           ),
         ),
@@ -83,7 +83,7 @@ Future<void> pumpAccountAddPage({
     print('TEST EXCEPTION: $exception');
   }
 
-  expect(find.byType(AccountAddPage), findsOneWidget);
+  expect(find.byType(AccountAddPageContent), findsOneWidget);
 }
 
 ElevatedButton getSaveButton(WidgetTester tester) {
@@ -192,7 +192,7 @@ void main() {
                 Locale('en', ''),
                 Locale('de', ''),
               ],
-              home: AccountAddPage(
+              home: AccountAddPageContent(
                 credentialRepository: credentialRepository,
               ),
             ),
@@ -209,7 +209,7 @@ void main() {
         print('TEST EXCEPTION: $exception');
       }
 
-      expect(find.byType(AccountAddPage), findsOneWidget);
+      expect(find.byType(AccountAddPageContent), findsOneWidget);
 
       final saveButtonFinder = find.byKey(const Key('account_add_save_button'));
       expect(saveButtonFinder, findsOneWidget);

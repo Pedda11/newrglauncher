@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:twodotnulllauncher/repository/preferences_repository.dart';
+import 'package:twodotnulllauncher/screens/account/pages/account_add/account_add_page.dart';
 import '../../data/account.dart';
 import '../../localization/generated/l10n.dart';
 import '../../repository/credential_repository.dart';
 import '../../widgets/my_appbar.dart';
 import 'cubit/account_cubit/account_screen_cubit.dart';
-import 'pages/account_add/account_add_page.dart';
+import 'pages/account_add/widgets/account_add_page_content.dart';
 import 'pages/account_list/account_list_page.dart';
 
 class AccountScreen extends StatefulWidget {
