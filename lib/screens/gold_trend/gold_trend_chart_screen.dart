@@ -3,6 +3,8 @@ import 'package:twodotnulllauncher/screens/gold_trend/widgets/gold_trend_chart_s
 import 'package:twodotnulllauncher/widgets/my_appbar.dart';
 import 'package:twodotnulllauncher/localization/generated/l10n.dart';
 
+import '../../theme/helpers/theme_context_extensions.dart';
+
 class GoldTrendChartScreen extends StatelessWidget {
   const GoldTrendChartScreen({super.key});
 
@@ -10,6 +12,7 @@ class GoldTrendChartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final locales = Localize.of(context);
     return Scaffold(
+      backgroundColor: context.launcherColors.windowBackground,
       appBar: MyAppbar(title: locales.goldTrendScreenTitle, centerTitle: true),
       body: const GoldTrendChartScreenContent(),
     );

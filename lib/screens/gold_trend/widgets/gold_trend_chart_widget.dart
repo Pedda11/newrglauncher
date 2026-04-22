@@ -5,6 +5,8 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../theme/helpers/theme_context_extensions.dart';
+
 class GoldTrendChartWidget extends StatelessWidget {
   final List<GoldChartPoint> historyPoints;
   final List<GoldChartPoint> forecastPoints;
@@ -18,31 +20,65 @@ class GoldTrendChartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locales = Localize.of(context);
+    final colors = context.launcherColors;
+    final spacing = context.launcherSpacing;
+    final radius = context.launcherRadius;
+    final text = context.launcherText;
     if (historyPoints.length < 2) {
       return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              locales.goldTrendChartNoHistory,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 520),
+          padding: EdgeInsets.all(spacing.xl),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(radius.card),
+            color: colors.inputBackground.withValues(alpha: 0.72),
+            border: Border.all(
+              color: colors.accent.withValues(alpha: 0.14),
+              width: 1,
             ),
-            const SizedBox(height: 8),
-            Text(
-              locales.goldTrendChartNoHistoryDescription,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              locales.goldTrendChartMinimumDataPoints,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              locales.goldTrendChartDataImprovement,
-              textAlign: TextAlign.center,
-            ),
-          ],
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.16),
+                blurRadius: 14,
+                spreadRadius: -6,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.show_chart_rounded,
+                size: 34,
+                color: colors.accentSoft,
+              ),
+              SizedBox(height: spacing.md),
+              Text(
+                locales.goldTrendChartNoHistory,
+                style: text.sectionTitle,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: spacing.md),
+              Text(
+                locales.goldTrendChartNoHistoryDescription,
+                style: text.sectionSubtitle,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: spacing.sm),
+              Text(
+                locales.goldTrendChartMinimumDataPoints,
+                style: text.hintText,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: spacing.xs),
+              Text(
+                locales.goldTrendChartDataImprovement,
+                style: text.hintText,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -116,123 +152,363 @@ class GoldTrendChartWidget extends StatelessWidget {
       pointByX[_toDayX(point.date, baseDate)] = point;
     }
 
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.8,
-      child: LineChart(
-        LineChartData(
-          minX: minX,
-          maxX: maxX,
-          minY: safeMinY,
-          maxY: safeMaxY,
-          gridData: const FlGridData(
-            show: true,
-            drawVerticalLine: false,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+            left: spacing.sm,
+            right: spacing.sm,
+            bottom: spacing.lg,
           ),
-          borderData: FlBorderData(show: true),
-          titlesData: FlTitlesData(
-            topTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            rightTitles: const AxisTitles(
-              sideTitles: SideTitles(showTitles: false),
-            ),
-            leftTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                reservedSize: 56,
-                interval: yInterval,
-                getTitlesWidget: (value, meta) {
-                  return Text(
-                    _formatGoldAxis(value),
-                    style: const TextStyle(fontSize: 11),
-                  );
-                },
-              ),
-            ),
-            bottomTitles: AxisTitles(
-              sideTitles: SideTitles(
-                showTitles: true,
-                reservedSize: 36,
-                interval: _calculateBottomInterval(maxX),
-                getTitlesWidget: (value, meta) {
-                  final date = baseDate.add(
-                    Duration(hours: (value * 24).round()),
-                  );
-
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 8),
-                    child: Text(
-                      _formatShortDate(date),
-                      style: const TextStyle(fontSize: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      locales.goldTrendScreenTitle,
+                      style: text.sectionTitle,
                     ),
-                  );
-                },
+                    SizedBox(height: spacing.xs),
+                    Text(
+                      '${locales.goldTrendChartHistory} / ${locales.goldTrendChartForecast}',
+                      style: text.sectionSubtitle.copyWith(
+                        color: colors.mutedText.withValues(alpha: 0.88),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: spacing.md,
+                  vertical: spacing.sm,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(radius.button),
+                  color: colors.inputBackground.withValues(alpha: 0.72),
+                  border: Border.all(
+                    color: colors.accent.withValues(alpha: 0.14),
+                    width: 1,
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: 18,
+                          height: 3,
+                          decoration: BoxDecoration(
+                            color: colors.accentStrong,
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                        ),
+                        SizedBox(width: spacing.sm),
+                        Text(
+                          locales.goldTrendChartHistory,
+                          style: text.hintText.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: spacing.md),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 6,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                color:
+                                    colors.accentSoft.withValues(alpha: 0.85),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            const SizedBox(width: 3),
+                            Container(
+                              width: 6,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                color:
+                                    colors.accentSoft.withValues(alpha: 0.85),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                            const SizedBox(width: 3),
+                            Container(
+                              width: 6,
+                              height: 3,
+                              decoration: BoxDecoration(
+                                color:
+                                    colors.accentSoft.withValues(alpha: 0.85),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(width: spacing.sm),
+                        Text(
+                          locales.goldTrendChartForecast,
+                          style: text.hintText.copyWith(
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          lineBarsData: [
-            LineChartBarData(
-              spots: historySpots,
-              isCurved: false,
-              barWidth: 2,
-              dotData: const FlDotData(show: false),
-              belowBarData: BarAreaData(
-                show: true,
-                color: Colors.blue.withValues(alpha: 0.08),
+        ),
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(radius.card),
+              color: colors.panelBackground.withValues(alpha: 0.78),
+              border: Border.all(
+                color: colors.accent.withValues(alpha: 0.14),
+                width: 1,
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.16),
+                  blurRadius: 14,
+                  spreadRadius: -6,
+                  offset: const Offset(0, 6),
+                ),
+              ],
             ),
-            LineChartBarData(
-              spots: forecastSpots,
-              isCurved: false,
-              barWidth: 2,
-              dotData: const FlDotData(show: false),
-              dashArray: const [6, 4],
-            ),
-          ],
-          lineTouchData: LineTouchData(
-            handleBuiltInTouches: true,
-            touchTooltipData: LineTouchTooltipData(
-              getTooltipItems: (touchedSpots) {
-                final seenKeys = <String>{};
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                spacing.lg,
+                spacing.lg,
+                spacing.lg,
+                spacing.md,
+              ),
+              child: LineChart(
+                LineChartData(
+                  minX: minX,
+                  maxX: maxX,
+                  minY: safeMinY,
+                  maxY: safeMaxY,
+                  gridData: FlGridData(
+                    show: true,
+                    drawVerticalLine: false,
+                    horizontalInterval: yInterval,
+                    getDrawingHorizontalLine: (value) {
+                      return FlLine(
+                        color: colors.panelBorder.withValues(alpha: 0.30),
+                        strokeWidth: 1,
+                      );
+                    },
+                  ),
+                  borderData: FlBorderData(
+                    show: true,
+                    border: Border(
+                      left: BorderSide(
+                        color: colors.panelBorder.withValues(alpha: 0.65),
+                        width: 1,
+                      ),
+                      bottom: BorderSide(
+                        color: colors.panelBorder.withValues(alpha: 0.65),
+                        width: 1,
+                      ),
+                      top: BorderSide.none,
+                      right: BorderSide.none,
+                    ),
+                  ),
+                  titlesData: FlTitlesData(
+                    topTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    rightTitles: const AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    leftTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 64,
+                        interval: yInterval,
+                        getTitlesWidget: (value, meta) {
+                          final interval = _calculateBottomInterval(maxX);
 
-                return touchedSpots.map((spot) {
-                  final duplicateKey = '${spot.x}_${spot.y}';
+                          final isLastTick = (maxX - value).abs() < 0.01;
+                          if (isLastTick) {
+                            return const SizedBox.shrink();
+                          }
 
-                  if (seenKeys.contains(duplicateKey)) {
-                    return null;
-                  }
-                  seenKeys.add(duplicateKey);
+                          final date = baseDate.add(
+                            Duration(hours: (value * 24).round()),
+                          );
 
-                  final point = pointByX[spot.x];
-                  if (point == null) {
-                    return null;
-                  }
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              _formatShortDate(date),
+                              style: text.hintText.copyWith(
+                                fontSize: 10,
+                                color: colors.mutedText.withValues(alpha: 0.82),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 40,
+                        interval: _calculateBottomInterval(maxX),
+                        getTitlesWidget: (value, meta) {
+                          final date = baseDate.add(
+                            Duration(hours: (value * 24).round()),
+                          );
 
-                  final isForecast = forecastPoints.any(
-                    (p) => _toDayX(p.date, baseDate) == spot.x,
-                  );
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              _formatShortDate(date),
+                              style: text.hintText.copyWith(
+                                fontSize: 10,
+                                color: colors.mutedText.withValues(alpha: 0.82),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: historySpots,
+                      isCurved: false,
+                      barWidth: 3,
+                      color: colors.accentStrong,
+                      dotData: FlDotData(
+                        show: true,
+                        checkToShowDot: (spot, barData) {
+                          return spot == historySpots.last;
+                        },
+                        getDotPainter: (spot, percent, barData, index) {
+                          return FlDotCirclePainter(
+                            radius: 4.8,
+                            color: colors.accentStrong,
+                            strokeWidth: 2.2,
+                            strokeColor: colors.panelBackground,
+                          );
+                        },
+                      ),
+                      belowBarData: BarAreaData(
+                        show: true,
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            colors.accent.withValues(alpha: 0.20),
+                            colors.accent.withValues(alpha: 0.06),
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                    ),
+                    LineChartBarData(
+                      spots: forecastSpots,
+                      isCurved: false,
+                      barWidth: 2.5,
+                      color: colors.accentSoft.withValues(alpha: 0.85),
+                      dotData: FlDotData(
+                        show: true,
+                        checkToShowDot: (spot, barData) {
+                          return spot == forecastSpots.last;
+                        },
+                        getDotPainter: (spot, percent, barData, index) {
+                          return FlDotCirclePainter(
+                            radius: 4.4,
+                            color: colors.accentSoft.withValues(alpha: 0.95),
+                            strokeWidth: 2,
+                            strokeColor: colors.panelBackground,
+                          );
+                        },
+                      ),
+                      dashArray: const [8, 5],
+                    ),
+                  ],
+                  lineTouchData: LineTouchData(
+                    handleBuiltInTouches: true,
+                    touchTooltipData: LineTouchTooltipData(
+                      tooltipBorderRadius: BorderRadius.circular(radius.input),
+                      tooltipPadding: EdgeInsets.symmetric(
+                        horizontal: spacing.md,
+                        vertical: spacing.sm,
+                      ),
+                      tooltipMargin: 12,
+                      getTooltipColor: (_) =>
+                          colors.panelBackground.withValues(alpha: 0.96),
+                      fitInsideHorizontally: true,
+                      fitInsideVertically: true,
+                      getTooltipItems: (touchedSpots) {
+                        final seenKeys = <String>{};
 
-                  return LineTooltipItem(
-                    '${isForecast ? locales.goldTrendChartForecast : locales.goldTrendChartHistory}\n'
-                    '${_formatFullDate(point.date)}\n'
-                    '${_formatGoldTooltip(point.gold, locales)}',
-                    const TextStyle(fontSize: 12),
-                  );
-                }).toList();
-              },
+                        return touchedSpots.map((spot) {
+                          final duplicateKey = '${spot.x}_${spot.y}';
+
+                          if (seenKeys.contains(duplicateKey)) {
+                            return null;
+                          }
+                          seenKeys.add(duplicateKey);
+
+                          final point = pointByX[spot.x];
+                          if (point == null) {
+                            return null;
+                          }
+
+                          final isForecast = forecastPoints.any(
+                            (p) => _toDayX(p.date, baseDate) == spot.x,
+                          );
+
+                          return LineTooltipItem(
+                            '${isForecast ? locales.goldTrendChartForecast : locales.goldTrendChartHistory}\n'
+                            '${_formatFullDate(point.date)}\n'
+                            '${_formatGoldTooltip(point.gold, locales)}',
+                            text.fieldValue.copyWith(
+                              fontSize: 12,
+                              height: 1.35,
+                              color: isForecast
+                                  ? colors.accentSoft
+                                  : colors.bodyText,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          );
+                        }).toList();
+                      },
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 
   static double _calculateBottomInterval(double maxX) {
     if (maxX <= 7) return 1;
-    if (maxX <= 14) return 2;
-    if (maxX <= 30) return 5;
-    if (maxX <= 60) return 10;
-    return 15;
+    if (maxX <= 14) return 3;
+    if (maxX <= 30) return 6;
+    if (maxX <= 60) return 12;
+    return 18;
   }
 
   static String _formatShortDate(DateTime date) {

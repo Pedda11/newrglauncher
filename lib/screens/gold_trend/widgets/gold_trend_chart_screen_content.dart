@@ -3,6 +3,8 @@ import 'package:twodotnulllauncher/screens/gold_trend/widgets/gold_trend_chart_w
 import '../../../data/gold_chart_point.dart';
 import '../../../repository/gold_history_repository.dart';
 import '../../../services/gold_trend/gold_aggregation_service.dart';
+import '../../../theme/helpers/theme_context_extensions.dart';
+import '../../../widgets/launcher_panel.dart';
 
 class GoldTrendChartScreenContent extends StatefulWidget {
   const GoldTrendChartScreenContent({super.key});
@@ -49,11 +51,18 @@ class _GoldTrendChartScreenContentState
 
   @override
   Widget build(BuildContext context) {
+    final spacing = context.launcherSpacing;
+
     return Padding(
-      padding: const EdgeInsets.all(80),
-      child: GoldTrendChartWidget(
-        historyPoints: historyPoints,
-        forecastPoints: forecastPoints,
+      padding: EdgeInsets.all(spacing.screenPadding),
+      child: LauncherPanel(
+        child: Padding(
+          padding: EdgeInsets.all(spacing.xl),
+          child: GoldTrendChartWidget(
+            historyPoints: historyPoints,
+            forecastPoints: forecastPoints,
+          ),
+        ),
       ),
     );
   }
