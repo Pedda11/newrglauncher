@@ -38,6 +38,8 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
   final _totpService = TotpService();
 
+  bool inProgress = false;
+
   Future<void> initialize() async {
     await Log.i('Initializing AccountScreenCubit');
     await loadAccounts();
@@ -226,17 +228,25 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
           errorMsg: 'Ungültige Wartezeit für den Spielstart.'));
       return;
     }
+    if (inProgress) return;
+
+    inProgress = true;
+
     await Log.i('Starting game for account: ${acc.accountName}');
     try {
-      await startWowProcessLikeOldLauncher(
+      final wowProcess = await startWowProcess(
         wowRootPath: settingsRepository.wowRootFolderPath!,
         wowExecutableName: settingsRepository.wowExecutableName!,
       );
+
+      await Log.i('WoW started with pid: ${wowProcess.pid}');
 
       await Log.i(
           'Game process started, waiting for ${settingsRepository.secondsToWaitForGameToStart} seconds before sending keys');
       await Future.delayed(
           Duration(seconds: settingsRepository.secondsToWaitForGameToStart!));
+
+      await _bringWowToForeground();
 
       final accPasswd = await CredentialRepository().readPassword(acc.uniqueId);
 
@@ -244,16 +254,20 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
         await Log.i('Password not found in Credential Manager.');
         emit(const AccountScreenState.failed(
             errorMsg: 'Passwort konnte nicht gefunden werden.'));
+        inProgress = false;
         return;
       }
 
       await Log.i('Sending keys for account: ${acc.accId}');
+
       await sendKeys(acc.accountName, accPasswd);
       if (acc.isTotpEnabled) {
         await Log.i('2FA enabled for account: ${acc.accountName}');
 
         /// wait for 2FA popup to appear
         await Future.delayed(const Duration(seconds: 2));
+
+        await _bringWowToForeground();
 
         final secret =
             await CredentialRepository().readTotpSecret(acc.uniqueId);
@@ -262,6 +276,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
           await Log.i('TOTP secret not found for account.');
           emit(const AccountScreenState.failed(
               errorMsg: '2FA aktiviert, aber kein Secret gespeichert.'));
+          inProgress = false;
           return;
         }
 
@@ -270,6 +285,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
         await Log.i('Generated TOTP code, sending input');
 
         await sendText(code, pressEnter: true);
+        inProgress = false;
       }
     } catch (e, st) {
       await Log.i(
@@ -286,6 +302,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
         app: 'launcher',
         report: report,
       );
+      inProgress = false;
       emit(AccountScreenState.failed(errorMsg: e.toString()));
     }
     try {
@@ -317,7 +334,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
     }
   }
 
-  Future<void> startWowProcessLikeOldLauncher({
+  Future<Process> startWowProcess({
     required String wowRootPath,
     required String wowExecutableName,
   }) async {
@@ -336,36 +353,21 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       throw StateError('WoW executable not found: $exePath');
     }
 
-    await Log.i('Starting WoW like old launcher');
+    await Log.i('Starting WoW directly');
     await Log.i('WoW root: $wowRootPath');
     await Log.i('WoW exe: $exePath');
-    await Log.i('WoW start mode: PowerShell + Start-Process + RunAs');
+    await Log.i('WoW start mode: direct Process.start');
 
-    final psCommand = '''
-Start-Process -FilePath '${exePath.replaceAll("'", "''")}' -WorkingDirectory '${wowRootPath.replaceAll("'", "''")}' -Verb RunAs
-''';
-
-    final result = await Process.run(
-      'powershell',
-      [
-        '-NoProfile',
-        '-ExecutionPolicy',
-        'Bypass',
-        '-Command',
-        psCommand,
-      ],
+    final process = await Process.start(
+      exePath,
+      const [],
+      workingDirectory: wowRootPath,
       runInShell: true,
     );
 
-    await Log.i('PowerShell exit code: ${result.exitCode}');
-    await Log.i('PowerShell stdout: ${result.stdout}');
-    await Log.i('PowerShell stderr: ${result.stderr}');
+    await Log.i('WoW process pid: ${process.pid}');
 
-    if (result.exitCode != 0) {
-      throw StateError(
-        'Failed to start WoW via PowerShell RunAs. Exit code: ${result.exitCode}',
-      );
-    }
+    return process;
   }
 
   Future<void> sendText(String text, {bool pressEnter = false}) async {
@@ -378,5 +380,185 @@ Start-Process -FilePath '${exePath.replaceAll("'", "''")}' -WorkingDirectory '${
     if (pressEnter) {
       _sendKey(VIRTUAL_KEY.VK_RETURN);
     }
+  }
+
+  Future<void> _logVisibleWindows() async {
+    final results = <String>[];
+
+    _windowDumpResults = results;
+
+    try {
+      final enumCallback =
+          Pointer.fromFunction<WNDENUMPROC>(enumWindowsDumpProc, 1);
+
+      EnumWindows(enumCallback, 0);
+
+      await Log.i('=== Visible windows dump start ===');
+      for (final line in results) {
+        await Log.i(line);
+      }
+      await Log.i('=== Visible windows dump end ===');
+    } finally {
+      _windowDumpResults = null;
+    }
+  }
+
+  Future<void> _bringWowToForeground() async {
+    int hWnd = 0;
+
+    for (int i = 0; i < 20; i++) {
+      hWnd = _findWindowByTitle('World of Warcraft');
+
+      if (hWnd != 0) {
+        break;
+      }
+
+      await Future.delayed(const Duration(milliseconds: 500));
+    }
+
+    await Log.i('WoW window handle by title: $hWnd');
+
+    if (hWnd == 0) {
+      emit(const AccountScreenState.failed(
+        errorMsg: 'WoW Fenster konnte nicht gefunden werden.',
+      ));
+      return;
+    }
+
+    ShowWindow(hWnd, SHOW_WINDOW_CMD.SW_RESTORE);
+    await Future.delayed(const Duration(milliseconds: 150));
+    SetForegroundWindow(hWnd);
+    await Future.delayed(const Duration(milliseconds: 150));
+  }
+
+  int _findWindowByTitle(String title) {
+    final resultPointer = calloc<IntPtr>();
+
+    try {
+      final enumCallback =
+          Pointer.fromFunction<WNDENUMPROC>(enumWindowsByTitleProc, 1);
+
+      _windowSearchTitle = title;
+      _windowSearchResultPointer = resultPointer;
+
+      EnumWindows(enumCallback, 0);
+
+      return resultPointer.value;
+    } finally {
+      _windowSearchTitle = null;
+      _windowSearchResultPointer = null;
+      calloc.free(resultPointer);
+    }
+  }
+}
+
+//top level variables and functions---------------------------------------
+int enumWindowsProc(int hWnd, int lParam) {
+  final targetPid = _windowSearchTargetPid;
+  final resultPointer = _windowSearchResultPointer;
+
+  if (targetPid == null || resultPointer == null) {
+    return 1;
+  }
+
+  if (IsWindowVisible(hWnd) == 0) {
+    return 1;
+  }
+
+  final pidPointer = calloc<Uint32>();
+
+  try {
+    GetWindowThreadProcessId(hWnd, pidPointer);
+
+    if (pidPointer.value == targetPid) {
+      resultPointer.value = hWnd;
+      return 0;
+    }
+
+    return 1;
+  } finally {
+    calloc.free(pidPointer);
+  }
+}
+
+String? _windowSearchTitle;
+List<String>? _windowDumpResults;
+int? _windowSearchTargetPid;
+Pointer<IntPtr>? _windowSearchResultPointer;
+
+int enumWindowsByTitleProc(int hWnd, int lParam) {
+  final searchTitle = _windowSearchTitle;
+  final resultPointer = _windowSearchResultPointer;
+
+  if (searchTitle == null || resultPointer == null) {
+    return 1;
+  }
+
+  if (IsWindowVisible(hWnd) == 0) {
+    return 1;
+  }
+
+  final titleBuffer = wsalloc(512);
+
+  try {
+    final titleLength = GetWindowText(hWnd, titleBuffer, 512);
+    final title = titleLength > 0 ? titleBuffer.toDartString() : '';
+
+    if (title.trim() == searchTitle) {
+      resultPointer.value = hWnd;
+      return 0;
+    }
+
+    return 1;
+  } finally {
+    calloc.free(titleBuffer);
+  }
+}
+
+int _findWindowByPid(int targetPid) {
+  final resultPointer = calloc<IntPtr>();
+
+  try {
+    final enumCallback = Pointer.fromFunction<WNDENUMPROC>(enumWindowsProc, 1);
+
+    _windowSearchTargetPid = targetPid;
+    _windowSearchResultPointer = resultPointer;
+
+    EnumWindows(enumCallback, 0);
+
+    return resultPointer.value;
+  } finally {
+    _windowSearchTargetPid = null;
+    _windowSearchResultPointer = null;
+    calloc.free(resultPointer);
+  }
+}
+
+int enumWindowsDumpProc(int hWnd, int lParam) {
+  final results = _windowDumpResults;
+  if (results == null) {
+    return 1;
+  }
+
+  if (IsWindowVisible(hWnd) == 0) {
+    return 1;
+  }
+
+  final pidPointer = calloc<Uint32>();
+  final titleBuffer = wsalloc(512);
+
+  try {
+    GetWindowThreadProcessId(hWnd, pidPointer);
+    final titleLength = GetWindowText(hWnd, titleBuffer, 512);
+    final title = titleLength > 0 ? titleBuffer.toDartString() : '';
+
+    if (title.trim().isNotEmpty) {
+      results.add('hWnd=$hWnd | pid=${pidPointer.value} | title=$title');
+    }
+
+    return 1;
+  } finally {
+    calloc.free(pidPointer);
+    calloc.free(titleBuffer);
   }
 }
