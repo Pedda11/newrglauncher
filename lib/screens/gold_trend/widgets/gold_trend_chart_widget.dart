@@ -338,29 +338,12 @@ class GoldTrendChartWidget extends StatelessWidget {
                     leftTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
-                        reservedSize: 64,
+                        reservedSize: 56,
                         interval: yInterval,
                         getTitlesWidget: (value, meta) {
-                          final interval = _calculateBottomInterval(maxX);
-
-                          final isLastTick = (maxX - value).abs() < 0.01;
-                          if (isLastTick) {
-                            return const SizedBox.shrink();
-                          }
-
-                          final date = baseDate.add(
-                            Duration(hours: (value * 24).round()),
-                          );
-
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(
-                              _formatShortDate(date),
-                              style: text.hintText.copyWith(
-                                fontSize: 10,
-                                color: colors.mutedText.withValues(alpha: 0.82),
-                              ),
-                            ),
+                          return Text(
+                            _formatGoldAxis(value),
+                            style: const TextStyle(fontSize: 11),
                           );
                         },
                       ),
