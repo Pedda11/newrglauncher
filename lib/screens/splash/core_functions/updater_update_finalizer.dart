@@ -23,27 +23,27 @@ class UpdaterUpdateFinalizer {
   static Future<void> finalize({
     required String updaterVersion,
   }) async {
-    await Log.i('Finalizing updater update to version $updaterVersion');
+    await Log.info('Finalizing updater update to version $updaterVersion');
 
     await File(_versionFile).writeAsString(
       updaterVersion,
       flush: true,
     );
 
-    await Log.i('Updater version file updated to $updaterVersion');
+    await Log.info('Updater version file updated to $updaterVersion');
 
     final zipFile = File(_zipFile);
     if (await zipFile.exists()) {
       await zipFile.delete();
     }
 
-    await Log.i('Updater update zip file deleted');
+    await Log.info('Updater update zip file deleted');
 
     final updaterNewDir = Directory(_updaterNewDir);
     if (await updaterNewDir.exists()) {
       await updaterNewDir.delete(recursive: true);
     }
 
-    await Log.i('Updater new directory deleted');
+    await Log.info('Updater new directory deleted');
   }
 }

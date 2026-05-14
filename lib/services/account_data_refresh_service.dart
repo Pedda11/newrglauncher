@@ -21,7 +21,7 @@ class AccountDataRefreshService {
   });
 
   Future<AccountRefreshResult> refreshAccount(Account acc) async {
-    await Log.i('Refreshing account data for account: ${acc.accId}');
+    await Log.info('Refreshing account data for account: ${acc.accId}');
 
     final charsPath =
         '${settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\Rising-Gods';
@@ -29,7 +29,7 @@ class AccountDataRefreshService {
     final dir = Directory(charsPath);
     final entities = await dir.list().toList();
 
-    await Log.i(
+    await Log.info(
       'Found ${entities.length} character directories for account: ${acc.accId}',
     );
 
@@ -39,7 +39,7 @@ class AccountDataRefreshService {
     final savedInstancesPathAltoholic =
         '${settingsRepository.wowAccountsDirectoryPath}\\${acc.accountName.toUpperCase()}\\SavedVariables\\Altoholic.lua';
 
-    await Log.i(
+    await Log.info(
       'Reading Altoholic files for account: ${acc.accId}',
     );
 
@@ -80,7 +80,7 @@ class AccountDataRefreshService {
 
       await goldHistoryRepository.writeSnapshots(mergedSnapshots);
 
-      await Log.i(
+      await Log.info(
         'Gold history updated for account: ${acc.accId}, '
         'existing: ${existingSnapshots.length}, '
         'incoming: ${goldSnapshots.length}, '
@@ -117,14 +117,14 @@ class AccountDataRefreshService {
     final forecastPoints =
         goldAggregationService.buildForecastPoints(chartPoints);
 
-    await Log.i('Current total gold copper: $totalCopper');
-    await Log.i(
+    await Log.info('Current total gold copper: $totalCopper');
+    await Log.info(
       'Current total gold formatted: ${Altoholic.formatCoins(totalCopper)}',
     );
-    await Log.i(
+    await Log.info(
       'Built ${goldSnapshots.length} gold snapshots for accountId: ${acc.accId}',
     );
-    await Log.i(
+    await Log.info(
       'Finished refreshing account: ${acc.accId}, total characters loaded: ${characters.length}',
     );
 

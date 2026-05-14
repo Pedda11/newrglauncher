@@ -55,7 +55,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
     //generateFakeGoldHistory is only for testing purposes. This replaces the real gold history with fake data. Make sure u backup your data before running this.!!!
     //await generateFakeGoldHistory();
 
-    await Log.i('Update check started.');
+    await Log.info('Update check started.');
     try {
       emit(const SplashScreenState.checkingForUpdates());
 
@@ -68,7 +68,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
         currentLauncherVersion: currentVersion,
       );
 
-      await Log.i('Startup decision: ${decision.type}');
+      await Log.info('Startup decision: ${decision.type}');
 
       switch (decision.type) {
         case EStartupDecisionType.maintenance:
@@ -76,14 +76,14 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
           return;
 
         case EStartupDecisionType.blockingError:
-          await Log.i('Blocking error encountered: ${decision.message}');
+          await Log.info('Blocking error encountered: ${decision.message}');
           emit(SplashScreenState.blockingError(
             message: decision.message ?? 'Fehler',
           ));
           return;
 
         case EStartupDecisionType.forceUpdate:
-          await Log.i('Force update required. Message: ${decision.message}');
+          await Log.info('Force update required. Message: ${decision.message}');
           emit(SplashScreenState.updateRequired(
             message: decision.message,
             status: status,
@@ -92,14 +92,14 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
           await _prepareUpdaterIfNeeded(status);
 
           if (status.update == null) {
-            await Log.i(
+            await Log.info(
                 'Launcher update information is missing in the status response.');
             throw StateError(
               'Launcher update required, but status.update is missing.',
             );
           }
 
-          await Log.i(
+          await Log.info(
               'Starting launcher update from ${status.update!.url} with expected SHA256: ${status.update!.sha256}');
 
           await LauncherUpdaterService.startUpdate(
@@ -108,7 +108,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
             launcherVersion: status.launcherVersion,
           );
 
-          await Log.i(
+          await Log.info(
               'Launcher update process initiated. Exiting launcher to allow updater to run.');
 
           exit(0);
@@ -116,26 +116,26 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
         case EStartupDecisionType.proceed:
           settingsRepository.eulaAccepted =
               await preferencesRepository.getEula() ?? false;
-          await Log.i('EULA accepted: ${settingsRepository.eulaAccepted}');
+          await Log.info('EULA accepted: ${settingsRepository.eulaAccepted}');
           if (!settingsRepository.eulaAccepted) {
-            await Log.i(
+            await Log.info(
                 'EULA has not been accepted. Prompting user to accept EULA.');
             emit(const SplashScreenState.eulaNotAccepted());
             return;
           }
 
-          await Log.i('EULA accepted. Proceeding with initialization.');
+          await Log.info('EULA accepted. Proceeding with initialization.');
 
           final wowPath = await preferencesRepository.getWowPath();
 
           if (wowPath == null) {
-            await Log.i(
+            await Log.info(
                 'WoW path is not set. Prompting user to complete setup.');
             emit(const SplashScreenState.initializedFirstStart());
             return;
           }
 
-          await Log.i(
+          await Log.info(
               'All required settings are present. Initialization complete.');
 
           settingsRepository.fillWithExecutablePath(wowPath);
@@ -156,13 +156,13 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
           return;
 
         case EStartupDecisionType.nonBlockingError:
-          await Log.i(
+          await Log.info(
               'Non-blocking error encountered: ${decision.message}. Proceeding with initialization.');
           emit(const SplashScreenState.initialized());
           return;
       }
     } catch (e, st) {
-      await Log.i('Error during initialization: $e');
+      await Log.info('Error during initialization: $e');
 
       final logTail = await LogReader.readLastLines(10);
 
@@ -183,7 +183,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
 
   Future<String> getLauncherVersion() async {
     final info = await PackageInfo.fromPlatform();
-    await Log.i('Current launcher version: ${info.version}');
+    await Log.info('Current launcher version: ${info.version}');
     return info.version;
   }
 
@@ -222,7 +222,7 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
     final needsUpdaterUpdate =
         await UpdaterVersionChecker.needsUpdaterUpdate(status: status);
 
-    await Log.i('Updater update needed: $needsUpdaterUpdate');
+    await Log.info('Updater update needed: $needsUpdaterUpdate');
 
     if (!needsUpdaterUpdate) {
       return;
@@ -230,31 +230,31 @@ class SplashScreenCubit extends Cubit<SplashScreenState> {
 
     final updaterUpdate = UpdaterUpdateValidator.requireUpdaterUpdate(status);
 
-    await Log.i(
+    await Log.info(
         'Starting download of updater version ${status.updaterVersion} from ${updaterUpdate.url}');
 
     final zipFile = await UpdaterZipDownloader.downloadUpdaterZip(
       url: updaterUpdate.url,
     );
 
-    await Log.i('Download completed. Verifying hash...');
+    await Log.info('Download completed. Verifying hash...');
 
     await UpdaterZipHashVerifier.verify(
       filePath: zipFile.path,
       expectedHex: updaterUpdate.sha256,
     );
 
-    await Log.i('Hash verification passed. Extracting zip...');
+    await Log.info('Hash verification passed. Extracting zip...');
 
     await UpdaterZipExtractor.extractZip(
       zipPath: zipFile.path,
     );
 
-    await Log.i('Extraction completed. Promoting updater...');
+    await Log.info('Extraction completed. Promoting updater...');
 
     await UpdaterPromoter.promote();
 
-    await Log.i('Updater promotion completed. Finalizing update...');
+    await Log.info('Updater promotion completed. Finalizing update...');
 
     await UpdaterUpdateFinalizer.finalize(
       updaterVersion: status.updaterVersion,

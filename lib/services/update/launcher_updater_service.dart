@@ -24,13 +24,13 @@ class LauncherUpdaterService {
     final setup = File(_setupExe);
 
     if (!await setup.exists()) {
-      await Log.i('Updater setup executable not found at $_setupExe');
+      await Log.info('Updater setup executable not found at $_setupExe');
       throw StateError('Updater not found: $_setupExe');
     }
 
     final pid = ProcessInfoUtil.currentPid();
 
-    await Log.i(
+    await Log.info(
         'Starting updater with PID $pid, URL: $url, SHA256: $sha256, Launcher Version: $launcherVersion');
 
     await Process.start(

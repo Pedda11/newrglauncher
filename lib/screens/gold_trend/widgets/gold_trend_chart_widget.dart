@@ -111,10 +111,7 @@ class GoldTrendChartWidget extends StatelessWidget {
       expandedMaxY,
     );
 
-    final safeMinY = GoldChartAxisHelper.roundDownToInterval(
-      expandedMinY,
-      yInterval,
-    );
+    const safeMinY = 0.0;
 
     final safeMaxY = GoldChartAxisHelper.roundUpToInterval(
       expandedMaxY,

@@ -22,15 +22,7 @@ class Log {
     }
   }
 
-  static String _sanitize(String msg) {
-    final regex = RegExp(r'Users\\([^\\]+)', caseSensitive: false);
-
-    return msg.replaceAllMapped(regex, (match) {
-      return 'Users\\\\####';
-    });
-  }
-
-  static Future<void> i(String msg) async {
+  static Future<void> info(String msg) async {
     if (_currentLogFile == null) {
       await init();
     }
@@ -43,6 +35,16 @@ class Log {
       mode: FileMode.append,
       flush: true,
     );
+  }
+
+  //------------------------------- Private Methods ------------------------------
+
+  static String _sanitize(String msg) {
+    final regex = RegExp(r'Users\\([^\\]+)', caseSensitive: false);
+
+    return msg.replaceAllMapped(regex, (match) {
+      return 'Users\\\\####';
+    });
   }
 
   static Future<void> _cleanupOldLogs(Directory logsDir) async {

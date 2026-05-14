@@ -41,13 +41,13 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
   bool inProgress = false;
 
   Future<void> initialize() async {
-    await Log.i('Initializing AccountScreenCubit');
+    await Log.info('Initializing AccountScreenCubit');
     await loadAccounts();
   }
 
   Future<void> loadAccounts() async {
     try {
-      await Log.i('Loading accounts from PreferencesRepository');
+      await Log.info('Loading accounts from PreferencesRepository');
       List<String>? list = await preferencesRepository.getAccounts();
       mainRepository.accountList = [];
       list ??= [];
@@ -60,10 +60,10 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       } else {
         emit(const AccountScreenState.goToAddAccountPage());
       }
-      await Log.i(
+      await Log.info(
           'Finished loading accounts, total accounts loaded: ${mainRepository.accountList.length}');
     } catch (e, st) {
-      await Log.i('Error occurred while loading accounts: $e');
+      await Log.info('Error occurred while loading accounts: $e');
       final logTail = await LogReader.readLastLines(10);
 
       final report = await LauncherErrorReportBuilder.build(
@@ -87,14 +87,15 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
   void deleteSingleAccount(Account acc) async {
     try {
-      await Log.i('Deleting account with id: ${acc.accId}');
+      await Log.info('Deleting account with id: ${acc.accId}');
       emit(const AccountScreenState.deletingAccount());
 
       mainRepository.accountList.removeWhere((a) => a.uniqueId == acc.uniqueId);
 
       List<String> accStringList = [];
 
-      await Log.i('Updating accounts in PreferencesRepository after deletion');
+      await Log.info(
+          'Updating accounts in PreferencesRepository after deletion');
       for (Account a in mainRepository.accountList) {
         String accountString = jsonEncode(a.toJson());
         accStringList.add(accountString);
@@ -103,7 +104,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       try {
         await CredentialRepository().deletePassword('#${acc.uniqueId}#');
       } catch (e, st) {
-        await Log.i(
+        await Log.info(
             'Error occurred while deleting password for account with id: ${acc.accId}, error: $e');
         final logTail = await LogReader.readLastLines(10);
 
@@ -122,10 +123,10 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
       await preferencesRepository.setAccounts(accStringList);
 
-      await Log.i(
+      await Log.info(
           'Finished deleting account with id: ${acc.accId}, total accounts remaining: ${mainRepository.accountList.length}');
     } catch (e, st) {
-      await Log.i(
+      await Log.info(
           'Error occurred while deleting account with id: ${acc.accId}, error: $e');
       final logTail = await LogReader.readLastLines(10);
 
@@ -223,7 +224,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
   Future<void> startGame(Account acc) async {
     if (settingsRepository.secondsToWaitForGameToStart == null) {
-      await Log.i('Invalid wait time for game start: null');
+      await Log.info('Invalid wait time for game start: null');
       emit(const AccountScreenState.failed(
           errorMsg: 'Ungültige Wartezeit für den Spielstart.'));
       return;
@@ -232,16 +233,16 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
     inProgress = true;
 
-    await Log.i('Starting game for account: ${acc.accountName}');
+    await Log.info('Starting game for account: ${acc.accountName}');
     try {
       final wowProcess = await startWowProcess(
         wowRootPath: settingsRepository.wowRootFolderPath!,
         wowExecutableName: settingsRepository.wowExecutableName!,
       );
 
-      await Log.i('WoW started with pid: ${wowProcess.pid}');
+      await Log.info('WoW started with pid: ${wowProcess.pid}');
 
-      await Log.i(
+      await Log.info(
           'Game process started, waiting for ${settingsRepository.secondsToWaitForGameToStart} seconds before sending keys');
       await Future.delayed(
           Duration(seconds: settingsRepository.secondsToWaitForGameToStart!));
@@ -251,18 +252,18 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       final accPasswd = await CredentialRepository().readPassword(acc.uniqueId);
 
       if (accPasswd == null) {
-        await Log.i('Password not found in Credential Manager.');
+        await Log.info('Password not found in Credential Manager.');
         emit(const AccountScreenState.failed(
             errorMsg: 'Passwort konnte nicht gefunden werden.'));
         inProgress = false;
         return;
       }
 
-      await Log.i('Sending keys for account: ${acc.accId}');
+      await Log.info('Sending keys for account: ${acc.accId}');
 
       await sendKeys(acc.accountName, accPasswd);
       if (acc.isTotpEnabled) {
-        await Log.i('2FA enabled for account: ${acc.accountName}');
+        await Log.info('2FA enabled for account: ${acc.accountName}');
 
         /// wait for 2FA popup to appear
         await Future.delayed(const Duration(seconds: 2));
@@ -273,7 +274,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
             await CredentialRepository().readTotpSecret(acc.uniqueId);
 
         if (secret == null) {
-          await Log.i('TOTP secret not found for account.');
+          await Log.info('TOTP secret not found for account.');
           emit(const AccountScreenState.failed(
               errorMsg: '2FA aktiviert, aber kein Secret gespeichert.'));
           inProgress = false;
@@ -282,13 +283,13 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
         final code = _totpService.generateCode(secret: secret);
 
-        await Log.i('Generated TOTP code, sending input');
+        await Log.info('Generated TOTP code, sending input');
 
         await sendText(code, pressEnter: true);
         inProgress = false;
       }
     } catch (e, st) {
-      await Log.i(
+      await Log.info(
           'Error occurred while starting game for account: ${acc.accId}, error: $e');
       final logTail = await LogReader.readLastLines(10);
 
@@ -313,10 +314,10 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
       await refreshService.refreshAccount(acc);
     } on PathNotFoundException catch (e) {
-      await Log.i('Error while reading character data: ${e.toString()}');
+      await Log.info('Error while reading character data: ${e.toString()}');
       return;
     } catch (e, st) {
-      await Log.i('Error while reading character data: ${e.toString()}');
+      await Log.info('Error while reading character data: ${e.toString()}');
       final logTail = await LogReader.readLastLines(10);
 
       final report = await LauncherErrorReportBuilder.build(
@@ -353,10 +354,10 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       throw StateError('WoW executable not found: $exePath');
     }
 
-    await Log.i('Starting WoW directly');
-    await Log.i('WoW root: $wowRootPath');
-    await Log.i('WoW exe: $exePath');
-    await Log.i('WoW start mode: direct Process.start');
+    await Log.info('Starting WoW directly');
+    await Log.info('WoW root: $wowRootPath');
+    await Log.info('WoW exe: $exePath');
+    await Log.info('WoW start mode: direct Process.start');
 
     final process = await Process.start(
       exePath,
@@ -365,7 +366,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       runInShell: true,
     );
 
-    await Log.i('WoW process pid: ${process.pid}');
+    await Log.info('WoW process pid: ${process.pid}');
 
     return process;
   }
@@ -393,11 +394,11 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
 
       EnumWindows(enumCallback, 0);
 
-      await Log.i('=== Visible windows dump start ===');
+      await Log.info('=== Visible windows dump start ===');
       for (final line in results) {
-        await Log.i(line);
+        await Log.info(line);
       }
-      await Log.i('=== Visible windows dump end ===');
+      await Log.info('=== Visible windows dump end ===');
     } finally {
       _windowDumpResults = null;
     }
@@ -416,7 +417,7 @@ class AccountScreenCubit extends Cubit<AccountScreenState> {
       await Future.delayed(const Duration(milliseconds: 500));
     }
 
-    await Log.i('WoW window handle by title: $hWnd');
+    await Log.info('WoW window handle by title: $hWnd');
 
     if (hWnd == 0) {
       emit(const AccountScreenState.failed(

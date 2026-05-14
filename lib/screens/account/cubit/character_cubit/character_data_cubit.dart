@@ -55,11 +55,11 @@ class CharacterDataCubit extends Cubit<CharacterDataState> {
         ),
       );
     } on PathNotFoundException catch (e) {
-      await Log.i('Error while reading character data: ${e.toString()}');
+      await Log.info('Error while reading character data: ${e.toString()}');
       emit(const CharacterDataState.noData());
       return;
     } catch (e, st) {
-      await Log.i('Error while reading character data: ${e.toString()}');
+      await Log.info('Error while reading character data: ${e.toString()}');
       final logTail = await LogReader.readLastLines(10);
 
       final report = await LauncherErrorReportBuilder.build(
@@ -118,7 +118,7 @@ class CharacterDataCubit extends Cubit<CharacterDataState> {
         ),
       );
     } catch (e, st) {
-      await Log.i('Error while reordering character data: ${e.toString()}');
+      await Log.info('Error while reordering character data: ${e.toString()}');
       final logTail = await LogReader.readLastLines(10);
 
       final report = await LauncherErrorReportBuilder.build(
