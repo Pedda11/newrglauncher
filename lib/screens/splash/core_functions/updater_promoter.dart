@@ -21,12 +21,12 @@ class UpdaterPromoter {
     final updaterNewDir = Directory(_updaterNewDir);
 
     if (!await updaterNewDir.exists()) {
-      await Log.i('updater_new directory not found, skipping promotion');
+      await Log.info('updater_new directory not found, skipping promotion');
       throw StateError(
           'updater_new directory not found: ${updaterNewDir.path}');
     }
 
-    await Log.i(
+    await Log.info(
         'Promoting updater from ${updaterNewDir.path} to ${updatesDir.path}');
 
     /// Remove old updater runtime files from updates root,
@@ -46,7 +46,7 @@ class UpdaterPromoter {
       await entity.delete(recursive: true);
     }
 
-    await Log.i(
+    await Log.info(
         'Old updater files removed from updates directory and copy started');
 
     /// Copy fresh updater files from updater_new into updates root.
@@ -63,6 +63,6 @@ class UpdaterPromoter {
       }
     }
 
-    await Log.i('Updater promotion completed successfully');
+    await Log.info('Updater promotion completed successfully');
   }
 }

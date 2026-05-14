@@ -48,11 +48,11 @@ class BackupCubit extends Cubit<BackupState> {
         },
       );
 
-      await Log.i('Backup finished.');
+      await Log.info('Backup finished.');
 
       emit(const BackupState.backupFinished());
     } catch (e, st) {
-      await Log.i('Backup failed: $e');
+      await Log.info('Backup failed: $e');
       final logTail = await LogReader.readLastLines(10);
 
       final report = await LauncherErrorReportBuilder.build(

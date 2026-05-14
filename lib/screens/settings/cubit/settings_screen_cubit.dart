@@ -31,7 +31,7 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
   LauncherPinUtils? _launcherPinUtils;
 
   Future<List<String>> getAvailableDrives() async {
-    await Log.i('Getting available drives without wmic');
+    await Log.info('Getting available drives without wmic');
 
     final drives = <String>[];
 
@@ -54,13 +54,13 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
             );
 
         drives.add(drivePath);
-        await Log.i('Drive is accessible: $drivePath');
+        await Log.info('Drive is accessible: $drivePath');
       } catch (e) {
-        await Log.i('Skipping drive $drivePath: $e');
+        await Log.info('Skipping drive $drivePath: $e');
       }
     }
 
-    await Log.i('Drive scan complete: $drives');
+    await Log.info('Drive scan complete: $drives');
     return drives;
   }
 
@@ -69,20 +69,20 @@ class SettingsScreenCubit extends Cubit<SettingsScreenState> {
         LauncherPinUtils(credentialRepository: credentialRepository);
 
     emit(const SettingsScreenState.scanningForDrives());
-    await Log.i('Initializing SettingsScreenCubit');
+    await Log.info('Initializing SettingsScreenCubit');
 
     final drives = await getAvailableDrives();
     final drivesWithSlash = <String>[];
 
     for (final drive in drives) {
-      await Log.i('Found drive: $drive');
+      await Log.info('Found drive: $drive');
       drivesWithSlash.add('$drive\\');
     }
 
     settingsRepository.drives = drivesWithSlash;
 
-    await Log.i('Available drives: ${settingsRepository.drives}');
-    await Log.i('Settings initialization complete');
+    await Log.info('Available drives: ${settingsRepository.drives}');
+    await Log.info('Settings initialization complete');
 
     emit(const SettingsScreenState.initialized());
   }

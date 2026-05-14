@@ -21,8 +21,8 @@ class UpdaterZipHashVerifier {
     final actual = await sha256File(filePath);
 
     if (actual.toLowerCase() != expectedHex.toLowerCase()) {
-      await Log.i('Updater zip SHA256 mismatch. expected=$expectedHex');
-      await Log.i('Actual hash: $actual');
+      await Log.info('Updater zip SHA256 mismatch. expected=$expectedHex');
+      await Log.info('Actual hash: $actual');
       throw StateError(
         'Updater zip SHA256 mismatch. expected=$expectedHex actual=$actual',
       );

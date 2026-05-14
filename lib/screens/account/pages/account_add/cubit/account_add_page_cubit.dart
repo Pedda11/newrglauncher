@@ -38,7 +38,7 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
       final uniqueId = const Uuid().v4();
       account.uniqueId = uniqueId;
 
-      await Log.i('Adding account accId: ${account.accId}');
+      await Log.info('Adding account accId: ${account.accId}');
 
       final ids = <int>[];
 
@@ -46,7 +46,7 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
         ids.add(a.accId);
       }
 
-      await Log.i('Existing account IDs: $ids');
+      await Log.info('Existing account IDs: $ids');
       if (ids.isNotEmpty) {
         ids.sort();
         final i = ids.last;
@@ -63,7 +63,7 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
           throw Exception('TOTP is enabled but no secret was provided.');
         }
 
-        await Log.i('TOTP enabled for account: ${account.accountName}');
+        await Log.info('TOTP enabled for account: ${account.accountName}');
         await credentialRepository.saveTotpSecret(
           account.uniqueId,
           normalizedTotp,
@@ -72,7 +72,7 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
 
       mainRepository.accountList.add(account);
 
-      await Log.i(
+      await Log.info(
         'Account added to MainRepository with accId: ${account.accId}, now saving accounts to PreferencesRepository',
       );
       final accStringList = <String>[];
@@ -84,12 +84,12 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
 
       await preferencesRepository.setAccounts(accStringList);
 
-      await Log.i(
+      await Log.info(
         'Account addition process completed successfully for accId: ${account.accId}',
       );
       emit(const AccountAddPageState.accountAdded());
     } catch (e, st) {
-      await Log.i('Error occurred while adding account: $e');
+      await Log.info('Error occurred while adding account: $e');
       final logTail = await LogReader.readLastLines(10);
 
       final report = await LauncherErrorReportBuilder.build(
@@ -110,7 +110,7 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
   Future<void> editAccount(Account account, String passwd, String? totP) async {
     emit(const AccountAddPageState.addingNewAccount());
     try {
-      await Log.i('Editing account accName: ${account.accountName}');
+      await Log.info('Editing account accName: ${account.accountName}');
 
       final oldPassword =
           await credentialRepository.readPassword(account.uniqueId);
@@ -150,7 +150,7 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
 
       mainRepository.accountList[index] = account;
 
-      await Log.i(
+      await Log.info(
         'Account edited to MainRepository with accName: ${account.accountName}, now saving accounts to PreferencesRepository',
       );
       final accStringList = <String>[];
@@ -164,7 +164,7 @@ class AccountAddPageCubit extends Cubit<AccountAddPageState> {
       mainRepository.account = null;
       emit(const AccountAddPageState.accountAdded());
     } catch (e, st) {
-      await Log.i('Error occurred while editing account: $e');
+      await Log.info('Error occurred while editing account: $e');
       final logTail = await LogReader.readLastLines(10);
 
       final report = await LauncherErrorReportBuilder.build(

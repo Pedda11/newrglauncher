@@ -48,7 +48,7 @@ class _NavigationPaneState extends State<NavigationPane> {
   }
 
   Future<void> _beforeExit() async {
-    await Log.i('_beforeExit');
+    await Log.info('_beforeExit');
 
     final cubit = context.read<BackupCubit>();
     await cubit.startBackup();

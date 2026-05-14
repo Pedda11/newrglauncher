@@ -21,14 +21,15 @@ class CredentialRepository {
         final result = CredRead(targetNamePtr, _credType, 0, credentialOutPtr);
 
         if (result != 0) {
-          await Log.i('CredRead succeeded for $logContext on attempt $attempt');
+          await Log.info(
+              'CredRead succeeded for $logContext on attempt $attempt');
 
           final credentialPtr = credentialOutPtr.value;
           final blobSize = credentialPtr.ref.CredentialBlobSize;
 
           if (blobSize == 0 || credentialPtr.ref.CredentialBlob == nullptr) {
             CredFree(credentialPtr);
-            await Log.i(
+            await Log.info(
               'Credential blob is empty or null for $logContext',
             );
             return null;
@@ -38,13 +39,13 @@ class CredentialRepository {
               credentialPtr.ref.CredentialBlob.asTypedList(blobSize);
           final value = utf8.decode(blobBytes);
 
-          await Log.i('Successfully read credential for $logContext');
+          await Log.info('Successfully read credential for $logContext');
           CredFree(credentialPtr);
           return value;
         }
 
         final error = GetLastError();
-        await Log.i('CredRead result: $result, error: $error');
+        await Log.info('CredRead result: $result, error: $error');
 
         if (error == ERROR_NOT_FOUND) {
           return null;
@@ -52,14 +53,14 @@ class CredentialRepository {
 
         /// Retry flaky first-read failures where CredRead fails but GetLastError stays 0.
         if (error == ERROR_SUCCESS && attempt < maxAttempts) {
-          await Log.i(
+          await Log.info(
             'CredRead failed without Win32 error, retrying ($attempt/$maxAttempts)',
           );
           await Future.delayed(const Duration(milliseconds: 200));
           continue;
         }
 
-        await Log.i(
+        await Log.info(
           'CredRead failed for $logContext with error code: $error on attempt $attempt',
         );
 
@@ -114,7 +115,7 @@ class CredentialRepository {
         _credentialKey(accountUuid, ECredentialKind.password).toNativeUtf16();
     final userNamePtr = 'account_$accountUuid'.toNativeUtf16();
 
-    await Log.i('Saving credential for accountUuId: $accountUuid');
+    await Log.info('Saving credential for accountUuId: $accountUuid');
 
     final passwordBytes = utf8.encode(password);
     final blobPtr = calloc<Uint8>(passwordBytes.length);
@@ -125,7 +126,7 @@ class CredentialRepository {
 
     final credentialPtr = calloc<CREDENTIAL>();
 
-    await Log.i(
+    await Log.info(
       'Prepared credential structure for accountId: $accountUuid, attempting to write to Windows Credential Manager',
     );
 
@@ -146,14 +147,14 @@ class CredentialRepository {
 
       final result = CredWrite(credentialPtr, 0);
 
-      await Log.i('CredWrite result for accountId: $accountUuid: $result');
+      await Log.info('CredWrite result for accountId: $accountUuid: $result');
 
       if (result == 0) {
         final error = GetLastError();
         throw Exception('CredWrite failed. Win32 error: $error');
       }
     } finally {
-      await Log.i(
+      await Log.info(
         'Finished attempting to save credential for accountId: $accountUuid, freeing allocated memory',
       );
       calloc.free(credentialPtr);
@@ -167,7 +168,8 @@ class CredentialRepository {
     var targetNamePtr =
         _credentialKey(accountUuid, ECredentialKind.password).toNativeUtf16();
 
-    await Log.i('Attempting to read credential for accountUuId: $accountUuid');
+    await Log.info(
+        'Attempting to read credential for accountUuId: $accountUuid');
 
     try {
       final password = await _readCredentialValueWithRetry(
@@ -188,7 +190,7 @@ class CredentialRepository {
         _legacyPasswordCredentialKey(accountUuid).toNativeUtf16();
 
     try {
-      await Log.i(
+      await Log.info(
         'Password not found under new key for accountId: $accountUuid, trying legacy key',
       );
 
@@ -207,7 +209,8 @@ class CredentialRepository {
     final legacyTargetNamePtr =
         _legacyPasswordCredentialKey(accountUuid).toNativeUtf16();
 
-    await Log.i('Attempting to delete credential for accountId: $accountUuid');
+    await Log.info(
+        'Attempting to delete credential for accountId: $accountUuid');
 
     try {
       final result = CredDelete(targetNamePtr, _credType, 0);
@@ -216,7 +219,7 @@ class CredentialRepository {
         final error = GetLastError();
 
         if (error != ERROR_NOT_FOUND) {
-          await Log.i('CredDelete failed with error code: $error');
+          await Log.info('CredDelete failed with error code: $error');
           throw Exception('CredDelete failed. Win32 error: $error');
         }
       }
@@ -227,14 +230,15 @@ class CredentialRepository {
         final legacyError = GetLastError();
 
         if (legacyError != ERROR_NOT_FOUND) {
-          await Log.i('Legacy CredDelete failed with error code: $legacyError');
+          await Log.info(
+              'Legacy CredDelete failed with error code: $legacyError');
           throw Exception(
             'Legacy CredDelete failed. Win32 error: $legacyError',
           );
         }
       }
     } finally {
-      await Log.i(
+      await Log.info(
         'Finished attempting to delete credential for accountUuId: $accountUuid, freeing allocated memory',
       );
       calloc.free(targetNamePtr);
@@ -247,7 +251,7 @@ class CredentialRepository {
         _credentialKey(accountUuid, ECredentialKind.totpSecret).toNativeUtf16();
     final userNamePtr = 'account_${accountUuid}_totp'.toNativeUtf16();
 
-    await Log.i('Saving TOTP secret for accountId: $accountUuid');
+    await Log.info('Saving TOTP secret for accountId: $accountUuid');
 
     final normalizedSecret = _normalizeTotpSecret(secret);
     final secretBytes = utf8.encode(normalizedSecret);
@@ -259,7 +263,7 @@ class CredentialRepository {
 
     final credentialPtr = calloc<CREDENTIAL>();
 
-    await Log.i(
+    await Log.info(
       'Prepared TOTP credential structure for accountId: $accountUuid, attempting to write to Windows Credential Manager',
     );
 
@@ -280,7 +284,7 @@ class CredentialRepository {
 
       final result = CredWrite(credentialPtr, 0);
 
-      await Log.i(
+      await Log.info(
         'CredWrite result for TOTP secret accountId: $accountUuid: $result',
       );
 
@@ -291,7 +295,7 @@ class CredentialRepository {
         );
       }
     } finally {
-      await Log.i(
+      await Log.info(
         'Finished attempting to save TOTP secret for accountId: $accountUuid, freeing allocated memory',
       );
       calloc.free(credentialPtr);
@@ -305,7 +309,8 @@ class CredentialRepository {
     final targetNamePtr =
         _credentialKey(accountUuid, ECredentialKind.totpSecret).toNativeUtf16();
 
-    await Log.i('Attempting to read TOTP secret for accountId: $accountUuid');
+    await Log.info(
+        'Attempting to read TOTP secret for accountId: $accountUuid');
 
     try {
       return await _readCredentialValueWithRetry(
@@ -321,7 +326,8 @@ class CredentialRepository {
     final targetNamePtr =
         _credentialKey(accountUuid, ECredentialKind.totpSecret).toNativeUtf16();
 
-    await Log.i('Attempting to delete TOTP secret for accountId: $accountUuid');
+    await Log.info(
+        'Attempting to delete TOTP secret for accountId: $accountUuid');
 
     try {
       final result = CredDelete(targetNamePtr, _credType, 0);
@@ -333,7 +339,7 @@ class CredentialRepository {
           return;
         }
 
-        await Log.i(
+        await Log.info(
           'CredDelete for TOTP secret failed with error code: $error',
         );
         throw Exception(
@@ -341,7 +347,7 @@ class CredentialRepository {
         );
       }
     } finally {
-      await Log.i(
+      await Log.info(
         'Finished attempting to delete TOTP secret for accountId: $accountUuid, freeing allocated memory',
       );
       calloc.free(targetNamePtr);
@@ -353,7 +359,7 @@ class CredentialRepository {
         _globalCredentialKey(ECredentialKind.launcherPin).toNativeUtf16();
     final userNamePtr = 'launcher_pin'.toNativeUtf16();
 
-    await Log.i('Saving launcher PIN');
+    await Log.info('Saving launcher PIN');
 
     final bytes = utf8.encode(jsonPayload);
     final blobPtr = calloc<Uint8>(bytes.length);
@@ -397,7 +403,7 @@ class CredentialRepository {
     final targetNamePtr =
         _globalCredentialKey(ECredentialKind.launcherPin).toNativeUtf16();
 
-    await Log.i('Reading launcher PIN');
+    await Log.info('Reading launcher PIN');
 
     try {
       return await _readCredentialValueWithRetry(
@@ -413,7 +419,7 @@ class CredentialRepository {
     final targetNamePtr =
         _globalCredentialKey(ECredentialKind.launcherPin).toNativeUtf16();
 
-    await Log.i('Deleting launcher PIN');
+    await Log.info('Deleting launcher PIN');
 
     try {
       final result = CredDelete(targetNamePtr, _credType, 0);

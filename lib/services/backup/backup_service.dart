@@ -59,7 +59,7 @@ class BackupService {
     Isolate? isolate;
 
     try {
-      await Log.i('Starting backup isolate');
+      await Log.info('Starting backup isolate');
       isolate = await Isolate.spawn<_BackupIsolateRequest>(
         _backupIsolateEntry,
         _BackupIsolateRequest(
@@ -194,7 +194,7 @@ Future<void> _backupIsolateEntry(_BackupIsolateRequest request) async {
       'currentFilePath': null,
     });
 
-    await Log.i('Collecting files for backup');
+    await Log.info('Collecting files for backup');
 
     final archive = Archive();
     var processedFiles = 0;
@@ -217,7 +217,7 @@ Future<void> _backupIsolateEntry(_BackupIsolateRequest request) async {
       });
     }
 
-    await Log.i('Finalizing backup');
+    await Log.info('Finalizing backup');
 
     request.sendPort.send({'type': 'finalizing'});
 
@@ -227,7 +227,7 @@ Future<void> _backupIsolateEntry(_BackupIsolateRequest request) async {
     final zipFileName = '${timestamp}_WTF_backup.zip';
     final zipFilePath = p.join(request.backupFolderPath, zipFileName);
 
-    await Log.i('Writing backup to $zipFilePath');
+    await Log.info('Writing backup to $zipFilePath');
 
     final zipFile = File(zipFilePath);
     await zipFile.writeAsBytes(Uint8List.fromList(zipData), flush: true);
